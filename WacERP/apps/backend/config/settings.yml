@@ -24,8 +24,11 @@ test:
 
 all:
   .settings:
+    enabled_modules:      [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
+    
     # Form security secret (CSRF protection)
-    csrf_secret:            148e77f5b46de42f4caf4dd2c4ad25449ae4f0bb
+#    csrf_secret:            148e77f5b46de42f4caf4dd2c4ad25449ae4f0bb
+    csrf_secret:            false
 
     # Output escaping settings
     escaping_strategy:      true
@@ -33,3 +36,17 @@ all:
 
     # Enable the database manager
     use_database:           true
+
+    # Cache settings
+    lazy_cache_key:         on        # Delays creation of a cache key until after checking whether an action or partial is cacheable
+
+    standard_helpers:       [Partial, Cache, I18N]
+    charset:                utf-8
+    i18n:                   on
+    default_culture:        zh_CN
+
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure

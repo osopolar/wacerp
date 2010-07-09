@@ -5,6 +5,6 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:      mysql:host=localhost;dbname=WacERP
-      username: root
-      password: 
+      dsn:      mysql:host=localhost;dbname=db_wac_erp
+      username: developer
+      password: developer
