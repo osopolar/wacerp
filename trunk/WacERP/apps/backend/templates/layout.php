@@ -3,12 +3,16 @@
   <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
-    <?php include_title() ?>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <title><?php echo __('Title', array(), 'messages') ?></title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript">
+        var BASE_URL = '<?php echo $sf_request->getUriPrefix().url_for('@homepage'); ?>';
+    </script>
+
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
-  <body>
+  <body id="wacAppBody">
     <?php echo $sf_content ?>
   </body>
 </html>
