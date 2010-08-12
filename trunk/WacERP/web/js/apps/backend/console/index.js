@@ -19,18 +19,27 @@ $(document).ready(
     function() {
         //       wacShowBlockUILoading();
 
-        initLayouts();
+        initConsoleLayouts();
 
-    //       bindDefaultEvents();
-    //
+        bindConsoleEvents();
+    
     //       wacHideBlockUI();
 
     }
     );
-/***** init section, end *****/
 
+function btnAppStockManagement()
+{
+    $("#btnAppStockManagement").bind("click", {}, function(e){
+        
+    });
 
-function initLayouts()
+    $("#btnAppSystemManagement").bind("click", {}, function(e){
+
+    });
+}
+
+function initConsoleLayouts()
 {
     // create the Wac Application Base LAYOUT
     wacAppBaseLayout = $("body").layout( wacAppBaseLayoutSettings );
@@ -64,7 +73,7 @@ function initLayouts()
 
 /*
     *#######################
-    * OUTER LAYOUT SETTINGS
+    * wacAppBaseLayoutSettings
     *#######################
     *
     * This configuration illustrates how extensively the layout can be customized
@@ -178,3 +187,5 @@ var wacAppBaseLayoutSettings = {
         minHeight:    200
     }
 };
+
+/***** init section, end *****/
