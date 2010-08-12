@@ -19,9 +19,9 @@
 		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
     </div>
     <ul class="toolbar">
-        <li id="tbarToggleNorth" class="first"><span></span>App1</li>
-        <li id="tbarOpenSouth"><span></span>App2</li>
-        <li id="tbarCloseSouth"><span></span>App3</li>
+        <li id="btnAppStockManagement" class="first"><span></span>App1</li>
+        <li id="btnAppSystemManagement"><span></span>App2</li>
+        <li id="btnOther"><span></span>App3</li>
     </ul>
 </div>
 
