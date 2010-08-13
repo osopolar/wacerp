@@ -34,5 +34,11 @@
 </div>
 
 
-<div id="wac_app_container">    
+<div id="wac_app_container">
+    <?php
+            //mainItem form, hidden form interface
+            include_component("appStockManagement", "layout",
+                    array()
+            );
+    ?>
 </div>
