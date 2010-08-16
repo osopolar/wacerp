@@ -1,3 +1,11 @@
+<?php
+$contextInfo = array(
+    "moduleName" => sfContext::getInstance()->getModuleName(),
+    "actionName" => sfContext::getInstance()->getActionName()
+);
+
+?>
+
 <div class="ui-layout-west">
     <div class="header"></div>
     <div class="subhead"></div>
@@ -14,13 +22,21 @@
 </div>
 
 <div class="ui-layout-north">
-    <div class="header">Outer - North</div>
+    <div class="header">
+        <?php
+            echo $contextInfo["moduleName"];
+        ?>
+        - North
+    </div>
     <div class="content">
-		I only have toggler when 'closed' - I cannot be resized - and I do not 'slide open'
+        <?php
+            echo $contextInfo["moduleName"];
+        ?>
+        common application header content
     </div>
     <ul class="toolbar">
-        <li id="btnAppStockManagement" class="first"><span></span>App1</li>
-        <li id="btnAppSystemManagement"><span></span>App2</li>
+        <li id="btnAppStockManagement" class="first"><span></span>AppStockManagement</li>
+        <li id="btnAppSystemManagement"><span></span>AppSystemManagement</li>
         <li id="btnOther"><span></span>App3</li>
     </ul>
 </div>
@@ -38,6 +54,13 @@
     <?php
             //mainItem form, hidden form interface
             include_component("appStockManagement", "layout",
+                    array()
+            );
+    ?>
+
+    <?php
+            //mainItem form, hidden form interface
+            include_component("appSystemManagement", "layout",
                     array()
             );
     ?>

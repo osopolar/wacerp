@@ -35,11 +35,15 @@ $(document).ready(
 function bindConsoleEvents()
 {
     $("#btnAppStockManagement").bind("click", {}, function(e){
-        
+        wacDebugLog("btnAppStockManagement");
+        appSystemManagementLayout.hide();
+        appStockManagementLayout = $("#app_stock_management").layout( appStockManagementLayoutSettings );
     });
 
     $("#btnAppSystemManagement").bind("click", {}, function(e){
-
+        wacDebugLog("btnAppSystemManagement");
+        appStockManagementLayout.hide();
+        appSystemManagementLayout = $("#app_system_management ").layout( appSystemManagementLayoutSettings );
     });
 }
 
