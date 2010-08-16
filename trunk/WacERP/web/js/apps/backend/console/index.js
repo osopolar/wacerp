@@ -24,6 +24,8 @@ $(document).ready(
         initConsoleLayout();
 
         bindConsoleEvents();
+
+        initDefaultAppLayout();
     
     //       wacHideBlockUI();
 
@@ -36,15 +38,20 @@ function bindConsoleEvents()
 {
     $("#btnAppStockManagement").bind("click", {}, function(e){
         wacDebugLog("btnAppStockManagement");
-        appSystemManagementLayout.hide();
-        appStockManagementLayout = $("#app_stock_management").layout( appStockManagementLayoutSettings );
+        objAppSystemManagement.hideLayout();
+        objAppStockManagement.initLayout();
     });
 
     $("#btnAppSystemManagement").bind("click", {}, function(e){
         wacDebugLog("btnAppSystemManagement");
-        appStockManagementLayout.hide();
-        appSystemManagementLayout = $("#app_system_management ").layout( appSystemManagementLayoutSettings );
+        objAppStockManagement.hideLayout();
+        objAppSystemManagement.initLayout();
     });
+}
+
+function initDefaultAppLayout()
+{
+    objAppStockManagement.initLayout();
 }
 
 function initConsoleLayout()
