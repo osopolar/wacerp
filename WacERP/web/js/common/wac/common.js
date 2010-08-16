@@ -305,14 +305,14 @@ function wacFormatDate(v){
 
 function wacDebugLog(msg)
 {
-//    if(!$.browser.msie){
-////        console.log($.browser.version);
-//        console.log(msg);
-//    }
-//    else
-//    {
-//      alert(msg);
-//    }
+    if(!$.browser.msie){
+//        console.log($.browser.version);
+        console.log(msg);
+    }
+    else
+    {
+      alert(msg);
+    }
 
 //    if($("#debugDiv").length == 0)
 //    {

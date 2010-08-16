@@ -1,13 +1,15 @@
 <?php
+
 /**
  * manage the app layout
  */
-class layoutComponent extends WacComponent
+class appStockManagementComponents extends WacComponent
 {
-    public function execute($request)
+    
+    public function executeLayout($request)
     {
         parent::execute($request);
-        
+
         $this->getResponse()->addJavaScript($this->getComponentJs(), 'last');
     }
 }

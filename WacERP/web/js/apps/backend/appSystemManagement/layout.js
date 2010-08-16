@@ -3,14 +3,14 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appStockManagement
+ * @subpackage appSystemManagement
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  */
 
 /***** variables declartion section, begin *****/
-var appStockManagementLayout;
-var appStockManagementLayoutSettings;
+var appSystemManagementLayout;
+var appSystemManagementLayoutSettings;
 /***** variables declartion section, end *****/
 
 
@@ -19,11 +19,11 @@ $(document).ready(
     function() {
         //       wacShowBlockUILoading();
 
-        initAppStockManagementLayoutSetting();
+        initAppSystemManagementLayoutSetting();
 
-        initAppStockManagementLayout();
+        initAppSystemManagementLayout();
 
-        bindAppStockManagementEvents();
+        bindAppSystemManagementEvents();
     
     //       wacHideBlockUI();
 
@@ -32,23 +32,23 @@ $(document).ready(
 
 
 
-function bindAppStockManagementEvents()
+function bindAppSystemManagementEvents()
 {
     
 }
 
-function initAppStockManagementLayout()
+function initAppSystemManagementLayout()
 {
 // create the Wac Application Base LAYOUT
-    appStockManagementLayout = $("#app_stock_management").layout( appStockManagementLayoutSettings );
+//    AppSystemManagementLayout = $("#app_system_management").layout( appSystemManagementLayoutSettings );
 
 }
 
-function initAppStockManagementLayoutSetting()
+function initAppSystemManagementLayoutSetting()
 {
     /*
         *#######################
-        * appStockManagementLayoutSettings
+        * AppSystemManagementLayoutSettings
         *#######################
         *
         * This configuration illustrates how extensively the layout can be customized
@@ -59,8 +59,8 @@ function initAppStockManagementLayoutSetting()
         * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
         */
 
-    appStockManagementLayoutSettings = {
-        initHidden : false
+    appSystemManagementLayoutSettings = {
+        initClosed : true
         ,
         applyDefaultStyles:    true // basic styling for testing & demo purposes
         ,
