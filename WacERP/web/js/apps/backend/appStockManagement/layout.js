@@ -24,7 +24,7 @@ $(document).ready(
 
 //        objAppStockManagement.initAppStockManagementLayoutSettings();
         bindAppStockManagementEvents();
-    
+        $("#appStockManagementLabel").wac.hilight();
     //       wacHideBlockUI();
 
     }
