@@ -7,7 +7,9 @@
             - Center</h3>
         <div class="ui-layout-content">
             <?php
+            echo "<div id=\"{$contextInfo["moduleName"]}Label\">";
             echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
+            echo "</div>"
             ?>
         </div>
         <div class="footer"></div>
