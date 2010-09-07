@@ -17,6 +17,8 @@
     //
 
     $.wac = {
+        elem: $(element),
+        obj: this,
         hilight: function(options) {
             debug(this);
 
@@ -51,14 +53,20 @@
             if (window.console && window.console.log)
                 window.console.log('hilight selection count: ' + $obj.size());
         }
+        
     };
 
     $.fn.wac = function (opts) {
         return this.each(function() {
-            var conf = $.extend({},opts);
-            if(tree_component.inst && tree_component.inst[$(this).attr('id')])
-                tree_component.inst[$(this).attr('id')].destroy();
-            if(conf !== false) new tree_component().init(this, conf);
+            var element = $(this);
+           // Return early if this element already has a plugin instance
+           if (element.data('wac')) return;
+
+           // pass options to plugin constructor
+           var myplugin = new wac(this, opts);
+
+           // Store plugin object in this element's data
+           element.data('wac', myplugin);
         });
     };
 
