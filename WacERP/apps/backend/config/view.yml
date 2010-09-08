@@ -26,8 +26,12 @@ default:
     jquery-ui-i18n:  common/jquery/plugins/jquery-ui-1.8.4.custom/jquery-ui-i18n.js
     jquery.layout:   common/jquery/plugins/jquery.layout-1.3.0/jquery.layout.js
 
-    wac_common:      common/wac/common.js
-    wac_jquery:      common/wac/jquery.wac.js
+    wac_main:        common/wac/main.js
+#    wac_functions:   common/wac/functions.js
+    wac_models:      common/wac/models.js
+    wac_plugin_base: common/wac/jquery_plugins/base.js
+    wac_tool:        common/wac/jquery_plugins/tool.js
+#    wac_foo:         common/wac/jquery_plugins/foo.js  //for test extension
 
   has_layout:     true
   layout:         layout
