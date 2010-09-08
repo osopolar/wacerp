@@ -24,7 +24,11 @@ $(document).ready(
 
 //        objAppStockManagement.initAppStockManagementLayoutSettings();
         bindAppStockManagementEvents();
-        $("#appStockManagementLabel").wac.hilight();
+
+
+        $(document).wacTool().dumpObj({name:"ben"});
+//        $('#appStockManagementLabel').wacTool().test({name:"ben"});
+
     //       wacHideBlockUI();
 
     }
