@@ -12,34 +12,24 @@
  */
 
 /***** variables declartion section, begin *****/
-
-var objAppStockController;
+//var objAppStockControllerLayer;
 /***** variables declartion section, end *****/
 
 
 /***** init section, begin *****/
-$(document).ready(
-    function() {
-        //       wacShowBlockUILoading();
-        
-        bindAppStockControllerEvents();
 
-    //        $(document).wacTool().dumpObj({name:"ben"});
-    //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
-
-    //       wacHideBlockUI();
-
-    }
-);
-
-objAppStockController = {
+objAppStockControllerLayer = {
     layout: null,
     layoutSettings: null,
+    bindEvents: function(){
+
+    },
     initLayout: function(){
         // create WAC Application LAYOUT
         $("#appStockController").show();
         this.layoutSettings = (this.layoutSettings == null) ? this.initLayoutSettings() : this.layoutSettings;
         this.layout = $("#appStockController").layout( this.layoutSettings );
+//        $(document).wacTool().dumpObj(this.layoutSettings);
         return this.layout;
     }
     ,
@@ -108,9 +98,5 @@ objAppStockController = {
     }
 }
 
-function bindAppStockControllerEvents()
-{
-    
-}
 
 /***** init section, end *****/

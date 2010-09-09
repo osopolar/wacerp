@@ -9,9 +9,7 @@
  */
 
 /***** variables declartion section, begin *****/
-
-var objAppBaseController;
-
+var wacAppController;
 /***** variables declartion section, end *****/
 
 
@@ -19,38 +17,45 @@ var objAppBaseController;
 $(document).ready(
     function() {
         //       wacShowBlockUILoading();
-        objAppBaseController.initLayout();
+        wacAppController.appsContainer.push(objAppSystemController, objAppStockController);
+        wacAppController.initLayout();
 
-        objAppBaseController.bindEvents();
-        objAppBaseController.initDefaultAppLayout();
+        wacAppController.bindEvents();
+        wacAppController.initDefaultAppLayout();
     
     //       wacHideBlockUI();
 
     }
 );
-    
-objAppBaseController = {
+
+wacAppController = {
+    appsContainer: [],
     layout: null,
     layoutSettings: null,
     bindEvents: function(){
         $("#btnAppStockController").bind("click", {}, function(e){
-            Wac.log("btnAppStockController");
-            objAppSystemController.hideLayout();
-            objAppStockController.initLayout();
+            wacAppController.showApp("AppStockController");
         });
 
         $("#btnAppSystemController").bind("click", {}, function(e){
-            Wac.log("btnAppSystemController");
-            objAppStockController.hideLayout();
-            objAppSystemController.initLayout();
+            wacAppController.showApp("AppSystemController");
         });
     }
     ,
+    showApp: function(appName){
+        $.each(this.appsContainer, function(i){
+            if(this.name == appName){
+                this.initLayout();
+            }
+            else{
+                this.hideLayout();
+            }
+        //                Wac.log(i + ":" + this.name);
+        })
+    }
+    ,
     initDefaultAppLayout: function(){
-        objAppSystemController.initLayout();
-        objAppSystemController.hideLayout();
-
-        objAppStockController.initLayout();
+        this.showApp("AppStockController");
     },
     initLayout: function(){
         // create WAC Application LAYOUT

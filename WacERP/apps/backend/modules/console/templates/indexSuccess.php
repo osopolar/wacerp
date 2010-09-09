@@ -53,14 +53,14 @@ $contextInfo = array(
 <div id="wac_app_container">
     <?php
             //mainItem form, hidden form interface
-            include_component("appStockController", "layout",
+            include_component("appStockController", "main",
                     array()
             );
     ?>
 
     <?php
             //mainItem form, hidden form interface
-            include_component("appSystemController", "layout",
+            include_component("appSystemController", "main",
                     array()
             );
     ?>
