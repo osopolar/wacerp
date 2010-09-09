@@ -13,24 +13,14 @@
 
 /***** variables declartion section, begin *****/
 
-var objAppSystemController;
+//var objAppSystemControllerLayer;
 
 /***** variables declartion section, end *****/
 
 
 /***** init section, begin *****/
-$(document).ready(
-    function() {
-        //       wacShowBlockUILoading();
 
-        bindAppSystemControllerEvents();
-
-    //       wacHideBlockUI();
-
-    }
-);
-
-objAppSystemController = {
+objAppSystemControllerLayer = {
     layout: null,
     layoutSettings: null,
     initLayout: function(){

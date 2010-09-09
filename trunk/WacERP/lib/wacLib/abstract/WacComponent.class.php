@@ -20,8 +20,12 @@ abstract class WacComponent extends sfComponent {
         return $this->getActionName();
     }
 
-    public function getComponentJs() {
-        return 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$this->getActionName();
+    public function getComponentJs($specName="") {
+        return
+        ($specName=="") ?
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$this->getActionName()
+                :
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
     }
 
     /*

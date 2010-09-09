@@ -5,11 +5,12 @@
  */
 class appStockControllerComponents extends WacComponent
 {
-    
-    public function executeLayout($request)
+    public function executeMain($request)
     {
         parent::execute($request);
 
+        $this->getResponse()->addJavaScript($this->getComponentJs("layout"), 'last');
         $this->getResponse()->addJavaScript($this->getComponentJs(), 'last');
     }
+
 }
