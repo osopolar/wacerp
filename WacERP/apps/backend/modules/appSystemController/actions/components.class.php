@@ -3,7 +3,7 @@
 /**
  * manage the app layout
  */
-class appStockManagementComponents extends WacComponent
+class appSystemControllerComponents extends WacComponent
 {
     
     public function executeLayout($request)

@@ -35,8 +35,8 @@ $contextInfo = array(
         common application header content
     </div>
     <ul class="toolbar">
-        <li id="btnAppStockManagement" class="first"><span></span>AppStockManagement</li>
-        <li id="btnAppSystemManagement"><span></span>AppSystemManagement</li>
+        <li id="btnAppStockController" class="first"><span></span>AppStockController</li>
+        <li id="btnAppSystemController"><span></span>AppSystemController</li>
         <li id="btnOther"><span></span>App3</li>
     </ul>
 </div>
@@ -53,14 +53,14 @@ $contextInfo = array(
 <div id="wac_app_container">
     <?php
             //mainItem form, hidden form interface
-            include_component("appStockManagement", "layout",
+            include_component("appStockController", "layout",
                     array()
             );
     ?>
 
     <?php
             //mainItem form, hidden form interface
-            include_component("appSystemManagement", "layout",
+            include_component("appSystemController", "layout",
                     array()
             );
     ?>
