@@ -1,8 +1,8 @@
 /*
  * wac global setting class
- * http://www.WebApp-China.com/
+ * http://www.WebAppClub.com/
  *
- * Copyright (c) 2010 JianBinBi (WebApp-China.com)
+ * Copyright (c) 2010 JianBinBi (WebAppClub.com)
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
