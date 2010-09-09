@@ -14,7 +14,8 @@ default:
 
   stylesheets:
     main:            main.css
-    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/ui-lightness/jquery-ui-1.8.4.custom.css
+#    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/ui-lightness/jquery-ui-1.8.4.custom.css
+    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/redmond/jquery-ui-1.8.4.custom.css
     wac_main:        common/wac/main.css
 
   javascripts:
