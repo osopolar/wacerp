@@ -1,14 +1,14 @@
 <?php
 
 /**
- * appStockManagement actions.
+ * appSystemController actions.
  *
  * @package    WacERP
- * @subpackage appStockManagement
+ * @subpackage appSystemController
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class appStockManagementActions extends WacCommonActions
+class appSystemControllerActions extends WacCommonActions
 {
  /**
   * Executes index action
