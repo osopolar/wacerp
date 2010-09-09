@@ -3,17 +3,17 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appStockManagement
+ * @subpackage appStockController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appStockManagement / AppStockManagement
+ * appStockController / AppStockController
  *
  */
 
 /***** variables declartion section, begin *****/
-var appStockManagementLayout;
-var objAppStockManagement;
+
+var objAppStockController;
 /***** variables declartion section, end *****/
 
 
@@ -21,35 +21,36 @@ var objAppStockManagement;
 $(document).ready(
     function() {
         //       wacShowBlockUILoading();
+        
+        bindAppStockControllerEvents();
 
-//        objAppStockManagement.initAppStockManagementLayoutSettings();
-        bindAppStockManagementEvents();
-
-
-        $(document).wacTool().dumpObj({name:"ben"});
-//        $('#appStockManagementLabel').wacTool().test({name:"ben"});
+    //        $(document).wacTool().dumpObj({name:"ben"});
+    //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
 
     //       wacHideBlockUI();
 
     }
-    );
+);
 
-objAppStockManagement = {
-    layoutSettings: {},
+objAppStockController = {
+    layout: null,
+    layoutSettings: null,
     initLayout: function(){
         // create WAC Application LAYOUT
-        $("#appStockManagement").show();
-        appStockManagementLayout = $("#appStockManagement").layout( this.layoutSettings );
+        $("#appStockController").show();
+        this.layoutSettings = (this.layoutSettings == null) ? this.initLayoutSettings() : this.layoutSettings;
+        this.layout = $("#appStockController").layout( this.layoutSettings );
+        return this.layout;
     }
     ,
     hideLayout: function(){
-        $("#appStockManagement").hide();
+        $("#appStockController").hide();
     }
     ,
     initLayoutSettings: function(){
         /*
         *#######################
-        * appStockManagementLayoutSettings
+        * appStockControllerLayoutSettings
         *#######################
         *
         * This configuration illustrates how extensively the layout can be customized
@@ -60,7 +61,7 @@ objAppStockManagement = {
         * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
         */
 
-        this.appStockManagementLayoutSettings = {
+        return {
             initHidden : false
             ,
             applyDefaultStyles:    true // basic styling for testing & demo purposes
@@ -107,7 +108,7 @@ objAppStockManagement = {
     }
 }
 
-function bindAppStockManagementEvents()
+function bindAppStockControllerEvents()
 {
     
 }

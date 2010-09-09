@@ -3,17 +3,18 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appSystemManagement
+ * @subpackage appSystemController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appSystemManagement / AppSystemManagement
+ * appSystemController / AppSystemController
  *
  */
 
 /***** variables declartion section, begin *****/
-var appSystemManagementLayout;
-var objAppSystemManagement;
+
+var objAppSystemController;
+
 /***** variables declartion section, end *****/
 
 
@@ -22,30 +23,33 @@ $(document).ready(
     function() {
         //       wacShowBlockUILoading();
 
-//        objAppSystemManagement.initAppSystemManagementLayoutSettings();
-        bindAppSystemManagementEvents();
+        bindAppSystemControllerEvents();
 
     //       wacHideBlockUI();
 
     }
-    );
+);
 
-objAppSystemManagement = {
-    layoutSettings: {},
+objAppSystemController = {
+    layout: null,
+    layoutSettings: null,
     initLayout: function(){
         // create WAC Application LAYOUT
-        $("#appSystemManagement").show();
-        appSystemManagementLayout = $("#appSystemManagement").layout( this.layoutSettings );
+        $("#appSystemController").show();
+        this.layoutSettings = (this.layoutSettings == null) ? this.initLayoutSettings() : this.layoutSettings;
+        this.layout = $("#appSystemController").layout( this.layoutSettings );
+//        $(document).wacTool().dumpObj(this.layoutSettings);
+        return this.layout;
     }
     ,
     hideLayout: function(){
-        $("#appSystemManagement").hide();
+        $("#appSystemController").hide();
     }
     ,
     initLayoutSettings: function(){
         /*
         *#######################
-        * appSystemManagementLayoutSettings
+        * appSystemControllerLayoutSettings
         *#######################
         *
         * This configuration illustrates how extensively the layout can be customized
@@ -56,7 +60,7 @@ objAppSystemManagement = {
         * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
         */
 
-        this.layoutSettings = {
+        return {
             initHidden : false
             ,
             applyDefaultStyles:    true // basic styling for testing & demo purposes
@@ -103,7 +107,7 @@ objAppSystemManagement = {
     }
 }
 
-function bindAppSystemManagementEvents()
+function bindAppSystemControllerEvents()
 {
 
 }
