@@ -28,6 +28,7 @@
         - South
     </div>
     <div class="ui-layout-west">
+        <div class="header">a2</div>
         <?php
         echo $contextInfo["moduleName"];
         ?>

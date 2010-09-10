@@ -13,7 +13,7 @@
 
 /***** variables declartion section, begin *****/
 var objAppStockController;
-var objAppStockControllerLayer;
+var objAppStockControllerLayout;
 /***** variables declartion section, end *****/
 
 
@@ -23,6 +23,7 @@ $(document).ready(
         //       wacShowBlockUILoading();
         
         objAppStockController.bindEvents();
+        
 
     //        $(document).wacTool().dumpObj({name:"ben"});
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
@@ -34,16 +35,16 @@ $(document).ready(
 
 objAppStockController = {
     name: "AppStockController",
-    layout: objAppStockControllerLayer,
+    layout: objAppStockControllerLayout,
     bindEvents: function(){
         Wac.log("objAppStockController init");
     },
     initLayout: function(){
-        this.layout.initLayout();
+        this.layout.init();
     }
     ,
     hideLayout: function(){
-        this.layout.hideLayout();
+        this.layout.hide();
     }
 }
 
