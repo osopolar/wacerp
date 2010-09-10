@@ -7,7 +7,7 @@ $contextInfo = array(
 ?>
 
 <div class="ui-layout-west">
-    <div class="header"></div>
+    <div class="header">a1</div>
     <div class="subhead"></div>
     <div class="content"></div>
     <div class="footer"></div>
@@ -50,7 +50,7 @@ $contextInfo = array(
 </div>
 
 
-<div id="wac_app_container">
+<div id="wacAppContainer">
     <?php
             //mainItem form, hidden form interface
             include_component("appStockController", "main",

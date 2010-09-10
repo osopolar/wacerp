@@ -12,7 +12,7 @@
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
-  <body id="wac_app_body">
+  <body id="wacAppController">
     <?php echo $sf_content ?>
   </body>
 </html>

@@ -13,7 +13,7 @@
 
 /***** variables declartion section, begin *****/
 var objAppSystemController;
-var objAppSystemControllerLayer;
+var objAppSystemControllerLayout;
 /***** variables declartion section, end *****/
 
 
@@ -34,16 +34,16 @@ $(document).ready(
 
 objAppSystemController = {
     name: "AppSystemController",
-    layout: objAppSystemControllerLayer,
+    layout: objAppSystemControllerLayout,
     bindEvents: function(){
         Wac.log("objAppSystemController init");
     },
     initLayout: function(){
-        this.layout.initLayout();
+        this.layout.init();
     }
     ,
     hideLayout: function(){
-        this.layout.hideLayout();
+        this.layout.hide();
     }
 }
 
