@@ -7,13 +7,13 @@
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appSystemController / AppStockController
+ * appTestController / AppStockController
  *
  */
 
 /***** variables declartion section, begin *****/
-var objAppSystemController;
-var objAppSystemControllerLayout;
+var objAppTestController;
+var objAppTestControllerLayout;
 /***** variables declartion section, end *****/
 
 
@@ -22,7 +22,7 @@ $(document).ready(
     function() {
         //       wacShowBlockUILoading();
         
-        objAppSystemController.bindEvents();
+        objAppTestController.bindEvents();
 
     //        $(document).wacTool().dumpObj({name:"ben"});
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
@@ -32,11 +32,11 @@ $(document).ready(
     }
 );
 
-objAppSystemController = {
-    name: "AppSystemController",
-    layout: objAppSystemControllerLayout,
+objAppTestController = {
+    name: "AppTestController",
+    layout: objAppTestControllerLayout,
     bindEvents: function(){
-//        Wac.log("objAppSystemController init");
+//        Wac.log("objAppTestController init");
     },
     initLayout: function(){
         return this.layout.init();
@@ -48,5 +48,5 @@ objAppSystemController = {
 }
 
 // put it into wac apps container
-wacAppController.appsContainer.push(objAppSystemController);
+wacAppController.appsContainer.push(objAppTestController);
 /***** init section, end *****/

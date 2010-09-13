@@ -37,10 +37,18 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
-   *  return internal path of the request
+     *  return internal path of the request
     */
     public function getInternalPath() {
         return $this->getContext()->getConfiguration()->getApplication()."/".$this->getModuleName()."/".$this->getActionName();
+    }
+
+    public function getActionJs($specName="") {
+        return
+        ($specName=="") ?
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$this->getActionName()
+                :
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
     }
 
     /*

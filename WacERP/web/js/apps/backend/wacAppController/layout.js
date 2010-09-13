@@ -3,28 +3,18 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appStockController
+ * @subpackage appSystemController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appStockController / AppStockController
+ * wacAppController / wacAppController
  *
  */
 
 /***** variables declartion section, begin *****/
-//var objAppStockControllerLayout;
-/***** variables declartion section, end *****/
 
-$(document).ready(
-    function() {
-
-        
-    }
-    );
-
-/***** init section, begin *****/
 var options = {
-    appId: "#appStockController",
+    appId: "#wacAppController",
     settings: {
         defaults: {
             size:                   "auto"
@@ -93,34 +83,17 @@ var options = {
             ,
             slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
-            initClosed:             false
+            initClosed:             true
         }
         ,
         west: {
-            size:					250
+            size:                           250
             ,
-            spacing_closed:			21			// wider space when closed
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
             ,
-            togglerLength_closed:	21			// make toggler 'square' - 21x21
+            slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
-            togglerAlign_closed:	"top"		// align to top of resizer
-            ,
-            togglerLength_open:		0			// NONE - using custom togglers INSIDE west-pane
-            ,
-            togglerTip_open:		"Close West Pane"
-            ,
-            togglerTip_closed:		"Open West Pane"
-            ,
-            resizerTip_open:		"Resize West Pane"
-            ,
-            slideTrigger_open:		"click" 	// default
-            ,
-            initClosed:				true
-            //	add 'bounce' option to default 'slide' effect
-            ,
-            fxSettings_open:		{
-                easing: "easeOutBounce"
-            }
+            initClosed:             true
         }
         ,
         east: {
@@ -130,11 +103,11 @@ var options = {
             ,
             slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
-            initClosed:             false
+            initClosed:             true
         }
         ,
         center: {
-            paneSelector: "#appStockControllerCenter"             // sample: use an ID to select pane instead of a class
+            paneSelector: "#wacAppContainer"             // sample: use an ID to select pane instead of a class
             ,
             onresize:     ""    // resize INNER LAYOUT when center pane resizes
             ,
@@ -145,33 +118,18 @@ var options = {
     }
 };
 
+// create WAC Application LAYOUT
+objWacAppControllerLayout = new WacLayout(options);
 
-// declare app layout object
-objAppStockControllerLayout = new WacLayout(options);
+/***** variables declartion section, end *****/
 
-// decorate the layout
-objAppStockControllerLayout.decorate = function(){
-    var uiLayout = this.getUiLayout();
-    // must prefix paneClass with "body > " to target ONLY the wacAppBaseLayout panes
-        var westSelector = "#appStockController  .ui-layout-west"; // outer-west pane
-        var eastSelector = "#appStockController  .ui-layout-east"; // outer-east pane
 
-        // CREATE SPANs for pin-buttons - using a generic class as identifiers
-        $("<span></span>").addClass("pin-button").prependTo( westSelector );
-        $("<span></span>").addClass("pin-button").prependTo( eastSelector );
+/***** init section, begin *****/
 
-        // BIND events to pin-buttons to make them functional
-        uiLayout.addPinBtn( westSelector +" .pin-button", "west");
-        uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
-
-        // CREATE SPANs for close-buttons - using unique IDs as identifiers
-        $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
-        $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
-        // BIND layout events to close-buttons to make them functional
-        uiLayout.addCloseBtn("#west-closer", "west");
-        uiLayout.addCloseBtn("#east-closer", "east");
-
-//        $(document).wacTool().dumpObj(uiLayout.options);
-}
+//$(document).ready(
+//    function() {
+//
+//    }
+//    )
 
 /***** init section, end *****/
