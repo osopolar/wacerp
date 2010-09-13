@@ -22,29 +22,29 @@ $(document).ready(
 
 //        $(document).wacTool().dumpObj(uiLayout.options);
         wacAppController.bindEvents();
-//        wacAppController.initDefaultAppLayout();
+        wacAppController.initDefaultAppLayout();
 
-   objAppStockControllerLayout.init();
 
-        // must prefix paneClass with "body > " to target ONLY the wacAppBaseLayout panes
-        var westSelector = "#appStockController .ui-layout-west"; // outer-west pane
-        var eastSelector = "#appStockController .ui-layout-east"; // outer-east pane
+//       objAppStockControllerLayout.init();
 
-        // CREATE SPANs for pin-buttons - using a generic class as identifiers
-        $("<span></span>").addClass("pin-button").prependTo( westSelector );
-        $("<span></span>").addClass("pin-button").prependTo( eastSelector );
-        Wac.log("ddddddd: " + $(westSelector).length);
-
-        // BIND events to pin-buttons to make them functional
-        uiLayout.addPinBtn( westSelector +" .pin-button", "west");
-        uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
-
-        // CREATE SPANs for close-buttons - using unique IDs as identifiers
-        $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
-        $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
-        // BIND layout events to close-buttons to make them functional
-        uiLayout.addCloseBtn("#west-closer", "west");
-        uiLayout.addCloseBtn("#east-closer", "east");
+//        // must prefix paneClass with "body > " to target ONLY the wacAppBaseLayout panes
+//        var westSelector = "#wacAppController .ui-layout-west"; // outer-west pane
+//        var eastSelector = "#wacAppController .ui-layout-east"; // outer-east pane
+//
+//        // CREATE SPANs for pin-buttons - using a generic class as identifiers
+//        $("<span></span>").addClass("pin-button").prependTo( westSelector );
+//        $("<span></span>").addClass("pin-button").prependTo( eastSelector );
+//
+//        // BIND events to pin-buttons to make them functional
+//        uiLayout.addPinBtn( westSelector +" .pin-button", "west");
+//        uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
+//
+//        // CREATE SPANs for close-buttons - using unique IDs as identifiers
+//        $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
+//        $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
+//        // BIND layout events to close-buttons to make them functional
+//        uiLayout.addCloseBtn("#west-closer", "west");
+//        uiLayout.addCloseBtn("#east-closer", "east");
 
 
 
@@ -178,7 +178,7 @@ wacAppController = {
                 center: {
                     paneSelector: "#wacAppContainer"             // sample: use an ID to select pane instead of a class
                     ,
-                    onresize:     "innerLayout.resizeAll"    // resize INNER LAYOUT when center pane resizes
+                    onresize:     ""    // resize INNER LAYOUT when center pane resizes
                     ,
                     minWidth:     200
                     ,

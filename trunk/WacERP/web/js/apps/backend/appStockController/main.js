@@ -37,10 +37,10 @@ objAppStockController = {
     name: "AppStockController",
     layout: objAppStockControllerLayout,
     bindEvents: function(){
-        Wac.log("objAppStockController init");
+//        Wac.log("objAppStockController init");
     },
     initLayout: function(){
-        this.layout.init();
+        return this.layout.init();
     }
     ,
     hideLayout: function(){
@@ -48,5 +48,7 @@ objAppStockController = {
     }
 }
 
+// put it into wac apps container
+wacAppController.appsContainer.push(objAppStockController);
 
 /***** init section, end *****/

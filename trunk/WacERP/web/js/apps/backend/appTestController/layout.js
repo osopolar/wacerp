@@ -1,26 +1,26 @@
 /*
- * init app stock management layout
+ * init app test management layout
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appSystemController
+ * @subpackage appTestController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appSystemController / AppSystemController
+ * appTestController / AppTestController
  *
  */
 
 /***** variables declartion section, begin *****/
 
-//var objAppSystemControllerLayout;
+//var objAppTestControllerLayout;
 
 /***** variables declartion section, end *****/
 
 
 /***** init section, begin *****/
 var options = {
-    appId: "#appSystemController",
+    appId: "#appTestController",
     settings: {
         initHidden : false
         ,
@@ -68,11 +68,11 @@ var options = {
 };
 
 // declare app layout object
-objAppSystemControllerLayout = new WacLayout(options);
+objAppTestControllerLayout = new WacLayout(options);
 
 // decorate the layout
-objAppSystemControllerLayout.decorate = function(){
+objAppTestControllerLayout.decorate = function(){
     var uiLayout = this.getUiLayout();
-    Wac.log("objAppSystemControllerLayout.decorate");
+    Wac.log("objAppTestControllerLayout.decorate");
 }
 /***** init section, end *****/
