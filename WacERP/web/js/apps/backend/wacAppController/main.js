@@ -38,7 +38,7 @@ wacAppController = {
     appsContainer: [],
     layout: objWacAppControllerLayout,
     bindEvents: function(){
-        $("#appNavBar").bind("click", {}, function(e){
+        $("#appNavBar > li").bind("click", {}, function(e){
             Wac.log(e.target.id);
         });
 
