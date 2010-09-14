@@ -57,6 +57,7 @@ WacLayout = function(options){
             $(_options.appId).show();
             settings = (settings == null) ? this.initSettings(_options) : settings;
             _instance = $(_options.appId).layout( settings );
+            this.decorate();
             //        $(document).wacTool().dumpObj(settings);
             return _instance;
         }

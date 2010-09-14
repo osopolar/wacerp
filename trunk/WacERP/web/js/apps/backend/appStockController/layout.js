@@ -149,27 +149,29 @@ var options = {
 // declare app layout object
 objAppStockControllerLayout = new WacLayout(options);
 
-// decorate the layout
+// override decorate method, decorate the layout
 objAppStockControllerLayout.decorate = function(){
+    Wac.log("objAppStockControllerLayout.decorate");
+
     var uiLayout = this.getUiLayout();
     // must prefix paneClass with "body > " to target ONLY the wacAppBaseLayout panes
-        var westSelector = "#appStockController  .ui-layout-west"; // outer-west pane
-        var eastSelector = "#appStockController  .ui-layout-east"; // outer-east pane
+    var westSelector = "#appStockController  .ui-layout-west"; // outer-west pane
+    var eastSelector = "#appStockController  .ui-layout-east"; // outer-east pane
 
-        // CREATE SPANs for pin-buttons - using a generic class as identifiers
-        $("<span></span>").addClass("pin-button").prependTo( westSelector );
-        $("<span></span>").addClass("pin-button").prependTo( eastSelector );
+    // CREATE SPANs for pin-buttons - using a generic class as identifiers
+    $("<span></span>").addClass("pin-button").prependTo( westSelector );
+    $("<span></span>").addClass("pin-button").prependTo( eastSelector );
 
-        // BIND events to pin-buttons to make them functional
-        uiLayout.addPinBtn( westSelector +" .pin-button", "west");
-        uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
+    // BIND events to pin-buttons to make them functional
+    uiLayout.addPinBtn( westSelector +" .pin-button", "west");
+    uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
 
-        // CREATE SPANs for close-buttons - using unique IDs as identifiers
-        $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
-        $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
-        // BIND layout events to close-buttons to make them functional
-        uiLayout.addCloseBtn("#west-closer", "west");
-        uiLayout.addCloseBtn("#east-closer", "east");
+    // CREATE SPANs for close-buttons - using unique IDs as identifiers
+    $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
+    $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
+    // BIND layout events to close-buttons to make them functional
+    uiLayout.addCloseBtn("#west-closer", "west");
+    uiLayout.addCloseBtn("#east-closer", "east");
 
 //        $(document).wacTool().dumpObj(uiLayout.options);
 }

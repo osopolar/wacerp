@@ -17,15 +17,18 @@ var wacAppController;
 $(document).ready(
     function() {
         //       wacShowBlockUILoading();
-//        wacAppController.appsContainer.push(objAppSystemController, objAppStockController);
+
+        /***     init main layout      ***/
         wacAppController.initLayout();
 
-//        $(document).wacTool().dumpObj(uiLayout.options);
+        /***     bind main controller events      ***/
         wacAppController.bindEvents();
-        wacAppController.initDefaultAppLayout();
 
-        wacAppController.getApp("AppStockController").layout.decorate();
-        wacAppController.getApp("AppSystemController").layout.decorate();
+        /***     bind main controller events      ***/
+//        wacAppController.initDefaultApp("AppStockController");
+//        wacAppController.initDefaultApp("AppTestController");
+        wacAppController.initDefaultApp("AppSystemController");
+
 
 
     //       wacHideBlockUI();
@@ -39,20 +42,11 @@ wacAppController = {
     layout: objWacAppControllerLayout,
     bindEvents: function(){
         $("#appNavBar > li").bind("click", {}, function(e){
-            Wac.log(e.target.id);
+//            Wac.log(e.target.id);
+//            Wac.log(e.currentTarget.id);
+            wacAppController.showApp(e.currentTarget.id.substring(3));
         });
-
-//        $("#btnAppStockController").bind("click", {}, function(e){
-//            wacAppController.showApp("AppStockController");
-//        });
-//
-//        $("#btnAppSystemController").bind("click", {}, function(e){
-//            wacAppController.showApp("AppSystemController");
-//        });
-//
-//        $("#btnAppTestController").bind("click", {}, function(e){
-//            wacAppController.showApp("AppTestController");
-//        });
+        
     }
     ,
     getApp: function(appName){
@@ -80,8 +74,8 @@ wacAppController = {
         return uiLayout;
     }
     ,
-    initDefaultAppLayout: function(){
-        return this.showApp("AppStockController");
+    initDefaultApp: function(appName){
+        return this.showApp(appName);
     },
     initLayout: function(opts){
         return this.layout.init();  // return UI LAYOUT
