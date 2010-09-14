@@ -87,7 +87,7 @@ var options = {
         }
         ,
         west: {
-            size:                           250
+            size:                   250
             ,
             spacing_closed:         0            // HIDE resizer & toggler when 'closed'
             ,

@@ -22,57 +22,108 @@
 var options = {
     appId: "#appSystemController",
     settings: {
-        initHidden : false
-        ,
-        applyDefaultStyles:    true // basic styling for testing & demo purposes
-        ,
-        minSize:        20 // TESTING ONLY
-        ,
-        spacing_closed:    	14
-        ,
-        north__spacing_closed:    	8
-        ,
-        south__spacing_closed:    	8
-        ,
-        north__togglerLength_closed:	-1 // = 100% - so cannot 'slide open'
-        ,
-        south__togglerLength_closed:	-1
-        ,
-        fxName:        	"slide" // do not confuse with "slidable" option!
-        ,
-        fxSpeed_open:    	1000
-        ,
-        fxSpeed_close:    	2500
-        ,
-        fxSettings_open:    {
-            easing: "easeInQuint"
+        defaults: {
+            size:                   "auto"
+            ,
+            minSize:                90
+            ,
+            paneClass:              "pane"         // default = 'ui-layout-pane'
+            ,
+            resizerClass:           "resizer"    // default = 'ui-layout-resizer'
+            ,
+            togglerClass:           "toggler"    // default = 'ui-layout-toggler'
+            ,
+            buttonClass:            "button"    // default = 'ui-layout-button'
+            ,
+            contentSelector:        ".content"    // inner div to auto-size so only it scrolls, not the entire pane!
+            ,
+            contentIgnoreSelector:  "span"        // 'paneSelector' for content to 'ignore' when measuring room for content
+            ,
+            togglerLength_open:     35            // WIDTH of toggler on north/south edges - HEIGHT on east/west edges
+            ,
+            togglerLength_closed:   35            // "100%" OR -1 = full height
+            ,
+            hideTogglerOnSlide:     true        // hide the toggler when pane is 'slid open'
+            ,
+            togglerTip_open:        "Close This Pane"
+            ,
+            togglerTip_closed:      "Open This Pane"
+            ,
+            resizerTip:             "Resize This Pane"
+            //    effect defaults - overridden on some panes
+            ,
+            fxName:                 "slide"        // none, slide, drop, scale
+            ,
+            fxSpeed_open:           750
+            ,
+            fxSpeed_close:          1500
+            ,
+            fxSettings_open:        {
+                easing: "easeInQuint"
+            }
+            ,
+            fxSettings_close:        {
+                easing: "easeOutQuint"
+            }
         }
         ,
-        fxSettings_close:    {
-            easing: "easeOutQuint"
+        north: {
+            maxSize:                200
+            ,
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            ,
+            slidable:              false        // REFERENCE - cannot slide if spacing_closed = 0
+            ,
+            initClosed:            true
         }
         ,
-        north__fxName:    	"none"
+        south: {
+            maxSize:                200
+            ,
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            ,
+            slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
+            ,
+            initClosed:             false
+        }
         ,
-        south__fxName:    	"drop"
+        west: {
+            size:                  250
+            ,
+            slidable:              false        // REFERENCE - cannot slide if spacing_closed = 0
+            ,
+            initClosed:            false
+        }
         ,
-        south__fxSpeed_open:    	500
+        east: {
+            size:                    250
+            ,
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            ,
+            slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
+            ,
+            initClosed:             true
+        }
         ,
-        south__fxSpeed_close:    	1000
-        //,	initClosed:        true
-        ,
-        center__minWidth:    200
-        ,
-        center__minHeight:    200
+        center: {
+            paneSelector: "#appSystemControllerCenter"             // sample: use an ID to select pane instead of a class
+            ,
+            onresize:     ""    // resize INNER LAYOUT when center pane resizes
+            ,
+            minWidth:     200
+            ,
+            minHeight:    200
+        }
     }
 };
-
 // declare app layout object
 objAppSystemControllerLayout = new WacLayout(options);
 
-// decorate the layout
+// override decorate method, decorate the layout
 objAppSystemControllerLayout.decorate = function(){
-    var uiLayout = this.getUiLayout();
     Wac.log("objAppSystemControllerLayout.decorate");
+    
+    var uiLayout = this.getUiLayout();
+    
 }
 /***** init section, end *****/
