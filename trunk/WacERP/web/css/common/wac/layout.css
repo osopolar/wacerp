@@ -63,7 +63,7 @@
 .footer  { border-top: 1px solid #777; }
 #wacAppContainer .footer  { border-top: 1px solid #BBB; }
 .content {
-    padding:    10px;
+    padding:    0px;
     position:    relative;
     overflow:    auto;
 }
@@ -321,6 +321,21 @@ span.button-close-east:hover    { background: url(img/go-rt-on.gif)  no-repeat c
     display: block !important;
 }
 
+/*   jqgrid css    */
+.ui-jqgrid-sortable{
+    font-size: 9pt;
+}
 
+.ui-jqgrid-btable{
+    font-size: 9pt;
+}
+
+.ui-jqgrid-title {
+    font-size: 11pt;
+}
+
+#jqgh_menu{
+    font-size: 9pt;
+}
 
 

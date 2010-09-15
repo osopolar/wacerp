@@ -78,10 +78,14 @@ var options = {
         }
         ,
         south: {
-            maxSize:                200
+            size:      30
             ,
-            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            minSize:   20
             ,
+            maxSize:   200
+            ,
+//            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+//            ,
             slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
             initClosed:             false
