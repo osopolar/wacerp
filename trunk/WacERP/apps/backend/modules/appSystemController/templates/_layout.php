@@ -1,16 +1,12 @@
 <div id="<?php echo $contextInfo["moduleName"]; ?>" style="display: none; height: 100%">
-    <div class="ui-layout-center" id="<?php echo $contextInfo["moduleName"]; ?>Center">
+    <div class="ui-layout-center ui-helper-reset ui-widget-content" id="<?php echo $contextInfo["moduleName"]; ?>Center">
         <h3 class="ui-widget-header ui-corner-top ui-helper-clearfix">
             <?php
             echo $contextInfo["moduleName"];
             ?>
             - Center</h3>
-        <div class="content">
-            <?php
-            echo "<div id=\"{$contextInfo["moduleName"]}Label\">";
-            echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
-            echo "</div>"
-            ?>
+        <div class="content" id="<?php echo $contextInfo["moduleName"]; ?>Tabs">
+            <ul></ul>
         </div>
         <div class="footer">
             Center - Footer

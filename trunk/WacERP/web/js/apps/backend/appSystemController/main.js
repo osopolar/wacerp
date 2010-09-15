@@ -14,6 +14,7 @@
 /***** variables declartion section, begin *****/
 var objAppSystemController;
 var objAppSystemControllerLayout;  // inited in layout.js
+var objAppSystemControllerTabs;  // 
 /***** variables declartion section, end *****/
 
 
@@ -24,6 +25,20 @@ $(document).ready(
         
         objAppSystemController.bindEvents();
         objAppSystemController.initWestMenu("#appSystemControllerMenu");
+
+        var objAppSystemControllerTabs =$('#appSystemControllerTabs').tabs({
+//            add: function(e, ui) {
+//                // append close thingy
+//                $(ui.tab).parents('li:first')
+//                .append('<span class="ui-tabs-close ui-icon ui-icon-close" title="Close Tab"></span>')
+//                .find('span.ui-tabs-close')
+//                .click(function() {
+//                    objAppSystemControllerTabs.tabs('remove', $('li', objAppSystemControllerTabs).index($(this).parents('li:first')[0]));
+//                });
+//                // select just added tab
+//                objAppSystemControllerTabs.tabs('select', '#' + ui.panel.id);
+//            }
+        });
 
     //        $(document).wacTool().dumpObj({name:"ben"});
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
@@ -87,12 +102,13 @@ objAppSystemController = {
             onSelectRow: function(rowid) {
                 var treedata = $(menuId).jqGrid('getRowData',rowid);
                 if(treedata.isLeaf=="true") {
+                    Wac.log(treedata.id + " : " + treedata.url);
                     //treedata.url
 //                    var st = "#t"+treedata.id;
 //                    if($(st).html() != null ) {
-//                        appSystemManagementMainTab.tabs('select',st);
+//                        objAppSystemControllerTabs.tabs('select',st);
 //                    } else {
-//                        appSystemManagementMainTab.tabs('add',st, treedata.menu);
+//                        objAppSystemControllerTabs.tabs('add',st, treedata.menu);
 //                        $(st,"#appSystemManagementMenuTabs").load(treedata.url);
 //                    }
                 }

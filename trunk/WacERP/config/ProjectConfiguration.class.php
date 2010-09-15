@@ -10,5 +10,16 @@ class ProjectConfiguration extends sfProjectConfiguration
   {
     $this->enablePlugins('sfDoctrinePlugin');
     $this->enablePlugins('sfDoctrineGuardPlugin');
+
+    $this->setupCorePluginsCustomConfig();
   }
+
+  public function setupCorePluginsCustomConfig() {
+// custom builder options for doctrine
+      sfConfig::set('doctrine_model_builder_options',
+                    array('baseTableClassName' => 'WacCommonTable',
+                          'baseClassName' => 'sfDoctrineRecord'));
+
+  }
+
 }
