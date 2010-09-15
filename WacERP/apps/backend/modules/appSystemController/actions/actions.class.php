@@ -19,4 +19,9 @@ class appSystemControllerActions extends WacCommonActions
   {
     $this->forward('default', 'module');
   }
+  
+  public function executeGetWestMenu(sfWebRequest $request) {
+      return OutputHelper::getInstance()->outputXmlFormat(
+              $this->getComponent($this->getModuleName(), 'WestMenu', array()), $this);
+  }
 }

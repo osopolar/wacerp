@@ -14,4 +14,11 @@ class appSystemControllerComponents extends WacComponent
         $this->getResponse()->addJavaScript($this->getComponentJs(), 'last');
     }
 
+    public function executeWestMenu($request)
+    {
+        parent::execute($request);
+
+        $this->user = $this->getUser();
+    }
+
 }

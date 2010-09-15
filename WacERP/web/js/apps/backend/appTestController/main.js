@@ -1,19 +1,19 @@
 /*
- * init app stock management layout
+ * init app test management layout
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appStockController
+ * @subpackage appTestController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appTestController / AppStockController
+ * appTestController / AppTestController
  *
  */
 
 /***** variables declartion section, begin *****/
 var objAppTestController;
-var objAppTestControllerLayout;
+var objAppTestControllerLayout;  // inited in layout.js
 /***** variables declartion section, end *****/
 
 
@@ -25,7 +25,7 @@ $(document).ready(
         objAppTestController.bindEvents();
 
     //        $(document).wacTool().dumpObj({name:"ben"});
-    //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
+    //        $('#appTestControllerLabel').wacTool().test({name:"ben"});
 
     //       wacHideBlockUI();
 

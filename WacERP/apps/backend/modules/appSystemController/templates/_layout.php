@@ -1,6 +1,6 @@
 <div id="<?php echo $contextInfo["moduleName"]; ?>" style="display: none; height: 100%">
     <div class="ui-layout-center" id="<?php echo $contextInfo["moduleName"]; ?>Center">
-        <h3 class="header">
+        <h3 class="ui-widget-header ui-corner-top ui-helper-clearfix">
             <?php
             echo $contextInfo["moduleName"];
             ?>
@@ -28,24 +28,15 @@
     </div>
 
     <div class="ui-layout-south">
-        <div class="content">
         <?php
-        echo $contextInfo["moduleName"];
+        include_partial("wacAppController/copyrightFooter", $contextInfo);
         ?>
-        - South
-        </div>
     </div>
 
     <div class="ui-layout-west">
-        <div class="header">West Header</div>
-        <div class="subhead">East Sub Header</div>
         <div class="content">
-            <?php
-        echo $contextInfo["moduleName"];
-        ?>
-        - West
+            <table id="<?php echo $contextInfo["moduleName"];?>Menu"></table>
         </div>
-       <div class="footer">West - Footer</div>
     </div>
 
     <div class="ui-layout-east">
