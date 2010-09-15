@@ -21,6 +21,33 @@ Doctrine_Manager::getInstance()->bindComponent('WacSystemParameter', 'wac_db_con
  * @property string $pr_str1
  * @property string $pr_str2
  * 
+ * @method integer            getId()         Returns the current record's "id" value
+ * @method integer            getPrInt1()     Returns the current record's "pr_int1" value
+ * @method integer            getPrInt2()     Returns the current record's "pr_int2" value
+ * @method integer            getPriority()   Returns the current record's "priority" value
+ * @method integer            getIsAvail()    Returns the current record's "is_avail" value
+ * @method timestamp          getCreatedAt()  Returns the current record's "created_at" value
+ * @method timestamp          getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method string             getName()       Returns the current record's "name" value
+ * @method string             getCode()       Returns the current record's "code" value
+ * @method integer            getType()       Returns the current record's "type" value
+ * @method string             getValue()      Returns the current record's "value" value
+ * @method string             getPrStr1()     Returns the current record's "pr_str1" value
+ * @method string             getPrStr2()     Returns the current record's "pr_str2" value
+ * @method WacSystemParameter setId()         Sets the current record's "id" value
+ * @method WacSystemParameter setPrInt1()     Sets the current record's "pr_int1" value
+ * @method WacSystemParameter setPrInt2()     Sets the current record's "pr_int2" value
+ * @method WacSystemParameter setPriority()   Sets the current record's "priority" value
+ * @method WacSystemParameter setIsAvail()    Sets the current record's "is_avail" value
+ * @method WacSystemParameter setCreatedAt()  Sets the current record's "created_at" value
+ * @method WacSystemParameter setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacSystemParameter setName()       Sets the current record's "name" value
+ * @method WacSystemParameter setCode()       Sets the current record's "code" value
+ * @method WacSystemParameter setType()       Sets the current record's "type" value
+ * @method WacSystemParameter setValue()      Sets the current record's "value" value
+ * @method WacSystemParameter setPrStr1()     Sets the current record's "pr_str1" value
+ * @method WacSystemParameter setPrStr2()     Sets the current record's "pr_str2" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

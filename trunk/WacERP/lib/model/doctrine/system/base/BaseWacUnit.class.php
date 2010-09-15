@@ -22,6 +22,35 @@ Doctrine_Manager::getInstance()->bindComponent('WacUnit', 'wac_db_connection1');
  * @property WacUnitType $WacUnitType
  * @property Doctrine_Collection $WacUnitRatio
  * 
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method integer             getTypeId()       Returns the current record's "type_id" value
+ * @method integer             getPrInt1()       Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()       Returns the current record's "pr_int2" value
+ * @method integer             getPriority()     Returns the current record's "priority" value
+ * @method integer             getIsAvail()      Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()    Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()    Returns the current record's "updated_at" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method string              getCode()         Returns the current record's "code" value
+ * @method string              getPrStr1()       Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()       Returns the current record's "pr_str2" value
+ * @method WacUnitType         getWacUnitType()  Returns the current record's "WacUnitType" value
+ * @method Doctrine_Collection getWacUnitRatio() Returns the current record's "WacUnitRatio" collection
+ * @method WacUnit             setId()           Sets the current record's "id" value
+ * @method WacUnit             setTypeId()       Sets the current record's "type_id" value
+ * @method WacUnit             setPrInt1()       Sets the current record's "pr_int1" value
+ * @method WacUnit             setPrInt2()       Sets the current record's "pr_int2" value
+ * @method WacUnit             setPriority()     Sets the current record's "priority" value
+ * @method WacUnit             setIsAvail()      Sets the current record's "is_avail" value
+ * @method WacUnit             setCreatedAt()    Sets the current record's "created_at" value
+ * @method WacUnit             setUpdatedAt()    Sets the current record's "updated_at" value
+ * @method WacUnit             setName()         Sets the current record's "name" value
+ * @method WacUnit             setCode()         Sets the current record's "code" value
+ * @method WacUnit             setPrStr1()       Sets the current record's "pr_str1" value
+ * @method WacUnit             setPrStr2()       Sets the current record's "pr_str2" value
+ * @method WacUnit             setWacUnitType()  Sets the current record's "WacUnitType" value
+ * @method WacUnit             setWacUnitRatio() Sets the current record's "WacUnitRatio" collection
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>
