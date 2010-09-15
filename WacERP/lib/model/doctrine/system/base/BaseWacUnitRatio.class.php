@@ -22,6 +22,35 @@ Doctrine_Manager::getInstance()->bindComponent('WacUnitRatio', 'wac_db_connectio
  * @property WacUnit $FromUnit
  * @property WacUnit $ToUnit
  * 
+ * @method integer      getId()             Returns the current record's "id" value
+ * @method float        getRatio()          Returns the current record's "ratio" value
+ * @method integer      getPrInt1()         Returns the current record's "pr_int1" value
+ * @method integer      getPrInt2()         Returns the current record's "pr_int2" value
+ * @method integer      getPriority()       Returns the current record's "priority" value
+ * @method integer      getIsAvail()        Returns the current record's "is_avail" value
+ * @method timestamp    getCreatedAt()      Returns the current record's "created_at" value
+ * @method timestamp    getUpdatedAt()      Returns the current record's "updated_at" value
+ * @method string       getFromUnitCode()   Returns the current record's "from_unit_code" value
+ * @method string       getToUnitCode()     Returns the current record's "to_unit_code" value
+ * @method string       getPrStr1()         Returns the current record's "pr_str1" value
+ * @method string       getPrStr2()         Returns the current record's "pr_str2" value
+ * @method WacUnit      getFromUnit()       Returns the current record's "FromUnit" value
+ * @method WacUnit      getToUnit()         Returns the current record's "ToUnit" value
+ * @method WacUnitRatio setId()             Sets the current record's "id" value
+ * @method WacUnitRatio setRatio()          Sets the current record's "ratio" value
+ * @method WacUnitRatio setPrInt1()         Sets the current record's "pr_int1" value
+ * @method WacUnitRatio setPrInt2()         Sets the current record's "pr_int2" value
+ * @method WacUnitRatio setPriority()       Sets the current record's "priority" value
+ * @method WacUnitRatio setIsAvail()        Sets the current record's "is_avail" value
+ * @method WacUnitRatio setCreatedAt()      Sets the current record's "created_at" value
+ * @method WacUnitRatio setUpdatedAt()      Sets the current record's "updated_at" value
+ * @method WacUnitRatio setFromUnitCode()   Sets the current record's "from_unit_code" value
+ * @method WacUnitRatio setToUnitCode()     Sets the current record's "to_unit_code" value
+ * @method WacUnitRatio setPrStr1()         Sets the current record's "pr_str1" value
+ * @method WacUnitRatio setPrStr2()         Sets the current record's "pr_str2" value
+ * @method WacUnitRatio setFromUnit()       Sets the current record's "FromUnit" value
+ * @method WacUnitRatio setToUnit()         Sets the current record's "ToUnit" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

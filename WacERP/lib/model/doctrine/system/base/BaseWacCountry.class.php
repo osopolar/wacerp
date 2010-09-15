@@ -23,6 +23,37 @@ Doctrine_Manager::getInstance()->bindComponent('WacCountry', 'wac_db_connection1
  * @property string $pr_str1
  * @property string $pr_str2
  * 
+ * @method integer    getId()         Returns the current record's "id" value
+ * @method integer    getPrInt1()     Returns the current record's "pr_int1" value
+ * @method integer    getPrInt2()     Returns the current record's "pr_int2" value
+ * @method integer    getPriority()   Returns the current record's "priority" value
+ * @method integer    getIsAvail()    Returns the current record's "is_avail" value
+ * @method timestamp  getCreatedAt()  Returns the current record's "created_at" value
+ * @method timestamp  getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method string     getIsoCode2()   Returns the current record's "iso_code2" value
+ * @method string     getIsoCode3()   Returns the current record's "iso_code3" value
+ * @method string     getCode()       Returns the current record's "code" value
+ * @method string     getName()       Returns the current record's "name" value
+ * @method string     getPath()       Returns the current record's "path" value
+ * @method string     getMemo()       Returns the current record's "memo" value
+ * @method string     getPrStr1()     Returns the current record's "pr_str1" value
+ * @method string     getPrStr2()     Returns the current record's "pr_str2" value
+ * @method WacCountry setId()         Sets the current record's "id" value
+ * @method WacCountry setPrInt1()     Sets the current record's "pr_int1" value
+ * @method WacCountry setPrInt2()     Sets the current record's "pr_int2" value
+ * @method WacCountry setPriority()   Sets the current record's "priority" value
+ * @method WacCountry setIsAvail()    Sets the current record's "is_avail" value
+ * @method WacCountry setCreatedAt()  Sets the current record's "created_at" value
+ * @method WacCountry setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacCountry setIsoCode2()   Sets the current record's "iso_code2" value
+ * @method WacCountry setIsoCode3()   Sets the current record's "iso_code3" value
+ * @method WacCountry setCode()       Sets the current record's "code" value
+ * @method WacCountry setName()       Sets the current record's "name" value
+ * @method WacCountry setPath()       Sets the current record's "path" value
+ * @method WacCountry setMemo()       Sets the current record's "memo" value
+ * @method WacCountry setPrStr1()     Sets the current record's "pr_str1" value
+ * @method WacCountry setPrStr2()     Sets the current record's "pr_str2" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

@@ -23,6 +23,37 @@ Doctrine_Manager::getInstance()->bindComponent('WacCurrency', 'wac_db_connection
  * @property string $pr_str2
  * @property Doctrine_Collection $WacCurrencyRatio
  * 
+ * @method integer             getId()               Returns the current record's "id" value
+ * @method decimal             getValue()            Returns the current record's "value" value
+ * @method integer             getPrInt1()           Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()           Returns the current record's "pr_int2" value
+ * @method integer             getPriority()         Returns the current record's "priority" value
+ * @method integer             getIsAvail()          Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()        Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()        Returns the current record's "updated_at" value
+ * @method string              getName()             Returns the current record's "name" value
+ * @method string              getCode()             Returns the current record's "code" value
+ * @method string              getSymboLeft()        Returns the current record's "symbo_left" value
+ * @method string              getSymboRight()       Returns the current record's "symbo_right" value
+ * @method string              getPrStr1()           Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()           Returns the current record's "pr_str2" value
+ * @method Doctrine_Collection getWacCurrencyRatio() Returns the current record's "WacCurrencyRatio" collection
+ * @method WacCurrency         setId()               Sets the current record's "id" value
+ * @method WacCurrency         setValue()            Sets the current record's "value" value
+ * @method WacCurrency         setPrInt1()           Sets the current record's "pr_int1" value
+ * @method WacCurrency         setPrInt2()           Sets the current record's "pr_int2" value
+ * @method WacCurrency         setPriority()         Sets the current record's "priority" value
+ * @method WacCurrency         setIsAvail()          Sets the current record's "is_avail" value
+ * @method WacCurrency         setCreatedAt()        Sets the current record's "created_at" value
+ * @method WacCurrency         setUpdatedAt()        Sets the current record's "updated_at" value
+ * @method WacCurrency         setName()             Sets the current record's "name" value
+ * @method WacCurrency         setCode()             Sets the current record's "code" value
+ * @method WacCurrency         setSymboLeft()        Sets the current record's "symbo_left" value
+ * @method WacCurrency         setSymboRight()       Sets the current record's "symbo_right" value
+ * @method WacCurrency         setPrStr1()           Sets the current record's "pr_str1" value
+ * @method WacCurrency         setPrStr2()           Sets the current record's "pr_str2" value
+ * @method WacCurrency         setWacCurrencyRatio() Sets the current record's "WacCurrencyRatio" collection
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

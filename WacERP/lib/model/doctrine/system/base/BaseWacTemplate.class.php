@@ -19,6 +19,29 @@ Doctrine_Manager::getInstance()->bindComponent('WacTemplate', 'wac_db_connection
  * @property string $pr_str1
  * @property string $pr_str2
  * 
+ * @method integer     getId()         Returns the current record's "id" value
+ * @method integer     getPrInt1()     Returns the current record's "pr_int1" value
+ * @method integer     getPrInt2()     Returns the current record's "pr_int2" value
+ * @method integer     getPriority()   Returns the current record's "priority" value
+ * @method integer     getIsAvail()    Returns the current record's "is_avail" value
+ * @method timestamp   getCreatedAt()  Returns the current record's "created_at" value
+ * @method timestamp   getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method string      getName()       Returns the current record's "name" value
+ * @method string      getCode()       Returns the current record's "code" value
+ * @method string      getPrStr1()     Returns the current record's "pr_str1" value
+ * @method string      getPrStr2()     Returns the current record's "pr_str2" value
+ * @method WacTemplate setId()         Sets the current record's "id" value
+ * @method WacTemplate setPrInt1()     Sets the current record's "pr_int1" value
+ * @method WacTemplate setPrInt2()     Sets the current record's "pr_int2" value
+ * @method WacTemplate setPriority()   Sets the current record's "priority" value
+ * @method WacTemplate setIsAvail()    Sets the current record's "is_avail" value
+ * @method WacTemplate setCreatedAt()  Sets the current record's "created_at" value
+ * @method WacTemplate setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacTemplate setName()       Sets the current record's "name" value
+ * @method WacTemplate setCode()       Sets the current record's "code" value
+ * @method WacTemplate setPrStr1()     Sets the current record's "pr_str1" value
+ * @method WacTemplate setPrStr2()     Sets the current record's "pr_str2" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

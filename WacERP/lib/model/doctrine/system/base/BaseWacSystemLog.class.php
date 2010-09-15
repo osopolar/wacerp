@@ -20,6 +20,31 @@ Doctrine_Manager::getInstance()->bindComponent('WacSystemLog', 'wac_db_connectio
  * @property string $pr_str1
  * @property string $pr_str2
  * 
+ * @method integer      getId()         Returns the current record's "id" value
+ * @method integer      getType()       Returns the current record's "type" value
+ * @method integer      getPrInt1()     Returns the current record's "pr_int1" value
+ * @method integer      getPrInt2()     Returns the current record's "pr_int2" value
+ * @method integer      getPriority()   Returns the current record's "priority" value
+ * @method integer      getIsAvail()    Returns the current record's "is_avail" value
+ * @method timestamp    getCreatedAt()  Returns the current record's "created_at" value
+ * @method timestamp    getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method integer      getUserId()     Returns the current record's "user_id" value
+ * @method string       getContent()    Returns the current record's "content" value
+ * @method string       getPrStr1()     Returns the current record's "pr_str1" value
+ * @method string       getPrStr2()     Returns the current record's "pr_str2" value
+ * @method WacSystemLog setId()         Sets the current record's "id" value
+ * @method WacSystemLog setType()       Sets the current record's "type" value
+ * @method WacSystemLog setPrInt1()     Sets the current record's "pr_int1" value
+ * @method WacSystemLog setPrInt2()     Sets the current record's "pr_int2" value
+ * @method WacSystemLog setPriority()   Sets the current record's "priority" value
+ * @method WacSystemLog setIsAvail()    Sets the current record's "is_avail" value
+ * @method WacSystemLog setCreatedAt()  Sets the current record's "created_at" value
+ * @method WacSystemLog setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacSystemLog setUserId()     Sets the current record's "user_id" value
+ * @method WacSystemLog setContent()    Sets the current record's "content" value
+ * @method WacSystemLog setPrStr1()     Sets the current record's "pr_str1" value
+ * @method WacSystemLog setPrStr2()     Sets the current record's "pr_str2" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

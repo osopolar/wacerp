@@ -22,6 +22,35 @@ Doctrine_Manager::getInstance()->bindComponent('WacCurrencyRatio', 'wac_db_conne
  * @property WacCurrency $FromCurrency
  * @property WacCurrency $ToCurrency
  * 
+ * @method integer          getId()                 Returns the current record's "id" value
+ * @method float            getRatio()              Returns the current record's "ratio" value
+ * @method integer          getPrInt1()             Returns the current record's "pr_int1" value
+ * @method integer          getPrInt2()             Returns the current record's "pr_int2" value
+ * @method integer          getPriority()           Returns the current record's "priority" value
+ * @method integer          getIsAvail()            Returns the current record's "is_avail" value
+ * @method timestamp        getCreatedAt()          Returns the current record's "created_at" value
+ * @method timestamp        getUpdatedAt()          Returns the current record's "updated_at" value
+ * @method string           getFromCurrencyCode()   Returns the current record's "from_currency_code" value
+ * @method string           getToCurrencyCode()     Returns the current record's "to_currency_code" value
+ * @method string           getPrStr1()             Returns the current record's "pr_str1" value
+ * @method string           getPrStr2()             Returns the current record's "pr_str2" value
+ * @method WacCurrency      getFromCurrency()       Returns the current record's "FromCurrency" value
+ * @method WacCurrency      getToCurrency()         Returns the current record's "ToCurrency" value
+ * @method WacCurrencyRatio setId()                 Sets the current record's "id" value
+ * @method WacCurrencyRatio setRatio()              Sets the current record's "ratio" value
+ * @method WacCurrencyRatio setPrInt1()             Sets the current record's "pr_int1" value
+ * @method WacCurrencyRatio setPrInt2()             Sets the current record's "pr_int2" value
+ * @method WacCurrencyRatio setPriority()           Sets the current record's "priority" value
+ * @method WacCurrencyRatio setIsAvail()            Sets the current record's "is_avail" value
+ * @method WacCurrencyRatio setCreatedAt()          Sets the current record's "created_at" value
+ * @method WacCurrencyRatio setUpdatedAt()          Sets the current record's "updated_at" value
+ * @method WacCurrencyRatio setFromCurrencyCode()   Sets the current record's "from_currency_code" value
+ * @method WacCurrencyRatio setToCurrencyCode()     Sets the current record's "to_currency_code" value
+ * @method WacCurrencyRatio setPrStr1()             Sets the current record's "pr_str1" value
+ * @method WacCurrencyRatio setPrStr2()             Sets the current record's "pr_str2" value
+ * @method WacCurrencyRatio setFromCurrency()       Sets the current record's "FromCurrency" value
+ * @method WacCurrencyRatio setToCurrency()         Sets the current record's "ToCurrency" value
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>

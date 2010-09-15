@@ -22,6 +22,35 @@ Doctrine_Manager::getInstance()->bindComponent('WacWorkflow', 'wac_db_connection
  * @property string $pr_str2
  * @property Doctrine_Collection $WacWorkflowItem
  * 
+ * @method integer             getId()              Returns the current record's "id" value
+ * @method integer             getType()            Returns the current record's "type" value
+ * @method integer             getPrInt1()          Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()          Returns the current record's "pr_int2" value
+ * @method integer             getPriority()        Returns the current record's "priority" value
+ * @method integer             getIsAvail()         Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()       Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()       Returns the current record's "updated_at" value
+ * @method string              getName()            Returns the current record's "name" value
+ * @method string              getCode()            Returns the current record's "code" value
+ * @method string              getMemo()            Returns the current record's "memo" value
+ * @method string              getPrStr1()          Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()          Returns the current record's "pr_str2" value
+ * @method Doctrine_Collection getWacWorkflowItem() Returns the current record's "WacWorkflowItem" collection
+ * @method WacWorkflow         setId()              Sets the current record's "id" value
+ * @method WacWorkflow         setType()            Sets the current record's "type" value
+ * @method WacWorkflow         setPrInt1()          Sets the current record's "pr_int1" value
+ * @method WacWorkflow         setPrInt2()          Sets the current record's "pr_int2" value
+ * @method WacWorkflow         setPriority()        Sets the current record's "priority" value
+ * @method WacWorkflow         setIsAvail()         Sets the current record's "is_avail" value
+ * @method WacWorkflow         setCreatedAt()       Sets the current record's "created_at" value
+ * @method WacWorkflow         setUpdatedAt()       Sets the current record's "updated_at" value
+ * @method WacWorkflow         setName()            Sets the current record's "name" value
+ * @method WacWorkflow         setCode()            Sets the current record's "code" value
+ * @method WacWorkflow         setMemo()            Sets the current record's "memo" value
+ * @method WacWorkflow         setPrStr1()          Sets the current record's "pr_str1" value
+ * @method WacWorkflow         setPrStr2()          Sets the current record's "pr_str2" value
+ * @method WacWorkflow         setWacWorkflowItem() Sets the current record's "WacWorkflowItem" collection
+ * 
  * @package    WacERP
  * @subpackage model
  * @author     JianBinBi <jianbinbi@gmail.com>
