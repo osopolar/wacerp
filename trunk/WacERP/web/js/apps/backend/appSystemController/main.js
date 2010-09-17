@@ -14,7 +14,6 @@
 /***** variables declartion section, begin *****/
 var objAppSystemController;
 var objAppSystemControllerLayout;  // inited in layout.js
-var objAppSystemControllerTabs;  // 
 /***** variables declartion section, end *****/
 
 
@@ -24,21 +23,7 @@ $(document).ready(
         //       wacShowBlockUILoading();
         
         objAppSystemController.bindEvents();
-        objAppSystemController.initWestMenu("#appSystemControllerMenu");
-
-        var objAppSystemControllerTabs =$('#appSystemControllerTabs').tabs({
-//            add: function(e, ui) {
-//                // append close thingy
-//                $(ui.tab).parents('li:first')
-//                .append('<span class="ui-tabs-close ui-icon ui-icon-close" title="Close Tab"></span>')
-//                .find('span.ui-tabs-close')
-//                .click(function() {
-//                    objAppSystemControllerTabs.tabs('remove', $('li', objAppSystemControllerTabs).index($(this).parents('li:first')[0]));
-//                });
-//                // select just added tab
-//                objAppSystemControllerTabs.tabs('select', '#' + ui.panel.id);
-//            }
-        });
+        objAppSystemController.init();
 
     //        $(document).wacTool().dumpObj({name:"ben"});
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
@@ -51,19 +36,46 @@ $(document).ready(
 objAppSystemController = {
     name: "AppSystemController",
     layout: objAppSystemControllerLayout,
+    westMenu: null,
+    tab: null,
     bindEvents: function(){
 //        Wac.log("objAppSystemController init");
     }
     ,
-    initLayout: function(){
+    init: function(){
+        this.initWestMenu("#appSystemControllerMenu");
+        this.initTab("#appSystemControllerTabs");         
+    }
+    ,
+    initLayout: function(){  // invoke by main app controller
         return this.layout.init();
     }
     ,
     hideLayout: function(){
         this.layout.hide();
     },
+    initTab: function(tabId){
+        this.tab = $(tabId).tabs({
+            tabTemplate: '<li><a href="#{href}">#{label}</a> <span class="ui-icon ui-icon-close">Close Tab</span></li>',
+            add: function(event, ui) {
+//                var tab_content = $tab_content_input.val() || 'Tab '+tab_counter+' content.';
+//                $(ui.panel).append('<p>'+tab_content+'</p>');
+            
+                objAppSystemController.tab.tabs('select', '#' + ui.panel.id); // select just added tab
+            }
+        });
+
+       
+
+        // close icon: removing the tab on click
+        // note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+        $(tabId + ' span.ui-icon-close').live('click', function() {
+            var index = $('li', objAppSystemController.tab).index($(this).parent());
+            objAppSystemController.tab.tabs('remove', index);
+        });
+    },
     initWestMenu: function(menuId){
-        $(menuId).jqGrid({
+        this.westMenu = $(menuId).jqGrid({
             url: BASE_URL + "/appSystemController/getWestMenu",
             datatype: "xml",
             height: "auto",
@@ -102,15 +114,14 @@ objAppSystemController = {
             onSelectRow: function(rowid) {
                 var treedata = $(menuId).jqGrid('getRowData',rowid);
                 if(treedata.isLeaf=="true") {
-                    Wac.log(treedata.id + " : " + treedata.url);
-                    //treedata.url
-//                    var st = "#t"+treedata.id;
-//                    if($(st).html() != null ) {
-//                        objAppSystemControllerTabs.tabs('select',st);
-//                    } else {
-//                        objAppSystemControllerTabs.tabs('add',st, treedata.menu);
-//                        $(st,"#appSystemManagementMenuTabs").load(treedata.url);
-//                    }
+//                    $(document).wacTool().dumpObj(treedata);
+                    var st = "#t"+treedata.id;
+                    if($(st).html() != null ) {
+                        objAppSystemController.tab.tabs('select',st);
+                    } else {
+                        objAppSystemController.tab.tabs('add', st, treedata.menu);
+                        $(st, objAppSystemController.tab.id).load(treedata.url);
+                    }
                 }
             }
         });

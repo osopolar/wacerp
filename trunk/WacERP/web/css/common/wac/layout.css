@@ -16,7 +16,7 @@
     padding: 0;/* alignment & padding is on the inner-divs */
     overflow: auto; /* will be auto-set to 'hidden' for any pane with a 'scrolling content div' */
 }
-
+li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 
 /*
 *    OUTER-LAYOUT PANE FORMATTING

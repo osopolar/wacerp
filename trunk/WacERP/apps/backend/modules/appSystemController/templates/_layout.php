@@ -5,8 +5,10 @@
             echo $contextInfo["moduleName"];
             ?>
             - Center</h3>
-        <div class="content" id="<?php echo $contextInfo["moduleName"]; ?>Tabs">
-            <ul></ul>
+        <div class="content">
+            <div id="<?php echo $contextInfo["moduleName"]; ?>Tabs" style="font-size:12px; overflow:auto;">
+                    <ul></ul>
+            </div>
         </div>
         <div class="footer">
             Center - Footer
