@@ -24,7 +24,21 @@ test:
 
 all:
   .settings:
-    enabled_modules:      [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
+    enabled_modules:
+      - default
+      - sfGuardAuth
+      - sfGuardGroup
+      - sfGuardUser
+      - sfGuardPermission
+
+      - wacAppController
+      - wacAppSystemController
+      - wacAppTestController
+      - wacGuardUser
+      - wacGuardGroup
+      - wacGuardPermission
+      - wacCommon
+      - wacCountry
     
     # Form security secret (CSRF protection)
 #    csrf_secret:            148e77f5b46de42f4caf4dd2c4ad25449ae4f0bb

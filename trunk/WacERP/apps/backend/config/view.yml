@@ -16,24 +16,30 @@ default:
     main:            main.css
 #    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/ui-lightness/jquery-ui-1.8.4.custom.css
 #    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/redmond/jquery-ui-1.8.4.custom.css
-    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/cupertino/jquery-ui-1.8.4.custom.css
-    wac_main:        common/wac/main.css
 
-  javascripts:
-    jquery:          common/jquery/jquery-1.4.2/jquery-1.4.2.min.js
-    jquery.cookie:   common/jquery/jquery-1.4.2/jquery.cookie.js
-    jquery.hotkeys:  common/jquery/jquery-1.4.2/jquery.hotkeys.js
+#    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/cupertino/jquery-ui-1.8.4.custom.css
+#    jquery.jqGrid:   common/jquery/plugins/jquery.jqGrid-3.7.1/ui.jqgrid.css
+#    wac_main:        common/wac/main.css
+#    app.layout:      common/wac/layout.css
 
-    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/jquery-ui-1.8.4.custom.min.js
-    jquery-ui-i18n:  common/jquery/plugins/jquery-ui-1.8.4.custom/jquery-ui-i18n.js
-    jquery.layout:   common/jquery/plugins/jquery.layout-1.3.0/jquery.layout.js
-
-    wac_main:        common/wac/main.js
-#    wac_functions:   common/wac/functions.js
-    wac_models:      common/wac/models.js
-    wac_plugin_base: common/wac/jquery_plugins/base.js
-    wac_tool:        common/wac/jquery_plugins/tool.js
-#    wac_foo:         common/wac/jquery_plugins/foo.js  //for test extension
+#  javascripts:
+#    jquery:          common/jquery/jquery-1.4.2/jquery-1.4.2.min.js
+#    jquery.cookie:   common/jquery/jquery-1.4.2/jquery.cookie.js
+#    jquery.hotkeys:  common/jquery/jquery-1.4.2/jquery.hotkeys.js
+#
+#    jquery-ui:       common/jquery/plugins/jquery-ui-1.8.4.custom/jquery-ui-1.8.4.custom.min.js
+#    jquery-ui-i18n:  common/jquery/plugins/jquery-ui-1.8.4.custom/jquery-ui-i18n.js
+#    jquery.layout:   common/jquery/plugins/jquery.layout-1.3.0/jquery.layout.js
+#
+#    jqgrid.jqGrid.locale:   common/jquery/plugins/jquery.jqGrid-3.7.1/i18n/grid.locale-cn.js
+#    jquery.jqGrid:   common/jquery/plugins/jquery.jqGrid-3.7.1/jquery.jqGrid.min.js
+#
+#    wac_main:        common/wac/main.js
+##    wac_functions:   common/wac/functions.js
+#    wac_models:      common/wac/models.js
+#    wac_plugin_base: common/wac/jquery_plugins/base.js
+#    wac_tool:        common/wac/jquery_plugins/tool.js
+##    wac_foo:         common/wac/jquery_plugins/foo.js  //for test extension
 
   has_layout:     true
   layout:         layout
