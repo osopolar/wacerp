@@ -49,6 +49,7 @@ objAppStockController = {
 }
 
 // put it into wac apps container
-wacAppController.appsContainer.push(objAppStockController);
+//wacAppController.appsContainer.push(objAppStockController);
+wacAppController.appsContainer = wacAppController.appsContainer.add(objAppStockController);
 
 /***** init section, end *****/

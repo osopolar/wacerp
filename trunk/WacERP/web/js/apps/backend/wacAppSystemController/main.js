@@ -3,11 +3,11 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appSystemController
+ * @subpackage wacAppSystemController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appSystemController / AppSystemController
+ * wacAppSystemController / WacAppSystemController
  *
  */
 
@@ -34,7 +34,7 @@ $(document).ready(
 );
 
 objAppSystemController = {
-    name: "AppSystemController",
+    name: "WacAppSystemController",
     layout: objAppSystemControllerLayout,
     westMenu: null,
     tab: null,
@@ -43,8 +43,8 @@ objAppSystemController = {
     }
     ,
     init: function(){
-        this.initWestMenu("#appSystemControllerMenu");
-        this.initTab("#appSystemControllerTabs");         
+        this.initWestMenu("#wacAppSystemControllerMenu");
+        this.initTab("#wacAppSystemControllerTabs");
     }
     ,
     initLayout: function(){  // invoke by main app controller
@@ -76,7 +76,7 @@ objAppSystemController = {
     },
     initWestMenu: function(menuId){
         this.westMenu = $(menuId).jqGrid({
-            url: BASE_URL + "/appSystemController/getWestMenu",
+            url: BASE_URL + "/wacAppSystemController/getWestMenu",
             datatype: "xml",
             height: "auto",
             pager: false,
@@ -129,5 +129,6 @@ objAppSystemController = {
 }
 
 // put it into wac apps container
-wacAppController.appsContainer.push(objAppSystemController);
+//wacAppController.appsContainer.push(objAppSystemController);
+wacAppController.appsContainer = wacAppController.appsContainer.add(objAppSystemController);
 /***** init section, end *****/
