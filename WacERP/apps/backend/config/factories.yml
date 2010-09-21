@@ -29,6 +29,10 @@ dev:
       delivery_strategy: none
 
 all:
+  user:
+    class: myUser
+    param:
+      timeout:     7200     # session timeout in seconds
   routing:
     class: sfPatternRouting
     param:
