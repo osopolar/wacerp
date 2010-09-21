@@ -42,8 +42,8 @@ wacAppController = {
     layout: objWacAppControllerLayout,
     bindEvents: function(){
         $("#appNavBar > li").bind("click", {}, function(e){
-//            Wac.log(e.target.id);
-//            Wac.log(e.currentTarget.id);
+            Wac.log(e.target.id);
+            Wac.log(e.currentTarget.id);
             if(e.currentTarget.id != "btnLogout"){
                 wacAppController.showApp(e.currentTarget.id.substring(3));
             }
