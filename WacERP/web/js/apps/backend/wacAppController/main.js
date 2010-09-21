@@ -26,8 +26,8 @@ $(document).ready(
 
         /***     bind main controller events      ***/
 //        wacAppController.initDefaultApp("AppStockController");
-//        wacAppController.initDefaultApp("AppTestController");
-        wacAppController.initDefaultApp("AppSystemController");
+//        wacAppController.initDefaultApp("WacAppTestController");
+        wacAppController.initDefaultApp("WacAppSystemController");
 
 
 
@@ -38,39 +38,52 @@ $(document).ready(
 
 wacAppController = {
     name: "AppController",
-    appsContainer: [],
+    appsContainer: $(),
     layout: objWacAppControllerLayout,
     bindEvents: function(){
         $("#appNavBar > li").bind("click", {}, function(e){
 //            Wac.log(e.target.id);
 //            Wac.log(e.currentTarget.id);
-            wacAppController.showApp(e.currentTarget.id.substring(3));
+            if(e.currentTarget.id != "btnLogout"){
+                wacAppController.showApp(e.currentTarget.id.substring(3));
+            }
+            else{
+                $(document).wacPage().redirect({url: '/logout'});
+            }
         });
         
     }
     ,
     getApp: function(appName){
         var app = null;
-        $.each(this.appsContainer, function(i){
-            if(this.name == appName){
-                app = this;
-                return;
-            }
-        })
+        this.appsContainer.each(function(i){
+                if(this.name == appName){
+                    app = this;
+                    return;
+                }
+        });
+
+//        $.each(this.appsContainer, function(i){
+//            if(this.name == appName){
+//                app = this;
+//                return;
+//            }
+//        })
         return app;
     }
     ,
     showApp: function(appName){
         var uiLayout = null;
-        $.each(this.appsContainer, function(i){
-            if(this.name != appName){
-                this.hideLayout();
-            }
-            else{
-                uiLayout = this.initLayout();
-            }
-//            Wac.log(i + ":" + this.name);
-        })
+        this.appsContainer.each(
+            function(i){
+                if(this.name != appName){
+                    this.hideLayout();
+                }
+                else{
+                    uiLayout = this.initLayout();
+                }
+//                Wac.log(i + ":" + this.name);
+            })
         return uiLayout;
     }
     ,

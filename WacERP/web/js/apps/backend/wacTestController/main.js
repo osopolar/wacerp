@@ -3,11 +3,11 @@
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appTestController
+ * @subpackage wacAppTestController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appTestController / AppTestController
+ * wacAppTestController / WacAppTestController
  *
  */
 
@@ -33,7 +33,7 @@ $(document).ready(
 );
 
 objAppTestController = {
-    name: "AppTestController",
+    name: "WacAppTestController",
     layout: objAppTestControllerLayout,
     bindEvents: function(){
 //        Wac.log("objAppTestController init");
@@ -48,5 +48,6 @@ objAppTestController = {
 }
 
 // put it into wac apps container
-wacAppController.appsContainer.push(objAppTestController);
+//wacAppController.appsContainer.push(objAppTestController);
+wacAppController.appsContainer = wacAppController.appsContainer.add(objAppTestController);
 /***** init section, end *****/

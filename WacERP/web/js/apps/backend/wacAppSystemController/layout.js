@@ -1,26 +1,26 @@
 /*
- * init app test management layout
+ * init app stock management layout
  *
  * 8/12/2010 6:08:31 PM
  * @package    WacERP
- * @subpackage appTestController
+ * @subpackage wacAppSystemController
  * @author     Ben Bi <jianbinbi@gmail.com>
  * @version    8/12/2010 6:08:31 PM
  * @replace variables:
- * appTestController / AppTestController
+ * wacAppSystemController / AppSystemController
  *
  */
 
 /***** variables declartion section, begin *****/
 
-//var objAppTestControllerLayout;
+//var objAppSystemControllerLayout;
 
 /***** variables declartion section, end *****/
 
 
 /***** init section, begin *****/
 var options = {
-    appId: "#appTestController",
+    appId: "#wacAppSystemController",
     settings: {
         defaults: {
             size:                   "auto"
@@ -70,13 +70,19 @@ var options = {
         north: {
             maxSize:                200
             ,
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            ,
             slidable:              false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
-            initClosed:            false
+            initClosed:            true
         }
         ,
         south: {
-            maxSize:                200
+            size:      30
+            ,
+            minSize:   20
+            ,
+            maxSize:   200
             ,
 //            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
 //            ,
@@ -96,13 +102,15 @@ var options = {
         east: {
             size:                    250
             ,
+            spacing_closed:         0            // HIDE resizer & toggler when 'closed'
+            ,
             slidable:               false        // REFERENCE - cannot slide if spacing_closed = 0
             ,
-            initClosed:             false
+            initClosed:             true
         }
         ,
         center: {
-            paneSelector: "#appTestControllerCenter"             // sample: use an ID to select pane instead of a class
+            paneSelector: "#wacAppSystemControllerCenter"             // sample: use an ID to select pane instead of a class
             ,
             onresize:     ""    // resize INNER LAYOUT when center pane resizes
             ,
@@ -112,33 +120,14 @@ var options = {
         }
     }
 };
-
 // declare app layout object
-objAppTestControllerLayout = new WacLayout(options);
+objAppSystemControllerLayout = new WacLayout(options);
 
 // override decorate method, decorate the layout
-objAppTestControllerLayout.decorate = function(){
-    Wac.log("objAppTestControllerLayout.decorate");
+objAppSystemControllerLayout.decorate = function(){
+    Wac.log("objAppSystemControllerLayout.decorate");
     
-//    var uiLayout = this.getUiLayout();
-//
-//    // must prefix paneClass with "body > " to target ONLY the wacAppBaseLayout panes
-//    var westSelector = "#appTestController  .ui-layout-west"; // outer-west pane
-//    var eastSelector = "#appTestController  .ui-layout-east"; // outer-east pane
-//
-//    // CREATE SPANs for pin-buttons - using a generic class as identifiers
-//    $("<span></span>").addClass("pin-button").prependTo( westSelector );
-//    $("<span></span>").addClass("pin-button").prependTo( eastSelector );
-//
-//    // BIND events to pin-buttons to make them functional
-//    uiLayout.addPinBtn( westSelector +" .pin-button", "west");
-//    uiLayout.addPinBtn( eastSelector +" .pin-button", "east" );
-//
-//    // CREATE SPANs for close-buttons - using unique IDs as identifiers
-//    $("<span></span>").attr("id", "west-closer" ).prependTo( westSelector );
-//    $("<span></span>").attr("id", "east-closer").prependTo( eastSelector );
-//    // BIND layout events to close-buttons to make them functional
-//    uiLayout.addCloseBtn("#west-closer", "west");
-//    uiLayout.addCloseBtn("#east-closer", "east");
+    var uiLayout = this.getUiLayout();
+    
 }
 /***** init section, end *****/
