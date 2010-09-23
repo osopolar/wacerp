@@ -11,6 +11,12 @@ class WacControlTableType
     public static $masterControlTableA        = "masterControlTableA";
 
     //// handle name/code/memo simple table
-    public static $baseSingleControlTableA        = "baseSingleControlTableA";
+    public static $baseSingleControlTableA    = "baseSingleControlTableA";
+
+    //// module listing
+    public static $moduleListingA         = "moduleListingA";
+
+    //// module form
+    public static $moduleForm             = "moduleForm";
 
 }
