@@ -100,20 +100,20 @@ class WacModuleHelper
      * @params - (sfOutputEscaperArrayDecorator) objMainModuleTableFields
      * return string
      */
-    public static function generateJqGridHiddenFields(sfOutputEscaperArrayDecorator $objMainModuleTableFields=null, $isDetailDeclare=false, $isComma=true)
+    public static function generateJqGridHiddenFields($arrMainModuleTableFields=array(), $isDetailDeclare=false, $isComma=true)
     {
-        if(!is_null($objMainModuleTableFields)) {
+        if(count($arrMainModuleTableFields)>0) {
             $tmpArr = array();
             $i=0;
             if(!$isDetailDeclare) {
-                foreach($objMainModuleTableFields as $v) {
+                foreach($arrMainModuleTableFields as $v) {
                     $tmpArr[] = "'hidden{$i}'";
                     $i++;
                 }
             }
             else
             {
-                foreach($objMainModuleTableFields as $v) {
+                foreach($arrMainModuleTableFields as $v) {
                     $tmpArr[] = "{name:'".$v."', editable:false, hidden:true}";
                     $i++;
                 }
@@ -131,7 +131,7 @@ class WacModuleHelper
     {
         $str =" be = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', ".StaticWacModuleFormInputMode::$edit." , '\" + cl +\"');\\\"";
+        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\" + cl +\"');\\\"";
         $str.=" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
@@ -156,11 +156,11 @@ class WacModuleHelper
     public static function generateAddFormBtn($module, $attachName="")
     {
 //        $str ="<input id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
-//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}', ".StaticWacModuleFormInputMode::$add.");\"";
+//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}', '".WacOperationType::$add."');\"";
 //        $str.=" class=\"fm-button ui-state-default ui-corner-all fm-button-icon-left\" name=\"btnAdd\" value=\"添加\" type=\"button\" style=\"display: inline;\" />\n";
 
         $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', ".StaticWacModuleFormInputMode::$add.");\"";
+        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."');\"";
         $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
         $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";        
 
@@ -205,7 +205,7 @@ class WacModuleHelper
     {
         $str =" sa = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_sa\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', ".StaticWacModuleFormInputMode::$add." , 0, '\" + cl +\"');\\\"";
+        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');\\\"";
         $str.=" value='添加子项' style=\\\"height: 22px; width: 62px;\\\">\";\n";
 
         return $str;
@@ -217,7 +217,7 @@ class WacModuleHelper
     public static function generateSubListEditFormBtn($module, $attachName="")
     {
         $str = "be =  \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"编\\\" onclick=\\\"javascript: \";\n";
-        $str .="be += \"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', ".StaticWacModuleFormInputMode::$edit." , '\"+cl+\"', '\" + row_id +\"');\";\n";
+        $str .="be += \"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n";
         $str .="be += \"\\\">\";\n";
 
         return $str;
@@ -248,7 +248,7 @@ class WacModuleHelper
         $str.=" });\n\n";
 
         $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
-        $str.="if(rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$audited)." || rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$finish).")";
+        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$subModule}{$attachName}_be\"+cl).attr('disabled','disabled');\n";
         $str.= "\$(\"#{$subModule}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
@@ -267,7 +267,7 @@ class WacModuleHelper
 //        $str.=" });\n\n";
 //
 //        $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
-//        $str.="if(rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$audited)." || rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$finish).")";
+//        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
 //        $str.= "{\n";
 //        $str.= "\$(\"#{$subModule}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
 //        $str.= "}\n";
@@ -317,8 +317,8 @@ class WacModuleHelper
         $str.=" });\n\n";
 
         $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('getRowData',cl);\n";
-//        $str.= "wacDebugLog('".StaticWacFormStatus::getId(StaticWacFormStatus::$audited).":' + rowData['status']);\n";
-        $str.="if(rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$audited)." || rowData['status']==".StaticWacFormStatus::getId(StaticWacFormStatus::$finish).")";
+//        $str.= "wacDebugLog('".WacEntityStatus::getId(WacEntityStatus::$audited).":' + rowData['status']);\n";
+        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$module}{$attachName}_ba\"+cl).attr('disabled','disabled');\n";
         $str.= "\$(\"#{$subModule}{$attachName}_sa\"+cl).attr('disabled','disabled');\n";

@@ -156,10 +156,6 @@ class wacGuardUserActions extends WacCommonActions
    */
   public function executeGetFormData(sfWebRequest $request)
   {
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
       $resultSet = JsCommonData::getCommonDatum();
       $resultSet['info'] = JsCommonData::getSuccessDatum();
 
