@@ -2,7 +2,7 @@ WacCountry:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_country
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -40,7 +40,7 @@ WacCurrency:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_currency
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -79,7 +79,7 @@ WacCurrencyRatio:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_currency_ratio
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -127,7 +127,7 @@ WacSysmsg:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_sysmsg
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -162,7 +162,7 @@ WacSystemLog:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_system_log
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -200,7 +200,7 @@ WacSystemParameter:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_system_parameter
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -236,7 +236,7 @@ WacTemplate:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_template
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -270,7 +270,7 @@ WacUnit:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_unit
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -317,7 +317,7 @@ WacUnitType:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_unit
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -351,7 +351,7 @@ WacUnitRatio:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_unit_ratio
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -399,7 +399,7 @@ WacWorkflow:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_workflow
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)
@@ -443,7 +443,7 @@ WacWorkflowItem:
   connection: wac_db_connection1
   actAs:      [Timestampable]
   tableName: wac_workflow_item
-  package: system.
+  #package: wacBaseAppPlugin.system.
   columns:
     id:
       type: integer(8)

@@ -10,16 +10,5 @@
  */
 class wacCountryActions extends WacCommonActions
 {
-    /**
-   * Executes an application defined process prior to execution of this sfAction object.
-   *
-   * By default, this method is empty.
-   */
-  public function preExecute()
-  {
-      parent::preExecute();
-      
-      $module = sfContext::getInstance()->getRequest()->getParameter("module");
-      $this->mainModuleTable = Doctrine::getTable(WacTable::$$module);
-  }
+    
 }

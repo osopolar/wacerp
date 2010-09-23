@@ -65,6 +65,10 @@ class WacModule
 //          'wacWeaveQcForm'                   => array('id'=>"53",'group'=>'1', 'name'=>"wacWeaveQcForm", 'caption'=>"织造QC单"),
 //          'wacWeaveQcFormItem'               => array('id'=>"54",'group'=>'1', 'name'=>"wacWeaveQcFormItem", 'caption'=>"织造QC单子项"),
           'wacWorkflowItem'                  => array('id'=>"55",'group'=>'1', 'name'=>"wacWorkflowItem", 'caption'=>"工作流程子项"),
+
+          'wacGuardPermission'               => array('id'=>"55",'group'=>'1', 'name'=>"wacGuardPermission", 'caption'=>"权限管理"),
+          'wacGuardGroup'                    => array('id'=>"56",'group'=>'1', 'name'=>"wawacGuardGroupcWorkflowItem", 'caption'=>"用户组管理"),
+          'wacGuardUser'                     => array('id'=>"57",'group'=>'1', 'name'=>"wacWorkflowItem", 'caption'=>"用户管理"),
     );
 
     public static function getInstance()

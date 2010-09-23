@@ -1,10 +1,10 @@
 <!-- ControlTable, begin -->
 <?php
-  include_component('common', 'controlTable1',
-              array( 'partial'      => WacModule::getName("common")."/".WacControlTableType::$baseSingleControlTablePermission,
+  include_component(WacModule::getName("wacCommon"), WacControlTableType::$masterControlTableA,
+              array( 'partial'      =>  $contextInfo["moduleName"]."/".WacControlTableType::$baseSingleControlTableA,
                      'invokeParams' => array(
-                                           'moduleName' => sfContext::getInstance()->getRequest()->getParameter("module"),
-                                           'caption'    => WacModule::getCaption(sfContext::getInstance()->getRequest()->getParameter("module")),
+                                           'moduleName' => $contextInfo["moduleName"],   //$contextInfo defined by WacCommonAction
+                                           'caption'    => WacModule::getCaption($contextInfo["moduleName"]),
                                            )
                   ));
 ?>
