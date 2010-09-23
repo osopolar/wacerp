@@ -1,7 +1,8 @@
 <?php
 
 
-class sfGuardGroupPermissionTable extends PluginsfGuardGroupPermissionTable
+//class sfGuardGroupPermissionTable extends PluginsfGuardGroupPermissionTable
+class sfGuardGroupPermissionTable extends WacCommonTable
 {
     
     public static function getInstance()

@@ -33,13 +33,13 @@ abstract class WacCommonActions extends sfActions {
         $this->contextInfo["actionPath"] = $this->actionPath;
         $this->contextInfo["moduleName"] = $this->moduleName;
 
-//      $moduleName = $this->moduleName;
-//      if(isset(WacTable::$$moduleName))
-//      {
-//          $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
-//      }
-//      $this->wacLogger = WacLogger::getInstance();
-//      sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
+        $moduleName = $this->moduleName;
+        if(isset(WacTable::$$moduleName)) {
+            $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
+        }
+
+        $this->wacLogger = WacLogger::getInstance();
+        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
     }
 
     /*
@@ -51,10 +51,10 @@ abstract class WacCommonActions extends sfActions {
 
     public function getActionJs($specName="") {
         return
-        ($specName=="") ?
-        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$this->getActionName()
+                ($specName=="") ?
+                $this->actionPath
                 :
-        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
+                'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
     }
 
     /*
@@ -131,11 +131,6 @@ abstract class WacCommonActions extends sfActions {
    * @return list data array
     */
     public function executeGetList(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
-
         $jqGridDataHelper = JqGridDataHelper::getInstance();
 
         if(($request->hasParameter(JqGridDataHelper::$KEY_SEARCH_FIELD) && ($request->getParameter(JqGridDataHelper::$KEY_SEARCH_FIELD)!="")) || $request->hasParameter(JqGridDataHelper::$KEY_SIDX)) {
@@ -204,7 +199,7 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
-   * @return 
+   * @return
     */
     public function inspectDataValidation(sfWebRequest $request, $params=array()) {
         $result    = JsCommonData::getSuccessDatum();
@@ -228,10 +223,6 @@ abstract class WacCommonActions extends sfActions {
    * @return validate
     */
     public function executeValidate(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
         $inspectResult = $this->inspectDataValidation($request);
         $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult;
@@ -242,10 +233,6 @@ abstract class WacCommonActions extends sfActions {
    * @return list data array
     */
     public function executeAdd(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $inspectResult = $this->inspectDataValidation($request);
         if($inspectResult['status'] == WacOperationStatus::$Error) {
             $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
@@ -284,10 +271,6 @@ abstract class WacCommonActions extends sfActions {
         // forward to 404 if no id
         $this->forward404Unless($request->hasParameter('id'));
 
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $inspectResult = $this->inspectDataValidation($request);
         if($inspectResult['status'] == WacOperationStatus::$Error) {
             $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
@@ -323,11 +306,7 @@ abstract class WacCommonActions extends sfActions {
     public function executeDelete(sfWebRequest $request) {
         // forward to 404 if no id
         $this->forward404Unless($request->hasParameter('id'));
-
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
+        
 //      $resultSet = $this->getRequest()->getParameterHolder()->getAll();
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
 
@@ -379,9 +358,6 @@ abstract class WacCommonActions extends sfActions {
    *  return id=>code hash as select html format
     */
     public function executeGetIdCodeHashInFormat(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
 
         $resultSet = array();
 
@@ -451,8 +427,13 @@ abstract class WacCommonActions extends sfActions {
         $resultSet = array();
         $arrParam = array();
 
-        if($this->getRequest()->hasParameter("status")) {
-            $arrParam['andWhere'][] = "status=".StaticWacFormStatus::getId($this->getRequest()->getParameter("status"));
+        $request = $this->getRequest();
+        if($request->hasParameter("status")) {
+            $arrParam['andWhere'][] = "status=".StaticWacFormStatus::getId($request->getParameter("status"));
+        }
+
+        if($request->hasParameter(JqFlexboxDataHelper::$querySting) && $request->getParameter(JqFlexboxDataHelper::$querySting)!="") {
+            $arrParam['andWhere'][] = "{$valField} like '".$request->getParameter(JqFlexboxDataHelper::$querySting)."%'";
         }
 
         $arrParam['orderBy'] = "t1.id asc";

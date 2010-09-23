@@ -62,7 +62,7 @@ class OutputHelper
             if($this->isDebug){
                 $resultSet["info"]["req_params"] = $action->getRequest()->getParameterHolder()->getAll();
             }
-            return $action->renderText($action->getPartial('common/blank', array('output' => $resultSet)));
+            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/blank', array('output' => $resultSet)));
         }
         return $action->renderText($output);
     }

@@ -26,8 +26,8 @@ class WacLogger {
 
     public function __construct()			// construct method
     {
-        $this->msgTable = Doctrine::getTable(WacTable::$sysmsg);
-        $this->loggerTable = Doctrine::getTable(WacTable::$systemLog);
+        $this->msgTable = Doctrine::getTable(WacTable::$wacSysmsg);
+        $this->loggerTable = Doctrine::getTable(WacTable::$wacSystemLog);
     }
 
     /*
