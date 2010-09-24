@@ -13,10 +13,18 @@ var wacAppController;
 /***** variables declartion section, end *****/
 
 
+(function($){
+  $.wactest =$.fn.wactest = function() {
+     console.log("sth");
+
+  };
+})( jQuery );
+
 /***** init section, begin *****/
 $(document).ready(
     function() {
         $(document).wacPage().showBlockUILoading();
+        
 
         /***     init main layout      ***/
         wacAppController.initLayout();

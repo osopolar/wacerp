@@ -70,13 +70,13 @@
                 if(id === undefined)
                 {
                     $.blockUI({
-                        message: '<h3><img src="/images/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                         });
                 }
                 else
                 {
                     $(id).block({
-                        message: '<h3><img src="/images/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                         });
                 }
             }
