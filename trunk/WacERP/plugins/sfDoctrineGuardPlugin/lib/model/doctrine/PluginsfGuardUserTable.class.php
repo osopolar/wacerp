@@ -8,7 +8,7 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id: PluginsfGuardUserTable.class.php 23793 2009-11-11 17:42:50Z Kris.Wallsmith $
  */
-abstract class PluginsfGuardUserTable extends Doctrine_Table
+abstract class PluginsfGuardUserTable extends WacCommonTable
 {
   /**
    * Retrieves a sfGuardUser object by username and is_active flag.

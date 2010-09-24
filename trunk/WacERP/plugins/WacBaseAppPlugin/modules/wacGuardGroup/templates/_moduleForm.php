@@ -4,7 +4,7 @@ $formDialogId = WacModuleHelper::getFormDialogId($invokeParams['moduleName']);
 $formId       = WacModuleHelper::getFormId($invokeParams['moduleName']);
 echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
 
-echo "<script type=\"text/javascript\" src=\"/js/backend/{$invokeParams['moduleName']}/".WacControlTableType::$moduleForm.".js\">";
+echo "<script type=\"text/javascript\" src=\"/js/backend/{$invokeParams['moduleName']}/".WacComponentList::$moduleForm.".js\">";
 echo "</script>";
 ?>
 <!-- form, begin-->

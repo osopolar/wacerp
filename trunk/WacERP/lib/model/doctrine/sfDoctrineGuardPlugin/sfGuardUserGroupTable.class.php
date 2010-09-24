@@ -1,8 +1,7 @@
 <?php
 
 
-//class sfGuardUserGroupTable extends PluginsfGuardUserGroupTable
-class sfGuardUserGroupTable extends WacCommonTable
+class sfGuardUserGroupTable extends PluginsfGuardUserGroupTable
 {
     
     public static function getInstance()

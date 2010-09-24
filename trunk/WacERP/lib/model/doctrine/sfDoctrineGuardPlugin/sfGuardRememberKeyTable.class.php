@@ -1,8 +1,7 @@
 <?php
 
 
-//class sfGuardRememberKeyTable extends PluginsfGuardRememberKeyTable
-class sfGuardRememberKeyTable extends WacCommonTable
+class sfGuardRememberKeyTable extends PluginsfGuardRememberKeyTable
 {
     
     public static function getInstance()
