@@ -2,15 +2,36 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/layout.js</url>
+            <line>81</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appTestController/layout.js</url>
+            <line>87</line>
+            <line>133</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/css/common/wac/layout.css</url>
+            <line>9</line>
+            <line>64</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/console/index.js</url>
-            <line>24</line>
-            <line>53</line>
-            <line>195</line>
+            <line>15</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemManagement/layout.js</url>
             <line>40</line>
             <line>67</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/main.js</url>
+            <line>26</line>
+            <line>116</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/css/common/jquery/plugins/jquery.layout-1.3.0/layout1.css</url>
+            <line>130</line>
         </file>
     </editor-bookmarks>
 </project-private>

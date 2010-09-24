@@ -1,11 +1,11 @@
 <?php
 /**
- * Description of WacControlTableType
+ * Description of WacComponentList
  *    control table type
  *
  * @author ben
  */
-class WacControlTableType
+class WacComponentList
 {
     //// handle name/code/memo simple table
     public static $masterControlTableA        = "masterControlTableA";

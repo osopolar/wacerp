@@ -25,7 +25,7 @@
             colNames:['id', '用户名', '用户组', '状态', '建立时间',
                 
        <?php
-            echo WacModuleHelper::generateJqGridHiddenFields($invokeParams['objMainModuleTableFields']);
+            echo WacModuleHelper::generateJqGridHiddenFields($invokeParams['arrMainModuleTableFields']);
        ?>
                 '操作' ],
             colModel:[
@@ -69,7 +69,7 @@
                 },
 
      <?php
-            echo WacModuleHelper::generateJqGridHiddenFields($invokeParams['objMainModuleTableFields'], true);
+            echo WacModuleHelper::generateJqGridHiddenFields($invokeParams['arrMainModuleTableFields'], true);
      ?>
                 
                 {
