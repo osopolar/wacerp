@@ -16,7 +16,7 @@ var wacAppController;
 /***** init section, begin *****/
 $(document).ready(
     function() {
-        //       wacShowBlockUILoading();
+        $(document).wacPage().showBlockUILoading();
 
         /***     init main layout      ***/
         wacAppController.initLayout();
@@ -31,7 +31,7 @@ $(document).ready(
 
 
 
-    //       wacHideBlockUI();
+        $(document).wacPage().hideBlockUI();
 
     }
     );

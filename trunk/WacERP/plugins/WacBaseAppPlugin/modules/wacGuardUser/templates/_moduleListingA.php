@@ -7,20 +7,20 @@
  * "wac_guard_user"
  */
 ?>
-<div id="<?php echo WacModuleHelper::getListingTableId($invokeParams['moduleName']);?>">
+<div id="<?php echo WacModuleHelper::getListingTableId($invokeParams['contextInfo']['moduleName']);?>">
 
     <div style="font-size:12px;"></div>
     <br />
 
-    <table id="<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>"></table>
-    <div id="<?php echo WacModuleHelper::getPagerId($invokeParams['moduleName']); ?>" ></div>
+    <table id="<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>"></table>
+    <div id="<?php echo WacModuleHelper::getPagerId($invokeParams['contextInfo']['moduleName']); ?>" ></div>
 
     <script type="text/javascript">
         //<![CDATA[
-        jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>").jqGrid({
+        jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid({
             datatype: "json",
-            url: BASE_URL+"<?php echo $invokeParams['moduleName']; ?>/getList",
-            editurl: "<?php echo $invokeParams['moduleName']; ?>/doOperation",
+            url: BASE_URL+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/getList",
+            editurl: "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/doOperation",
             postData: {dataFormat: "json"},
             colNames:['id', '用户名', '用户组', '状态', '建立时间',
                 
@@ -96,24 +96,24 @@
             sortorder: "desc",
             multiselect: false,
             viewrecords: true,
-            pager: '#<?php echo WacModuleHelper::getPagerId($invokeParams['moduleName']); ?>',
-            caption:"<?php echo $invokeParams['caption']; ?>列表",
+            pager: '#<?php echo WacModuleHelper::getPagerId($invokeParams['contextInfo']['moduleName']); ?>',
+            caption:"<?php echo WacModule::getCaption($invokeParams["contextInfo"]["moduleName"]); ?>列表",
             height: '100%',
             width: '100%',
 
             gridComplete: function(){
-                var ids = jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>").jqGrid('getDataIDs');
-                var editUrl = BASE_URL + "<?php echo $invokeParams['moduleName']; ?>/edit";
-                var delUrl = BASE_URL + "<?php echo $invokeParams['moduleName']; ?>/delete";
+                var ids = jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getDataIDs');
+                var editUrl = BASE_URL + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/edit";
+                var delUrl = BASE_URL + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/delete";
                 for(var i=0;i < ids.length;i++){
                     var cl = ids[i];
-                    <?php echo WacModuleHelper::generateListViewFormBtn($invokeParams['moduleName']);?>     // bv
-                    <?php echo WacModuleHelper::generateListAuditFormBtn($invokeParams['moduleName']);?>    // ba
+                    <?php echo WacModuleHelper::generateListViewFormBtn($invokeParams['contextInfo']['moduleName']);?>     // bv
+                    <?php echo WacModuleHelper::generateListAuditFormBtn($invokeParams['contextInfo']['moduleName']);?>    // ba
                     <?php echo WacModuleHelper::generateListAddSubFormBtn($invokeParams['subItemModuleName']);?>    // sa
-                    <?php echo WacModuleHelper::generateListEditFormBtn($invokeParams['moduleName']);?>    // be
-                    <?php echo WacModuleHelper::generateListDelFormBtn($invokeParams['moduleName']);?>    // de
+                    <?php echo WacModuleHelper::generateListEditFormBtn($invokeParams['contextInfo']['moduleName']);?>    // be
+                    <?php echo WacModuleHelper::generateListDelFormBtn($invokeParams['contextInfo']['moduleName']);?>    // de
 
-                    <?php echo WacModuleHelper::generateListBtns($invokeParams['moduleName'], $invokeParams['subItemModuleName'], $invokeParams['attachName'], array('be','de'));?>
+                    <?php echo WacModuleHelper::generateListBtns($invokeParams['contextInfo']['moduleName'], $invokeParams['subItemModuleName'], $invokeParams['attachInfo']['name'], array('be','de'));?>
                 }
             },
 
@@ -123,22 +123,22 @@
 
             loadComplete: function()
             {
-                //        console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
+                //        console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
                 //        console.log("loadComplete");
                 $(this).trigger("tabsload");   // inform tabs event listener
             }
 
          }); // grid end
 
-        jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>").jqGrid('navGrid','#<?php echo WacModuleHelper::getPagerId($invokeParams['moduleName']); ?>',
+        jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('navGrid','#<?php echo WacModuleHelper::getPagerId($invokeParams['contextInfo']['moduleName']); ?>',
                         {edit:false, add:false, del:false, search:true, refresh:true, view:false, position:"left"},
-                        {afterSubmit: <?php echo $invokeParams['moduleName']; ?>CallbackValidate, afterComplete: <?php echo $invokeParams['moduleName']; ?>CallbackEdit},
-                        {afterSubmit: <?php echo $invokeParams['moduleName']; ?>CallbackValidate, afterComplete: <?php echo $invokeParams['moduleName']; ?>CallbackAdd},
-                        {afterComplete: <?php echo $invokeParams['moduleName']; ?>CallbackDel},
-                        {afterComplete: <?php echo $invokeParams['moduleName']; ?>CallbackSearch},
-                        {afterComplete: <?php echo $invokeParams['moduleName']; ?>CallbackView});
+                        {afterSubmit: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackValidate, afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackEdit},
+                        {afterSubmit: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackValidate, afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackAdd},
+                        {afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackDel},
+                        {afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackSearch},
+                        {afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackView});
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackValidate(response, postdata){
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackValidate(response, postdata){
                             //    console.log("callbackEdit");
 
                             wacAjaxData.response = eval('(' + response.responseText + ')');
@@ -155,10 +155,10 @@
                             }
                         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackSave(response){
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackSave(response){
                             //    alert("callbackSave");
                             //    console.log("callbackSave");
-                            //    console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
+                            //    console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
                             //    console.log(response.responseText);
                             wacAjaxData.response = eval('(' + response.responseText + ')');
                             if(wacAjaxData.response.userdata.status == wacOperationStatus.Succss)
@@ -172,45 +172,45 @@
                             }
                         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackEdit()
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackEdit()
         {
             //    alert("callbackEdit");
             //    console.log("callbackEdit");
         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackAdd()
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackAdd()
         {
             //    alert("callbackAdd");
             //    console.log("callbackAdd");
         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackDel()
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackDel()
         {
             //    alert("callbackDel");
             //    console.log("callbackDel");
         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackSearch()
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackSearch()
         {
             //    alert("callbackSearch");
             //    console.log("callbackSearch");
         }
 
-        function <?php echo $invokeParams['moduleName']; ?>CallbackView()
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackView()
         {
             //    alert("callbackView");
             //    console.log("callbackView");
         }
 
-        function <?php echo $invokeParams['moduleName']; ?>FormValidate(postdata, formid)
+        function <?php echo $invokeParams['contextInfo']['moduleName']; ?>FormValidate(postdata, formid)
         {
             $result = [];
             $.getJSON(
-            BASE_URL+"<?php echo $invokeParams['moduleName']; ?>/validate",
+            BASE_URL+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/validate",
             postdata,
             function(jsonData){
                 wacOperationStatus.Processing = true;
-<?php echo $invokeParams['moduleName']; ?>FormValidateCallBack(jsonData);
+<?php echo $invokeParams['contextInfo']['moduleName']; ?>FormValidateCallBack(jsonData);
         }
     );
 
@@ -229,7 +229,7 @@
 
     }
 
-    function <?php echo $invokeParams['moduleName']; ?>FormValidateCallBack(jsonData)
+    function <?php echo $invokeParams['contextInfo']['moduleName']; ?>FormValidateCallBack(jsonData)
     {
         wacAjaxData.response = jsonData;
         wacOperationStatus.Processing = false;
