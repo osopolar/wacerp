@@ -19,4 +19,7 @@ class WacComponentList
     //// module form
     public static $moduleForm             = "moduleForm";
 
+    //// buttons bar for the module
+    public static $moduleButtonBar = "moduleButtonBar";
+
 }

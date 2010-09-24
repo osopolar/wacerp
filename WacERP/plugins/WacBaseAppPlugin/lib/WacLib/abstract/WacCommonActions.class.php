@@ -26,11 +26,13 @@ abstract class WacCommonActions extends sfActions {
 
     public function preExecute() {
         $this->moduleName = $this->getModuleName();
-        $this->actionPath = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/'.$this->getActionName();
+        $this->actionPath = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/'.$this->getActionName().'/';
 
         $this->contextInfo = array();
         $this->contextInfo["actionName"] = $this->getActionName();
         $this->contextInfo["actionPath"] = $this->actionPath;
+        $this->contextInfo["modulePath"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/';
+        $this->contextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
         $this->contextInfo["moduleName"] = $this->moduleName;
 
         $moduleName = $this->moduleName;
@@ -429,7 +431,7 @@ abstract class WacCommonActions extends sfActions {
 
         $request = $this->getRequest();
         if($request->hasParameter("status")) {
-            $arrParam['andWhere'][] = "status=".StaticWacFormStatus::getId($request->getParameter("status"));
+            $arrParam['andWhere'][] = "status=".WacEntityStatus::getId($request->getParameter("status"));
         }
 
         if($request->hasParameter(JqFlexboxDataHelper::$querySting) && $request->getParameter(JqFlexboxDataHelper::$querySting)!="") {

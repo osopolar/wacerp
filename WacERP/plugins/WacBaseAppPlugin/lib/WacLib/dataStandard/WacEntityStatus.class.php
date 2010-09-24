@@ -8,9 +8,9 @@
 class WacEntityStatus
 {
     public static $active     = "active";
-    public static $inActive  = "inActive";
+    public static $inActive   = "inActive";
     public static $avail      = "avail";
-    public static $inAvail   = "inAvail";
+    public static $inAvail    = "inAvail";
 
     public static $notsave    = "notsave";
     public static $init       = "init";
