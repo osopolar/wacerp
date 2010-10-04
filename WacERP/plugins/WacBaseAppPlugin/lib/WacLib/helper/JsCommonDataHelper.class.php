@@ -39,12 +39,12 @@ class JsCommonData {
      * @params
      * array $node - node info,
      */
-    public static function getErrorDatum($info="", $code=0, $attrsInfo = array()) {
+    public static function getErrorDatum($msg="", $code=0, $attrsInfo = array()) {
 
         return array(
         "status" => WacOperationStatus::$Error,
         "error_code" => $code,
-        "error_info" => $info,
+        "message"    => $msg,
         "attributes"=>$attrsInfo,
         );
     }
@@ -54,12 +54,12 @@ class JsCommonData {
      * @params
      * array $node - node info,
      */
-    public static function getSuccessDatum($info="", $code=0, $attrsInfo = array()) {
+    public static function getSuccessDatum($msg="", $code=0, $attrsInfo = array()) {
 
         return array(
         "status" => WacOperationStatus::$Succss,
         "error_code" => $code,
-        "error_info" => $info,
+        "message"    => $msg,
         "attributes"=>$attrsInfo,
         );
     }

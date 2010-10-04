@@ -91,7 +91,31 @@
                 {
                     $(id).unblock();
                 }
-                
+            }
+            ,
+            showTips: function(msg, title)
+            {
+                if(title != undefined)
+                {
+                    $("body").append("<div id='wacTipsDialog' title='" + title + "'><p>" + msg +"</p></div>");
+                }
+                else
+                {
+                    $("body").append("<div id='wacTipsDialog' title='信息提示'><p>" + msg +"</p></div>");
+                }
+
+                $("#wacTipsDialog").dialog({
+                    bgiframe: true,
+                    modal: true,
+                    width: 400,
+                    zIndex: 100,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog('close');
+                            $("#wacTipsDialog").remove();
+                        }
+                    }
+                });
             }
             ,
             test: function(options) {

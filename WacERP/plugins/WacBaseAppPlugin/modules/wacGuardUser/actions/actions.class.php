@@ -60,10 +60,7 @@ class wacGuardUserActions extends WacCommonActions
    */
   public function executeAdd(sfWebRequest $request)
   {
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
+      
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)
@@ -93,7 +90,7 @@ class wacGuardUserActions extends WacCommonActions
 
           $resultSet['items'][0] = $targetItem->toArray();
           $resultSet['info']     = JsCommonData::getSuccessDatum(
-                                       Doctrine::getTable(WacTable::$sysmsg)->getContentByCode("sys_add_succ")
+                                       Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
                                    );
       }
 
@@ -108,11 +105,7 @@ class wacGuardUserActions extends WacCommonActions
   {
       // forward to 404 if no id
       $this->forward404Unless($request->hasParameter('id'));
-
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
+      
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)
@@ -143,7 +136,7 @@ class wacGuardUserActions extends WacCommonActions
 
           $resultSet['items'][0] = $targetItem->toArray();
           $resultSet['info']     = JsCommonData::getSuccessDatum(
-                                       Doctrine::getTable(WacTable::$sysmsg)->getContentByCode("sys_edit_succ")
+                                       Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_edit_succ")
                                    );
       }
 

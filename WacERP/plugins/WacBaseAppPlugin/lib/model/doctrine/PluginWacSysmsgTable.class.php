@@ -16,4 +16,13 @@ class PluginWacSysmsgTable extends WacCommonTable
     {
         return Doctrine_Core::getTable('PluginWacSysmsg');
     }
+
+    /*
+     * return value
+     */
+    public function getContentByCode($cv)
+    {
+        $resultArr = $this->findOneBy('code', $cv, Doctrine::HYDRATE_ARRAY);
+        return nl2br($resultArr['content']);
+    }
 }

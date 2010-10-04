@@ -20,7 +20,7 @@ var objAppSystemControllerLayout;  // inited in layout.js
 /***** init section, begin *****/
 $(document).ready(
     function() {
-        //       wacShowBlockUILoading();
+        $(document).wacPage().showBlockUILoading();
         
         objAppSystemController.bindEvents();
         objAppSystemController.init();
@@ -28,7 +28,7 @@ $(document).ready(
     //        $(document).wacTool().dumpObj({name:"ben"});
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
 
-    //       wacHideBlockUI();
+        $(document).wacPage().hideBlockUI();
 
     }
 );
