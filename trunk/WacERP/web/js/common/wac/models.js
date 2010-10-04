@@ -9,9 +9,47 @@ var wacFormStatus      = new WacFormStatus();
 /*
  *
  */
-function WacModel()
+function WacFormPrototype()
 {
-    this.productionOrder = {};
+    this.bindEvents = function(){
+        Wac.log("bindEvents");
+    };
+
+    this.initDialog = function(){
+        Wac.log("initDialog");
+    };
+
+    this.initForm = function(){
+        Wac.log("initForm");
+    };
+
+    this.initFormData = function(){
+        Wac.log("initFormData");
+    };
+
+    this.initFormDataCallBack = function(jsonData){
+        Wac.log("initFormDataCallBack");
+    };
+
+    this.setupDefaults = function(){
+        Wac.log("setupDefaults");
+    };
+
+    this.openMainForm = function(){
+        Wac.log("openMainForm");
+    };
+
+    this.validateMainForm = function(){
+        Wac.log("validateMainForm");
+    };
+
+    this.submitMainForm = function(){
+        Wac.log("submitMainForm");
+    };
+
+    this.submitMainFormCallBack = function(jsonData){
+        Wac.log("submitMainFormCallBack");
+    };
 }
 
 
@@ -59,6 +97,9 @@ function WacOpenTabs()
  */
 function WacFormInputMode()
 {
-    this.add  = 0;
-    this.edit = 1;
+    this.add   = 'c';
+    this.read  = 'r';
+    this.edit  = 'u';
+    this.del   = 'd';
+    this.audit = 'a';
 }

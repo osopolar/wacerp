@@ -144,7 +144,7 @@ class WacModuleHelper
     {
         $str =" de = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"'});\\\"";
+        $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"', top: 200, left:500});\\\"";
         $str.=" value='删' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
