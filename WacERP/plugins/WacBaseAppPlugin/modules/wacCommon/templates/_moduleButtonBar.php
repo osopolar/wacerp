@@ -10,8 +10,6 @@
       {
           echo WacModuleHelper::generateAddFormBtn($invokeParams['contextInfo']['moduleName'],$invokeParams['attachInfo']['name']);
       }
-//           echo "<input id=\"".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'])."btnAdd\" onclick=\"javascript:$('#".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'])."').dialog('open');\" class=\"fm-button ui-state-default ui-corner-all fm-button-icon-left\" name=\"btnAdd\" value=\"添加\" type=\"button\" class=\"ui-corner-all\" />";
-//           echo "<input onclick=\"javascript:initProductionOrderFormDialog();\" class=\"fm-button ui-state-default ui-corner-all fm-button-icon-left\" name=\"btnAdd\" id=\"btnAdd\" value=\"添加\" type=\"button\" class=\"ui-corner-all\" />";
 
       echo "<script type=\"text/javascript\">";
       echo "$(\"#{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}_search_code\").focus()";
