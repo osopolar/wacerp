@@ -107,7 +107,7 @@ function WacGuardUserForm(){
         });
     };
 
-    this.initFormData() = function(){
+    this.initFormData = function(){
         $(document).wacPage().showBlockUILoading(this.formDialogId);
         $(this.moduleId + '_sf_guard_user_group_list').empty();
 
@@ -169,16 +169,16 @@ function WacGuardUserForm(){
     this.setupDefaults = function(defaultValueObj){
         if(wacGuardUserInputMode == wacFormInputMode.add)   // use default values
         {
-            $("#wacGuardUser_id").attr("value", 0);
+            $(this.moduleId + "_id").attr("value", 0);
         }
         else  // use edit obj values
         {
-            $("#wacGuardUser_id").attr("value", wacGuardUserObj.id);
-            $("#wacGuardUser_username").attr("value", wacGuardUserObj.username);
-            $("#wacGuardUser_password").attr("value", "000000");
-            $("#wacGuardUser_password_confirm").attr("value", "000000");
+            $(this.moduleId + "_id").attr("value", wacGuardUserObj.id);
+            $(this.moduleId + "_username").attr("value", wacGuardUserObj.username);
+            $(this.moduleId + "_password").attr("value", "000000");
+            $(this.moduleId + "_password_confirm").attr("value", "000000");
 
-            $("#wacGuardUser_is_active").attr("checked", (wacGuardUserObj.is_active=='true'));
+            $(this.moduleId + "_is_active").attr("checked", (wacGuardUserObj.is_active=='true'));
         }
     };
 

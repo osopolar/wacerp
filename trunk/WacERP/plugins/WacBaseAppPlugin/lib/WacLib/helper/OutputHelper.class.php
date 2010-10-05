@@ -50,11 +50,7 @@ class OutputHelper
     {
         $output = '';
         if ($action->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-            $action->getResponse()->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
-            $action->getResponse()->setHttpHeader("Pragma", "no-cache");
-            $action->getResponse()->setHttpHeader("Expires", 0);
-            
+            $this->setNoCacheHeader($action, false);            
             $action->getResponse()->setContentType('application/json; charset=utf-8');
             $output = json_encode($resultSet);
         }
@@ -74,10 +70,7 @@ class OutputHelper
      */
     public function outputXmlFormat($resultSet, $action)
     {
-        sfConfig::set('sf_web_debug', false);
-        $action->getResponse()->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
-        $action->getResponse()->setHttpHeader("Pragma", "no-cache");
-        $action->getResponse()->setHttpHeader("Expires", 0);
+        $this->setNoCacheHeader($action, false);
         $action->getResponse()->setContentType('application/xml; encoding=utf-8');
 
         return $action->renderText(print_r($resultSet, true));
@@ -90,6 +83,7 @@ class OutputHelper
      */
     public function outputHtmlSelectElements($resultSet, $action, $params=array())
     {
+        $this->setNoCacheHeader($action, false);
         $output = '<select>';
         if(isset($params) && count($params)>0)
         {
@@ -111,5 +105,12 @@ class OutputHelper
         return $action->renderText($output);
     }
 
-}
+    public function setNoCacheHeader($action, $isSfDebug=false)
+    {
+        sfConfig::set('sf_web_debug', $isSfDebug);
+        $action->getResponse()->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
+        $action->getResponse()->setHttpHeader("Pragma", "no-cache");
+        $action->getResponse()->setHttpHeader("Expires", 0);        
+    }
 
+}

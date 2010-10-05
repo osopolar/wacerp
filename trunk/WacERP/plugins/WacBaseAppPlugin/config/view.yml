@@ -39,6 +39,8 @@ default:
     jquery.formValidator: common/jquery/plugins/formValidator/jquery.validationEngine.js
     jquery.validationEngine-zh: common/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js
 
+    jquery-shout:    common/jquery/plugins/jquery-shout/jquery.shout.js
+
     wac_main: common/wac/main.js
     - common/wac/models.js
     - common/wac/jquery_plugins/base.js

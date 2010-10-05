@@ -155,14 +155,16 @@ class WacModuleHelper
      */
     public static function generateAddFormBtn($module, $attachName="")
     {
-//        $str ="<input id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
-//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}', '".WacOperationType::$add."');\"";
-//        $str.=" class=\"fm-button ui-state-default ui-corner-all fm-button-icon-left\" name=\"btnAdd\" value=\"添加\" type=\"button\" style=\"display: inline;\" />\n";
+//        $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
+//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."');\"";
+//        $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
+//        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
 
         $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
+        $str.= "$.shout('keyword-search', {user: {name: 'Gabriel'}});";
         $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."');\"";
         $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
-        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";        
+        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
 
         return $str;
     }
