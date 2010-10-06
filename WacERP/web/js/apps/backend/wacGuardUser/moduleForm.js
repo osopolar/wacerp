@@ -17,13 +17,21 @@ var wacGuardUserObj = {};
 
 /***** init section, begin *****/
 $(document).ready(
-    function() {
+    function(){
+        if($.Storage.get("wacGuardUserForm") == null){
+            Wac.log("::: ");
+           $.Storage.set("wacGuardUserForm", "1");
+            var wacGuardUserForm = new WacGuardUserForm();
 
-        var wacGuardUserForm = new WacGuardUserForm();
-        
-        wacGuardUserForm.initDialog();
-        wacGuardUserForm.initForm();
-        wacGuardUserForm.bindEvents();
+            wacGuardUserForm.initDialog();
+            wacGuardUserForm.initForm();
+            wacGuardUserForm.bindEvents();
+
+            $(document).hear("keyword-search", function ($self, data) {
+                Wac.log($(document).wacTool().dumpObj(data));
+            });
+        }
+
         
 //        initWacGuardUserFormDialog();
 //
