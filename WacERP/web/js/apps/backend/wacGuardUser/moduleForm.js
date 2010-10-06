@@ -18,8 +18,9 @@ var wacGuardUserObj = {};
 /***** init section, begin *****/
 $(document).ready(
     function(){
+        Wac.log("::: " + $.Storage.get("wacGuardUserForm"));
         if($.Storage.get("wacGuardUserForm") == null){
-            Wac.log("::: ");
+            
            $.Storage.set("wacGuardUserForm", "1");
             var wacGuardUserForm = new WacGuardUserForm();
 
