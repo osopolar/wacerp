@@ -162,7 +162,7 @@ class WacModuleHelper
 
         $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
         $str.= "$.shout('keyword-search', {user: {name: 'Gabriel'}});";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."');\"";
+        $str.= '" ';
         $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
         $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
 
