@@ -2,7 +2,6 @@
 $formDialogId = WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName']);
 $formId       = WacModuleHelper::getFormId($invokeParams['contextInfo']['moduleName']);
 echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
-
 ?>
 <!-- form, begin-->
 <form name="<?php echo $formId;?>" id="<?php echo $formId;?>" method="post" class="wacFormA" action="">
@@ -83,8 +82,7 @@ echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" 
     <input type="hidden" name="id" id="<?php echo $invokeParams['contextInfo']['moduleName'] ?>_id" value="0">
 </form>
 <!-- form, end-->
-
 <?php
-echo "<script type=\"text/javascript\" src=\"{$invokeParams['contextInfo']['jsModulePath']}".WacComponentList::$moduleForm.".js\"></script>\n";
 echo "</div>";
+echo "<script type=\"text/javascript\" src=\"{$invokeParams['contextInfo']['jsModulePath']}".WacComponentList::$moduleForm.".js\"></script>\n";
 ?>

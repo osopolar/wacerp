@@ -18,20 +18,18 @@ var wacGuardUserObj = {};
 /***** init section, begin *****/
 $(document).ready(
     function(){
-        Wac.log("::: " + $.Storage.get("wacGuardUserForm"));
-        if($.Storage.get("wacGuardUserForm") == null){
-            
-           $.Storage.set("wacGuardUserForm", "1");
-            var wacGuardUserForm = new WacGuardUserForm();
+        var wacGuardUserForm = new WacGuardUserForm();
 
-            wacGuardUserForm.initDialog();
-            wacGuardUserForm.initForm();
-            wacGuardUserForm.bindEvents();
+        wacGuardUserForm.initDialog();
+        wacGuardUserForm.initForm();
+        wacGuardUserForm.bindEvents();
 
-            $(document).hear("keyword-search", function ($self, data) {
-                Wac.log($(document).wacTool().dumpObj(data));
-            });
-        }
+//        Wac.log($(document).hear("wacGuardUserForm", "show-add-form", function ($self, data) {}));
+
+        $(document).hear("wacGuardUserForm", "show-add-form", function ($self, data) {  // listenerid, event name, callback
+            Wac.log("wacGuardUserForm:" + data);
+//            Wac.log(jQuery._jq_shout.registry);
+        });
 
         
 //        initWacGuardUserFormDialog();
@@ -51,7 +49,7 @@ function WacGuardUserForm(){
     this.formDialogId = this.formId + "Dialog";
     this.listId = this.moduleId + "List";
 
-    this.appControllerId = "wacAppSystemController";
+    this.appControllerId = "#wacAppSystemController";
 
     this.initDialog = function(){
         //    Wac.log("initWacGuardUserFormDialog.");
@@ -83,6 +81,9 @@ function WacGuardUserForm(){
     };
 
     this.bindEvents = function(){
+        // unbind all events related to the dialog form
+        $(this.formDialogId).unbind();
+        
         $(this.formDialogId).bind('dialogopen', function(event, ui)
         {
             this.initFormData();
@@ -105,6 +106,7 @@ function WacGuardUserForm(){
         });
 
         // fix dialog div didnt remove bug, remove it by this way
+        $(this.appControllerId).unbind('tabsremove');
         $(this.appControllerId).bind('tabsremove', function(event, ui) {
             if(ui.panel.id == "t23002")
             {

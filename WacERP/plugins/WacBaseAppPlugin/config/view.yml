@@ -39,7 +39,7 @@ default:
     - common/jquery/plugins/formValidator/jquery.validationEngine.js     # jquery.formValidator
     - common/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh
 
-    - common/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
+#    - common/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
     - common/jquery/plugins/jquery-shout/jquery.shout.js     # jquery-shout
 
     - common/wac/main.js  # wac_main

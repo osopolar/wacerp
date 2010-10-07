@@ -161,7 +161,7 @@ class WacModuleHelper
 //        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
 
         $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
-        $str.= "$.shout('keyword-search', {user: {name: 'Gabriel'}});";
+        $str.= "$.shout('show-add-form', {user: {name: 'Gabriel'}});";
         $str.= '" ';
         $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
         $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
