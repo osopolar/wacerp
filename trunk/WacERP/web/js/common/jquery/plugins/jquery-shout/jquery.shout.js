@@ -32,7 +32,7 @@ jQuery.extend(jQuery._jq_shout,
 
 jQuery.extend(jQuery.fn,
               {
-                  hear: function (eventName, messageCallback) {
+                  hear: function (listenerId, eventName, messageCallback) {
                       var $self = this;
                       var list = jQuery._jq_shout.registry[eventName];
                       if (!list) {
@@ -41,9 +41,27 @@ jQuery.extend(jQuery.fn,
                       var action = function() {
                           var item = {
                               source: $self,
+                              id: listenerId,
                               callback: messageCallback
+                          };
+                          
+                          if(jQuery._jq_shout.registry[eventName].length>0){
+                          	var flag = true;
+                                $.each(jQuery._jq_shout.registry[eventName], function(idx){
+                                    if(this.id === item.id){
+                                        flag = false;
+                                    };
+//                                    console.log(this.id + ":" + item.id + ":" + flag);
+                                });
+
+                            if(flag){
+                            	jQuery._jq_shout.registry[eventName].push(item);
+                            }
                           }
-                          jQuery._jq_shout.registry[eventName].push(item);
+                          else{
+                          	jQuery._jq_shout.registry[eventName].push(item);
+                          }
+                          
                       }
                       if ($self.length > 0) {
                           return this.each(action);
