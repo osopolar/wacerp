@@ -73,54 +73,54 @@ abstract class WacCommonTable extends Doctrine_Table
         return $this->getAbstractList($arrParams, $page, $maxPerPage, $isArr);
     }
 
-    /*
-   *  return id=>name hash
-   */
-  public function getIdNameHash()
-  {
-      return $this->getHashList("id", "name");
-  }
-
   /*
+   *  return id=>name hash
+    */
+    public function getIdNameHash($page=1, $rows=50, $params=array()) {
+        return $this->getHashList("id", "name", array(), $page, $rows, $params);
+    }
+
+    /*
    *  return code=>name hash
-   */
-  public function getCodeNameHash()
-  {
-      return $this->getHashList("code", "name");
-  }
+    */
+    public function getCodeNameHash($page=1, $rows=50, $params=array()) {
+        return $this->getHashList("code", "name", array(), $page, $rows, $params);
+    }
 
     /*
      * @condParam - condition array
    * @return hash list data array
     */
-    public function getHashList($keyField, $valField, $condParams=array(), $page=1, $rows=20) {
+    public function getHashList($keyField, $valField, $condParams=array(), $page=1, $rows=20, $params=array()) {
         $resultSet = array();
         $arrParams = array();
 
-        if(count($condParams)>0)
-        {
+        if(count($condParams)>0) {
             $arrParams = $condParams;
         }
-        else
-        {
+        else {
             $arrParams['orderBy'] = "t1.id asc";
         }
 
-        if(sfConfig::has("maxHashItems"))
-        {
+        if(sfConfig::has("maxHashItems")) {
             $rows = sfConfig::get("maxHashItems");
         }
-        
+
         $listItems = $this->getCustomList($arrParams, $page, $rows, true);
 
-        if(count($listItems)>0) {
-            foreach($listItems as $listItem) {
-                $tmpArr = array();
+        if(isset($params["format"]) && $params["format"]=="SF_SELECT_OPTIONS") {
+            $resultSet = SfDataHelper::getInstance()->toSelectOptions($listItems, $keyField, $valField);
+        }
+        else {
+            if(count($listItems)>0) {
+                foreach($listItems as $listItem) {
+                    $tmpArr = array();
 //              $keyMethodName = "get".ucfirst($keyField);
 //              $valueMethodName = "get".ucfirst($valField);
 //              $tmpArr[$arrListItem->$keyMethodName()] = $arrListItem->$valueMethodName();
-                $tmpArr = array("key"=>$listItem[$keyField], "value"=>$listItem[$valField]);
-                $resultSet[] = $tmpArr;
+                    $tmpArr = array("key"=>$listItem[$keyField], "value"=>$listItem[$valField]);
+                    $resultSet[] = $tmpArr;
+                }
             }
         }
 
