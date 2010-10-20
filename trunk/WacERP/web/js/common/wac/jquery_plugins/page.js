@@ -118,6 +118,69 @@
                 });
             }
             ,
+            isEmpty: function(str){
+                return (str == null) || (str.length == 0);
+            }
+            ,
+            isEmail: function(str){
+                if(isEmpty(str)) return false;
+                var re = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
+                return re.test(str);
+            }
+            ,
+            isAlpha: function(str){
+                var re = /[^a-zA-Z]/g
+                if (re.test(str)) return false;
+                return true;
+            }
+            ,
+            isNumeric: function(str){
+                var re = /[\D]/g
+                if (re.test(str)) return false;
+                return true;
+            }
+            ,
+            isAlphaNumeric: function(str){
+                var re = /[^a-zA-Z0-9]/g
+                if (re.test(str)) return false;
+                return true;
+            }
+            ,
+            isLength: function(str, len){
+                return str.length == len;
+            }
+            ,
+            isLengthBetween: function(str, min, max){
+                return (str.length >= min)&&(str.length <= max);
+            }
+            ,
+            isPhoneNumber: function(str){
+                var re = /^\(?[2-9]\d{2}[\)\.-]?\s?\d{3}[\s\.-]?\d{4}$/
+                return re.test(str);
+            }
+            ,
+            isDate: function(str){
+                var re = /^(\d{1,2})[\s\.\/-](\d{1,2})[\s\.\/-](\d{4})$/
+                if (!re.test(str)) return false;
+                var result = str.match(re);
+                var m = parseInt(result[1]);
+                var d = parseInt(result[2]);
+                var y = parseInt(result[3]);
+                if(m < 1 || m > 12 || y < 1900 || y > 2100) return false;
+                if(m == 2){
+                    var days = ((y % 4) == 0) ? 29 : 28;
+                }else if(m == 4 || m == 6 || m == 9 || m == 11){
+                    var days = 30;
+                }else{
+                    var days = 31;
+                }
+                return (d >= 1 && d <= days);
+            }
+            ,
+            isMatch: function(str1, str2){
+                return str1 == str2;
+            }
+            ,
             test: function(options) {
                 var defaults = {};
                 
