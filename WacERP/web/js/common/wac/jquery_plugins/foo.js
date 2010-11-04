@@ -35,6 +35,12 @@
                 
             }
             ,
+            isAlpha: function(str){
+                var re = /[^a-zA-Z]/g
+                if (re.test(str)) return false;
+                return true;
+            }
+            ,
             isEmail: function(str){
                 if(isEmpty(str)) return false;
                 var re = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
@@ -42,12 +48,7 @@
                 return _result;
             }
             ,
-            isAlpha: function(str){
-                var re = /[^a-zA-Z]/g
-                if (re.test(str)) return false;
-                return true;
-            }
-            ,
+            
             getSize: function(size) {
                 return size;
             },
