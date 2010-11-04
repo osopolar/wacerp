@@ -71,13 +71,13 @@
                 {
                     $.blockUI({
                         message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
-                        });
+                    });
                 }
                 else
                 {
                     $(id).block({
                         message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
-                        });
+                    });
                 }
             }
             ,
@@ -175,6 +175,30 @@
                     var days = 31;
                 }
                 return (d >= 1 && d <= days);
+            }
+            ,
+            is18YearOld: function(str){
+                var re = /^(\d{1,2})[\s\.\/-](\d{1,2})[\s\.\/-](\d{4})$/
+                if (!re.test(str)) return false;
+                var result = str.match(re);
+                var d = parseInt(result[1].replace(/^0+/g, ''));
+                var m = parseInt(result[2].replace(/^0+/g, ''));
+                var y = parseInt(result[3].replace(/^0+/g, ''));
+                var currentTime = new Date();
+
+                if((currentTime.getFullYear() - y)>18 ){
+                    return true;
+                }
+
+                if(((currentTime.getFullYear() - y)==18) && (currentTime.getMonth()>(m-1) ) ){
+                    return true;
+                }
+
+                if(((currentTime.getFullYear() - y)==18) && (currentTime.getMonth()==(m-1)) && (currentTime.getDate()>=d) ){
+                    return true;
+                }
+
+                return false;
             }
             ,
             isMatch: function(str1, str2){
