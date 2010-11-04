@@ -16,8 +16,6 @@ $(document).ready(function(){
 
 //   $(document).wacPage().showTips("sth");
 //   Wac.log("fffffff1: " + $(document).wacFoo().getSize(55));
-   Wac.log("fffffff2: " + $(document).wacFoo().isEmail("mymail@163.com"));
-
-//   Wac.log($(document).wacPage().isEmail("mymail@163.com"));
-//   Wac.log($(document).wacPage().isEmail("mymail@com"));
+   Wac.log($(document).wacFoo().isEmail("mymail@163.com"));
+   Wac.log($(document).wacFoo().isEmail("mymail@com"));
 })

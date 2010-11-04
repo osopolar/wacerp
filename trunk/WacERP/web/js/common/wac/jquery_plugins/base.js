@@ -18,14 +18,13 @@ var Wac = Wac || {};  // global package for wac
 (function($) {
     $.fn.encapsulatedPlugin = function(plugin, definition, objects, options) {
         var result = [];
-var _rs;
+        var _rs;
         // Iterates through the set calling the specified function.
         function makeIteratorFunction(f, set) {
             return function() {
                 for ( var i = 0; i < set.length; i++) {
                     _rs = set[i][f].apply(set[i][f], arguments);
-
-                    console.log(i + ":" + _rs);
+                    return _rs;
                 }
             };
         }
@@ -58,6 +57,7 @@ var _rs;
         // Finally mix-in a convenient reference back to the objects, to allow for chaining.
         result.$ = objects;
         return result;
+
     };
 
 })(jQuery);
