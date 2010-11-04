@@ -23,7 +23,6 @@
         // Private members
         var elem = $(element);
         var settings = $.extend({}, options || {});
-        var _result;
 
         // Private methods
         function _privateMethod() {
@@ -35,22 +34,6 @@
                 
             }
             ,
-            isEmail: function(str){
-                if(isEmpty(str)) return false;
-                var re = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
-                _result = re.test(str);
-                return _result;
-            }
-            ,
-            isAlpha: function(str){
-                var re = /[^a-zA-Z]/g
-                if (re.test(str)) return false;
-                return true;
-            }
-            ,
-            getSize: function(size) {
-                return size;
-            },
             debug: function(options) {
                 var defaults = {};
                 

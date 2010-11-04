@@ -47,7 +47,7 @@ default:
     - common/wac/jquery_plugins/base.js
     - common/wac/jquery_plugins/tool.js
     - common/wac/jquery_plugins/page.js
-#    wac_foo:         common/wac/jquery_plugins/foo.js  //for test extension
+    - common/wac/jquery_plugins/foo.js  #for test extension
 
   has_layout:     true
   layout:         layout

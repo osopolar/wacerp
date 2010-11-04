@@ -17,7 +17,7 @@ class t1Action extends WacCommonActions
   */
   public function execute($request)
   {
-    $this->getResponse()->addJavaScript($this->actionPath.".js", 'last');
+    $this->getResponse()->addJavaScript($this->contextInfo["modulePath"].$this->contextInfo["actionName"].".js", 'last');
 
         //component js required, begin
 //
