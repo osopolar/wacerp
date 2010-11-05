@@ -14,8 +14,8 @@ $(document).ready(function(){
 //        Wac.log(i + ":" + this.name);
 //    })
 
-//   $(document).wacPage().showTips("sth");
+   $(document).wacPage().showTips("hello, guys!");
 //   Wac.log("fffffff1: " + $(document).wacFoo().getSize(55));
-   Wac.log($(document).wacFoo().isEmail("mymail@163.com"));
-   Wac.log($(document).wacFoo().isEmail("mymail@com"));
+   Wac.log($(document).wacPage().isEmail("mymail@com.cn"));
+   Wac.log($(document).wacPage().isEmail("mymail@com"));
 })

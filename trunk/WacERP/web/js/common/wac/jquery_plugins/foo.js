@@ -48,10 +48,26 @@
                 return _result;
             }
             ,
-            
-            getSize: function(size) {
-                return size;
-            },
+            showBlockUILoading: function(id, msg)
+            {
+                if(msg === undefined){
+                    var msg = "loading...";
+                }
+
+                if(id === undefined)
+                {
+                    $.blockUI({
+                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                    });
+                }
+                else
+                {
+                    $(id).block({
+                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                    });
+                }
+            }
+            ,
             debug: function(options) {
                 var defaults = {};
                 

@@ -30,8 +30,41 @@
         }
 
         return {
-            myMethod: function(options){
-                
+            isEmail: function(str){
+                if(isEmpty(str)) return false;
+                var re = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
+                return re.test(str);
+            }
+            ,
+            isAlpha: function(str){
+                var re = /[^a-zA-Z]/g
+                if (re.test(str)) return false;
+                return true;
+            }
+            ,
+            showTips: function(msg, title)
+            {
+                if(title != undefined)
+                {
+                    $("body").append("<div id='wacTipsDialog' title='" + title + "'><p>" + msg +"</p></div>");
+                }
+                else
+                {
+                    $("body").append("<div id='wacTipsDialog' title='Tips'><p>" + msg +"</p></div>");
+                }
+
+                $("#wacTipsDialog").dialog({
+                    bgiframe: true,
+                    modal: true,
+                    width: 400,
+                    zIndex: 100,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog('close');
+                            $("#wacTipsDialog").remove();
+                        }
+                    }
+                });
             }
             ,
             debug: function(options) {
