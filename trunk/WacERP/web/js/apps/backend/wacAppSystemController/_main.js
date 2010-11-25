@@ -30,6 +30,10 @@ $(document).ready(
 
         $(document).wacPage().hideBlockUI();
 
+        // put it into wac apps container
+        //wacAppController.appsContainer.push(objAppSystemController);
+        wacAppController.appsContainer = wacAppController.appsContainer.add(objAppSystemController);
+
     }
 );
 
@@ -128,7 +132,5 @@ objAppSystemController = {
     }
 }
 
-// put it into wac apps container
-//wacAppController.appsContainer.push(objAppSystemController);
-wacAppController.appsContainer = wacAppController.appsContainer.add(objAppSystemController);
+
 /***** init section, end *****/

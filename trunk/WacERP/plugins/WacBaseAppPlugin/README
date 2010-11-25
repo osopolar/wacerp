@@ -1,0 +1,96 @@
+# WacBase plugin (for symfony 1.4) #
+
+The `WacBaseAppPlugin` is a symfony plugin that provides base wac application architecture and base libs/components/js.
+
+It gives you the model and the modules
+(backend and frontend) to develop wac application in a minute in
+a configurable plugin.
+
+## Installation ##
+
+  * Install the plugin (via a package)
+
+        symfony plugin:install WacBaseAppPlugin
+
+  * Install the plugin (via a Subversion checkout)
+  
+        svn co http//svn.symfony-project.com/plugins/WacBaseAppPlugin/trunk plugins/WacBaseAppPlugin
+
+  * Activate the plugin in the `config/ProjectConfiguration.class.php`
+  
+        [php]
+        class ProjectConfiguration extends sfProjectConfiguration
+        {
+          public function setup()
+          {
+            $this->enablePlugins(array(
+              'sfDoctrinePlugin', 
+              'WacBaseAppPlugin',
+              '...'
+            ));
+          }
+        }
+
+  * Rebuild your model
+
+        symfony doctrine:build-model
+        symfony doctrine:build-sql
+
+  * Update you database tables by starting from scratch (it will delete all
+    the existing tables, then re-create them):
+
+        symfony doctrine:insert-sql
+
+    or do everything with one command
+
+        symfony doctrine-build-all-reload frontend
+
+    or you can just create the new tables by using the generated SQL
+    statements in `data/sql/plugins.sfGuardAuth.lib.model.schema.sql`
+
+  * Load default fixtures (optional - it creates a superadmin user)
+
+        mkdir data/fixtures/
+        cp plugins/WacBaseAppPlugin/data/fixtures/fixtures.yml.sample data/fixtures/sfGuard.yml
+
+        symfony doctrine:data-load frontend # replace frontend with the name of one of your application
+
+  * Enable one or more modules in your `settings.yml` (optional)
+    * For your backend application:  sfGuardUser, sfGuardGroup, sfGuardPermission
+
+              all:
+                .settings:
+							    enabled_modules:
+							      - default
+							      - sfGuardAuth
+							      - sfGuardGroup
+							      - sfGuardUser
+							      - sfGuardPermission
+							
+							      - wacAppController
+							      - wacAppSystemController
+							      - wacAppTestController
+							      - wacGuardUser
+							      - wacGuardGroup
+							      - wacGuardPermission
+							      - wacCommon
+							      - wacCountry
+
+    * For your frontend application: sfGuardAuth
+
+              all:
+                .settings:
+                  enabled_modules:      [default, sfGuardAuth]
+
+  * Clear you cache
+
+        symfony cc
+
+  * Optionally add the "Remember Me" filter to `filters.yml` above the security filter:
+
+        [yml]
+        remember_me:
+          class: sfGuardRememberMeFilter
+
+        security: ~
+

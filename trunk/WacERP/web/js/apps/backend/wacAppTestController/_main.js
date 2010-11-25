@@ -29,6 +29,9 @@ $(document).ready(
 
     //       wacHideBlockUI();
 
+        // put it into wac apps container
+        //wacAppController.appsContainer.push(objAppTestController);
+        wacAppController.appsContainer = wacAppController.appsContainer.add(objAppTestController);
     }
 );
 
@@ -47,7 +50,5 @@ objAppTestController = {
     }
 }
 
-// put it into wac apps container
-//wacAppController.appsContainer.push(objAppTestController);
-wacAppController.appsContainer = wacAppController.appsContainer.add(objAppTestController);
+
 /***** init section, end *****/

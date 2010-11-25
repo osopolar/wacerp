@@ -24,7 +24,12 @@ var Wac = {
         if(this.debug){
             if(!$.browser.msie && window.console && window.console.log){
                 //        console.log($.browser.version);
-                window.console.log(msg);
+                if(typeof(msg)=='string') {
+                    window.console.log("debugLog: " + msg);
+                }
+                else{
+                    window.console.log(msg);
+                }
             }
             else
             {
