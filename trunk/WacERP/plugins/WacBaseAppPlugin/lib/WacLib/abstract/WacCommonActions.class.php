@@ -33,6 +33,7 @@ abstract class WacCommonActions extends sfActions {
         $this->contextInfo["actionPath"] = $this->actionPath;
         $this->contextInfo["modulePath"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/';
         $this->contextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
+//        $this->contextInfo["wacJsModulePath"] = "/js/".$this->contextInfo["modulePath"];
         $this->contextInfo["moduleName"] = $this->moduleName;
 
         $moduleName = $this->moduleName;

@@ -12,8 +12,10 @@ abstract class WacComponent extends sfComponent {
     // define a info holder
     public function execute($request) {
         $this->contextInfo = array();
-        $this->contextInfo["componentName"] = $this->getActionName();
-        $this->contextInfo["moduleName"] = $this->getModuleName();
+        $this->contextInfo["componentName"]  = $this->getActionName();
+        $this->contextInfo["moduleName"]     = $this->getModuleName();
+        $this->contextInfo["componentJs"]    = $this->getComponentJs();
+        $this->contextInfo["wacComponentJs"] = $this->getWacComponentJs();
     }
 
     public function getComponentName() {
@@ -26,6 +28,14 @@ abstract class WacComponent extends sfComponent {
         'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/_'.$this->getActionName()
                 :
         'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/_'.$specName;
+    }
+
+    public function getWacComponentJs($specName="") {
+        return
+        ($specName=="") ?
+        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$this->getActionName()
+                :
+        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$specName;
     }
 
     /*

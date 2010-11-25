@@ -84,5 +84,6 @@ echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" 
 <!-- form, end-->
 <?php
 echo "</div>";
-echo "<script type=\"text/javascript\" src=\"{$invokeParams['contextInfo']['jsModulePath']}".WacComponentList::$moduleForm.".js\"></script>\n";
+//echo "<script type=\"text/javascript\" src=\"{$invokeParams['contextInfo']['jsModulePath']}".WacComponentList::$moduleForm.".js\"></script>\n";
+echo "<script type=\"text/javascript\" src=\"".$contextInfo["wacComponentJs"].".js\"></script>\n";
 ?>
