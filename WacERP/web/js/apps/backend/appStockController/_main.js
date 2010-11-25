@@ -29,6 +29,10 @@ $(document).ready(
     //        $('#appStockControllerLabel').wacTool().test({name:"ben"});
 
     //       wacHideBlockUI();
+        
+        // put it into wac apps container
+        //wacAppController.appsContainer.push(objAppStockController);
+        wacAppController.appsContainer = wacAppController.appsContainer.add(objAppStockController);
 
     }
 );
@@ -48,8 +52,6 @@ objAppStockController = {
     }
 }
 
-// put it into wac apps container
-//wacAppController.appsContainer.push(objAppStockController);
-wacAppController.appsContainer = wacAppController.appsContainer.add(objAppStockController);
+
 
 /***** init section, end *****/

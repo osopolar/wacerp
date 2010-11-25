@@ -23,9 +23,9 @@ abstract class WacComponent extends sfComponent {
     public function getComponentJs($specName="") {
         return
         ($specName=="") ?
-        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$this->getActionName()
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/_'.$this->getActionName()
                 :
-        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
+        'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/_'.$specName;
     }
 
     /*
