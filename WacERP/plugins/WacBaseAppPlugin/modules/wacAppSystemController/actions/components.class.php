@@ -10,8 +10,8 @@ class wacAppSystemControllerComponents extends WacComponent
     {
         parent::execute($request);
 
-        $this->getResponse()->addJavaScript($this->getComponentJs("layout"), '');
-        $this->getResponse()->addJavaScript($this->getComponentJs(), '');
+        $this->getResponse()->addJavaScript($this->getWacComponentJs("layout"), '');
+        $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');
     }
 
     public function executeWestMenu($request)
