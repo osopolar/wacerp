@@ -14,12 +14,12 @@ class WacComponentList
     public static $baseSingleControlTableA    = "baseSingleControlTableA";
 
     //// module listing
-    public static $moduleListingA         = "moduleListingA";
+    public static $moduleListingA             = "moduleListingA";
 
     //// module form
-    public static $moduleForm             = "moduleForm";
+    public static $moduleForm                 = "moduleForm";
 
     //// buttons bar for the module
-    public static $moduleButtonBar = "moduleButtonBar";
+    public static $moduleButtonBar            = "moduleButtonBar";
 
 }

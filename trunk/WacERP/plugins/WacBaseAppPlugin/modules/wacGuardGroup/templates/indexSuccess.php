@@ -6,16 +6,15 @@
 
   echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n\n";
 
-//  //  module buttons bar
-//  include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
-//              array( 'partial'      => WacModule::getName("common")."/".WacComponentList::$moduleButtonBar,
-//                     'invokeParams' => array(
-//                                           'moduleName' => $contextInfo["moduleName"],
-//                                           'caption'    => WacModule::getCaption($contextInfo["moduleName"]),
-//                                           'attachInfo' => $attachInfo
-//                                           )
-//                  ));
-
+// module buttons bar
+  include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
+              array( 'partial'      => WacModule::getName("wacCommon")."/".WacComponentList::$moduleButtonBar,
+                     'invokeParams' => array(
+                                           'contextInfo' => $contextInfo,
+                                           'attachInfo' => $attachInfo
+                                           )
+                  ));
+  
   // model list
   include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
               array( 'partial'      => $contextInfo["moduleName"]."/".WacComponentList::$moduleListingA,
