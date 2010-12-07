@@ -123,8 +123,8 @@
 
             loadComplete: function()
             {
-                //        console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
-                //        console.log("loadComplete");
+                //        Wac.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
+                //        Wac.log("loadComplete");
                 $(this).trigger("tabsload");   // inform tabs event listener
             }
 
@@ -139,11 +139,11 @@
                         {afterComplete: <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackView});
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackValidate(response, postdata){
-                            //    console.log("callbackEdit");
+                            //    Wac.log("callbackEdit");
 
                             wacAjaxData.response = eval('(' + response.responseText + ')');
-                            //    console.log($.dump(wacAjaxData.response));
-                            //    console.log($.dump(postdata));
+                            //    Wac.log($.dump(wacAjaxData.response));
+                            //    Wac.log($.dump(postdata));
 
                             if(wacAjaxData.response.userdata.status == wacOperationStatus.Succss)
                             {
@@ -157,9 +157,9 @@
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackSave(response){
                             //    alert("callbackSave");
-                            //    console.log("callbackSave");
-                            //    console.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
-                            //    console.log(response.responseText);
+                            //    Wac.log("callbackSave");
+                            //    Wac.log($.dump($("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getGridParam', 'userData')));
+                            //    Wac.log(response.responseText);
                             wacAjaxData.response = eval('(' + response.responseText + ')');
                             if(wacAjaxData.response.userdata.status == wacOperationStatus.Succss)
                             {
@@ -175,31 +175,31 @@
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackEdit()
         {
             //    alert("callbackEdit");
-            //    console.log("callbackEdit");
+            //    Wac.log("callbackEdit");
         }
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackAdd()
         {
             //    alert("callbackAdd");
-            //    console.log("callbackAdd");
+            //    Wac.log("callbackAdd");
         }
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackDel()
         {
             //    alert("callbackDel");
-            //    console.log("callbackDel");
+            //    Wac.log("callbackDel");
         }
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackSearch()
         {
             //    alert("callbackSearch");
-            //    console.log("callbackSearch");
+            //    Wac.log("callbackSearch");
         }
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>CallbackView()
         {
             //    alert("callbackView");
-            //    console.log("callbackView");
+            //    Wac.log("callbackView");
         }
 
         function <?php echo $invokeParams['contextInfo']['moduleName']; ?>FormValidate(postdata, formid)
@@ -225,7 +225,7 @@
             return [false, wacAjaxData.response.userdata.error_info];
         }
 
-        //    console.log($.dump(postdata));
+        //    Wac.log($.dump(postdata));
 
     }
 
@@ -234,7 +234,7 @@
         wacAjaxData.response = jsonData;
         wacOperationStatus.Processing = false;
         $(".loading").css("display", "none");
-        //    console.log($.dump(jsonData));
+        //    Wac.log($.dump(jsonData));
     }
     //]]>
     </script>

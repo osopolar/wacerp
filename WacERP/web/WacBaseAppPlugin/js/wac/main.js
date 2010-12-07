@@ -48,7 +48,7 @@ var Wac = {
 }
 
 /*
- *
+ *  WacLayout class
  */
 WacLayout = function(options){
     var settings = null;
