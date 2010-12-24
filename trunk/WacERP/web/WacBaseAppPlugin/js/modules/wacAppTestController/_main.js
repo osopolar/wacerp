@@ -13,7 +13,6 @@
 
 /***** variables declartion section, begin *****/
 var objAppTestController;
-var objAppTestControllerLayout;  // inited in layout.js
 /***** variables declartion section, end *****/
 
 

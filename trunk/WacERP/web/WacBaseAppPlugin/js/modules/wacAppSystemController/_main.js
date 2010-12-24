@@ -13,7 +13,6 @@
 
 /***** variables declartion section, begin *****/
 var objAppSystemController;
-var objAppSystemControllerLayout;  // inited in layout.js
 /***** variables declartion section, end *****/
 
 

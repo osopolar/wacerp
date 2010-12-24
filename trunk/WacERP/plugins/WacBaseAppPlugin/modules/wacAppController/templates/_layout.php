@@ -1,11 +1,3 @@
-<?php
-$contextInfo = array(
-    "moduleName" => sfContext::getInstance()->getModuleName(),
-    "actionName" => sfContext::getInstance()->getActionName()
-);
-
-?>
-
 <div class="ui-layout-west">
     <div class="header">a1</div>
     <div class="subhead"></div>

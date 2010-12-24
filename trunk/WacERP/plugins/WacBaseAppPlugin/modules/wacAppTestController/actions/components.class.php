@@ -5,12 +5,6 @@
  */
 class wacAppTestControllerComponents extends WacComponent
 {
-    public function executeMain($request)
-    {
-        parent::execute($request);
-
-        $this->getResponse()->addJavaScript($this->getWacComponentJs("layout"), '');
-        $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');
-    }
-
+    // component main is defined in parent class
+    // component layout is defined in parent class
 }

@@ -8,6 +8,7 @@
  * @author     ben
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
+
 abstract class WacComponent extends sfComponent {
     // define a info holder
     public function execute($request) {
@@ -16,6 +17,18 @@ abstract class WacComponent extends sfComponent {
         $this->contextInfo["moduleName"]     = $this->getModuleName();
         $this->contextInfo["componentJs"]    = $this->getComponentJs();
         $this->contextInfo["wacComponentJs"] = $this->getWacComponentJs();
+    }
+
+    public function executeMain($request)
+    {
+        $this->execute($request);
+//        $this->getResponse()->addJavaScript($this->getWacComponentJs(), 'last');  // layout
+    }
+
+    public function executeLayout($request)
+    {
+        $this->execute($request);
+        $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');  // layout
     }
 
     public function getComponentName() {
@@ -33,7 +46,7 @@ abstract class WacComponent extends sfComponent {
     public function getWacComponentJs($specName="") {
         return
         ($specName=="") ?
-        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$this->getActionName()
+        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$this->contextInfo["componentName"]
                 :
         '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$specName;
     }

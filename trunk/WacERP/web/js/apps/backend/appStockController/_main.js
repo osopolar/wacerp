@@ -13,7 +13,6 @@
 
 /***** variables declartion section, begin *****/
 var objAppStockController;
-var objAppStockControllerLayout;
 /***** variables declartion section, end *****/
 
 

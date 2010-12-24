@@ -121,7 +121,7 @@ var options = {
     }
 };
 // declare app layout object
-objAppSystemControllerLayout = new WacLayout(options);
+var objAppSystemControllerLayout = new WacLayout(options);
 
 // override decorate method, decorate the layout
 objAppSystemControllerLayout.decorate = function(){
