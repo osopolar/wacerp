@@ -9,8 +9,8 @@ class wacAppControllerComponents extends WacComponent
     {
         parent::execute($request);
 
-        $this->getResponse()->addJavaScript($this->getWacComponentJs("layout"), 'last');
-        $this->getResponse()->addJavaScript($this->getWacComponentJs(), 'last');
+        $this->getResponse()->addJavaScript($this->getWacComponentJs("layout"), 'last');  // layout
+        $this->getResponse()->addJavaScript($this->getWacComponentJs(), 'last');          // main
     }
 
 }
