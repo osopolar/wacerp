@@ -119,7 +119,7 @@ var options = {
 };
 
 // create WAC Application LAYOUT
-objWacAppControllerLayout = new WacLayout(options);
+var objWacAppControllerLayout = new WacLayout(options);
 
 /***** variables declartion section, end *****/
 

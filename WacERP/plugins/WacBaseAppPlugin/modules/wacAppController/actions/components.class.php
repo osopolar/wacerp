@@ -5,12 +5,6 @@
  */
 class wacAppControllerComponents extends WacComponent
 {
-    public function executeMain($request)
-    {
-        parent::execute($request);
-
-        $this->getResponse()->addJavaScript($this->getWacComponentJs("layout"), 'last');  // layout
-        $this->getResponse()->addJavaScript($this->getWacComponentJs(), 'last');          // main
-    }
-
+    // component main is defined in parent class
+    // component layout is defined in parent class
 }

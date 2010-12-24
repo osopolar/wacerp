@@ -5,12 +5,12 @@
  */
 class appStockControllerComponents extends WacComponent
 {
-    public function executeMain($request)
+    // component main is defined in parent class
+    // component layout is defined in parent class
+
+    public function executeLayout($request)
     {
-        parent::execute($request);
-
-        $this->getResponse()->addJavaScript($this->getComponentJs("layout"), '');
-        $this->getResponse()->addJavaScript($this->getComponentJs(), '');
+        $this->execute($request);
+        $this->getResponse()->addJavaScript($this->getComponentJs(), '');  // layout
     }
-
 }

@@ -15,12 +15,6 @@
 //var objAppStockControllerLayout;
 /***** variables declartion section, end *****/
 
-$(document).ready(
-    function() {
-
-        
-    }
-    );
 
 /***** init section, begin *****/
 var options = {
@@ -147,7 +141,7 @@ var options = {
 
 
 // declare app layout object
-objAppStockControllerLayout = new WacLayout(options);
+var objAppStockControllerLayout = new WacLayout(options);
 
 // override decorate method, decorate the layout
 objAppStockControllerLayout.decorate = function(){
