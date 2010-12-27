@@ -163,7 +163,7 @@ abstract class WacCommonActions extends sfActions {
         $pager     = $this->mainModuleTable->getPager();
         $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum());
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($filterResultSet, $this);
+        return OutputHelper::getInstance()->output($filterResultSet, $this);
     }
 
     /*
@@ -173,7 +173,7 @@ abstract class WacCommonActions extends sfActions {
         $resultSet['request_params'] = $this->getRequest()->getParameterHolder()->getAll();
         $resultSet['info'] = $request->hasParameter(JqGridDataHelper::$KEY_OPER);
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*
@@ -196,7 +196,7 @@ abstract class WacCommonActions extends sfActions {
             default:
                 $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
                 $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getErrorDatum();
-                return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+                return OutputHelper::getInstance()->output($resultSet, $this);
                 break;
         }
     }
@@ -229,7 +229,7 @@ abstract class WacCommonActions extends sfActions {
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
         $inspectResult = $this->inspectDataValidation($request);
         $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult;
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*
@@ -263,7 +263,7 @@ abstract class WacCommonActions extends sfActions {
             }
         }
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
 
     }
 
@@ -300,7 +300,7 @@ abstract class WacCommonActions extends sfActions {
                 $this->afterEdit($request);
             }
         }
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*
@@ -330,7 +330,7 @@ abstract class WacCommonActions extends sfActions {
 
         $this->afterDelete($request);
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*
@@ -353,7 +353,7 @@ abstract class WacCommonActions extends sfActions {
                 break;
         }
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*
@@ -373,7 +373,7 @@ abstract class WacCommonActions extends sfActions {
                 break;
         }
 
-        return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+        return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
     /*

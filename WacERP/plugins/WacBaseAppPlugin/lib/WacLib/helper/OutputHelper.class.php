@@ -25,20 +25,33 @@ class OutputHelper
     }
 
     /*
-     * return format datum according to the request format parameter
-     *      */
-    public function datumFormat($items, $request)
+     * return JsCommon format data structure
+     * @params
+     * array $node - node info,
+     */
+    public function output(array $resultSet, sfAction $action, $params=array())
     {
-        $resultSet = array();
-        switch($request->getParameter("data_format")) {
-            case StaticWacDataFormatType::$jsonFlexbox:
-                $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($items);
-                break;
-            default:
-                break;
+        if(!$action->getRequest()->hasParameter("dataFormat")){
+            throw new sfException("Wac Error: require parameter 'dataFormat'!");
         }
-
-        return $resultSet;
+        else{
+            $dataFormat = $action->getRequest()->getParameter("dataFormat");
+            switch ($dataFormat) {
+                case WacDataFormatType::$json:
+                    return $this->outputJsonOrTextFormat($resultSet, $action);
+                    break;
+                case WacDataFormatType::$xml:
+                    return $this->outputXmlFormat($resultSet, $action, true, false);
+                    break;
+                case WacDataFormatType::$jsonFlexbox:
+                    $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($items);
+                    return $this->outputXmlFormat($resultSet, $action, false);
+                    break;
+                default:
+                    return $this->outputJsonOrTextFormat($resultSet, $action);
+                    break;
+            }
+        }        
     }
 
     /*
@@ -46,7 +59,7 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputJsonOrTextFormat($resultSet, $action)
+    public function outputJsonOrTextFormat(array $resultSet, sfAction $action)
     {
         $output = '';
         if ($action->getRequest()->isXmlHttpRequest()) {
@@ -68,12 +81,18 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputXmlFormat($resultSet, $action)
+    public function outputXmlFormat($resultSet, sfAction $action, $isConvertToXML=false, $formatOutput=false)
     {
         $this->setNoCacheHeader($action, false);
         $action->getResponse()->setContentType('application/xml; encoding=utf-8');
-
-        return $action->renderText(print_r($resultSet, true));
+        if($isConvertToXML){
+            $document = DOM::arrayToDOMDocument($resultSet, "root");
+            $document->formatOutput = $formatOutput;
+            return $action->renderText($document->saveXML());
+        }
+        else{
+            return $action->renderText(print_r($resultSet, true));
+        }
     }
 
     /*
