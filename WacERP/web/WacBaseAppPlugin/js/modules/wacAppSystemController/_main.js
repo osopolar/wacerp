@@ -79,7 +79,7 @@ objAppSystemController = {
     },
     initWestMenu: function(menuId){
         this.westMenu = $(menuId).jqGrid({
-            url: BASE_URL + "/wacAppSystemController/getWestMenu",
+            url: BASE_URL + "wacAppSystemController/getWestMenu",
             datatype: "xml",
             height: "auto",
             pager: false,
@@ -94,7 +94,7 @@ objAppSystemController = {
             },
             {
                 name: "menu",
-                width: 180,
+                width: 238,
                 resizable: false,
                 sortable:false
             },
