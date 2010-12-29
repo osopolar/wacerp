@@ -7,17 +7,23 @@
   echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n\n";
 
 // module buttons bar
-  include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
-              array( 'partial'      => WacModule::getName("wacCommon")."/".WacComponentList::$moduleButtonBar,
+  include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
+              array(
+                     'mode'         => 'partial',
+                     'widgetModule' => WacModule::getName("wacCommon"),
+                     'widgetName'   => WacComponentList::$moduleButtonBar,
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'attachInfo' => $attachInfo
                                            )
                   ));
-  
+
   // model list
-  include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
-              array( 'partial'      => $contextInfo["moduleName"]."/".WacComponentList::$moduleListingA,
+  include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
+              array(
+                     'mode'         => 'partial',
+                     'widgetModule' => $contextInfo["moduleName"],
+                     'widgetName'   => WacComponentList::$moduleListingA,
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'arrMainModuleTableFields' => $arrMainModuleTableFields,  // return sfOutputEscaperArrayDecorator
@@ -25,6 +31,16 @@
                                            'attachInfo' => $attachInfo
                                            )
                   ));
+
+//  include_component(WacModule::getName("wacCommon"), WacComponentList::$masterControlTableA,
+//              array( 'partial'      => $contextInfo["moduleName"]."/".WacComponentList::$moduleListingA,
+//                     'invokeParams' => array(
+//                                           'contextInfo' => $contextInfo,
+//                                           'arrMainModuleTableFields' => $arrMainModuleTableFields,  // return sfOutputEscaperArrayDecorator
+//                                           'subItemModuleName' => $subItemModuleName,
+//                                           'attachInfo' => $attachInfo
+//                                           )
+//                  ));
 
   //mainItem form, hidden form interface
   include_component($contextInfo["moduleName"], WacComponentList::$moduleForm,

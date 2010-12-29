@@ -18,6 +18,7 @@
  * global system variable object, provides conveniences
  */
 var Wac = {
+//    debug: false,
     debug: true,
 
     log: function(msg){

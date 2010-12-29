@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<xliff version="1.0">
+  <file original="global" source-language="en_US" datatype="plaintext">
+    <header />
+    <body>
+      <!-- Actions -->
+      <trans-unit>
+        <source>Search</source>
+        <target>查找</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add To</source>
+        <target>添加</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Search Number</source>
+        <target>搜索编号</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

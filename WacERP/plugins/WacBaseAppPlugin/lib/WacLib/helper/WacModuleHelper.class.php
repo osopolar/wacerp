@@ -149,25 +149,21 @@ class WacModuleHelper
 
         return $str;
     }
-    
+
     /*
      * generateAddFormBtn
+     * @$invokeParams - array("contextInfo"=>array(), "attachInfo"=>array());
      */
-    public static function generateAddFormBtn($module, $attachName="")
+    public static function generateAddFormBtn($invokeParams)
     {
-//        $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
-//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."');\"";
-//        $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
-//        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
-
-        $str = "<a id=\"".WacModuleHelper::getFormDialogId($module, $attachName)."btnAdd\" onclick=\"javascript:";
+        $str = "<a id=\"".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'], $invokeParams['attachInfo']['name'])."btnAdd\" onclick=\"javascript:";
         $str.= "$.shout('show-add-form', {user: {name: 'Gabriel'}});";
         $str.= '" ';
         $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
         $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
 
         return $str;
-    }
+    }    
 
     /*
      * generateListViewFormBtn

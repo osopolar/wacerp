@@ -16,4 +16,9 @@ class wacCommonComponents extends WacComponent
          parent::execute($request);
     }
 
+    public function executeEmbedWidget($request)
+    {
+         parent::execute($request);
+    }
+
 }

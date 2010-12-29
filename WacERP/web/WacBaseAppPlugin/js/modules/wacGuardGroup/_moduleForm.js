@@ -27,7 +27,7 @@ $(document).ready(
 //        Wac.log($(document).hear("wacGuardGroupForm", "show-add-form", function ($self, data) {}));
 
         $(document).hear("wacGuardGroupForm", "show-add-form", function ($self, data) {  // listenerid, event name, callback
-            Wac.log("wacGuardGroupForm:" + data);
+            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
         });
 
