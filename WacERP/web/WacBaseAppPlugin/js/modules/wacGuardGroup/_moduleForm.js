@@ -18,31 +18,33 @@ var wacGuardGroupObj = {};
 /***** init section, begin *****/
 $(document).ready(
     function(){
-//        var wacGuardGroupForm = new WacGuardGroupForm();
-//
-//        wacGuardGroupForm.initDialog();
-//        wacGuardGroupForm.initForm();
-//        wacGuardGroupForm.bindEvents();
+        var wacGuardGroupForm = new WacGuardGroupForm();
 
-//        Wac.log($(document).hear("wacGuardGroupForm", "show-add-form", function ($self, data) {}));
+        wacGuardGroupForm.initDialog();
+        wacGuardGroupForm.initForm();
+        wacGuardGroupForm.bindEvents();
 
-        $(document).hear("wacGuardGroupForm", "show-add-form", function ($self, data) {  // listenerid, event name, callback
+        //        Wac.log($(document).hear("wacGuardGroupForm", "show-add-form", function ($self, data) {}));
+
+        $(document).hear("wacGuardGroupForm", "wacGuardGroup_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
             Wac.log(data);
-//            Wac.log(jQuery._jq_shout.registry);
+            wacGuardGroupForm.initFormData();
+        //            Wac.log(jQuery._jq_shout.registry);
         });
 
         
-//        initWacGuardGroupFormDialog();
-//
-//        initWacGuardGroupForm();
-//
-//        bindWacGuardGroupEvents();
+    //        initWacGuardGroupFormDialog();
+    //
+    //        initWacGuardGroupForm();
+    //
+    //        bindWacGuardGroupEvents();
     }
-);
+    );
 
 
 WacGuardGroupForm.prototype = new WacFormPrototype();  // extends WacFormPrototype
 function WacGuardGroupForm(){
+    var _self = this;
     this.moduleName = "wacGuardGroup";
     this.moduleId = "#" + this.moduleName;
     this.formId = this.moduleId + "Form";
@@ -125,13 +127,13 @@ function WacGuardGroupForm(){
         if(wacGuardGroupInputMode == wacFormInputMode.add)   // use default values
         {
             var params = {
-                "data_format" :'json'
+                "dataFormat" :'json'
             };
         }
         else
         {
             var params = {
-                "data_format" :'json',
+                "dataFormat" :'json',
                 "id" : wacGuardGroupObj.id
             };
         }
@@ -144,7 +146,7 @@ function WacGuardGroupForm(){
             data: params,
             dataType: "json",
             success: function(jsonData){
-                this.initFormDataCallBack(jsonData);
+                _self.initFormDataCallBack(jsonData);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
@@ -159,14 +161,14 @@ function WacGuardGroupForm(){
         }
         else
         {
-            for(i=0;i<jsonData['items']['group'].length;i++)
+            for(i=0;i<jsonData['items']['permission'].length;i++)
             {
-                $('<option value="' + jsonData['items']['group'][i].key +'">' + jsonData['items']['group'][i].value +'</option>').appendTo("#wacGuardGroup_sf_guard_user_group_list");
+                $('<option value="' + jsonData['items']['permission'][i].key +'">' + jsonData['items']['permission'][i].value +'</option>').appendTo("#wacGuardGroup_sf_guard_group_permissions_list");
             }
 
-            for(i=0;i<jsonData['items']['user_group'].length;i++)
+            for(i=0;i<jsonData['items']['group_permission'].length;i++)
             {
-                $(this.moduleId + "_sf_guard_user_group_list option[value='"+jsonData['items']['user_group'][i]+"']").attr("selected", true);
+                $("#wacGuardGroup_sf_guard_group_permissions_list option[value='"+jsonData['items']['group_permission'][i]+"']").attr("selected", true);
             }
         }
 
@@ -241,7 +243,7 @@ function WacGuardGroupForm(){
 
         $(document).wacPage().showBlockUILoading(this.formDialogId, "处理中...");
 
-        var extraParams = "data_format=json";
+        var extraParams = "dataFormat=json";
         var submitUrl;
 
         if(wacGuardGroupInputMode == wacFormInputMode.add){

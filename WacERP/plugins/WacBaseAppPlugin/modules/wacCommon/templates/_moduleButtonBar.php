@@ -11,10 +11,10 @@
         echo $inputStr;
 
         echo "	<button id='{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}_btnSearch'>".__("Search")."</button>";
+
         if ($invokeParams['attachInfo']['name'] != ucfirst(WacEntityStatus::$audited)) {
             echo "<button id='{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}_btnAdd'>".__("Add To")."</button>";
         }
-        
         echo "</span>";
 
         echo "<script type='text/javascript'>";
@@ -43,7 +43,7 @@
             }
         })
         .click(function(){
-            $.shout('show-add-form', {user: {name: 'Gabriel'}});
+            $.shout('<?php echo $invokeParams['contextInfo']['moduleName'].sfConfig::get("app_wac_events_show_add_form"); ?>', {});
         });
         
 //        $(document).wacPage().initUIBtn();

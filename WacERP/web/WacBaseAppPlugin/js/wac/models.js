@@ -11,6 +11,7 @@ var wacFormStatus      = new WacFormStatus();
  */
 function WacFormPrototype()
 {
+    
     this.bindEvents = function(){
         Wac.log("bindEvents");
     };
