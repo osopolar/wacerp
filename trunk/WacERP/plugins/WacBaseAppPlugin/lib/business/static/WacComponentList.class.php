@@ -7,6 +7,9 @@
  */
 class WacComponentList
 {
+    //// redirect to
+    public static $embedWidget                = "embedWidget";
+
     //// handle name/code/memo simple table
     public static $masterControlTableA        = "masterControlTableA";
 
