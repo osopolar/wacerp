@@ -96,7 +96,7 @@ class wacGuardGroupActions extends WacCommonActions
                                    );
       }
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
@@ -145,7 +145,7 @@ class wacGuardGroupActions extends WacCommonActions
                                    );
       }
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
@@ -175,7 +175,7 @@ class wacGuardGroupActions extends WacCommonActions
 
 //      $resultSet['items']['default']['currency_code_name'] = Doctrine::getTable(WacTable::$systemParameter)->getValueByCode(WacAppSettingCode::$currency);
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
