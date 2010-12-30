@@ -6,19 +6,19 @@
 
   echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n\n";
 
-// module buttons bar
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleToolbar Component Included.");
   include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
               array(
                      'mode'         => 'partial',
                      'widgetModule' => WacModule::getName("wacCommon"),
-                     'widgetName'   => WacComponentList::$moduleButtonBar,
+                     'widgetName'   => WacComponentList::$moduleToolBar,
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'attachInfo' => $attachInfo
                                            )
                   ));
 
-  // model list
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleList Component Included.");
   include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
               array(
                      'mode'         => 'partial',
@@ -42,9 +42,10 @@
 //                                           )
 //                  ));
 
-  //mainItem form, hidden form interface
+  
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} Moduleform Component Included.");
   include_component($contextInfo["moduleName"], WacComponentList::$moduleForm,
-              array( 'partial'      => $contextInfo["moduleName"]."/".WacComponentList::$moduleForm,
+              array(
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'attachInfo'  => $attachInfo,

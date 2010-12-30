@@ -7,8 +7,11 @@
  */
 class WacComponentList
 {
-    //// redirect to
+    //// embed widget, flexibly to change the embed components
     public static $embedWidget                = "embedWidget";
+
+    //// toolbar for the module
+    public static $moduleToolBar              = "moduleToolBar";
 
     //// handle name/code/memo simple table
     public static $masterControlTableA        = "masterControlTableA";

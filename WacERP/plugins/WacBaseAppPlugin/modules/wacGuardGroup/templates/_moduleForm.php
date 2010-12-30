@@ -1,16 +1,11 @@
 <?php
 $formDialogId = WacModuleHelper::getFormDialogId($invokeParams["contextInfo"]["moduleName"]);
 $formId       = WacModuleHelper::getFormId($invokeParams["contextInfo"]["moduleName"]);
-echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
+echo "<div id=\"".$formDialogId."\" title=\"".WacModule::getCaption($invokeParams["contextInfo"]["moduleName"])."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
 ?>
 <!-- form, begin-->
 <form name="<?php echo $formId;?>" id="<?php echo $formId;?>" method="post" class="wacFormA">
     <div class="wacFormFirstCol">
-        <h3>
-        <?php
-        echo WacModule::getCaption($invokeParams["contextInfo"]["moduleName"]);;
-        ?>
-        </h3>
         <div class="wacFormContentA">
             <div class="wacFormRow">
                 <div class="wacFormItemLeft ">编码</div>
@@ -67,7 +62,6 @@ echo "<div id=\"".$formDialogId."\" class=\"ui-widget\" style=\"display: none\" 
 <!-- form, end-->
 <?php
 echo "</div>";
-//echo "<script type=\"text/javascript\" src=\"{$invokeParams['contextInfo']['jsModulePath']}".WacComponentList::$moduleForm.".js\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"".$contextInfo["wacComponentJs"].".js\"></script>\n";
 
 
