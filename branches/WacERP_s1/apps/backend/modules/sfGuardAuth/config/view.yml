@@ -1,0 +1,16 @@
+signinSuccess:
+  stylesheets: [-*]
+  javascripts: [-*]
+
+#  stylesheets:
+#    jquery-ui:            jquery/jqueryUI/themes/smoothness/jquery-ui-1.7.2.custom.css
+##    jquery-ui:            jquery/jqueryUI/themes/cupertino/jquery-ui-1.7.2.custom.css
+##    jquery-ui:            jquery/jqueryUI/themes/sunny/jquery-ui-1.7.2.custom.css
+#  javascripts:
+#    jquery:                     jquery/jquery-1.3.2.min.js
+#    jquery.blockUI:             jquery/jquery.blockUI.js
+#    jquery-ui:                  jquery/plugins/jquery-ui-1.7.2/jquery-ui-1.7.2.custom.min.js
+#    jquery-ui-i18n:             jquery/plugins/jquery-ui-1.7.2/i18n/jquery-ui-i18n.js
+#    jquery.dump:                jquery/jquery.dump.js
+#    wac_common:                 wac_common.js
+#    wac_debug:                  wac_debug.js

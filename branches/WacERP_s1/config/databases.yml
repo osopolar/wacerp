@@ -1,0 +1,10 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/07-Databases
+
+all:
+  wac_db_connection1:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=db_wac_erp
+      username: developer
+      password: developer

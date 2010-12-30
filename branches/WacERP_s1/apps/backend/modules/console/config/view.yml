@@ -1,0 +1,12 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+#all:
+#  stylesheets:
+#    jquery.jqGrid:   common/jquery/plugins/jquery.jqGrid-3.7.1/ui.jqgrid.css
+#    app.layout:      common/wac/layout.css
+#
+#  javascripts:
+#    jqgrid.locale:   common/jquery/plugins/jquery.jqGrid-3.7.1/i18n/grid.locale-cn.js
+#    jquery.jqGrid:   common/jquery/plugins/jquery.jqGrid-3.7.1/jquery.jqGrid.min.js
+

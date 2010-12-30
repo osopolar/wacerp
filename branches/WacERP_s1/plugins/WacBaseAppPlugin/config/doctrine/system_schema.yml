@@ -1,0 +1,489 @@
+WacCountry:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_country
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    iso_code2: string(255)
+    iso_code3: string(255)
+    code: string(255)
+    name: string(255)
+    path: string(255)
+    memo: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacCurrency:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_currency
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    value:
+      type: decimal(10)
+      scale: false
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    symbo_left: string(255)
+    symbo_right: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacCurrencyRatio:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_currency_ratio
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    ratio:
+      type: float()
+      default: '0'
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    from_currency_code: string(255)
+    to_currency_code: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    FromCurrency:
+      class: WacCurrency
+      local: from_currency_code
+      foreign: code
+      type: one
+    ToCurrency:
+      class: WacCurrency
+      local: to_currency_code
+      foreign: code
+      type: one
+WacSysmsg:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_sysmsg
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    code: string(255)
+    name: string(255)
+    content: string()
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacSystemLog:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_system_log
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    type:
+      type: integer(1)
+      default: '0'
+      notnull: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    user_id: integer(8)
+    content: string()
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacSystemParameter:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_system_parameter
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    type: integer(1)
+    value: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacTemplate:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_template
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacUnit:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_unit
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    type_id:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    WacGoodsCategoryUnit:
+      local: id
+      foreign: unit_id
+      type: many
+    WacUnitType:
+      local: type_id
+      foreign: id
+      type: one
+WacUnitType:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_unit
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+WacUnitRatio:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_unit_ratio
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    ratio:
+      type: float()
+      default: '0'
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    from_unit_code: string(255)
+    to_unit_code: string(255)
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    FromUnit:
+      class: WacUnit
+      local: from_unit_code
+      foreign: code
+      type: one
+    ToUnit:
+      class: WacUnit
+      local: to_unit_code
+      foreign: code
+      type: one
+WacWorkflow:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_workflow
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    type:
+      type: integer(4)
+      default: '0'
+      notnull: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    memo: string()
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    WacWorkflowItem:
+      local: id
+      foreign: workflow_id
+      type: many
+WacWorkflowItem:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_workflow_item
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    workflow_id:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    level:
+      type: integer(4)
+      default: '0'
+      notnull: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    is_final: integer(1)
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    WacWorkflow:
+      local: workflow_id
+      foreign: id
+      type: one

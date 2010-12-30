@@ -1,0 +1,7 @@
+indexSuccess:
+#  stylesheets: [-*]
+#  javascripts: [-*]
+
+  stylesheets:
+    jquery.layout1:  common/jquery/plugins/jquery.layout-1.3.0/layout1.css
+    

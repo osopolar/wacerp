@@ -1,0 +1,10 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+#all:
+
+all:
+  wac_events:
+    show_add_form: _show_add_form_evt
+    show_edit_form: _show_edit_form_evt
