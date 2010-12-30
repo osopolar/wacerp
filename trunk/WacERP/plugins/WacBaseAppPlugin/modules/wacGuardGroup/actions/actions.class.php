@@ -42,7 +42,7 @@ class wacGuardGroupActions extends WacCommonActions
       $id = isset($reqParams['id']) ? $reqParams['id'] : 0;
       if($this->mainModuleTable->isExistedName($reqParams['name'], $id))
       {
-         $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
+         $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
          return $result;
       }
 
@@ -59,10 +59,6 @@ class wacGuardGroupActions extends WacCommonActions
    */
   public function executeAdd(sfWebRequest $request)
   {
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)
@@ -92,7 +88,7 @@ class wacGuardGroupActions extends WacCommonActions
 
           $resultSet['items'][0] = $targetItem->toArray();
           $resultSet['info']     = JsCommonData::getSuccessDatum(
-                                       Doctrine::getTable(WacTable::$sysmsg)->getContentByCode("sys_add_succ")
+                                       Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
                                    );
       }
 
@@ -141,7 +137,7 @@ class wacGuardGroupActions extends WacCommonActions
 
           $resultSet['items'][0] = $targetItem->toArray();
           $resultSet['info']     = JsCommonData::getSuccessDatum(
-                                       Doctrine::getTable(WacTable::$sysmsg)->getContentByCode("sys_edit_succ")
+                                       Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_edit_succ")
                                    );
       }
 
@@ -154,10 +150,6 @@ class wacGuardGroupActions extends WacCommonActions
    */
   public function executeGetFormData(sfWebRequest $request)
   {
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
       $resultSet = JsCommonData::getCommonDatum();
       $resultSet['info'] = JsCommonData::getSuccessDatum();
 

@@ -132,4 +132,16 @@ class OutputHelper
         $action->getResponse()->setHttpHeader("Expires", 0);        
     }
 
+    public function writeNote($v, $isReturnStr=false, $params=array())
+    {
+        $format = "\n\n<!-- WacNote: %s-->\n\n";
+        $str = sprintf($format, $v);
+        if(!$isReturnStr){
+            echo $str;
+        }
+        else{
+            return $str;
+        }
+    }
+
 }

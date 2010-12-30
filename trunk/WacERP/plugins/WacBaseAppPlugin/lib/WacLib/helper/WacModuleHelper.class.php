@@ -127,12 +127,21 @@ class WacModuleHelper
     /*
      * generateListEditFormBtn
      */
+//    public static function generateListEditFormBtn($module, $attachName="")
+//    {
+//        $str =" be = ";
+//        $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
+//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\" + cl +\"');\\\"";
+//        $str.=" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
+//
+//        return $str;
+//    }
     public static function generateListEditFormBtn($module, $attachName="")
     {
         $str =" be = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\" + cl +\"');\\\"";
-        $str.=" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
+        $str.= "$.shout('{$module}{$attachName}".sfConfig::get("app_wac_events_show_edit_form")."', {id: \" + cl +\" });";
+        $str.="\\\" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
     }
@@ -144,7 +153,7 @@ class WacModuleHelper
     {
         $str =" de = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"', top: 200, left:500});\\\"";
+        $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\"";
         $str.=" value='删' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
@@ -154,16 +163,16 @@ class WacModuleHelper
      * generateAddFormBtn
      * @$invokeParams - array("contextInfo"=>array(), "attachInfo"=>array());
      */
-    public static function generateAddFormBtn($invokeParams)
-    {
-        $str = "<a id=\"".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'], $invokeParams['attachInfo']['name'])."btnAdd\" onclick=\"javascript:";
-        $str.= "$.shout('show-add-form', {user: {name: 'Gabriel'}});";
-        $str.= '" ';
-        $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
-        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
-
-        return $str;
-    }    
+//    public static function generateAddFormBtn($invokeParams)
+//    {
+//        $str = "<a id=\"".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'], $invokeParams['attachInfo']['name'])."btnAdd\" onclick=\"javascript:";
+//        $str.= "$.shout('show-add-form', {user: {name: 'Gabriel'}});";
+//        $str.= '" ';
+//        $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
+//        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
+//
+//        return $str;
+//    }    
 
     /*
      * generateListViewFormBtn
