@@ -51,6 +51,9 @@ default:
 
 #    - /WacBaseAppPlugin/js/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
     jquery.shout: /WacBaseAppPlugin/js/jquery/plugins/jquery-shout/jquery.shout.js     # jquery-shout
+#    jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties-min.js  #jquery.i18n.properties
+    jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties.js  #jquery.i18n.properties
+
 
     wac.main: /WacBaseAppPlugin/js/wac/main.js  # wac_main
     wac.models: /WacBaseAppPlugin/js/wac/models.js
