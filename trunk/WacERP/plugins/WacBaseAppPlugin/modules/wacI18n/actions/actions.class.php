@@ -17,14 +17,19 @@ class wacI18nActions extends WacCommonActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-      return OutputHelper::getInstance()->debugRequest($this);
+//      return OutputHelper::getInstance()->debugRequest($this);
+//      return OutputHelper::getInstance()->output(array(), $this);
 //      $text = <<<EOD
 //# This line is ignored by the plugin
 //msg_hello = Hello
 //msg_world = World
 //msg_complex = Good morning {0}!
 //EOD;
-//      return $this->renderText($text);
+      $i18n = $this->getContext()->getI18N();
+//      $text = $i18n->__("Search Number");
+      $text = $i18n->getMessageSource()->read();
+      $i18n->getMessageFormat()->getSource();
+      return $this->renderText(print_r($text,true));
   }
 
 }
