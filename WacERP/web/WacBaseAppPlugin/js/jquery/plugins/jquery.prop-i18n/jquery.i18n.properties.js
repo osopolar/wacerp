@@ -118,6 +118,7 @@ function loadAndParseFile(filename, language, mode) {
         cache:		false,
         contentType:'text/plain;charset=UTF-8',
         dataType:   'text',
+        data:       {dataFormat: 'text'},
         success:    function(data, status) {
         				parseData(data, mode); 
 					}
