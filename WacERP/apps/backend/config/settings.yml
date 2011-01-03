@@ -31,6 +31,7 @@ all:
       - sfGuardUser
       - sfGuardPermission
 
+      - wacI18n
       - wacAppController
       - wacAppSystemController
       - wacAppTestController

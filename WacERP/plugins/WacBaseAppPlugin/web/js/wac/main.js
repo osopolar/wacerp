@@ -20,23 +20,25 @@
 var Wac = {
     debug: true,
 
-    log: function(msg){
+    log: function(msg, enable){
+        enable = (enable === undefined) ? true : enable;
         if(this.debug){
             if(!$.browser.msie && window.console && window.console.log){
                 //        console.log($.browser.version);
                 if(typeof(msg)=='string') {
-                    window.console.log("debugLog: " + msg);
+                    return enable ? window.console.log("debugLog: " + msg) : null;
                 }
                 else{
-                    window.console.log(msg);
+                    return enable ? window.console.log(msg) : null;
                 }
             }
             else
             {
-                alert(msg);
+                 return enable ? alert(msg) : null;
             }
         }
 
+        return null;
 
     //    if($("#debugDiv").length == 0)
     //    {

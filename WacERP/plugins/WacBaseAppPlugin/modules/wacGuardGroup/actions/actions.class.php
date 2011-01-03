@@ -104,10 +104,6 @@ class wacGuardGroupActions extends WacCommonActions
       // forward to 404 if no id
       $this->forward404Unless($request->hasParameter('id'));
 
-      if ($this->getRequest()->isXmlHttpRequest()) {
-          sfConfig::set('sf_web_debug', false);
-      }
-
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)

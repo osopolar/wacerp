@@ -67,8 +67,10 @@ class WacModule
           'wacWorkflowItem'                  => array('id'=>"55",'group'=>'1', 'name'=>"wacWorkflowItem", 'caption'=>"工作流程子项"),
 
           'wacGuardPermission'               => array('id'=>"55",'group'=>'1', 'name'=>"wacGuardPermission", 'caption'=>"权限管理"),
-          'wacGuardGroup'                    => array('id'=>"56",'group'=>'1', 'name'=>"wawacGuardGroupcWorkflowItem", 'caption'=>"用户组管理"),
-          'wacGuardUser'                     => array('id'=>"57",'group'=>'1', 'name'=>"wacWorkflowItem", 'caption'=>"用户管理"),
+          'wacGuardGroup'                    => array('id'=>"56",'group'=>'1', 'name'=>"wacGuardGroup", 'caption'=>"用户组管理"),
+          'wacGuardUser'                     => array('id'=>"57",'group'=>'1', 'name'=>"wacGuardUser", 'caption'=>"用户管理"),
+
+          'wacI18n'                          => array('id'=>"58",'group'=>'1', 'name'=>"wacI18n", 'caption'=>"多语言服务"),
     );
 
     public static function getInstance()

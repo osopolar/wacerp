@@ -96,6 +96,15 @@ class OutputHelper
     }
 
     /*
+     *
+     */
+    public function debugRequest(sfAction $action)
+    {
+        $reqParams = $action->getRequest()->getParameterHolder()->getAll();
+        return $action->renderPartial(WacModule::getName("wacCommon").'/blank', array('output' => $reqParams));
+    }
+
+    /*
      * return output html select elements
      * @params - $resultSet array(array(key, value))
      * array $node - node info,

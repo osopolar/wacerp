@@ -15,28 +15,60 @@
  */
 
 /*
- * global system variable object, provides conveniences
+ * Wac global system variable object, init wac app environment and provides convenient methods
  */
 var Wac = {
 //    debug: false,
     debug: true,
 
-    log: function(msg){
+    init: function(){
+        this.log("wac app init: ");
+        this.setupI18n();
+    },
+
+    setupI18n: function(){
+        // This will initialize the plugin
+        Wac.log($(window.location).attr("hostname"));
+        $.i18n.properties({
+            name:'',
+            path: BASE_URL + 'wacI18n/index/lang/',
+            mode:'both',
+            language:'zh_CN',
+            callback: function() {
+                // We specified mode: 'both' so translated values will be
+                // available as JS vars/functions and as a map
+
+                // Accessing a simple value through the map
+                $.i18n.prop('msg_hello');
+                // Accessing a value with placeholders through the map
+                $.i18n.prop('msg_complex', ['John']);
+
+                // Accessing a simple value through a JS variable
+                alert(msg_hello +' '+ msg_world);
+                // Accessing a value with placeholders through a JS function
+                alert(msg_complex('John'));
+            }
+        });
+    },
+    log: function(msg, enable){
+        enable = (enable === undefined) ? true : enable;
         if(this.debug){
             if(!$.browser.msie && window.console && window.console.log){
                 //        console.log($.browser.version);
                 if(typeof(msg)=='string') {
-                    window.console.log("debugLog: " + msg);
+                    return enable ? window.console.log("debugLog: " + msg) : null;
                 }
                 else{
-                    window.console.log(msg);
+                    return enable ? window.console.log(msg) : null;
                 }
             }
             else
             {
-                alert(msg);
+                 return enable ? alert(msg) : null;
             }
         }
+
+        return null;
 
 
     //    if($("#debugDiv").length == 0)
@@ -44,109 +76,8 @@ var Wac = {
     //        $("body").append("<div id='debugDiv' class='code'></div>");
     //    }
     //    $("#debugDiv")[0].innerHTML = msg;
-    }
-
+    }    
 }
 
-/*
- *  WacLayout class
- */
-WacLayout = function(options){
-    var settings = null;
-    
-    var _instance = null;
-    var _options = options;
-
-    return {  // declare public methods
-        init: function(){
-            // create WAC Application LAYOUT
-            $(_options.appId).show();
-            settings = (settings == null) ? this.initSettings(_options) : settings;
-            _instance = $(_options.appId).layout( settings );
-            this.decorate();
-            //        $(document).wacTool().dumpObj(settings);
-            return _instance;
-        }
-        ,
-        getUiLayout: function()
-        {
-            return _instance;
-        }
-        ,
-        decorate: function(){
-            Wac.log("layout.decorate");
-        }
-        ,
-        hide: function(){
-            $(_options.appId).hide();
-        }
-        ,
-        initSettings: function(){
-            /*
-            *#######################
-            * appSystemControllerLayoutSettings
-            *#######################
-            *
-            * This configuration illustrates how extensively the layout can be customized
-            * ALL SETTINGS ARE OPTIONAL - and there are more available than shown below
-            *
-            * These settings are set in 'sub-key format' - ALL data must be in a nested data-structures
-            * All default settings (applied to all panes) go inside the defaults:{} key
-            * Pane-specific settings go inside their keys: north:{}, south:{}, center:{}, etc
-            */
-
-            var defaults = {
-                name: _options.appId + "Layout" // NO FUNCTIONAL USE, but could be used by custom code to 'identify' a layout
-            // _options.defaults apply to ALL PANES - but overridden by pane-specific settings
-            };
-
-//            var defaults = {
-//                size:                   "auto"
-//                ,
-//                minSize:                90
-//                ,
-//                paneClass:              "pane"         // default = 'ui-layout-pane'
-//                ,
-//                resizerClass:           "resizer"    // default = 'ui-layout-resizer'
-//                ,
-//                togglerClass:           "toggler"    // default = 'ui-layout-toggler'
-//                ,
-//                buttonClass:            "button"    // default = 'ui-layout-button'
-//                ,
-//                contentSelector:        ".content"    // inner div to auto-size so only it scrolls, not the entire pane!
-//                ,
-//                contentIgnoreSelector:  "span"        // 'paneSelector' for content to 'ignore' when measuring room for content
-//                ,
-//                togglerLength_open:     35            // WIDTH of toggler on north/south edges - HEIGHT on east/west edges
-//                ,
-//                togglerLength_closed:   35            // "100%" OR -1 = full height
-//                ,
-//                hideTogglerOnSlide:     true        // hide the toggler when pane is 'slid open'
-//                ,
-//                togglerTip_open:        "Close This Pane"
-//                ,
-//                togglerTip_closed:      "Open This Pane"
-//                ,
-//                resizerTip:             "Resize This Pane"
-//                //    effect defaults - overridden on some panes
-//                ,
-//                fxName:                 "slide"        // none, slide, drop, scale
-//                ,
-//                fxSpeed_open:           750
-//                ,
-//                fxSpeed_close:          1500
-//                ,
-//                fxSettings_open:        {
-//                    easing: "easeInQuint"
-//                }
-//                ,
-//                fxSettings_close:        {
-//                    easing: "easeOutQuint"
-//                }
-//            }
-
-            return $.extend({}, defaults, _options.settings);
-
-        }
-    }
-}
+// invoke init method to initiate wac app
+Wac.init();
