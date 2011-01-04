@@ -104,7 +104,7 @@ function WacGuardGroupForm(){
 
         if($(_self.moduleId + "_sf_guard_group_permissions_list :selected").length == 0)
         {
-            $(document).wacPage().showTips("请选择至少一个权限!");
+            $(document).wacPage().showTips($.i18n.prop('please select one permission at least!'));
             validateFlag = false;
         }
 

@@ -6,16 +6,20 @@
     <body>
       <!-- Actions -->
       <trans-unit>
-        <source>msg_hello</source>
-        <target>Hello</target>
+        <source>please select one permission at least!</source>
+        <target>请选择至少一个权限!</target>
       </trans-unit>
       <trans-unit>
-        <source>msg_world</source>
-        <target>World</target>
+        <source>processing...</source>
+        <target>处理中...</target>
       </trans-unit>
       <trans-unit>
-        <source>msg_complex</source>
-        <target>Good morning {0}</target>
+        <source>data loading...</source>
+        <target>数据加载中...</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tips</source>
+        <target>信息提示</target>
       </trans-unit>
     </body>
   </file>

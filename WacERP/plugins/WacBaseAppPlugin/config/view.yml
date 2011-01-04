@@ -62,5 +62,5 @@ default:
     wac.plugin.page: /WacBaseAppPlugin/js/wac/jquery_plugins/page.js
     wac.plugin.foo: /WacBaseAppPlugin/js/wac/jquery_plugins/foo.js  #for test extension
 
-  has_layout:     true
-  layout:         layout
+#  has_layout:     true
+#  layout: layout

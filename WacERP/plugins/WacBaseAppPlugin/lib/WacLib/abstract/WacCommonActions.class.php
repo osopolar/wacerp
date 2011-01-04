@@ -43,6 +43,7 @@ abstract class WacCommonActions extends sfActions {
 
         $this->wacLogger = WacLogger::getInstance();
         sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
+//        $this->setLayout("wac_layout");
     }
 
     /*
