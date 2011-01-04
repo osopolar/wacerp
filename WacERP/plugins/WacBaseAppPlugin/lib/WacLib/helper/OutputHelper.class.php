@@ -27,15 +27,16 @@ class OutputHelper
     /*
      * return JsCommon format data structure
      * @params
-     * array $node - node info,
+     * $resultSet - mixed string/array,
      */
-    public function output(array $resultSet, sfAction $action, $params=array())
+    public function output($resultSet, sfAction $action, $params=array())
     {
         if(!$action->getRequest()->hasParameter("dataFormat")){
             throw new sfException("Wac Error: require parameter 'dataFormat'!");
         }
         else{
             $dataFormat = $action->getRequest()->getParameter("dataFormat");
+
             switch ($dataFormat) {
                 case WacDataFormatType::$json:
                     return $this->outputJsonOrTextFormat($resultSet, $action);
@@ -44,14 +45,39 @@ class OutputHelper
                     return $this->outputXmlFormat($resultSet, $action, true, false);
                     break;
                 case WacDataFormatType::$jsonFlexbox:
-                    $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($items);
+                    $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params["items"]);
                     return $this->outputXmlFormat($resultSet, $action, false);
+                    break;
+                case WacDataFormatType::$text:
+                    return $this->outputTextFormat($resultSet, $action);
                     break;
                 default:
                     return $this->outputJsonOrTextFormat($resultSet, $action);
                     break;
             }
         }        
+    }
+
+    /*
+     * return JsCommon format data structure
+     * @params
+     * array $node - node info,
+     */
+    public function outputTextFormat($output, sfAction $action)
+    {
+        if ($action->getRequest()->isXmlHttpRequest()) {
+            $this->setNoCacheHeader($action, false);
+            $action->getResponse()->setContentType('application/text; charset=utf-8');
+        }
+        else {
+            if($this->isDebug){
+                $resultSet = array();
+                $resultSet["output"] = $output;
+                $resultSet["info"]["req_params"] = $action->getRequest()->getParameterHolder()->getAll();
+            }
+            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
+        }
+        return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/blank', array('output' => $output)));
     }
 
     /*
@@ -71,7 +97,8 @@ class OutputHelper
             if($this->isDebug){
                 $resultSet["info"]["req_params"] = $action->getRequest()->getParameterHolder()->getAll();
             }
-            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/blank', array('output' => $resultSet)));
+
+            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
         }
         return $action->renderText($output);
     }
@@ -101,7 +128,7 @@ class OutputHelper
     public function debugRequest(sfAction $action)
     {
         $reqParams = $action->getRequest()->getParameterHolder()->getAll();
-        return $action->renderPartial(WacModule::getName("wacCommon").'/blank', array('output' => $reqParams));
+        return $action->renderPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $reqParams));
     }
 
     /*

@@ -63,7 +63,7 @@ $.i18n.properties = function(settings) {
 		loadAndParseFile(settings.path + settings.name + '_' + settings.language.substring(0, 5) +'.properties', settings.language, settings.mode);
 	}
 	else{
-		loadAndParseFile(settings.path + settings.language +'.properties', settings.language, settings.mode);
+		loadAndParseFile(settings.path + settings.language, settings.language, settings.mode);
 	}
 	
 //	var files = getFiles(settings.name);

@@ -31,7 +31,7 @@ var Wac = {
         Wac.log($(window.location).attr("hostname"));
         $.i18n.properties({
             name:'',
-            path: BASE_URL + 'wacI18n/index/lang/',
+            path: BASE_URL + 'wacI18n/getTransForJS/culture/',
             mode:'both',
             language:'zh_CN',
             callback: function() {
