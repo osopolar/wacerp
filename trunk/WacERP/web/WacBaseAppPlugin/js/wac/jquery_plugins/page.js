@@ -64,7 +64,7 @@
             showBlockUILoading: function(id, msg)
             {
                 if(msg === undefined){
-                    var msg = "数据加载中...";
+                    var msg = $.i18n.prop('data loading...');
                 }
 
                 if(id === undefined)
@@ -101,7 +101,7 @@
                 }
                 else
                 {
-                    $("body").append("<div id='wacTipsDialog' title='信息提示'><p>" + msg +"</p></div>");
+                    $("body").append("<div id='wacTipsDialog' title='"+ $.i18n.prop('Tips') +"'><p>" + msg +"</p></div>");
                 }
 
                 $("#wacTipsDialog").dialog({

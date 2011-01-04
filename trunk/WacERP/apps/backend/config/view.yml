@@ -42,4 +42,4 @@ default:
 ##    wac_foo:         common/wac/jquery_plugins/foo.js  //for test extension
 
   has_layout:     true
-  layout:         layout
+  layout:         wac_layout

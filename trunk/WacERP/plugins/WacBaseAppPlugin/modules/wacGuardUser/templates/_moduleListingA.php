@@ -19,7 +19,7 @@
         //<![CDATA[
         jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid({
             datatype: "json",
-            url: BASE_URL+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/getList",
+            url: WacAppConfig.baseUrl+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/getList",
             editurl: "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/doOperation",
             postData: {dataFormat: "json"},
             colNames:['id', '用户名', '用户组', '状态', '建立时间',
@@ -103,8 +103,8 @@
 
             gridComplete: function(){
                 var ids = jQuery("#<?php echo WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName']); ?>").jqGrid('getDataIDs');
-                var editUrl = BASE_URL + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/edit";
-                var delUrl = BASE_URL + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/delete";
+                var editUrl = WacAppConfig.baseUrl + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/edit";
+                var delUrl = WacAppConfig.baseUrl + "<?php echo $invokeParams['contextInfo']['moduleName']; ?>/delete";
                 for(var i=0;i < ids.length;i++){
                     var cl = ids[i];
                     <?php echo WacModuleHelper::generateListViewFormBtn($invokeParams['contextInfo']['moduleName']);?>     // bv
@@ -206,7 +206,7 @@
         {
             $result = [];
             $.getJSON(
-            BASE_URL+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/validate",
+            WacAppConfig.baseUrl+"<?php echo $invokeParams['contextInfo']['moduleName']; ?>/validate",
             postdata,
             function(jsonData){
                 wacOperationStatus.Processing = true;

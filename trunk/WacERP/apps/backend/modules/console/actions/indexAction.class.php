@@ -19,6 +19,5 @@ class indexAction extends WacCommonActions
 //        $this->getResponse()->addStylesheet("apps/backend/console/".__CLASS__.".css", 'last');
 //        //component css required, begin
 
-       $this->setLayout("layout");
     }
 }

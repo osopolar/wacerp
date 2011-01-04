@@ -22,31 +22,31 @@ var Wac = {
     debug: true,
 
     init: function(){
-        this.log("wac app init: ");
-        this.setupI18n();
+//        this.log("wac app init: ");
+        this.setupI18nData();
     },
 
-    setupI18n: function(){
+    setupI18nData: function(){
         // This will initialize the plugin
-        Wac.log($(window.location).attr("hostname"));
         $.i18n.properties({
             name:'',
-            path: BASE_URL + 'wacI18n/getTransForJS/culture/',
-            mode:'both',
-            language:'zh_CN',
+            path: WacAppConfig.baseUrl + 'wacI18n/getTransForJS/culture/',
+            mode:'map',
+            language:WacAppConfig.culture,
             callback: function() {
                 // We specified mode: 'both' so translated values will be
                 // available as JS vars/functions and as a map
 
+//           Wac.log($.i18n.prop('please select one permission at least!'));
                 // Accessing a simple value through the map
-                $.i18n.prop('msg_hello');
+//                $.i18n.prop('msg_hello');
                 // Accessing a value with placeholders through the map
-                $.i18n.prop('msg_complex', ['John']);
+//                $.i18n.prop('msg_complex', ['John']);
 
                 // Accessing a simple value through a JS variable
-                alert(msg_hello +' '+ msg_world);
-                // Accessing a value with placeholders through a JS function
-                alert(msg_complex('John'));
+//                alert(msg_hello +' '+ msg_world);
+//                // Accessing a value with placeholders through a JS function
+//                alert(msg_complex('John'));
             }
         });
     },

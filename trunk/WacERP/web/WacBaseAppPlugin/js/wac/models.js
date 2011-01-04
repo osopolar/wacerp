@@ -35,8 +35,8 @@ function WacModule(){
 function WacFormPrototype()
 {
     var _self = this;
-    var debug = true;
-//    var debug = false;
+//    var debug = true;
+    var debug = false;
 
     this.init = function(children){
         children.initDialog();
@@ -140,7 +140,7 @@ function WacFormPrototype()
         }
 
         $.ajax({
-            url: BASE_URL + children.moduleName + "/getFormData",
+            url: WacAppConfig.baseUrl + children.moduleName + "/getFormData",
             global: true,
             type: "GET",
             data: params,
@@ -200,22 +200,22 @@ function WacFormPrototype()
             return;
         }
 
-        $(document).wacPage().showBlockUILoading(children.formDialogId, "处理中...");
+        $(document).wacPage().showBlockUILoading(children.formDialogId, $.i18n.prop('processing...'));
 
         var extraParams = "dataFormat=json";
         var submitUrl;
 
         if(children.inputMode == wacFormInputMode.add){
-            submitUrl = BASE_URL + children.moduleName + "/add";
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/add";
         }
         else{
-            submitUrl = BASE_URL + children.moduleName + "/edit";
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/edit";
         }
 
 
         $.ajax({
             url: submitUrl,
-            //        url: BASE_URL + "test/ajaxTest" ,
+            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
             global: true,
             type: "GET",
             data: $(children.formId).serialize() + "&" + extraParams,

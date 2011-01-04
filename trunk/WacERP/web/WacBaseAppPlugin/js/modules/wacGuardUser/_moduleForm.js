@@ -138,7 +138,7 @@ function WacGuardUserForm(){
 
 
         $.ajax({
-            url: BASE_URL + this.moduleName + "/getFormData",
+            url: WacAppConfig.baseUrl + this.moduleName + "/getFormData",
             global: true,
             type: "GET",
             data: params,
@@ -245,16 +245,16 @@ function WacGuardUserForm(){
         var submitUrl;
 
         if(wacGuardUserInputMode == wacFormInputMode.add){
-            submitUrl = BASE_URL + this.moduleName + "/add";
+            submitUrl = WacAppConfig.baseUrl + this.moduleName + "/add";
         }
         else{
-            submitUrl = BASE_URL + this.moduleName + "/edit";
+            submitUrl = WacAppConfig.baseUrl + this.moduleName + "/edit";
         }
 
 
         $.ajax({
             url: submitUrl,
-            //        url: BASE_URL + "test/ajaxTest" ,
+            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
             global: true,
             type: "GET",
             data: $(this.formId).serialize() + "&" + extraParams,
@@ -380,7 +380,7 @@ function WacGuardUserForm(){
 //
 //
 //    $.ajax({
-//        url: BASE_URL + "wacGuardUser/getFormData",
+//        url: WacAppConfig.baseUrl + "wacGuardUser/getFormData",
 //        global: true,
 //        type: "GET",
 //        data: params,
@@ -498,16 +498,16 @@ function WacGuardUserForm(){
 //    var submitUrl;
 //
 //    if(wacGuardUserInputMode == wacFormInputMode.add){
-//        submitUrl = BASE_URL + "wacGuardUser/add";
+//        submitUrl = WacAppConfig.baseUrl + "wacGuardUser/add";
 //    }
 //    else{
-//        submitUrl = BASE_URL + "wacGuardUser/edit";
+//        submitUrl = WacAppConfig.baseUrl + "wacGuardUser/edit";
 //    }
 //
 //
 //    $.ajax({
 //        url: submitUrl,
-////        url: BASE_URL + "test/ajaxTest" ,
+////        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
 //        global: true,
 //        type: "GET",
 //        data: $("#wacGuardUserForm").serialize() + "&" + extraParams,
