@@ -12,4 +12,5 @@ class WacDataFormatType
 
     public static $json = "json";
     public static $xml = "xml";
+    public static $text = "text";
 }

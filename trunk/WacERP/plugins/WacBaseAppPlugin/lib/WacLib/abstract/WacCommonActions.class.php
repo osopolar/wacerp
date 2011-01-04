@@ -170,6 +170,7 @@ abstract class WacCommonActions extends sfActions {
    * test func
     */
     public function executeTest(sfWebRequest $request) {
+        $resultSet = array();
         $resultSet['request_params'] = $this->getRequest()->getParameterHolder()->getAll();
         $resultSet['info'] = $request->hasParameter(JqGridDataHelper::$KEY_OPER);
 

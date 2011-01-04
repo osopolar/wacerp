@@ -17,19 +17,32 @@ class wacI18nActions extends WacCommonActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-//      return OutputHelper::getInstance()->debugRequest($this);
-//      return OutputHelper::getInstance()->output(array(), $this);
+      $this->forward404();
+  }
+
+  public function executeGetTransForJS(sfWebRequest $request)
+  {
+//      $i18n = $this->getContext()->getI18N();
+//      $i18nMessageFormat = $i18n->getMessageFormat();
+
+      $wacI18nHelper = WacI18nHelper::getInstance();
+      return OutputHelper::getInstance()->output($wacI18nHelper->getJsMessages($this), $this);
+//      return $this->renderText(print_r($wacI18nHelper->getJsMessages($this),true));
+
 //      $text = <<<EOD
 //# This line is ignored by the plugin
 //msg_hello = Hello
 //msg_world = World
 //msg_complex = Good morning {0}!
 //EOD;
-      $i18n = $this->getContext()->getI18N();
-//      $text = $i18n->__("Search Number");
-      $text = $i18n->getMessageSource()->read();
-      $i18n->getMessageFormat()->getSource();
-      return $this->renderText(print_r($text,true));
+//      $text = $i18n->getCulture();
+//      $this->getUser()->setCulture("en_US");
+//      $i18n->__("");
+//      $i18n->__("", null, "messages-js");
+//      $text = $i18nMessageFormat->getSource()->read();
+//      return $this->renderText(print_r($text,true));
+//      return OutputHelper::getInstance()->output($text, $this);
+
   }
 
 }
