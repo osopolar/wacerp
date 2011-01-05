@@ -10,6 +10,7 @@ var wacFormStatus      = new WacFormStatus();
 //var wacModelObj        = new WacModel();
 //var wacOpenTabs        = new WacOpenTabs();
 
+
 /******************     wac class declaration     *******************/
 /*
  *  declare wac modules model class

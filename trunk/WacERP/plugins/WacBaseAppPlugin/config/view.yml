@@ -54,7 +54,6 @@ default:
 #    jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties-min.js  #jquery.i18n.properties
     jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties.js  #jquery.i18n.properties
 
-
     wac.main: /WacBaseAppPlugin/js/wac/main.js  # wac_main
     wac.models: /WacBaseAppPlugin/js/wac/models.js
     wac.plugin.base: /WacBaseAppPlugin/js/wac/jquery_plugins/base.js
