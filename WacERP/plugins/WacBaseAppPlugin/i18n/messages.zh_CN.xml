@@ -17,6 +17,42 @@
         <source>Search Number</source>
         <target>搜索编号</target>
       </trans-unit>
+      <trans-unit>
+        <source>Name</source>
+        <target>名称</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Coding</source>
+        <target>编码</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remark</source>
+        <target>备注</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create Time</source>
+        <target>建立时间</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Action</source>
+        <target>操作</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnEdit</source>
+        <target>编</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnSave</source>
+        <target>存</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnCancel</source>
+        <target>消</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnDel</source>
+        <target>删</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

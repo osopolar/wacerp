@@ -14,10 +14,6 @@
             echo "<button id='{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}_btnAdd'>".__("Add To")."</button>";
         }
         echo "</span>";
-
-        echo "<script type='text/javascript'>";
-        echo "$('#{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}_search_code').focus()";
-        echo "</script>";
         ?>
 
     </div>
@@ -27,21 +23,34 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#<?php echo "{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}"; ?>_btnSearch').button({
+        var prefixName = <?php echo "'{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}'" ?>;
+        var prefixId= '#' + prefixName;
+
+        $(prefixId + '_search_code').focus();
+
+        $(prefixId + '_btnSearch').button({
             text: true,
             icons: {
                 primary: "ui-icon-search"
             }
+        })
+        .click(function(){
+            $.shout(prefixId + '<?php echo sfConfig::get("app_wac_events_search_in_list"); ?>',
+              {
+                  searchField: "code",
+                  searchValue: $(prefixId + '_search_code').val()
+              }
+            );
         });
         
-        $('#<?php echo "{$invokeParams['contextInfo']['moduleName']}{$invokeParams['attachInfo']['name']}"; ?>_btnAdd').button({
+        $(prefixId + '_btnAdd').button({
             text: true,
             icons: {
                 primary: "ui-icon-document"
             }
         })
         .click(function(){
-            $.shout('<?php echo $invokeParams['contextInfo']['moduleName'].sfConfig::get("app_wac_events_show_add_form"); ?>', {});
+            $.shout(prefixId + '<?php echo sfConfig::get("app_wac_events_show_add_form"); ?>', {});
         });
         
 //        $(document).wacPage().initUIBtn();
