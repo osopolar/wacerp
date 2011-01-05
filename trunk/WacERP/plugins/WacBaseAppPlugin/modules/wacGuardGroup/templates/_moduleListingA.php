@@ -29,57 +29,17 @@
        ?>
                 '操作' ],
             colModel:[
-                {
-                    name:'id',
-                    index:'id',
-                    editable:false,
-                    width:30
-                },
-                {
-                    name:'name',
-                    index:'name',
-                    editable:true,
-                    formoptions:{elmsuffix:"(*)"},
-                    editrules:{required:true},
-                    width:100,
-                    align:"left"
-                },
-                {
-                    name:'description',
-                    index:'description',
-                    editable:false,
-                    width:200,
-                    align:"center"
-                },
-                {
-                    name:'permissions_names',
-                    index:'permissions_names',
-                    align:"center",
-                    editable:true,
-                    width:450
-                },
-                {
-                    name:'created_at',
-                    index:'created_at',
-                    sorttype:'date',
-                    datefmt:'Y-m-d',
-                    width:150,
-                    editable:false,
-                    align:"center"
-                },
+                {name:'id', index:'id', width:30},
+                {name:'name', index:'name', width:100, align:"left"},
+                {name:'description', index:'description', width:200, align:"center"},
+                {name:'permissions_names', index:'permissions_names', align:"center", sortable:false, width:450},
+                {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, align:"center"},
 
      <?php
             echo WacModuleHelper::generateJqGridHiddenFields($invokeParams['arrMainModuleTableFields'], true);
      ?>
                 
-                {
-                    name:'act',
-                    index:'act',
-                    width:100,
-                    editable:false,
-                    sortable:false,
-                    align:"center"
-                }
+                {name:'act', width:100, sortable:false, align:"center"}
             ],
             jsonReader : {
                 root:"items",

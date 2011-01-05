@@ -48,13 +48,13 @@ function WacFormPrototype()
     this.bindEvents = function(children){
         Wac.log("WacFormPrototype bindEvents", debug);
 
-        $(document).hear(children.formId, children.moduleName+"_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
+        $(document).hear(children.formId, children.moduleId + "_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
             children.openMainForm(wacFormInputMode.add);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
         });
 
-        $(document).hear(children.formId, children.moduleName+"_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
+        $(document).hear(children.formId, children.moduleId + "_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
             children.openMainForm(wacFormInputMode.edit, data.id);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);

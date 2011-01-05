@@ -13,56 +13,12 @@
         postData: {dataFormat: "json"},
         colNames:['id','名称', '编码', '备注','建立时间', '操作' ],
         colModel:[
-            {
-                name:'id',
-                index:'id',
-                editable:false,
-                width:25
-            },
-            {
-                name:'name',
-                index:'name',
-                editable:true,
-                formoptions:{elmsuffix:"(*)"},
-                editrules:{required:true},
-                //        editrules:{required:true, custom:true, custom_func:<?php echo $invokeParams['moduleName']; ?>ColValidate},
-                width:250
-            },
-            {
-                name:'code',
-                index:'code',
-                editable:true,
-                formoptions:{elmsuffix:"(*)"},
-                editrules:{required:true},
-                width:120,
-                align:"left"
-            },
-            {
-                name:'memo',
-                index:'memo',
-                editable:true,
-                width:150,
-                edittype:"textarea",
-                editoptions:{rows:"2",cols:"10"},
-                align:"center"
-            },
-            {
-                name:'created_at',
-                index:'created_at',
-                sorttype:'date',
-                datefmt:'Y-m-d',
-                width:150,
-                editable:false,
-                align:"center"
-            },
-            {
-                name:'act',
-                index:'act',
-                width:180,
-                editable:false,
-                sortable:false,
-                align:"center"
-            }
+            {name:'id', index:'id', editable:false, width:25},
+            {name:'name', index:'name', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:250},
+            {name:'code', index:'code', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:120, align:"left"},
+            {name:'memo', index:'memo', editable:true, width:150, edittype:"textarea", editoptions:{rows:"2",cols:"10"}, align:"center"},
+            {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, editable:false, align:"center"},
+            {name:'act', width:180, editable:false, sortable:false, align:"center"}
         ],
         jsonReader : {
             root:"items",

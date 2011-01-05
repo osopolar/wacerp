@@ -11,3 +11,4 @@ all:
   wac_events:
     show_add_form: _show_add_form_evt
     show_edit_form: _show_edit_form_evt
+    search_in_list: _search_in_list_evt

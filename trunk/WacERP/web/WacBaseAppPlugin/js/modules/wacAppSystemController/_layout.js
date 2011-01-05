@@ -127,7 +127,7 @@ var objAppSystemControllerLayout = new WacLayout(options);
 objAppSystemControllerLayout.decorate = function(){
     Wac.log("objAppSystemControllerLayout.decorate");
     
-    var uiLayout = this.getUiLayout();
+//    var uiLayout = this.getUiLayout();
     
 }
 /***** init section, end *****/

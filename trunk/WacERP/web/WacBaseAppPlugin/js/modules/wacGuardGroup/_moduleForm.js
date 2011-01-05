@@ -17,9 +17,10 @@ function WacGuardGroupForm(){
     var _self           = this;
     this.prototype      = new WacFormPrototype();  // extends WacFormPrototype
     this.appControllerId = "#wacAppSystemController";  // be used to listen tab-remove event of the controller
-    this.moduleName     = "wacGuardGroup";
-    this.uiPanelId      = wacModule.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
+    this.attacheName    = "";  // sometimes, there are several different lists, use this field to distinglish the corresponding forms
+    this.moduleName     = "wacGuardGroup" + this.attacheName;
     this.moduleId       = "#" + this.moduleName;
+    this.uiPanelId      = wacModule.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
 
     // layout order, div > dialog > form
     this.formName       = this.moduleName + "Form";

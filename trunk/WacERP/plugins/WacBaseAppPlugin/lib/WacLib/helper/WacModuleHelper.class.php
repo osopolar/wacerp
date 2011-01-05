@@ -140,7 +140,7 @@ class WacModuleHelper
     {
         $str =" be = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.= "$.shout('{$module}{$attachName}".sfConfig::get("app_wac_events_show_edit_form")."', {id: \" + cl +\" });";
+        $str.= "$.shout('#{$module}{$attachName}".sfConfig::get("app_wac_events_show_edit_form")."', {id: \" + cl +\" });";
         $str.="\\\" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;

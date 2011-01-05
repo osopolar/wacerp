@@ -21,8 +21,8 @@ default:
 
 #    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.6.custom/cupertino/jquery-ui-1.8.6.custom.css
     jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.6.custom/smoothness/jquery-ui-1.8.6.custom.css
-#    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.7.1/ui.jqgrid.css
-    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.1/ui.jqgrid.css
+#    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.1/ui.jqgrid.css
+    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
     validationEngine: /WacBaseAppPlugin/css/jquery/plugins/formValidator/validationEngine.jquery.css
     wac.main: /WacBaseAppPlugin/css/wac/main.css
     wac.layout: /WacBaseAppPlugin/css/wac/layout.css
@@ -41,10 +41,10 @@ default:
 
     jquery.blockUI: /WacBaseAppPlugin/js/jquery/plugins/blockUI/jquery.blockUI.js     # jquery.blockUI
 
-#    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.7.1/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
-#    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.7.1/jquery.jqGrid.min.js     # jquery.jqGrid
-    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.1/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
-    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.1/jquery.jqGrid.min.js     # jquery.jqGrid
+#    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.1/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
+#    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.1/jquery.jqGrid.min.js     # jquery.jqGrid
+    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
+    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/jquery.jqGrid.min.js     # jquery.jqGrid
 
     jquery.validationEngine: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine.js     # jquery.formValidator
     jquery.validationEngine.i18n: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh
