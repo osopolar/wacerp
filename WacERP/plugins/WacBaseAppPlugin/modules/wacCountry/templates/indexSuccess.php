@@ -5,14 +5,14 @@
   $subItemModuleName="";
   $attachInfo = array("name"=>"");
 
-  echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n\n";
+  echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n";
 
   OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleList Component Included.");
   include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
               array(
                      'mode'         => 'partial',
                      'widgetModule' => WacModule::getName("wacCommon"),
-                     'widgetName'   => WacComponentList::$baseSingleControlTableA,
+                     'widgetName'   => WacComponentList::$baseInlineTableA,
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'arrMainModuleTableFields' => $arrMainModuleTableFields,  // return sfOutputEscaperArrayDecorator
@@ -31,6 +31,6 @@
 //
 //
   
-  echo "</div>\n\n";
+  echo "</div>\n";
 ?>
 <!-- ControlComponent, end -->

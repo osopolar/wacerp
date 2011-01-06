@@ -18,8 +18,8 @@
  * Wac global system variable object, init wac app environment and provides convenient methods
  */
 var Wac = {
-    debug: false,
-//    debug: true,
+//    debug: false,
+    debug: true,
 
     init: function(){
 //        this.log("wac app init: ");
