@@ -57,6 +57,18 @@
         <source>JqGridBtnDel</source>
         <target>删</target>
       </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnDetail</source>
+        <target>详细</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnAudit</source>
+        <target>审批</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnAddSubItem</source>
+        <target>添加子项</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

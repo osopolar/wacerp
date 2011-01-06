@@ -36,7 +36,7 @@ class WacModuleHelper
      */
     public static function getComponentsId($module, $attachName="")
     {
-        return $module.$attachName."Components";
+        return $module.$attachName."Component";
     }
 
     /*
@@ -123,25 +123,12 @@ class WacModuleHelper
         return "";
     }
 
-
-    /*
-     * generateListEditFormBtn
-     */
-//    public static function generateListEditFormBtn($module, $attachName="")
-//    {
-//        $str =" be = ";
-//        $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-//        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\" + cl +\"');\\\"";
-//        $str.=" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
-//
-//        return $str;
-//    }
     public static function generateListEditFormBtn($module, $attachName="")
     {
         $str =" be = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
         $str.= "$.shout('#{$module}{$attachName}".sfConfig::get("app_wac_events_show_edit_form")."', {id: \" + cl +\" });";
-        $str.="\\\" value='编' style=\\\"height: 22px; width: 28px;\\\">\";\n";
+        $str.="\\\" value='".__("JqGridBtnEdit")."' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
     }
@@ -154,40 +141,20 @@ class WacModuleHelper
         $str =" de = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
         $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\"";
-        $str.=" value='删' style=\\\"height: 22px; width: 28px;\\\">\";\n";
+        $str.=" value='".__("JqGridBtnDel")."' style=\\\"height: 22px; width: 28px;\\\">\";\n";
 
         return $str;
     }
-
-    /*
-     * generateAddFormBtn
-     * @$invokeParams - array("contextInfo"=>array(), "attachInfo"=>array());
-     */
-//    public static function generateAddFormBtn($invokeParams)
-//    {
-//        $str = "<a id=\"".WacModuleHelper::getFormDialogId($invokeParams['contextInfo']['moduleName'], $invokeParams['attachInfo']['name'])."btnAdd\" onclick=\"javascript:";
-//        $str.= "$.shout('show-add-form', {user: {name: 'Gabriel'}});";
-//        $str.= '" ';
-//        $str.= "href=\"javascript:void(0);\" class=\"fg-button ui-state-default fg-button-icon-left ui-corner-all\">";
-//        $str.= "<span class=\"ui-icon ui-icon-circle-plus\"></span>添加</a>";
-//
-//        return $str;
-//    }    
 
     /*
      * generateListViewFormBtn
      */
     public static function generateListViewFormBtn($module, $attachName="")
     {
-//        $str =" bv = ";
-//        $str.=" \"<input {$module}_bv id=\\\"{$module}_bv\" + cl +\"\\\" class=\\\"{$module}_bv\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-//        $str.=" $(\'.{$module}_bv\').popupWindow({windowURL:\'http://code.google.com/p/swip/\',windowName:\'swip\'});\\\"";
-//        $str.=" value='详细' style=\\\"height: 22px; width: 50px;\\\">\";\n";
-
         $str =" bv = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_bv\" + cl +\"\\\" class=\\\"{$module}{$attachName}_bv\\\" type=\\\"button\\\" onclick=\\\"javascript:";
         $str.=" wacPopupWindow(\'{$module}{$attachName}PopupWin\', \'printer/Form/pModule/{$module}/pAction/print/id/\" + cl +\"\', 650, 550 );\\\"";
-        $str.=" value='详细' style=\\\"height: 22px; width: 50px;\\\">\";\n";
+        $str.=" value='".__("JqGridBtnDetail")."' style=\\\"height: 22px; width: 50px;\\\">\";\n";
 
         return $str;
     }
@@ -200,7 +167,7 @@ class WacModuleHelper
         $str =" ba = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_ba\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
         $str.=" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');\\\"";
-        $str.=" value='审批' style=\\\"height: 22px; width: 50px;\\\">\";\n";
+        $str.=" value='".__("JqGridBtnAudit")."' style=\\\"height: 22px; width: 50px;\\\">\";\n";
 
         return $str;
     }
@@ -213,7 +180,7 @@ class WacModuleHelper
         $str =" sa = ";
         $str.=" \"<input id=\\\"{$module}{$attachName}_sa\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
         $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');\\\"";
-        $str.=" value='添加子项' style=\\\"height: 22px; width: 62px;\\\">\";\n";
+        $str.=" value='".__("JqGridBtnAddSubItem")."' style=\\\"height: 22px; width: 62px;\\\">\";\n";
 
         return $str;
     }
@@ -223,7 +190,7 @@ class WacModuleHelper
      */
     public static function generateSubListEditFormBtn($module, $attachName="")
     {
-        $str = "be =  \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"编\\\" onclick=\\\"javascript: \";\n";
+        $str = "be =  \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"".__("JqGridBtnEdit")."\\\" onclick=\\\"javascript: \";\n";
         $str .="be += \"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n";
         $str .="be += \"\\\">\";\n";
 
@@ -235,7 +202,7 @@ class WacModuleHelper
      */
     public static function generateSubListDelFormBtn($module, $attachName="")
     {
-        $str ="de = \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"删\\\" onclick=\\\"javascript: \";\n";
+        $str ="de = \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"".__("JqGridBtnDel")."\\\" onclick=\\\"javascript: \";\n";
         $str.="de += \"jQuery('#\" + subgrid_table_id + \"').jqGrid('delGridRow', '\"+cl+\"', {url:'\"+delUrl+\"'});\";\n";
         $str.="de += \"\\\">\"\n";
 
