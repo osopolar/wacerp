@@ -1,35 +1,9 @@
 /*
- *  declare global wac object varibles
+ *  declare global Wac Prototypes
  */
-
-var wacModule          = new WacModule();
-var wacOperationStatus = new WacOperationStatus();
-var wacAjaxData        = new WacAjaxData();
-var wacFormInputMode   = new WacFormInputMode();
-var wacFormStatus      = new WacFormStatus();
-//var wacModelObj        = new WacModel();
-//var wacOpenTabs        = new WacOpenTabs();
 
 
 /******************     wac class declaration     *******************/
-/*
- *  declare wac modules model class
- */
-function WacModule(){
-    var _self = this;
-    var _tag = "t";
-    this._list = {
-        wacGuardUser : {uiPanelId: _tag+"23002", moduleName:"wacGuardUser"},
-        wacGuardGroup : {uiPanelId: _tag+"23003", moduleName:"wacGuardGroup"},
-        wacGuardPermission : {uiPanelId: _tag+"23004", moduleName:"wacGuardPermission"}
-    }
-
-    this.getUiPanelId = function(name){
-        return _self._list[name].uiPanelId;
-    }
-}
-
-
 /*
  *  declare a form-prototype model class
  */
@@ -49,13 +23,13 @@ function WacFormPrototype()
         Wac.log("WacFormPrototype bindEvents", debug);
 
         $(document).hear(children.formId, children.moduleId + "_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
-            children.openMainForm(wacFormInputMode.add);
+            children.openMainForm(WacEntity.formInputMode.add);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
         });
 
         $(document).hear(children.formId, children.moduleId + "_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
-            children.openMainForm(wacFormInputMode.edit, data.id);
+            children.openMainForm(WacEntity.formInputMode.edit, data.id);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
         });
@@ -135,7 +109,7 @@ function WacFormPrototype()
         $(document).wacPage().showBlockUILoading(children.formDialogId);
 
         var params ={dataFormat :'json'};
-        if(children.inputMode == wacFormInputMode.edit)   // use default values
+        if(children.inputMode == WacEntity.formInputMode.edit)   // use default values
         {
             params.id = children.modelEntity.id;
         }
@@ -206,7 +180,7 @@ function WacFormPrototype()
         var extraParams = "dataFormat=json";
         var submitUrl;
 
-        if(children.inputMode == wacFormInputMode.add){
+        if(children.inputMode == WacEntity.formInputMode.add){
             submitUrl = WacAppConfig.baseUrl + children.moduleName + "/add";
         }
         else{
@@ -233,7 +207,7 @@ function WacFormPrototype()
     this.submitMainFormCallBack = function(children, jsonData){
         Wac.log("WacFormPrototype submitMainFormCallBack", debug);
 
-        if(jsonData.info.status == wacOperationStatus.Error)
+        if(jsonData.info.status == WacEntity.operationStatus.Error)
         {
             $(document).wacPage().showTips(jsonData.info.message);
         }
@@ -349,56 +323,4 @@ WacLayout = function(options){
 
         }
     }
-}
-
-
-/*
- *  declare wac ajax action implemention status
- */
-function WacOperationStatus()
-{
-    this.Succss = "0000";
-    this.Error  = "0001";
-    this.Processing  = false;
-}
-
-/*
- *  declare wac ajax action implemention status
- */
-function WacFormStatus()
-{
-    this.notsave     = "0";
-    this.init        = "1";
-    this.Processing  = "2";
-    this.audited     = "3";
-    this.finish      = "100";
-}
-
-/*
- *  temporary store ajax data
- */
-function WacAjaxData()
-{
-    this.response = {};
-}
-
-/*
- * declare open tabs related objs
- */
-function WacOpenTabs()
-{
-    this.appStorehouseTabs = [];
-    this.appSysTabs = [];
-}
-
-/*
- *  form input mode
- */
-function WacFormInputMode()
-{
-    this.add   = 'c';
-    this.read  = 'r';
-    this.edit  = 'u';
-    this.del   = 'd';
-    this.audit = 'a';
 }

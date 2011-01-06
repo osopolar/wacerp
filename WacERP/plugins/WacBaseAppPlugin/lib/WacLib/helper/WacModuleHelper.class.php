@@ -107,14 +107,14 @@ class WacModuleHelper
             $i=0;
             if(!$isDetailDeclare) {
                 foreach($arrMainModuleTableFields as $v) {
-                    $tmpArr[] = "'hidden{$i}'";
+                    $tmpArr[] = "'hd{$i}'";
                     $i++;
                 }
             }
             else
             {
                 foreach($arrMainModuleTableFields as $v) {
-                    $tmpArr[] = "{name:'".$v."', editable:false, hidden:true}";
+                    $tmpArr[] = "{name:'".$v."', hidden:true}";
                     $i++;
                 }
             }
