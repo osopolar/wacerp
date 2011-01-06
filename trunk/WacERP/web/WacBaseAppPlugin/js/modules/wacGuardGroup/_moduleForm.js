@@ -20,7 +20,7 @@ function WacGuardGroupForm(){
     this.attacheName    = "";  // sometimes, there are several different lists, use this field to distinglish the corresponding forms
     this.moduleName     = "wacGuardGroup" + this.attacheName;
     this.moduleId       = "#" + this.moduleName;
-    this.uiPanelId      = wacModule.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
+    this.uiPanelId      = WacEntity.module.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
 
     // layout order, div > dialog > form
     this.formName       = this.moduleName + "Form";
@@ -28,8 +28,8 @@ function WacGuardGroupForm(){
     this.formDialogName = this.formName + "Dialog";
     this.formDialogId   = this.formId + "Dialog";
     this.listId         = this.moduleId + "List";
-    this.modelEntity    = {};
-    this.inputMode      = wacFormInputMode.add;
+    this.modelEntity    = {};  // map to current data model entity
+    this.inputMode      = WacEntity.formInputMode.add;
 
     this.init = function(){
         _self.prototype.init(_self);
@@ -52,7 +52,7 @@ function WacGuardGroupForm(){
     };
 
     this.initFormDataCallBack = function(jsonData){
-        if(jsonData.info.status == wacOperationStatus.Error)
+        if(jsonData.info.status == WacEntity.operationStatus.Error)
         {
             Wac.log(jsonData.info.message);
         }
@@ -77,7 +77,7 @@ function WacGuardGroupForm(){
     };
 
     this.setupDefaults = function(defaultValueObj){
-        if(_self.inputMode == wacFormInputMode.add)   // use default values
+        if(_self.inputMode == WacEntity.formInputMode.add)   // use default values
         {
             $(_self.moduleId + "_id").attr("value", 0);
         }

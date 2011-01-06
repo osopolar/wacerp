@@ -18,6 +18,10 @@
         <target>搜索编号</target>
       </trans-unit>
       <trans-unit>
+        <source>List</source>
+        <target>列表</target>
+      </trans-unit>
+      <trans-unit>
         <source>Name</source>
         <target>名称</target>
       </trans-unit>
