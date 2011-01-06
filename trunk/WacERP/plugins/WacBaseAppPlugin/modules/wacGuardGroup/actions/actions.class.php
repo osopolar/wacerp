@@ -21,7 +21,7 @@ class wacGuardGroupActions extends WacCommonActions
           foreach($listObjs as $listObj)
           {
               $tmpArr = $listObj->toArray();
-              $tmpArr['permissions_names'] = $listObj->getPermissionsNames();        
+              $tmpArr['permissions_names'] = $listObj->getPermissionsNames();
 
               $filterArr[] = $tmpArr;
           }
