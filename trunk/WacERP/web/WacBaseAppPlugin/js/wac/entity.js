@@ -7,7 +7,9 @@ var WacEntity = {
     operationStatus: new WacOperationStatus(),
     ajaxData: new WacAjaxData(),
     formInputMode: new WacFormInputMode(),
-    formStatus: new WacFormStatus()
+    formStatus: new WacFormStatus(),
+    jsonReader: new WacJsonReader()
+
 //  modelObj        = new WacModel();
 //  openTabs        = new WacOpenTabs();
 }
@@ -87,4 +89,18 @@ function WacFormInputMode()
     this.edit  = 'u';
     this.del   = 'd';
     this.audit = 'a';
+}
+
+/*
+ *  jsonReader for jqGrid
+ */
+function WacJsonReader()
+{
+    this.root  = "items";
+    this.page  = "currentPage";
+    this.total = "totalPages";
+    this.records  = "totalRecords";
+    this.userdata = "userdata";
+    this.id    = "id";
+    this.repeatitems = false;
 }

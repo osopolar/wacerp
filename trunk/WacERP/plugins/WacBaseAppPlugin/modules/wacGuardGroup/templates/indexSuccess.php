@@ -1,4 +1,4 @@
-<!-- ControlComponents, begin -->
+<!-- ControlComponent, begin -->
 <?php
   $arrMainModuleTableFields = WacModuleHelper::getModuleTableFields($contextInfo["moduleName"]);
   $subItemModuleName="";
@@ -54,4 +54,4 @@
 
   echo "</div>\n\n";
 ?>
-<!-- ControlComponents, end -->
+<!-- ControlComponent, end -->

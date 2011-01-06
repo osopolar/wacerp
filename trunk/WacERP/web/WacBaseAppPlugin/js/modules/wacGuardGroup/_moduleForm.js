@@ -13,9 +13,11 @@ $(document).ready(
     }
     );
 
+
 function WacGuardGroupForm(){
     var _self           = this;
     this.prototype      = new WacFormPrototype();  // extends WacFormPrototype
+
     this.appControllerId = "#wacAppSystemController";  // be used to listen tab-remove event of the controller
     this.attacheName    = "";  // sometimes, there are several different lists, use this field to distinglish the corresponding forms
     this.moduleName     = "wacGuardGroup" + this.attacheName;
@@ -123,6 +125,7 @@ function WacGuardGroupForm(){
 
     
     this.init();  // init method
+//    this.init(_self);  // init method
 
 }
    

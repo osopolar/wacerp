@@ -16,6 +16,8 @@ $moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachNam
 $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
 
 ?>
+
+
 <div id="<?php echo $moduleListingTableId; ?>">
     <table id="<?php echo $moduleListId; ?>"></table>
     <div id="<?php echo $moduleListPagerId; ?>" ></div>
@@ -41,7 +43,8 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 url: WacAppConfig.baseUrl+"<?php echo $moduleName; ?>/getList",
                 editurl: "<?php echo $moduleName; ?>/doOperation",
                 postData: {dataFormat: "json"},
-                colNames:['id',
+                colNames:[
+                    'id',
                     '<?php echo __("Coding");?>',
                     '<?php echo __("Name");?>',
                     '<?php echo __("Remark");?>',
@@ -62,15 +65,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                         ?>
                      {name:'act', width:100, sortable:false, align:"center"}
                  ],
-                 jsonReader : {
-                     root:"items",
-                     page: "currentPage",
-                     total: "totalPages",
-                     records: "totalRecords",
-                     userdata: "userdata",
-                     id: "id",
-                     repeatitems: false
-                 },
+                 jsonReader : WacEntity.jsonReader,
                  rowNum:10,
                  rowList:[10,20,30,40,50],
                  sortname: 'id',
@@ -84,8 +79,8 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
 
                  gridComplete: function(){
                      var ids = $(moduleListId).jqGrid('getDataIDs');
-                     var editUrl = WacAppConfig.baseUrl + "<?php echo $moduleName, $moduleAttachName; ?>/edit";
-                     var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName, $moduleAttachName; ?>/delete";
+                     var editUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/edit";
+                     var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                      for(var i=0;i < ids.length;i++){
                          var cl = ids[i];
                         <?php echo WacModuleHelper::generateListViewFormBtn($moduleName, $moduleAttachName); ?>     // bv
