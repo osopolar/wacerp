@@ -19,6 +19,9 @@ class WacComponentList
     //// handle name/code/memo simple table
     public static $baseSingleControlTableA    = "baseSingleControlTableA";
 
+    //// handle name/code/memo base inline "crud" table
+    public static $baseInlineTableA           = "baseInlineTableA";
+
     //// module listing
     public static $moduleListingA             = "moduleListingA";
 
