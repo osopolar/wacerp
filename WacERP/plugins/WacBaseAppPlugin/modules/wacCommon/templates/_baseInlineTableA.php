@@ -69,7 +69,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       for(var i=0;i < ids.length;i++){
                           var cl = ids[i];
                           be = "<input style='height:22px;width:28px;' type='button' value='编' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('editRow','"+cl+"', true, null, <?php echo $modulePrefixName; ?>Callback.save, '" + editUrl + "', WacEntity.extraParam);\" />";
-                          se = "<input style='height:22px;width:28px;' type='button' value='存' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('saveRow', '"+cl+"', <?php echo $modulePrefixName; ?>CallbackSave.save, '" + editUrl + "', WacEntity.extraParam, null);\" />";
+                          se = "<input style='height:22px;width:28px;' type='button' value='存' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('saveRow', '"+cl+"', <?php echo $modulePrefixName; ?>Callback.save, '" + editUrl + "', WacEntity.extraParam, null);\" />";
                           ce = "<input style='height:22px;width:28px;' type='button' value='消' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('restoreRow', '"+cl+"');\" />";
                           de = "<input style='height:22px;width:28px;' type='button' value='删' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('delGridRow', '"+cl+"', {url:'" + delUrl + "', top: 200, left:500});\" />";
                           $(moduleListId).jqGrid('setRowData',ids[i],{
@@ -93,114 +93,18 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             
             $(moduleListId).jqGrid('navGrid',moduleListPagerId,
             {edit:true, add:true, del:true, search:true, refresh:true, view:true, position:"left"},
-            {afterSubmit: <?php echo $modulePrefixName; ?>CallbackValidate, afterComplete: <?php echo $modulePrefixName; ?>CallbackEdit},
-            {afterSubmit: <?php echo $modulePrefixName; ?>CallbackValidate, afterComplete: <?php echo $modulePrefixName; ?>CallbackAdd},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackDel},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackSearch},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackView}
+            {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.edit},
+            {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.add},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.del},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.view}
         );
 
-            function <?php echo $modulePrefixName; ?>CallbackValidate(response, postdata)
-            {
-                //    Wac.log("callbackEdit");
-
-                WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
-                //    Wac.log($.dump(WacEntity.ajaxData.response));
-                //    Wac.log($.dump(postdata));
-
-                if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
-                {
-                    return [true, "", ""];
-                }
-                else
-                {
-                    return [false, WacEntity.ajaxData.response.userdata.error_info];
-                }
-            }
-
-//            function <?php echo $modulePrefixName; ?>CallbackSave(response)
-//            {
-//                    Wac.log("callbackSave");
-//                //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
-//                //    Wac.log(response.responseText);
-////                WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
-////                if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
-////                {
-////                    return true;
-////                }
-////                else
-////                {
-////                    $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
-////                    return [false, WacEntity.ajaxData.response.userdata.error_info];
-////                }
-//            }
-
-            function <?php echo $modulePrefixName; ?>CallbackEdit()
-            {
-                //    alert("callbackEdit");
-                //    Wac.log("callbackEdit");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackAdd()
-            {
-                //    alert("callbackAdd");
-                //    Wac.log("callbackAdd");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackDel()
-            {
-                //    alert("callbackDel");
-                //    Wac.log("callbackDel");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackSearch()
-            {
-                //    alert("callbackSearch");
-                //    Wac.log("callbackSearch");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackView()
-            {
-                //    alert("callbackView");
-                //    Wac.log("callbackView");
-            }
-
-            function <?php echo $modulePrefixName; ?>FormValidate(postdata, formid)
-            {
-                $result = [];
-                $.getJSON(
-                    WacAppConfig.baseUrl+"<?php echo $modulePrefixName; ?>/validate",
-                    postdata,
-                    function(jsonData){
-                        WacEntity.operationStatus.Processing = true;
-                        <?php echo $modulePrefixName; ?>FormValidateCallBack(jsonData);
-                    }
-                );
-
-                $(".loading").css("display", "block");
-
-                if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
-                {
-                    return [true];
-                }
-                else
-                {
-                    return [false, WacEntity.ajaxData.response.userdata.error_info];
-                }
-
-            }
-
-        function <?php echo $modulePrefixName; ?>FormValidateCallBack(jsonData)
-        {
-            WacEntity.ajaxData.response = jsonData;
-            WacEntity.operationStatus.Processing = false;
-            $(".loading").css("display", "none");
-            //    Wac.log($.dump(jsonData));
-        }
+            
       });
 
       <?php echo $modulePrefixName; ?>Callback = {
-          save : function(response){
+          save: function(response){
               Wac.log("callbackSave");
         //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
         //    Wac.log(response.responseText);
@@ -214,8 +118,55 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                 $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
                 return [false, WacEntity.ajaxData.response.userdata.error_info];
             }
+          },
+         
+         validate: function(response, postdata){
+             //    Wac.log("callbackEdit");
 
+              WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
+              //    Wac.log($.dump(WacEntity.ajaxData.response));
+              //    Wac.log($.dump(postdata));
+
+              if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
+              {
+                  return [true, "", ""];
+              }
+              else
+              {
+                  return [false, WacEntity.ajaxData.response.userdata.error_info];
+              }
+         },
+
+          view: function()
+          {
+              //    alert("viewCallback");
+              //    Wac.log("viewCallback");
+          },
+
+          edit: function()
+          {
+              //    alert("editCallback");
+              //    Wac.log("editCallback");
+          },
+
+          add: function()
+          {
+              //    alert("addCallback");
+              //    Wac.log("addCallback");
+          },
+
+          del: function()
+          {
+              //    alert("delCallback");
+              //    Wac.log("delCallback");
+          },
+
+          search: function()
+          {
+              //    alert("searchCallback");
+              //    Wac.log("searchCallback");
           }
+
       }
 
     </script>
