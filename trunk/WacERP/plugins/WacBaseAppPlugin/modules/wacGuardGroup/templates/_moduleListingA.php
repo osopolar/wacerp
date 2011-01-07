@@ -73,7 +73,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                  multiselect: false,
                  viewrecords: true,
                  pager: moduleListPagerId,
-                 caption:"<?php echo WacModule::getCaption($invokeParams["contextInfo"]["moduleName"]).__("List"); ?>",
+                 caption:"<?php echo WacModule::getCaption($moduleName).__("List"); ?>",
                  height: '100%',
                  width: '100%',
 

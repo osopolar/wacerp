@@ -30,66 +30,67 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
 
             $(moduleListId).jqGrid({
-                datatype: "json",
-                url: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/getList",
-                editurl: "<?php echo $moduleName; ?>/doOperation",
-                postData: {dataFormat: "json"},
-                colNames:[
-                        'id',
-                        '<?php echo __("Coding");?>',
-                        '<?php echo __("Name");?>',
-                        '<?php echo __("Remark");?>',
-                        '<?php echo __("Create Time");?>',
-                        '<?php echo __("Action");?>'
-                    ],
-                colModel:[
-                    {name:'id', index:'id', editable:false, width:25},
-                    {name:'name', index:'name', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:250},
-                    {name:'code', index:'code', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:120, align:"left"},
-                    {name:'memo', index:'memo', editable:true, width:150, edittype:"textarea", editoptions:{rows:"2",cols:"10"}, align:"center"},
-                    {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, editable:false, align:"center"},
-                    {name:'act', width:180, sortable:false, align:"center"}
-                ],
-                jsonReader : WacEntity.jsonReader,
-                rowNum:10,
-                rowList:[10,20,30,40,50],
-                sortname: 'id',
-                sortorder: "desc",
-                multiselect: true,
-                viewrecords: true,
-                pager: moduleListPagerId,
-                caption:"<?php echo WacModule::getCaption($invokeParams["contextInfo"]["moduleName"]).__("List"); ?>",
-                height: '100%',
-                width: '100%',
+                  datatype: "json",
+                  url: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/getList",
+                  editurl: "<?php echo $moduleName; ?>/doOperation",
+                  postData: {dataFormat: "json"},
+                  colNames:[
+                      'id',
+                      '<?php echo __("Coding"); ?>',
+                      '<?php echo __("Name"); ?>',
+                      '<?php echo __("Remark"); ?>',
+                      '<?php echo __("Create Time"); ?>',
+                      '<?php echo __("Action"); ?>'
+                  ],
+                  colModel:[
+                      {name:'id', index:'id', editable:false, width:25},
+                      {name:'name', index:'name', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:250},
+                      {name:'code', index:'code', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:120, align:"left"},
+                      {name:'memo', index:'memo', editable:true, width:150, edittype:"textarea", editoptions:{rows:"2",cols:"10"}, align:"center"},
+                      {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, editable:false, align:"center"},
+                      {name:'act', width:180, sortable:false, align:"center"}
+                  ],
+                  jsonReader : WacEntity.jsonReader,
+                  rowNum:10,
+                  rowList:[10,20,30,40,50],
+                  sortname: 'id',
+                  sortorder: "desc",
+                  multiselect: true,
+                  viewrecords: true,
+                  pager: moduleListPagerId,
+                  caption:"<?php echo WacModule::getCaption($moduleName) . __("List"); ?>",
+                  height: '100%',
+                  width: '100%',
 
-                gridComplete: function(){
-                    var ids = $(moduleListId).jqGrid('getDataIDs');
-                    var editUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/edit";
-                    var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
-                    for(var i=0;i < ids.length;i++){
-                        var cl = ids[i];
-                        be = "<input style='height:22px;width:28px;' type='button' value='编' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('editRow','"+cl+"', true, null, <?php echo $modulePrefixName; ?>CallbackSave, '" + editUrl + "');\" />";
-                        se = "<input style='height:22px;width:28px;' type='button' value='存' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('saveRow', '"+cl+"', <?php echo $modulePrefixName; ?>CallbackSave, '" + editUrl + "', {}, null);\" />";
-                        ce = "<input style='height:22px;width:28px;' type='button' value='消' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('restoreRow', '"+cl+"');\" />";
-                        de = "<input style='height:22px;width:28px;' type='button' value='删' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('delGridRow', '"+cl+"', {url:'" + delUrl + "', top: 200, left:500});\" />";
-                        $(moduleListId).jqGrid('setRowData',ids[i],{
-                            act:be+se+ce+de
-                        });
-                    }
-                },
+                  gridComplete: function(){
+                      var ids = $(moduleListId).jqGrid('getDataIDs');
+                      var editUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/edit";
+                      var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
+                      for(var i=0;i < ids.length;i++){
+                          var cl = ids[i];
+                          be = "<input style='height:22px;width:28px;' type='button' value='编' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('editRow','"+cl+"', true, null, <?php echo $modulePrefixName; ?>Callback.save, '" + editUrl + "', WacEntity.extraParam);\" />";
+                          se = "<input style='height:22px;width:28px;' type='button' value='存' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('saveRow', '"+cl+"', <?php echo $modulePrefixName; ?>CallbackSave.save, '" + editUrl + "', WacEntity.extraParam, null);\" />";
+                          ce = "<input style='height:22px;width:28px;' type='button' value='消' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('restoreRow', '"+cl+"');\" />";
+                          de = "<input style='height:22px;width:28px;' type='button' value='删' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('delGridRow', '"+cl+"', {url:'" + delUrl + "', top: 200, left:500});\" />";
+                          $(moduleListId).jqGrid('setRowData',ids[i],{
+                              act:be+se+ce+de
+                          });
+                      }
+                  },
 
-                loadError : function(xhr,st,err){
-                    alert("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
-                },
+                  loadError : function(xhr,st,err){
+                      alert("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
+                  },
 
-                loadComplete: function()
-                {
-                    //        Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
-                    //        Wac.log("loadComplete");
-                    $(this).trigger("tabsload");   // inform tabs event listener
-                }
+                  loadComplete: function()
+                  {
+                      //        Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
+                      //        Wac.log("loadComplete");
+                      $(this).trigger("tabsload");   // inform tabs event listener
+                  }
 
             });
+            
             $(moduleListId).jqGrid('navGrid',moduleListPagerId,
             {edit:true, add:true, del:true, search:true, refresh:true, view:true, position:"left"},
             {afterSubmit: <?php echo $modulePrefixName; ?>CallbackValidate, afterComplete: <?php echo $modulePrefixName; ?>CallbackEdit},
@@ -117,22 +118,22 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                 }
             }
 
-            function <?php echo $modulePrefixName; ?>CallbackSave(response)
-            {
-                    Wac.log("callbackSave");
-                //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
-                //    Wac.log(response.responseText);
-//                WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
-//                if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
-//                {
-//                    return true;
-//                }
-//                else
-//                {
-//                    $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
-//                    return [false, WacEntity.ajaxData.response.userdata.error_info];
-//                }
-            }
+//            function <?php echo $modulePrefixName; ?>CallbackSave(response)
+//            {
+//                    Wac.log("callbackSave");
+//                //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
+//                //    Wac.log(response.responseText);
+////                WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
+////                if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
+////                {
+////                    return true;
+////                }
+////                else
+////                {
+////                    $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
+////                    return [false, WacEntity.ajaxData.response.userdata.error_info];
+////                }
+//            }
 
             function <?php echo $modulePrefixName; ?>CallbackEdit()
             {
@@ -197,6 +198,25 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             //    Wac.log($.dump(jsonData));
         }
       });
+
+      <?php echo $modulePrefixName; ?>Callback = {
+          save : function(response){
+              Wac.log("callbackSave");
+        //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
+        //    Wac.log(response.responseText);
+            WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
+            if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
+            {
+                return true;
+            }
+            else
+            {
+                $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
+                return [false, WacEntity.ajaxData.response.userdata.error_info];
+            }
+
+          }
+      }
 
     </script>
 </div>

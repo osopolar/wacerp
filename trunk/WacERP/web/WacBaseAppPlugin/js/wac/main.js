@@ -24,6 +24,13 @@ var Wac = {
     init: function(){
 //        this.log("wac app init: ");
         this.setupI18nData();
+//        this.showBrowserInfo();
+    },
+
+    showBrowserInfo: function(){
+        $.each($.browser, function(i, val) {
+            console.log(i + ":" + val);
+        });
     },
 
     setupI18nData: function(){
@@ -54,7 +61,6 @@ var Wac = {
         enable = (enable === undefined) ? true : enable;
         if(this.debug){
             if(!$.browser.msie && window.console && window.console.log){
-                //        console.log($.browser.version);
                 if(typeof(msg)=='string') {
                     return enable ? window.console.log("debugLog: " + msg) : null;
                 }
@@ -67,9 +73,10 @@ var Wac = {
                  return enable ? alert(msg) : null;
             }
         }
-
+//                console.log($.browser.version);
+//                window.console.log(enable);
+//                window.console.log(msg);
         return null;
-
 
     //    if($("#debugDiv").length == 0)
     //    {

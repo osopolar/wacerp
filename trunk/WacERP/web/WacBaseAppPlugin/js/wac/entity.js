@@ -8,7 +8,8 @@ var WacEntity = {
     ajaxData: new WacAjaxData(),
     formInputMode: new WacFormInputMode(),
     formStatus: new WacFormStatus(),
-    jsonReader: new WacJsonReader()
+    jsonReader: new WacJsonReader(),
+    extraParam: new WacExtraParams()
 
 //  modelObj        = new WacModel();
 //  openTabs        = new WacOpenTabs();
@@ -103,4 +104,12 @@ function WacJsonReader()
     this.userdata = "userdata";
     this.id    = "id";
     this.repeatitems = false;
+}
+
+/*
+ *  extraParams for jqGrid
+ */
+function WacExtraParams()
+{
+    this.dataFormat = "json";
 }
