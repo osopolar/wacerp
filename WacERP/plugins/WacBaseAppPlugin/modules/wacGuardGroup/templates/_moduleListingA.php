@@ -31,7 +31,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
             
             $(document).hear(moduleListId, modulePrefixId + '<?php echo sfConfig::get("app_wac_events_search_in_list"); ?>', function ($self, data) {  // listenerid, event name, callback
-                var params = $.extend({dataFormat :"json"}, data);
+                var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
                 params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
                 $(moduleListId).jqGrid('setGridParam',{postData:params});
                 $(moduleListId).trigger("reloadGrid");
@@ -39,10 +39,10 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             });
             
             $(moduleListId).jqGrid({
-                datatype: "json",
+                datatype: WacEntity.extraParam.dataFormat,
                 url: WacAppConfig.baseUrl+"<?php echo $moduleName; ?>/getList",
-                editurl: "<?php echo $moduleName; ?>/doOperation",
-                postData: {dataFormat: "json"},
+                editurl: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/doOperation",
+                postData: {dataFormat: WacEntity.extraParam.dataFormat},
                 colNames:[
                     'id',
                     '<?php echo __("Coding");?>',
@@ -94,7 +94,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 },
 
                 loadError : function(xhr,st,err){
-                    alert("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
+                    Wac.log("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
                 },
 
                 loadComplete: function()
@@ -106,57 +106,16 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
 
             }); // grid end
 
+//          define a callback object to handle the callback, optional for this table
+            <?php echo $modulePrefixName; ?>Callback = new WacJqGridCallback("<?php echo $modulePrefixName; ?>");
+
             $(moduleListId).jqGrid('navGrid',moduleListPagerId,
             {edit:false, add:false, del:false, search:true, refresh:true, view:false, position:"left"},
-            {afterSubmit: <?php echo $modulePrefixName; ?>CallbackValidate, afterComplete: <?php echo $modulePrefixName; ?>CallbackEdit},
-            {afterSubmit: <?php echo $modulePrefixName; ?>CallbackValidate, afterComplete: <?php echo $modulePrefixName; ?>CallbackAdd},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackDel},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackSearch},
-            {afterComplete: <?php echo $modulePrefixName; ?>CallbackView});
-
-            function <?php echo $modulePrefixName; ?>CallbackValidate(response, postdata){
-            //    Wac.log("CallbackValidate");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackSave(response){
-            //    Wac.log("callbackSave");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackEdit()
-            {
-            //    Wac.log("callbackEdit");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackAdd()
-            {
-            //    Wac.log("callbackAdd");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackDel()
-            {
-            //    Wac.log("callbackDel");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackSearch()
-            {
-            //    Wac.log("callbackSearch");
-            }
-
-            function <?php echo $modulePrefixName; ?>CallbackView()
-            {
-            //    Wac.log("callbackView");
-            }
-
-            function <?php echo $modulePrefixName; ?>FormValidate(postdata, formid)
-            {
-                //    Wac.log("FormValidate");
-            }
-
-            function <?php echo $modulePrefixName; ?>FormValidateCallBack(jsonData)
-            {
-                //    Wac.log("FormValidateCallBack");
-            }
-
+            {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.edit},
+            {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.add},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.del},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
+            {afterComplete: <?php echo $modulePrefixName; ?>Callback.view});
          })
 
      //]]>
