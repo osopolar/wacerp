@@ -324,3 +324,67 @@ WacLayout = function(options){
         }
     }
 }
+
+
+// callback prototype for jqgird
+WacJqGridCallback = function(modulePrefixName)
+{
+    this.save = function(response){
+        Wac.log( modulePrefixName + "saveCallback");
+        //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
+        //    Wac.log(response.responseText);
+        WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
+        if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
+        {
+            return true;
+        }
+        else
+        {
+            $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
+            return [false, WacEntity.ajaxData.response.userdata.error_info];
+        }
+    };
+
+    this.validate = function(response, postdata){
+        Wac.log( modulePrefixName + "editCallback");
+
+        WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
+        //    Wac.log($.dump(WacEntity.ajaxData.response));
+        //    Wac.log($.dump(postdata));
+
+        if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
+        {
+            return [true, "", ""];
+        }
+        else
+        {
+            return [false, WacEntity.ajaxData.response.userdata.error_info];
+        }
+    };
+
+    this.view = function()
+    {
+        Wac.log( modulePrefixName + "ViewCallback");
+    };
+
+    this.edit = function()
+    {
+        Wac.log( modulePrefixName + "EditCallback");
+    };
+
+    this.add = function()
+    {
+        Wac.log( modulePrefixName + "AddCallback");
+    };
+
+    this.del = function()
+    {
+        Wac.log( modulePrefixName + "DelCallback");
+    };
+
+    this.search = function()
+    {
+        Wac.log( modulePrefixName + "SearchCallback");
+    };
+
+}
