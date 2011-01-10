@@ -34,7 +34,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                   datatype: WacEntity.extraParam.dataFormat,
                   url: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/getList",
                   editurl: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/doOperation/dataFormat/"+WacEntity.extraParam.dataFormat,
-                  postData: {dataFormat: WacEntity.extraParam.dataFormat},
+                  postData: WacEntity.extraParam,
                   colNames:[
                       'id',
                       '<?php echo __("Name"); ?>',
@@ -85,8 +85,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
 
                   loadComplete: function()
                   {
-                      //        Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
-//                           Wac.log("loadComplete");
+//                    Wac.log(modulePrefixName + "loadComplete");
                       $(this).trigger("tabsload");   // inform tabs event listener
                   }
 
