@@ -42,7 +42,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 datatype: WacEntity.extraParam.dataFormat,
                 url: WacAppConfig.baseUrl+"<?php echo $moduleName; ?>/getList",
                 editurl: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/doOperation",
-                postData: {dataFormat: WacEntity.extraParam.dataFormat},
+                postData: WacEntity.extraParam,
                 colNames:[
                     'id',
                     '<?php echo __("Coding");?>',
