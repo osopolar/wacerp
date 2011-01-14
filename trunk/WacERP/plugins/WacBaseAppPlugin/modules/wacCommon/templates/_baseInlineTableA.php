@@ -80,7 +80,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                   },
 
                   loadError : function(xhr,st,err){
-                      alert("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
+                      Wac.log("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
                   },
 
                   loadComplete: function()

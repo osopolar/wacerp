@@ -330,7 +330,7 @@ WacLayout = function(options){
 WacJqGridCallback = function(modulePrefixName)
 {
     this.save = function(response){
-        Wac.log( modulePrefixName + "saveCallback");
+        Wac.log( modulePrefixName + "SaveCallback");
         //    Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
         //    Wac.log(response.responseText);
         WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
@@ -340,17 +340,17 @@ WacJqGridCallback = function(modulePrefixName)
         }
         else
         {
-            $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.error_info);
-            return [false, WacEntity.ajaxData.response.userdata.error_info];
+            $(document).wacPage().showTips(WacEntity.ajaxData.response.userdata.message);
+            return [false, WacEntity.ajaxData.response.userdata.message];
         }
     };
 
     this.validate = function(response, postdata){
-        Wac.log( modulePrefixName + "editCallback");
+        Wac.log( modulePrefixName + "ValidateCallback");
 
         WacEntity.ajaxData.response = eval('(' + response.responseText + ')');
-        //    Wac.log($.dump(WacEntity.ajaxData.response));
-        //    Wac.log($.dump(postdata));
+//         Wac.log(WacEntity.ajaxData.response);
+//         Wac.log(postdata);
 
         if(WacEntity.ajaxData.response.userdata.status == WacEntity.operationStatus.succss)
         {
@@ -358,7 +358,7 @@ WacJqGridCallback = function(modulePrefixName)
         }
         else
         {
-            return [false, WacEntity.ajaxData.response.userdata.error_info];
+            return [false, WacEntity.ajaxData.response.userdata.message];
         }
     };
 
