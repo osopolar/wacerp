@@ -1,32 +1,31 @@
 <?php
-$modulePrefixName = $invokeParams['contextInfo']['moduleName'].$invokeParams['attachInfo']['name'];
+$modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
 $moduleName = $invokeParams['contextInfo']['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
 
+
+echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
+
+echo "  <span><input name='code' id='{$modulePrefixName}_search_code' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
+
+echo "  <span id='{$modulePrefixName}_g1'>\n";
+echo "	  <button id='{$modulePrefixName}_btnSearch' class=\"{button:{icons:{primary:'ui-icon-folder-open'},text:true}}\">" . __("Search") . "</button>\n";
+if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
+  echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
+}
+echo "</span>\n";
+
+echo "  <span id=\"{$modulePrefixName}_exportFormatBtns\">\n";
+echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt1\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt1\">Choice 1</label>\n";
+echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt2\" name=\"exportFormat\" checked=\"checked\" /><label for=\"{$modulePrefixName}_btnExportFmt2\">Choice 2</label>\n";
+echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt3\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt3\">Choice 3</label>\n";
+echo "  </span>\n";
+echo "	<button id='{$modulePrefixName}_btnExportSel'>" . __("Export Select") . "</button>\n";
+echo "</span>\n";
 ?>
 
-<div class="wacFormRow">
-    <div class="wacFormItemLeft" style="width:80%">
-        <?php
-        echo "<span id='toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>";
+<div class="wacFormClear"></div>
 
-        $inputStr = "";
-        $inputStr.="<input name='code' id='{$modulePrefixName}_search_code' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='".__("Search Code")."' ";
-        $inputStr.="/>\n";
-//        $inputStr.="onkeydown='javascript: if(this.value==\"".__("Search Number")."\"){this.value=\"\";} else{wacTriggerSearch(event, \"" . WacModuleHelper::getListId($invokeParams['contextInfo']['moduleName'], $invokeParams['attachInfo']['name']) . "\", \"code\");}'/>\n";
-        echo $inputStr;
-
-        echo "	<button id='{$modulePrefixName}_btnSearch'>".__("Search")."</button>";
-
-        if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
-            echo "<button id='{$modulePrefixName}_btnAdd'>".__("Add To")."</button>";
-        }
-        echo "</span>";
-        ?>
-
-    </div>
-    <div class="wacFormClear"></div>
-</div>
 <hr class="wacFormRuler" style="width:98%;"/>
 
 <script type="text/javascript">
@@ -34,38 +33,38 @@ $moduleAttachName = $invokeParams['attachInfo']['name'];
         var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
         var modulePrefixId= '#' + modulePrefixName;
         var searchFieldId = modulePrefixId + '_search_code';
+        var toolbarId = '#' + modulePrefixName + "_toolbar";
 
-        $(searchFieldId).focus();
-
-        $(searchFieldId).bind("keydown", function(e){
-            if($(searchFieldId).val() == $.i18n.prop("Search Code")){
-                $(searchFieldId).attr("value", "");
-            }
-        });
-
-        $(searchFieldId).bind("keyup", function(e){
-            triggerSearch();
-        });
-
-        $(modulePrefixId + '_btnSearch').button({
-            text: true,
-            icons: {
-                primary: "ui-icon-search"
-            }
-        })
-        .click(function(){
-            triggerSearch();
-        });
+        init();
+        bindEvents();
         
-        $(modulePrefixId + '_btnAdd').button({
-            text: true,
-            icons: {
-                primary: "ui-icon-document"
-            }
-        })
-        .click(function(){
-            $.shout(modulePrefixId + '<?php echo sfConfig::get("app_wac_events_show_add_form"); ?>', {});
-        });
+        function init(){
+            $(searchFieldId).focus();
+
+            $(modulePrefixId + '_btnSearch').button({text: true,icons: {primary: "ui-icon-search"}});
+            $(modulePrefixId + '_btnAdd').button({text: true,icons: {primary: "ui-icon-document"}});
+
+            $(modulePrefixId+'_g1').buttonset();
+            $(modulePrefixId+'_exportFormatBtns').buttonset();
+        };
+
+        function bindEvents(){
+            $(searchFieldId).bind("keydown", function(e){
+                if($(searchFieldId).val() == $.i18n.prop("Search Code")){
+                    $(searchFieldId).attr("value", "");
+                }
+            });
+
+            $(searchFieldId).bind("keyup", function(e){
+                triggerSearch();
+            });
+
+
+            $(modulePrefixId + '_btnSearch').bind("click", function(){
+               triggerSearch();
+            })
+        };
+        
 
         function triggerSearch(){            
 //            Wac.log($(searchFieldId).val());
@@ -76,6 +75,6 @@ $moduleAttachName = $invokeParams['attachInfo']['name'];
                   searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
               }
             );
-        }
+        };
     });
 </script>

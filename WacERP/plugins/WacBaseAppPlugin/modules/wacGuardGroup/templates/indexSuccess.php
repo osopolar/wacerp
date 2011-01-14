@@ -1,6 +1,6 @@
 <!-- ControlComponent, begin -->
 <?php
-  $arrMainModuleTableFields = WacModuleHelper::getModuleTableFields($contextInfo["moduleName"]);
+  $arrMainModuleTableFields = WacModuleHelper::getModuleTableFields($contextInfo["moduleName"]);  // got all fields from module table, they will be set as hidden fields in the table list
   $subItemModuleName="";
   $attachInfo = array("name"=>"");
 
@@ -43,7 +43,7 @@
 //                  ));
 
   
-  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} Moduleform Component Included.");
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleForm Component Included.");
   include_component($contextInfo["moduleName"], WacComponentList::$moduleForm,
               array(
                      'invokeParams' => array(
