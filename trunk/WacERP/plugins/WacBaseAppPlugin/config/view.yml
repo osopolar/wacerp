@@ -1,6 +1,10 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/13-View
 
+all:
+  components:      # Component Slots, for the widgets of public usage purpose
+    dataExportWidget: [wacCommon, dataExportWidget]
+
 default:
   http_metas:
     content-type: text/html
@@ -15,7 +19,6 @@ default:
   stylesheets:
 #    main:            main.css
 
-#    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.6.custom/smoothness/jquery-ui-1.8.6.custom.css
 #    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.7.custom/smoothness/jquery-ui-1.8.7.custom.css
     jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.8.custom/smoothness/jquery-ui-1.8.8.custom.css
 
@@ -32,8 +35,6 @@ default:
     jquery: /WacBaseAppPlugin/js/jquery/jquery-1.4.4/jquery-1.4.4.min.js     # jquery
 
 
-#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.6.custom/jquery-ui-1.8.6.custom.min.js     # jquery-ui
-#    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.6.custom/jquery-ui-i18n.js     # jquery-ui-i18n
 #    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.7.custom/jquery-ui-1.8.7.custom.min.js     # jquery-ui
 #    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.7.custom/jquery-ui-i18n.js     # jquery-ui-i18n
     jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-1.8.8.custom.min.js     # jquery-ui

@@ -31,6 +31,8 @@ all:
       - sfGuardUser
       - sfGuardPermission
 
+      - wacConfiguration
+      - wacCommon
       - wacI18n
       - wacAppController
       - wacAppSystemController
@@ -38,7 +40,6 @@ all:
       - wacGuardUser
       - wacGuardGroup
       - wacGuardPermission
-      - wacCommon
       - wacCountry
     
     # Form security secret (CSRF protection)

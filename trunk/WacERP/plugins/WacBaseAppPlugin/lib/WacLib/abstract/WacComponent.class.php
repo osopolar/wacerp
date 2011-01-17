@@ -51,6 +51,12 @@ abstract class WacComponent extends sfComponent {
         '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$specName;
     }
 
+    public function addWacComponentJs() {
+//        component js required, begin
+        $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');
+//        component js required, begin
+    }
+
     /*
    *  return internal path of the request
     */

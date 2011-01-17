@@ -12,11 +12,18 @@
             culture: '<?php echo $sf_user->getCulture(); ?>'
         }
     </script>
+    <?php 
+//    echo "<script type=\"text/javascript\" src=\"".$sf_request->getUriPrefix().url_for('@homepage')."\"></script>\n";
+    ?>
 
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
   <body id="wacAppController">
     <?php echo $sf_content ?>
+
+    <!-- ToolkitWidgets, begin -->
+    <?php include_component_slot('dataExportWidget') ?>
+    <!-- ToolkitWidgets, end -->
   </body>
 </html>

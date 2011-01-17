@@ -13,14 +13,18 @@ echo "	  <button id='{$modulePrefixName}_btnSearch' class=\"{button:{icons:{prim
 if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
   echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
 }
-echo "</span>\n";
-
-echo "  <span id=\"{$modulePrefixName}_exportFormatBtns\">\n";
-echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt1\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt1\">Choice 1</label>\n";
-echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt2\" name=\"exportFormat\" checked=\"checked\" /><label for=\"{$modulePrefixName}_btnExportFmt2\">Choice 2</label>\n";
-echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt3\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt3\">Choice 3</label>\n";
 echo "  </span>\n";
-echo "	<button id='{$modulePrefixName}_btnExportSel'>" . __("Export Select") . "</button>\n";
+
+//echo "  <span id=\"{$modulePrefixName}_exportFormatBtns\">\n";
+//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt1\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt1\">Choice 1</label>\n";
+//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt2\" name=\"exportFormat\" checked=\"checked\" /><label for=\"{$modulePrefixName}_btnExportFmt2\">Choice 2</label>\n";
+//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt3\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt3\">Choice 3</label>\n";
+//echo "  </span>\n";
+echo "  <span id='{$modulePrefixName}_g2'>\n";
+echo "	  <button id='{$modulePrefixName}_btnExportSel'>" . __("Export Select") . "</button>\n";
+echo "	  <button id='{$modulePrefixName}_btnPrint'>" . __("Print") . "</button>\n";
+echo "  </span>\n";
+
 echo "</span>\n";
 ?>
 
@@ -41,11 +45,17 @@ echo "</span>\n";
         function init(){
             $(searchFieldId).focus();
 
+            // g1
             $(modulePrefixId + '_btnSearch').button({text: true,icons: {primary: "ui-icon-search"}});
             $(modulePrefixId + '_btnAdd').button({text: true,icons: {primary: "ui-icon-document"}});
-
             $(modulePrefixId+'_g1').buttonset();
-            $(modulePrefixId+'_exportFormatBtns').buttonset();
+
+            $(modulePrefixId + '_btnExportSel').button({text: false,icons: {primary: "ui-icon-disk"}});
+            $(modulePrefixId + '_btnPrint').button({text: false,icons: {primary: "ui-icon-print"}});
+            $(modulePrefixId+'_g2').buttonset();
+
+//            $(modulePrefixId+'_exportFormatBtns').buttonset();
+
         };
 
         function bindEvents(){
@@ -62,6 +72,16 @@ echo "</span>\n";
 
             $(modulePrefixId + '_btnSearch').bind("click", function(){
                triggerSearch();
+            })
+
+            $(modulePrefixId + '_btnExportSel').bind("click", function(){
+                $.shout('<?php echo sfConfig::get("app_wac_events_show_data_export_form"); ?>',
+                    {
+                        searchField: "code",
+                        searchString: $(searchFieldId).val(),
+                        searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
+                    }
+                );
             })
         };
         

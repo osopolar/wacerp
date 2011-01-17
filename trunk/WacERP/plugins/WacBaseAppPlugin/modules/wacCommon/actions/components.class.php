@@ -21,4 +21,10 @@ class wacCommonComponents extends WacComponent
          parent::execute($request);
     }
 
+    public function executeDataExportWidget($request)
+    {
+         parent::execute($request);
+//         $this->addWacComponentJs();
+    }
+
 }
