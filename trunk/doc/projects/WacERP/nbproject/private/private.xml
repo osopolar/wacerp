@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/layout.js</url>
-            <line>81</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appTestController/layout.js</url>
-            <line>87</line>
-            <line>133</line>
-        </file>
-        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/css/common/wac/layout.css</url>
             <line>9</line>
             <line>64</line>
@@ -32,6 +23,36 @@
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/css/common/jquery/plugins/jquery.layout-1.3.0/layout1.css</url>
             <line>130</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/layout.js</url>
+            <line>81</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appTestController/layout.js</url>
+            <line>87</line>
+            <line>133</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/main.js</url>
+            <line>27</line>
+            <line>65</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/models.js</url>
+            <line>232</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/modules/wacGuardGroup/_moduleForm.js</url>
+            <line>11</line>
+            <line>48</line>
+            <line>95</line>
+            <line>126</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/modules/wacCommon/templates/_baseInlineTableA.php</url>
+            <line>30</line>
+            <line>71</line>
         </file>
     </editor-bookmarks>
 </project-private>
