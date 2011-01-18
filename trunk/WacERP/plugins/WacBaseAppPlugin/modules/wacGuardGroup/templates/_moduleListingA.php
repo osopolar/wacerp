@@ -30,7 +30,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
             
-            $(document).hear(moduleListId, modulePrefixId + '<?php echo sfConfig::get("app_wac_events_search_in_list"); ?>', function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
                 var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
                 params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
                 $(moduleListId).jqGrid('setGridParam',{postData:params});
