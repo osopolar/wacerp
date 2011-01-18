@@ -5,15 +5,9 @@
     <?php include_metas() ?>
     <title><?php echo __('Title', array(), 'messages') ?></title>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript">
-        // define a global app environment object, connected with server side config
-        var WacAppConfig = {
-            baseUrl: '<?php echo $sf_request->getUriPrefix().url_for('@homepage'); ?>',
-            culture: '<?php echo $sf_user->getCulture(); ?>'
-        }
-    </script>
+    
     <?php 
-//    echo "<script type=\"text/javascript\" src=\"".$sf_request->getUriPrefix().url_for('@homepage')."\"></script>\n";
+    echo "<script type=\"text/javascript\" src=\"".$sf_request->getUriPrefix().url_for('@homepage')."wacConfiguration/getFrontendEnvSetting/dataFormat/pureText\"></script>\n";
     ?>
 
     <?php include_stylesheets() ?>

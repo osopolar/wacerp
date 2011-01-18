@@ -51,11 +51,26 @@ class OutputHelper
                 case WacDataFormatType::$text:
                     return $this->outputTextFormat($resultSet, $action);
                     break;
+                case WacDataFormatType::$pureText:
+                    return $this->outputPureTextFormat($resultSet, $action);
+                    break;
                 default:
                     return $this->outputJsonOrTextFormat($resultSet, $action);
                     break;
             }
         }        
+    }
+
+    /*
+     * return pure text
+     * @params
+     * array $node - node info,
+     */
+    public function outputPureTextFormat($output, sfAction $action)
+    {
+        $this->setNoCacheHeader($action, false);
+        $action->getResponse()->setContentType('application/text; charset=utf-8');
+        return $action->renderText($output);
     }
 
     /*

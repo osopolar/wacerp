@@ -24,10 +24,11 @@ class wacConfigurationActions extends WacCommonActions
   {
       $str = "";
       $frontendConfigs = array();
-      $requiredKeys = array("wac_setting", "wac_events");
-      $frontendConfigs = $this->getRequireVars($requiredKeys);
+      $frontendConfigs["wac_setting"] = $this->getRequireVars(array("wac_setting"));
+      $frontendConfigs["wac_events"] = $this->getRequireVars(array("wac_events"));
+
 //      $str = print_r($frontendConfigs, true);
-      $str = $this->getPartial("jsVars", array("frontendConfigs"=>$frontendConfigs));
+      $str = $this->getPartial("jsFrontendEnvSetting", array("frontendConfigs"=>$frontendConfigs));
 
       return OutputHelper::getInstance()->output($str, $this);
   }
