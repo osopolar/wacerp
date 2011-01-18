@@ -9,7 +9,7 @@ echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-a
 echo "  <span><input name='code' id='{$modulePrefixName}_search_code' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
 
 echo "  <span id='{$modulePrefixName}_g1'>\n";
-echo "	  <button id='{$modulePrefixName}_btnSearch' class=\"{button:{icons:{primary:'ui-icon-folder-open'},text:true}}\">" . __("Search") . "</button>\n";
+echo "	  <button id='{$modulePrefixName}_btnSearch'>" . __("Search") . "</button>\n";
 if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
   echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
 }

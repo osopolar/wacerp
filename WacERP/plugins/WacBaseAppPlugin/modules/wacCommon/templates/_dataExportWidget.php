@@ -1,7 +1,14 @@
-<div id="wacDataExportForm" style="display: none;">
-    <ul>
-        <li>sth</li>
-    </ul>
+<div id="wacDataExportWidget" style="display: none;">
+    <form name="wacDataExportForm" id="wacDataExportForm" method="post" class="wacFormA">
+    <table>
+        <?php echo $form ?>
+        <tr>
+            <td>
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+    </form>
 </div>
 <?php
 //print_r($contextInfo);

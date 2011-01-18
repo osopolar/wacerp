@@ -24,7 +24,10 @@ class wacCommonComponents extends WacComponent
     public function executeDataExportWidget($request)
     {
          parent::execute($request);
-//         $this->addWacComponentJs();
+         $this->form = new DataExportForm(
+                array("format"=>0),   // default
+                array("ds" => sfConfig::get("app_wac_setting_data_export_format"))  // data source
+                );
     }
 
 }

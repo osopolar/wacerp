@@ -7,9 +7,14 @@
 all:
   wac_setting:
     legal_website: http://WWW.WebAppClub.COM
+    data_export_format:
+      - xml
+      - json
+      - cvs
     
   wac_events:
     show_add_form: _show_add_form_evt
     show_edit_form: _show_edit_form_evt
     search_in_list: _search_in_list_evt
     show_data_export_form: _show_data_export_form
+

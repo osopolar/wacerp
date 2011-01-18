@@ -39,23 +39,24 @@ class OutputHelper
 
             switch ($dataFormat) {
                 case WacDataFormatType::$json:
-                    return $this->outputJsonOrTextFormat($resultSet, $action);
+                    return $this->outputJsonOrTextFormat($resultSet, $action, $params);
                     break;
                 case WacDataFormatType::$xml:
-                    return $this->outputXmlFormat($resultSet, $action, true, false);
+                    return $this->outputXmlFormat($resultSet, $action, true, false, $params);
                     break;
                 case WacDataFormatType::$jsonFlexbox:
                     $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params["items"]);
-                    return $this->outputXmlFormat($resultSet, $action, false);
+                    return $this->outputXmlFormat($resultSet, $action, false, false, $params);
                     break;
                 case WacDataFormatType::$text:
-                    return $this->outputTextFormat($resultSet, $action);
+                    return $this->outputTextFormat($resultSet, $action, $params);
                     break;
                 case WacDataFormatType::$pureText:
-                    return $this->outputPureTextFormat($resultSet, $action);
+                case WacDataFormatType::$pureTextJs:
+                    return $this->outputPureTextFormat($resultSet, $action, $params);
                     break;
                 default:
-                    return $this->outputJsonOrTextFormat($resultSet, $action);
+                    return $this->outputJsonOrTextFormat($resultSet, $action, $params);
                     break;
             }
         }        
@@ -66,9 +67,16 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputPureTextFormat($output, sfAction $action)
+    public function outputPureTextFormat($output, sfAction $action, $params=array())
     {
-        $this->setNoCacheHeader($action, false);
+        if(isset($params["isCache"]) && $params["isCache"]){
+            $this->setCacheHeader($action, false);
+        }
+        else{
+           $this->setNoCacheHeader($action, false);
+        }
+//        $this->setCacheHeader($action, false);
+
         $action->getResponse()->setContentType('application/text; charset=utf-8');
         return $action->renderText($output);
     }
@@ -78,7 +86,7 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputTextFormat($output, sfAction $action)
+    public function outputTextFormat($output, sfAction $action, $params=array())
     {
         if ($action->getRequest()->isXmlHttpRequest()) {
             $this->setNoCacheHeader($action, false);
@@ -100,7 +108,7 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputJsonOrTextFormat(array $resultSet, sfAction $action)
+    public function outputJsonOrTextFormat(array $resultSet, sfAction $action, $params=array())
     {
         $output = '';
         if ($action->getRequest()->isXmlHttpRequest()) {
@@ -123,7 +131,7 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputXmlFormat($resultSet, sfAction $action, $isConvertToXML=false, $formatOutput=false)
+    public function outputXmlFormat($resultSet, sfAction $action, $isConvertToXML=false, $formatOutput=false, $params=array())
     {
         $this->setNoCacheHeader($action, false);
         $action->getResponse()->setContentType('application/xml; encoding=utf-8');
@@ -180,7 +188,17 @@ class OutputHelper
         sfConfig::set('sf_web_debug', $isSfDebug);
         $action->getResponse()->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
         $action->getResponse()->setHttpHeader("Pragma", "no-cache");
-        $action->getResponse()->setHttpHeader("Expires", 0);        
+        $action->getResponse()->setHttpHeader("Expires", 0);
+        return true;
+    }
+
+    public function setCacheHeader($action, $isSfDebug=false)
+    {
+        sfConfig::set('sf_web_debug', $isSfDebug);
+        sfConfig::set('sf_cache', true);
+        $action->getResponse()->addCacheControlHttpHeader('max_age=180');
+        $action->getResponse()->setHttpHeader('Expires', $action->getResponse()->getDate(time() + 3600));
+        return true;
     }
 
     public function writeNote($v, $isReturnStr=false, $params=array())

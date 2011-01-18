@@ -28,13 +28,10 @@ class wacTestActions extends WacCommonActions {
     }
 
     public function executeTestForm(sfWebRequest $request) {
-        $this->form = new sfForm();
-        $this->form->setWidgets(array(
-            'name' => new sfWidgetFormInputText(),
-            'email' => new sfWidgetFormInputText(array('default' => 'me@example.com')),
-            'subject' => new sfWidgetFormChoice(array('choices' => array('Subject A', 'Subject B', 'Subject C'))),
-            'message' => new sfWidgetFormTextarea(),
-        ));
+        $this->form = new DataExportForm( 
+                array("dataExportFormat" => 0),   // default
+                array("ds" => sfConfig::get("app_wac_setting_data_export_format"))  // data source
+                );
 
 //        $this->setLayout("layout");
     }

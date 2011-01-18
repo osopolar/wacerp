@@ -6,11 +6,6 @@
     <title><?php echo __('Title', array(), 'messages') ?></title>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
     
-    <?php
-    // Load WAC Ria frontend environment vars
-    echo "<script type=\"text/javascript\" src=\"".$sf_request->getUriPrefix().url_for('@homepage')."wacConfiguration/getFrontendEnvSetting/dataFormat/pureText\"></script>\n";
-    ?>
-
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>

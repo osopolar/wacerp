@@ -85,6 +85,10 @@
         <source>Close</source>
         <target>关闭</target>
       </trans-unit>
+      <trans-unit>
+        <source>DataExportFormat</source>
+        <target>数据输出格式</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
