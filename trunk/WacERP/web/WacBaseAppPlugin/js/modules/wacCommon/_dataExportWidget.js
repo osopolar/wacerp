@@ -11,7 +11,16 @@ $(document).ready(
         bindEvents();
 
         function init(){
-            Wac.log("dataExportWidget");
+//            Wac.log("dataExportWidget init");
+            $("#wacDataExportWidget").dialog({
+                bgiframe: true,
+                modal: true,
+                width: 480,
+                height: 420,
+                autoOpen: false,
+                buttons: {},
+                zIndex: 100
+            });
         }
 
         function bindEvents(){
@@ -21,6 +30,7 @@ $(document).ready(
 //                $(moduleListId).jqGrid('setGridParam',{postData:params});
 //                $(moduleListId).trigger("reloadGrid");
                 Wac.log(data);
+                $("#wacDataExportWidget").dialog('open');
             });
 
 

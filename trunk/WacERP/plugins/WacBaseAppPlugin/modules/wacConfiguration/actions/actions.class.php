@@ -30,7 +30,7 @@ class wacConfigurationActions extends WacCommonActions
 //      $str = print_r($frontendConfigs, true);
       $str = $this->getPartial("jsFrontendEnvSetting", array("frontendConfigs"=>$frontendConfigs));
 
-      return OutputHelper::getInstance()->output($str, $this);
+      return OutputHelper::getInstance()->output($str, $this, array("isCache"=>true));
   }
 
   private function getRequireVars($requiredKeys){

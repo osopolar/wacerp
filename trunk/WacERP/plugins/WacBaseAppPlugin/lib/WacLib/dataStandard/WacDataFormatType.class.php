@@ -14,4 +14,5 @@ class WacDataFormatType
     public static $xml = "xml";
     public static $text = "text";
     public static $pureText = "pureText";
+    public static $pureTextJs = "pureText.js";
 }
