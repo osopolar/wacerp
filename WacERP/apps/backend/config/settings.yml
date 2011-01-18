@@ -33,6 +33,7 @@ all:
 
       - wacConfiguration
       - wacCommon
+      - wacTest
       - wacI18n
       - wacAppController
       - wacAppSystemController

@@ -9,11 +9,7 @@
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
 abstract class WacCommonActions extends sfActions {
-    protected $innerContextInfo = array(
-        "moduleName" => "",
-        "actionPath" => "",
-    );
-
+    protected $innerContextInfo = array();
     
     public $mainModuleTable = null;
     public $wacLogger = null;
@@ -24,23 +20,20 @@ abstract class WacCommonActions extends sfActions {
      * notes: contextInfo - it will assign to tpl automaticlly
      */
     public function preExecute() {
-        $this->innerContextInfo["moduleName"] = $this->getModuleName();
-        $this->innerContextInfo["actionPath"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/'.$this->getActionName().'/';
-        $this->innerContextInfo["actionJs"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/'.$this->getActionName().'.js';
-
-        $this->contextInfo = array();
-        $this->contextInfo["actionName"]   = $this->getActionName();
-        $this->contextInfo["actionPath"]   = $this->innerContextInfo["actionPath"];
-        $this->contextInfo["actionJs"]     = $this->innerContextInfo["actionJs"];
-        $this->contextInfo["modulePath"]   = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/';
-        $this->contextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
-        $this->contextInfo["moduleName"]   = $this->innerContextInfo["moduleName"];
+        $this->innerContextInfo["moduleName"]   = $this->getModuleName();
+        $this->innerContextInfo["actionName"]   = $this->getActionName();
+        $this->innerContextInfo["modulePath"]   = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/';
+        $this->innerContextInfo["actionPath"]   = $this->innerContextInfo["modulePath"].$this->innerContextInfo["actionName"].'/';
+        $this->innerContextInfo["actionJs"]     = $this->innerContextInfo["modulePath"].$this->innerContextInfo["actionName"].'.js';
+        $this->innerContextInfo["wacActionJs"]  ='/WacBaseAppPlugin/js/modules/'.$this->innerContextInfo["moduleName"].'/'.$this->innerContextInfo["actionName"].'.js';
+        $this->innerContextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
 
         $moduleName = $this->innerContextInfo["moduleName"];
         if(isset(WacTable::$$moduleName)) {
             $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
         }
 
+        $this->contextInfo = $this->innerContextInfo;  //assign to tpl
         $this->wacLogger = WacLogger::getInstance();
 //        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
     }
@@ -49,7 +42,7 @@ abstract class WacCommonActions extends sfActions {
      *  return internal path of the request
     */
     public function getInternalPath() {
-        return $this->getContext()->getConfiguration()->getApplication()."/".$this->getModuleName()."/".$this->getActionName();
+        return $this->innerContextInfo["modulePath"].$this->getActionName();
     }
 
     public function getActionJs($specName="") {
@@ -57,11 +50,23 @@ abstract class WacCommonActions extends sfActions {
                 ($specName=="") ?
                 $this->innerContextInfo["actionJs"]
                 :
-                'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
+                $this->innerContextInfo["modulePath"].$specName;
     }
 
     public function addActionJs($specName="") {
         $this->getResponse()->addJavaScript($this->getActionJs(), "last");
+    }
+
+    public function getWacActionJs($specName="") {
+        return
+                ($specName=="") ?
+                $this->innerContextInfo["wacActionJs"]
+                :
+                $this->innerContextInfo["modulePath"].$specName;
+    }
+
+    public function addWacActionJs($specName="") {
+        $this->getResponse()->addJavaScript($this->getWacActionJs(), "last");
     }
 
     /*
@@ -385,10 +390,6 @@ abstract class WacCommonActions extends sfActions {
    *  return id=>name hash as select html format
     */
     public function executeGetIdNameHashHTML(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $resultSet = $this->getHashList("id", "name", 1, sfConfig::get("maxHashItems"));
         if($this->getRequest()->hasParameter("withNullItem")) {
             $params['withNullItem'] = true;
@@ -403,10 +404,6 @@ abstract class WacCommonActions extends sfActions {
    *  return code=>name hash as select html format
     */
     public function executeGetCodeNameHashHTML(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $resultSet = $this->getHashList("code", "name", 1, sfConfig::get("maxHashItems"));
         return OutputHelper::getInstance()->outputHtmlSelectElements($resultSet, $this);
     }
@@ -415,10 +412,6 @@ abstract class WacCommonActions extends sfActions {
    *  return id=>code hash as select html format
     */
     public function executeGetIdCodeHashHTML(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
         $resultSet = $this->getHashList("id", "code", 1, sfConfig::get("maxHashItems"));
         return OutputHelper::getInstance()->outputHtmlSelectElements($resultSet, $this);
     }
