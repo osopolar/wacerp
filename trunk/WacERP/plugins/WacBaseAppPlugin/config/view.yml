@@ -2,7 +2,7 @@
 # http://www.symfony-project.org/reference/1_4/en/13-View
 
 all:
-  components:      # Component Slots, for the widgets of public usage purpose
+  components:      # Component Slots(included in layout) , for the widgets of public usage purpose
     dataExportWidget: [wacCommon, dataExportWidget]
 
 default:
