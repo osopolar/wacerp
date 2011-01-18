@@ -34,6 +34,7 @@ echo "</span>\n";
 
 <script type="text/javascript">
     $(function(){
+        var moduleName = <?php echo "'{$moduleName}'" ?>;
         var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
         var modulePrefixId= '#' + modulePrefixName;
         var searchFieldId = modulePrefixId + '_search_code';
@@ -81,9 +82,8 @@ echo "</span>\n";
             $(modulePrefixId + '_btnExportSel').bind("click", function(){
                 $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,
                     {
-                        searchField: "code",
-                        searchString: $(searchFieldId).val(),
-                        searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
+                        moduleName: moduleName,
+                        modulePrefixName: modulePrefixName
                     }
                 );
             })

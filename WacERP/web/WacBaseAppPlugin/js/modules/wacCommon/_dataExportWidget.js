@@ -4,29 +4,9 @@
  *  
  */
 
-
-
-/***** variables declartion section, begin *****/
-
-/***** variables declartion section, end *****/
-
 /***** init section, begin *****/
 $(document).ready(
     function(){
-//        var wacGuardUserForm = new WacGuardUserForm();
-//
-//        wacGuardUserForm.initDialog();
-//        wacGuardUserForm.initForm();
-//        wacGuardUserForm.bindEvents();
-//
-////        Wac.log($(document).hear("wacGuardUserForm", "show-add-form", function ($self, data) {}));
-//
-//        $(document).hear("wacGuardUserForm", "show-add-form", function ($self, data) {  // listenerid, event name, callback
-//            Wac.log("wacGuardUserForm:" + data);
-////            Wac.log(jQuery._jq_shout.registry);
-//        });
-
-        
         init();
         bindEvents();
 
@@ -35,10 +15,15 @@ $(document).ready(
         }
 
         function bindEvents(){
-            $(document).hear("#wacAppController", "show-add-form", function ($self, data) {  // listenerid, event name, callback
-            Wac.log(data);
-//            Wac.log(jQuery._jq_shout.registry);
-        });
+            $(document).hear("#wacAppController", WacAppConfig.event.app_wac_events_show_data_export_form, function ($self, data) {  // listenerid, event name, callback
+//                var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
+//                params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
+//                $(moduleListId).jqGrid('setGridParam',{postData:params});
+//                $(moduleListId).trigger("reloadGrid");
+                Wac.log(data);
+            });
+
+
         }
     }
 );

@@ -9,41 +9,40 @@
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
 abstract class WacCommonActions extends sfActions {
-    public $actionPath = "";
-    public $moduleName = "";
+    protected $innerContextInfo = array(
+        "moduleName" => "",
+        "actionPath" => "",
+    );
+
+    
     public $mainModuleTable = null;
     public $wacLogger = null;
 
     /**
      * Executes an application defined process prior to execution of this sfAction object.
      *
-     * By default, this method is empty.
+     * notes: contextInfo - it will assign to tpl automaticlly
      */
-//  public function preExecute() {
-//      $this->wacLogger = WacLogger::getInstance();
-//      sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
-//  }
-
     public function preExecute() {
-        $this->moduleName = $this->getModuleName();
-        $this->actionPath = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/'.$this->getActionName().'/';
+        $this->innerContextInfo["moduleName"] = $this->getModuleName();
+        $this->innerContextInfo["actionPath"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/'.$this->getActionName().'/';
+        $this->innerContextInfo["actionJs"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/'.$this->getActionName().'.js';
 
         $this->contextInfo = array();
-        $this->contextInfo["actionName"] = $this->getActionName();
-        $this->contextInfo["actionPath"] = $this->actionPath;
-        $this->contextInfo["modulePath"] = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->moduleName.'/';
+        $this->contextInfo["actionName"]   = $this->getActionName();
+        $this->contextInfo["actionPath"]   = $this->innerContextInfo["actionPath"];
+        $this->contextInfo["actionJs"]     = $this->innerContextInfo["actionJs"];
+        $this->contextInfo["modulePath"]   = 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->innerContextInfo["moduleName"].'/';
         $this->contextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
-//        $this->contextInfo["wacJsModulePath"] = "/js/".$this->contextInfo["modulePath"];
-        $this->contextInfo["moduleName"] = $this->moduleName;
+        $this->contextInfo["moduleName"]   = $this->innerContextInfo["moduleName"];
 
-        $moduleName = $this->moduleName;
+        $moduleName = $this->innerContextInfo["moduleName"];
         if(isset(WacTable::$$moduleName)) {
             $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
         }
 
         $this->wacLogger = WacLogger::getInstance();
-        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
-//        $this->setLayout("wac_layout");
+//        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
     }
 
     /*
@@ -56,9 +55,13 @@ abstract class WacCommonActions extends sfActions {
     public function getActionJs($specName="") {
         return
                 ($specName=="") ?
-                $this->actionPath
+                $this->innerContextInfo["actionJs"]
                 :
                 'apps'.'/'.$this->getContext()->getConfiguration()->getApplication().'/'.$this->getModuleName().'/'.$specName;
+    }
+
+    public function addActionJs($specName="") {
+        $this->getResponse()->addJavaScript($this->getActionJs(), "last");
     }
 
     /*
@@ -467,7 +470,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->moduleName),
+                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$targetObj->getId());
         $this->wacLogger->logOperation(WacOperationType::$add, $logParams);
     }
@@ -480,7 +483,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->moduleName),
+                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$request->getParameter('id'));
         $this->wacLogger->logOperation(WacOperationType::$edit, $logParams);
     }
@@ -493,7 +496,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->moduleName),
+                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$request->getParameter('id'));
         $this->wacLogger->logOperation(WacOperationType::$del, $logParams);
     }
@@ -506,7 +509,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->moduleName),
+                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$targetObj->getId());
         $this->wacLogger->logOperation(WacOperationType::$audit, $logParams);
     }
