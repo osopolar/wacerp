@@ -74,8 +74,12 @@ echo "</span>\n";
                triggerSearch();
             })
 
+            $(modulePrefixId + '_btnAdd').bind("click", function(){
+               $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_add_form, {});
+            })
+
             $(modulePrefixId + '_btnExportSel').bind("click", function(){
-                $.shout('<?php echo sfConfig::get("app_wac_events_show_data_export_form"); ?>',
+                $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,
                     {
                         searchField: "code",
                         searchString: $(searchFieldId).val(),
@@ -88,7 +92,7 @@ echo "</span>\n";
 
         function triggerSearch(){            
 //            Wac.log($(searchFieldId).val());
-            $.shout(modulePrefixId + '<?php echo sfConfig::get("app_wac_events_search_in_list"); ?>',
+            $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list,
               {
                   searchField: "code",
                   searchString: $(searchFieldId).val(),
