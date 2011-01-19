@@ -6,7 +6,7 @@ $moduleAttachName = $invokeParams['attachInfo']['name'];
 
 echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
 
-echo "  <span><input name='code' id='{$modulePrefixName}_search_code' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
+echo "  <span><input name='code' id='{$modulePrefixName}_searchCode' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
 
 echo "  <span id='{$modulePrefixName}_g1'>\n";
 echo "	  <button id='{$modulePrefixName}_btnSearch'>" . __("Search") . "</button>\n";
@@ -37,7 +37,7 @@ echo "</span>\n";
         var moduleName = <?php echo "'{$moduleName}'" ?>;
         var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
         var modulePrefixId= '#' + modulePrefixName;
-        var searchFieldId = modulePrefixId + '_search_code';
+        var searchFieldId = modulePrefixId + '_searchCode';
         var toolbarId = '#' + modulePrefixName + "_toolbar";
 
         init();
@@ -80,12 +80,7 @@ echo "</span>\n";
             })
 
             $(modulePrefixId + '_btnExportSel').bind("click", function(){
-                $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,
-                    {
-                        moduleName: moduleName,
-                        modulePrefixName: modulePrefixName
-                    }
-                );
+                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_data_export,{});
             })
         };
         

@@ -25,6 +25,18 @@
         <source>Search Code</source>
         <target>搜索编号</target>
       </trans-unit>
+      <trans-unit>
+        <source>Submit</source>
+        <target>提交</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Close</source>
+        <target>关闭</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Please select</source>
+        <target>请选择</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -37,6 +37,30 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 $(moduleListId).trigger("reloadGrid");
 //                Wac.log(data);
             });
+
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
+                var params = "";
+                params = $(moduleListId).jqGrid('getGridParam',"url");
+                Wac.log(params);
+                params = $(moduleListId).jqGrid('getGridParam',"page");
+                Wac.log(params);
+                params = $(moduleListId).jqGrid('getGridParam',"sortname");
+                Wac.log(params);
+                 params = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                Wac.log(params);
+                 params = $(moduleListId).jqGrid('getGridParam',"rowNum");
+                Wac.log(params);
+//                 params = $(moduleListId).jqGrid('getGridParam',"searchField");
+//                Wac.log(params)
+//                params = $(moduleListId).jqGrid('getGridParam',"searchOper");
+//                Wac.log(params);
+//                params = $(moduleListId).jqGrid('getGridParam',"searchString");
+//                Wac.log(params);
+//                 params = $(moduleListId).jqGrid('getGridParam',"search");
+//                Wac.log(params);
+                params = $(moduleListId).getPostData();
+                Wac.log(params);
+            });
             
             $(moduleListId).jqGrid({
                 datatype: WacEntity.extraParam.dataFormat,
@@ -67,7 +91,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                  ],
                  jsonReader : WacEntity.jsonReader,
                  rowNum:10,
-                 rowList:[10,20,30,40,50],
+                 rowList:[5,10,20,30,40,50],
                  sortname: 'id',
                  sortorder: "desc",
                  multiselect: false,

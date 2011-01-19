@@ -176,6 +176,42 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
+   * @return list data array
+    */
+    public function executeDataExport(sfWebRequest $request) {
+        $jqGridDataHelper = JqGridDataHelper::getInstance();
+
+        if(($request->hasParameter(JqGridDataHelper::$KEY_SEARCH_FIELD) && ($request->getParameter(JqGridDataHelper::$KEY_SEARCH_FIELD)!="")) || $request->hasParameter(JqGridDataHelper::$KEY_SIDX)) {
+            $arrParam = array();
+
+            if($request->hasParameter(JqGridDataHelper::$KEY_SEARCH_FIELD) && $request->getParameter(JqGridDataHelper::$KEY_SEARCH_OPER)!="") {
+                $arrParam['andWhere'] = array(
+                        $jqGridDataHelper->getCondMapStr($request->getParameter(JqGridDataHelper::$KEY_SEARCH_OPER), "t1.".$request->getParameter(JqGridDataHelper::$KEY_SEARCH_FIELD), $request->getParameter(JqGridDataHelper::$KEY_SEARCH_STRING))
+                );
+            }
+
+            if($request->hasParameter(JqGridDataHelper::$KEY_SIDX)) {
+                $arrParam['orderBy'] = "t1.".$request->getParameter(JqGridDataHelper::$KEY_SIDX)." ".$request->getParameter(JqGridDataHelper::$KEY_SORD);
+            }
+
+//          $resultSet = $this->mainModuleTable->getCustomList($arrParam, $request->getParameter(JqGridDataHelper::$KEY_PAGE), $request->getParameter(JqGridDataHelper::$KEY_ROWS), true);
+            $resultSet = $this->mainModuleTable->getCustomList($arrParam, $request->getParameter(JqGridDataHelper::$KEY_PAGE), $request->getParameter(JqGridDataHelper::$KEY_ROWS), false);
+        }
+        else {
+//          $resultSet = $this->mainModuleTable->getCommonList($request->getParameter(JqGridDataHelper::$KEY_PAGE), $request->getParameter(JqGridDataHelper::$KEY_ROWS), true);
+            $resultSet = $this->mainModuleTable->getCommonList($request->getParameter(JqGridDataHelper::$KEY_PAGE), $request->getParameter(JqGridDataHelper::$KEY_ROWS), false);
+        }
+
+//      $filterResultSet = $resultSet;
+        $filterResultSet = $this->filterList($resultSet);
+
+        $pager     = $this->mainModuleTable->getPager();
+        $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum());
+
+        return OutputHelper::getInstance()->output($filterResultSet, $this);
+    }
+
+    /*
    * test func
     */
     public function executeTest(sfWebRequest $request) {
