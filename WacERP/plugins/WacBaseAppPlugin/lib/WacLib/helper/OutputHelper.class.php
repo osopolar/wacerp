@@ -11,6 +11,8 @@ class OutputHelper
     public static $_instance=null;
     public $isDebug = true;
 
+    protected $_request = null;
+
     public static function getInstance() {
         $class = __CLASS__;
         if(is_null(self::$_instance)) {
@@ -31,11 +33,12 @@ class OutputHelper
      */
     public function output($resultSet, sfAction $action, $params=array())
     {
-        if(!$action->getRequest()->hasParameter("dataFormat")){
+        $this->_request = $action->getRequest();
+        if(!$this->_request->hasParameter("dataFormat")){
             throw new sfException("Wac Error: require parameter 'dataFormat'!");
         }
         else{
-            $dataFormat = $action->getRequest()->getParameter("dataFormat");
+            $dataFormat = $this->_request->getParameter("dataFormat");
 
             switch ($dataFormat) {
                 case WacDataFormatType::$json:
@@ -52,8 +55,10 @@ class OutputHelper
                     return $this->outputTextFormat($resultSet, $action, $params);
                     break;
                 case WacDataFormatType::$pureText:
-                case WacDataFormatType::$pureTextJs:
                     return $this->outputPureTextFormat($resultSet, $action, $params);
+                    break;
+                case WacDataFormatType::$pureTextJs:   // for http request, but no any debug wrapping
+                    return $this->outputPureTextJsFormat($resultSet, $action, $params);
                     break;
                 default:
                     return $this->outputJsonOrTextFormat($resultSet, $action, $params);
@@ -75,9 +80,24 @@ class OutputHelper
         else{
            $this->setNoCacheHeader($action, false);
         }
-//        $this->setCacheHeader($action, false);
-
         $action->getResponse()->setContentType('application/text; charset=utf-8');
+        return $action->renderText($output);
+    }
+
+    /*
+     * return pure json text
+     * @params
+     * array $node - node info,
+     */
+    public function outputPureTextJsFormat($output, sfAction $action, $params=array())
+    {
+        if(isset($params["isCache"]) && $params["isCache"]){
+            $this->setCacheHeader($action, false);
+        }
+        else{
+           $this->setNoCacheHeader($action, false);
+        }
+        $action->getResponse()->setContentType('application/javascript; charset=utf-8');
         return $action->renderText($output);
     }
 
@@ -88,7 +108,7 @@ class OutputHelper
      */
     public function outputTextFormat($output, sfAction $action, $params=array())
     {
-        if ($action->getRequest()->isXmlHttpRequest()) {
+        if ($this->_request->isXmlHttpRequest()) {
             $this->setNoCacheHeader($action, false);
             $action->getResponse()->setContentType('application/text; charset=utf-8');
         }
@@ -96,7 +116,7 @@ class OutputHelper
             if($this->isDebug){
                 $resultSet = array();
                 $resultSet["output"] = $output;
-                $resultSet["info"]["req_params"] = $action->getRequest()->getParameterHolder()->getAll();
+                $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
             }
             return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
         }
@@ -111,14 +131,18 @@ class OutputHelper
     public function outputJsonOrTextFormat(array $resultSet, sfAction $action, $params=array())
     {
         $output = '';
-        if ($action->getRequest()->isXmlHttpRequest()) {
-            $this->setNoCacheHeader($action, false);            
+        if ($this->_request->isXmlHttpRequest()) {
+            if (isset($params["isCache"]) && $params["isCache"]) {
+                $this->setCacheHeader($action, false);
+            } else {
+                $this->setNoCacheHeader($action, false);
+            }
             $action->getResponse()->setContentType('application/json; charset=utf-8');
             $output = json_encode($resultSet);
         }
         else {
             if($this->isDebug){
-                $resultSet["info"]["req_params"] = $action->getRequest()->getParameterHolder()->getAll();
+                $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
             }
 
             return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
@@ -150,7 +174,7 @@ class OutputHelper
      */
     public function debugRequest(sfAction $action)
     {
-        $reqParams = $action->getRequest()->getParameterHolder()->getAll();
+        $reqParams = $this->_request->getParameterHolder()->getAll();
         return $action->renderPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $reqParams));
     }
 
@@ -195,9 +219,12 @@ class OutputHelper
     public function setCacheHeader($action, $isSfDebug=false)
     {
         sfConfig::set('sf_web_debug', $isSfDebug);
-        sfConfig::set('sf_cache', true);
+//        sfConfig::set('sf_cache', true);
+        $action->getResponse()->setHttpHeader('Last-Modified', $action->getResponse()->getDate(time() - 86400));
+        $action->getResponse()->setHttpHeader('Expires', $action->getResponse()->getDate(time() + 86400));
+        $action->getResponse()->setHttpHeader("Pragma", "cache");
         $action->getResponse()->addCacheControlHttpHeader('max_age=180');
-        $action->getResponse()->setHttpHeader('Expires', $action->getResponse()->getDate(time() + 3600));
+        $action->getResponse()->addCacheControlHttpHeader('private=True');
         return true;
     }
 
