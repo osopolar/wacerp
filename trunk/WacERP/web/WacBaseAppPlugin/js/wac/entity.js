@@ -9,7 +9,8 @@ var WacEntity = {
     formInputMode: new WacFormInputMode(),
     formStatus: new WacFormStatus(),
     jsonReader: new WacJsonReader(),
-    extraParam: new WacExtraParams()
+    extraParam: new WacExtraParams(),
+    JqGridMetas: new JqGridMetas()
 
 //  modelObj        = new WacModel();
 //  openTabs        = new WacOpenTabs();
@@ -112,4 +113,22 @@ function WacJsonReader()
 function WacExtraParams()
 {
     this.dataFormat = "json";
+}
+
+/*
+ *  JqGridMetas params
+ */
+function JqGridMetas()
+{
+    this.currentPage = "page";
+    this.totalPages  = "lastpage";
+    this.sortName    = "sortname";
+    this.sortOrder   = "sortorder";
+    this.rows        = "rows";
+    this.sidx        = "sidx";
+    this.sord        = "sord";
+    this.searchField = "searchField";
+    this.searchOper  = "searchOper";
+    this.searchString = "searchString";
+
 }

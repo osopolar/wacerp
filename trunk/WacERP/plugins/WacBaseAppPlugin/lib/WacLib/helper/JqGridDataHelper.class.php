@@ -82,7 +82,7 @@ class JqGridDataHelper {
     }
 
     /*
-     * return JqGridCommon format data structure
+     * return Common format data structure
      * @params
      * array $node - node info,
      */

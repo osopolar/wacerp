@@ -7,6 +7,7 @@ class DataExportForm extends sfForm {
                 'choices' => $this->getOption('ds'),
                 'multiple' => false,
                 'expanded' => true,
+                'label' => "Please select export format",
             )),
         ));
     }

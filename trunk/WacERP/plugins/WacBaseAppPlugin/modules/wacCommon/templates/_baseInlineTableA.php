@@ -30,6 +30,20 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
 
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
+//                var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
+//                params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
+//                $(moduleListId).jqGrid('setGridParam',{postData:params});
+//                $(moduleListId).trigger("reloadGrid");
+                var params = "";
+                params = $(moduleListId).getGridParam("editurl");
+                Wac.log(params);
+                params = $(moduleListId).getGridParam("url");
+                Wac.log(params);
+                params = $(moduleListId).getGridParam("postData");
+                Wac.log(params);
+            });
+
             $(moduleListId).jqGrid({
                   datatype: WacEntity.extraParam.dataFormat,
                   url: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/getList",
@@ -53,7 +67,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                   ],
                   jsonReader : WacEntity.jsonReader,
                   rowNum:10,
-                  rowList:[10,20,30,40,50],
+                  rowList:[5,10,20,30,40,50],
                   sortname: 'id',
                   sortorder: "desc",
                   multiselect: true,
