@@ -8,9 +8,9 @@ all:
   wac_setting:
     legal_website: http://WWW.WebAppClub.COM
     data_export_format:
-      - xml
-      - json
-      - cvs
+      xml: xml
+      json: json
+      csv: csv
     
   wac_events:
     show_add_form: _show_add_form_evt

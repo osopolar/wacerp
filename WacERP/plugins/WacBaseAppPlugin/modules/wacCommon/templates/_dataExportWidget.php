@@ -44,7 +44,8 @@ echo "</div>\n";
                     {
                         text: $.i18n.prop("Submit"),
                         click: function() {
-                            Wac.log(params);
+//                            Wac.log(params);
+                            dataExport();
                         }
                     },
                     {
@@ -58,12 +59,41 @@ echo "</div>\n";
 
         function bindEvents(){
             $(document).hear("#wacAppController", WacAppConfig.event.app_wac_events_show_data_export_form, function ($self, data) {  // listenerid, event name, callback
-                Wac.log(data);
+//                Wac.log(data);
                params = data;
                $(widgetId).dialog('open');
             });
-
-
         }
+
+        function dataExport(){
+            var submitUrl = WacAppConfig.baseUrl + params.moduleName + "/dataExport";
+            var submitParams = $.extend({dataFormat: $("input[name='dataExportFormat']:checked").val()}, params);
+            submitUrl += "?" + $.param(submitParams);
+
+//            Wac.log(submitUrl);
+            $(document).attr("location", submitUrl + "?" )
+
+
+//            $.ajax({
+//                url: submitUrl,
+//                //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+//                global: true,
+//                type: "get",
+//                data: submitParams,
+//                dataType: "json",
+//                success: function(jsonData){
+//                    dataExportCallBack(jsonData);
+//                },
+//                error: function(XMLHttpRequest, textStatus, errorThrown){
+//                    Wac.log("dataExport Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+//                }
+//            });
+        }
+
+        function dataExportCallBack(jsonData){
+        
+        }
+
+        
     })
 </script>
