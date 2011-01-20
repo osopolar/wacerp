@@ -12,6 +12,7 @@ class OutputHelper
     public $isDebug = true;
 
     protected $_request = null;
+    protected $_response = null;
 
     public static function getInstance() {
         $class = __CLASS__;
@@ -34,6 +35,7 @@ class OutputHelper
     public function output($resultSet, sfAction $action, $params=array())
     {
         $this->_request = $action->getRequest();
+        $this->_response = $action->getResponse();
         if(!$this->_request->hasParameter("dataFormat")){
             throw new sfException("Wac Error: require parameter 'dataFormat'!");
         }
@@ -52,6 +54,7 @@ class OutputHelper
                     return $this->outputXmlFormat($resultSet, $action, false, false, $params);
                     break;
                 case WacDataFormatType::$text:
+                case WacDataFormatType::$txt:
                     return $this->outputTextFormat($resultSet, $action, $params);
                     break;
                 case WacDataFormatType::$pureText:
@@ -68,6 +71,72 @@ class OutputHelper
     }
 
     /*
+     * export data, force data can be export/download
+     * @params
+     */
+    public function export($resultSet, sfAction $action, $params=array())
+    {
+        $this->_request = $action->getRequest();
+        $this->_response = $action->getResponse();
+
+        $action->setLayout(false);
+
+        if(!$this->_request->hasParameter("dataFormat")){
+            throw new sfException("Wac Error: require parameter 'dataFormat'!");
+        }
+        else{
+            $dataFormat = $this->_request->getParameter("dataFormat");
+            $output = "";
+            $bom = chr(0xEF).chr(0xBB).chr(0xBF); // output utf8 BOM first "ZERO WIDTH NO-BREAK SPACE"
+
+            switch ($dataFormat) {
+                case WacDataFormatType::$json:
+                    $output = json_encode($resultSet["items"]);
+                    break;
+                case WacDataFormatType::$xml:
+                    $document = DOM::arrayToDOMDocument($resultSet["items"], "root");
+                    $document->formatOutput = true;
+                    $output = $document->saveXML();
+                    break;
+                case WacDataFormatType::$csv:
+                    $output = $bom;
+                    if(count($resultSet["items"])>0){
+                        foreach($resultSet["items"] as $resultItem){
+                            $output.=implode(",", $resultItem)."\n";
+                        }
+                    }
+                    break;
+                case WacDataFormatType::$text:
+                case WacDataFormatType::$txt:
+                default:
+                    $output = print_r($resultSet["items"], true);
+                    break;
+            }
+            
+            $this->_response->clearHttpHeaders();
+            $this->_response->setContentType('application/octet-stream;');
+
+            $fileName = $params["fileName"];
+            if(WacEnvInfo::getInstance()->isIeBrowser()){
+                $fileName = urlencode($params["fileName"]);
+            }
+
+            $this->_response->setHttpHeader('Content-Length', strlen($output));
+            $this->_response->setHttpHeader("Content-Disposition", "attachment; filename={$fileName}.{$dataFormat}");
+            $this->_response->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
+            $this->_response->setHttpHeader("Expires", 0);
+            $this->_response->setHttpHeader('Pragma', 'no-cache');
+            $this->_response->sendHttpHeaders();
+            $this->_response->setContent($output);
+
+//        $this->_response->setContent(readfile($pdfpath));
+            
+            
+        }
+        return sfView::NONE;
+    }
+
+    /*
      * return pure text
      * @params
      * array $node - node info,
@@ -80,7 +149,7 @@ class OutputHelper
         else{
            $this->setNoCacheHeader($action, false);
         }
-        $action->getResponse()->setContentType('application/text; charset=utf-8');
+        $this->_response->setContentType('application/text; charset=utf-8');
         return $action->renderText($output);
     }
 
@@ -97,7 +166,7 @@ class OutputHelper
         else{
            $this->setNoCacheHeader($action, false);
         }
-        $action->getResponse()->setContentType('application/javascript; charset=utf-8');
+        $this->_response->setContentType('application/javascript; charset=utf-8');
         return $action->renderText($output);
     }
 
@@ -110,7 +179,7 @@ class OutputHelper
     {
         if ($this->_request->isXmlHttpRequest()) {
             $this->setNoCacheHeader($action, false);
-            $action->getResponse()->setContentType('application/text; charset=utf-8');
+            $this->_response->setContentType('application/text; charset=utf-8');
         }
         else {
             if($this->isDebug){
@@ -137,7 +206,7 @@ class OutputHelper
             } else {
                 $this->setNoCacheHeader($action, false);
             }
-            $action->getResponse()->setContentType('application/json; charset=utf-8');
+            $this->_response->setContentType('application/json; charset=utf-8');
             $output = json_encode($resultSet);
         }
         else {
@@ -158,7 +227,7 @@ class OutputHelper
     public function outputXmlFormat($resultSet, sfAction $action, $isConvertToXML=false, $formatOutput=false, $params=array())
     {
         $this->setNoCacheHeader($action, false);
-        $action->getResponse()->setContentType('application/xml; encoding=utf-8');
+        $this->_response->setContentType('application/xml; encoding=utf-8');
         if($isConvertToXML){
             $document = DOM::arrayToDOMDocument($resultSet, "root");
             $document->formatOutput = $formatOutput;
@@ -210,9 +279,9 @@ class OutputHelper
     public function setNoCacheHeader($action, $isSfDebug=false)
     {
         sfConfig::set('sf_web_debug', $isSfDebug);
-        $action->getResponse()->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
-        $action->getResponse()->setHttpHeader("Pragma", "no-cache");
-        $action->getResponse()->setHttpHeader("Expires", 0);
+        $this->_response->setHttpHeader("Cache-Control", "no-cache, must-revalidate");
+        $this->_response->setHttpHeader("Pragma", "no-cache");
+        $this->_response->setHttpHeader("Expires", 0);
         return true;
     }
 
@@ -220,11 +289,11 @@ class OutputHelper
     {
         sfConfig::set('sf_web_debug', $isSfDebug);
 //        sfConfig::set('sf_cache', true);
-        $action->getResponse()->setHttpHeader('Last-Modified', $action->getResponse()->getDate(time() - 86400));
-        $action->getResponse()->setHttpHeader('Expires', $action->getResponse()->getDate(time() + 86400));
-        $action->getResponse()->setHttpHeader("Pragma", "cache");
-        $action->getResponse()->addCacheControlHttpHeader('max_age=180');
-        $action->getResponse()->addCacheControlHttpHeader('private=True');
+        $this->_response->setHttpHeader('Last-Modified', $this->_response->getDate(time() - 86400));
+        $this->_response->setHttpHeader('Expires', $this->_response->getDate(time() + 86400));
+        $this->_response->setHttpHeader("Pragma", "cache");
+        $this->_response->addCacheControlHttpHeader('max_age=180');
+        $this->_response->addCacheControlHttpHeader('private=True');
         return true;
     }
 

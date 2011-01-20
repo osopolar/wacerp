@@ -10,7 +10,7 @@ var WacEntity = {
     formStatus: new WacFormStatus(),
     jsonReader: new WacJsonReader(),
     extraParam: new WacExtraParams(),
-    JqGridMetas: new JqGridMetas()
+    jqGridMetas: new JqGridMetas()
 
 //  modelObj        = new WacModel();
 //  openTabs        = new WacOpenTabs();
@@ -117,18 +117,18 @@ function WacExtraParams()
 
 /*
  *  JqGridMetas params
+ *  the keys are wac standard common datum fields
  */
 function JqGridMetas()
 {
-    this.currentPage = "page";
-    this.totalPages  = "lastpage";
-    this.sortName    = "sortname";
-    this.sortOrder   = "sortorder";
-    this.rows        = "rows";
-    this.sidx        = "sidx";
-    this.sord        = "sord";
-    this.searchField = "searchField";
-    this.searchOper  = "searchOper";
+    this.currentPage  = "page";
+    this.totalPages   = "lastpage";
+    this.rows         = "rows";
+    this.sortName     = "sortname";
+    this.sortOrder    = "sord";
+    this.sidx         = "sidx";
+    this.searchField  = "searchField";
+    this.searchOper   = "searchOper";
     this.searchString = "searchString";
 
 }

@@ -70,21 +70,21 @@ class JqGridDataHelper {
      * @params
      * array $node - node info,
      */
-    public function getOriCommonDatum()
-    {
-        return array(
-        "page"  =>1,
-        "total"   => 1,
-        "records" => 0,
-        "userdata"=> array(),
-        "rows"    => array()
-        );
-    }
+//    public function getOriCommonDatum()
+//    {
+//        return array(
+//        "page"  =>1,
+//        "total"   => 1,
+//        "records" => 0,
+//        "userdata"=> array(),
+//        "rows"    => array()
+//        );
+//    }
 
     /*
      * return Common format data structure
      * @params
-     * array $node - node info,
+     * the keys are wac standard common datum fields
      */
     public function getCommonDatum()
     {

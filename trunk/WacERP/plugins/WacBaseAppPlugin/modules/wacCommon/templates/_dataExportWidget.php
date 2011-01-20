@@ -58,7 +58,7 @@ echo "</div>\n";
 
         function bindEvents(){
             $(document).hear("#wacAppController", WacAppConfig.event.app_wac_events_show_data_export_form, function ($self, data) {  // listenerid, event name, callback
-//                Wac.log(data);
+                Wac.log(data);
                params = data;
                $(widgetId).dialog('open');
             });

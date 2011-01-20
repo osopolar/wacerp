@@ -25,6 +25,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
     <script type="text/javascript">
 
       $("#<?php echo $moduleListingTableId; ?>").ready(function(){
+            var moduleName = <?php echo "'{$moduleName}'" ?>;
             var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
             var modulePrefixId   = '#' + modulePrefixName;
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
