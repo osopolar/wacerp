@@ -91,10 +91,10 @@ class OutputHelper
 
             switch ($dataFormat) {
                 case WacDataFormatType::$json:
-                    $output = json_encode($resultSet["items"]);
+                    $output = json_encode($resultSet);
                     break;
                 case WacDataFormatType::$xml:
-                    $document = DOM::arrayToDOMDocument($resultSet["items"], "root");
+                    $document = DOM::arrayToDOMDocument($resultSet, "root");
                     $document->formatOutput = true;
                     $output = $document->saveXML();
                     break;

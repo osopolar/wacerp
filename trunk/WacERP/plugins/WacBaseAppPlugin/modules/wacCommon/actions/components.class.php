@@ -25,7 +25,7 @@ class wacCommonComponents extends WacComponent
     {
          parent::execute($request);
          $this->form = new DataExportForm(
-                array("dataExportFormat" => 0),   // default
+                array("dataExportFormat" => "xml"),   // default
                 array("ds" => sfConfig::get("app_wac_setting_data_export_format"))  // data source
                 );
     }
