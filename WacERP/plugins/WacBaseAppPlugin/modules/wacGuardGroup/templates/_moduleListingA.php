@@ -8,9 +8,9 @@
  *
  */
 
-$modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams['attachInfo']['name'];
 $moduleName           = $invokeParams['contextInfo']['moduleName'];
 $moduleAttachName     = $invokeParams['attachInfo']['name'];
+$modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams['attachInfo']['name'];
 $moduleListingTableId = WacModuleHelper::getListingTableId($moduleName, $moduleAttachName);
 $moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachName);
 $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
@@ -25,6 +25,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
     <script type="text/javascript">
         //<![CDATA[
         $(function(){
+            var moduleName = <?php echo "'{$moduleName}'" ?>;
             var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
             var modulePrefixId   = '#' + modulePrefixName;
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
@@ -39,27 +40,27 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             });
 
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
-                var params = "";
-                params = $(moduleListId).jqGrid('getGridParam',"url");
-                Wac.log(params);
-                params = $(moduleListId).jqGrid('getGridParam',"page");
-                Wac.log(params);
-                params = $(moduleListId).jqGrid('getGridParam',"sortname");
-                Wac.log(params);
-                 params = $(moduleListId).jqGrid('getGridParam',"sortorder");
-                Wac.log(params);
-                 params = $(moduleListId).jqGrid('getGridParam',"rowNum");
-                Wac.log(params);
-//                 params = $(moduleListId).jqGrid('getGridParam',"searchField");
-//                Wac.log(params)
-//                params = $(moduleListId).jqGrid('getGridParam',"searchOper");
+//                var params = {}};
+//                params = $(moduleListId).jqGrid('getGridParam',"url");
 //                Wac.log(params);
-//                params = $(moduleListId).jqGrid('getGridParam',"searchString");
+//                params = $(moduleListId).jqGrid('getGridParam',"page");
 //                Wac.log(params);
-//                 params = $(moduleListId).jqGrid('getGridParam',"search");
+//                params = $(moduleListId).jqGrid('getGridParam',"sortname");
 //                Wac.log(params);
-                params = $(moduleListId).getPostData();
-                Wac.log(params);
+//                 params = $(moduleListId).jqGrid('getGridParam',"sortorder");
+//                Wac.log(params);
+//                 params = $(moduleListId).jqGrid('getGridParam',"rowNum");
+//                Wac.log(params);
+//                params = $(moduleListId).getPostData();
+//                Wac.log(params);
+                var params = {};
+                params.moduleName = moduleName;
+                params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
+                params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
+                params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
+                params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
+                params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,params);
             });
             
             $(moduleListId).jqGrid({
