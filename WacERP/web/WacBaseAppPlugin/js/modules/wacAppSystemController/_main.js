@@ -79,12 +79,12 @@ objAppSystemController = {
     },
     initWestMenu: function(menuId){
         this.westMenu = $(menuId).jqGrid({
-            url: WacAppConfig.baseUrl + "wacAppSystemController/getWestMenu",
+            url: WacAppConfig.baseUrl + "wacAppSystemController/getWestMenu/dataFormat/xml",
             datatype: "xml",
             height: "auto",
             pager: false,
             loadui: "disable",
-            colNames: ["id","选项","url"],
+            colNames: ["id",$.i18n.prop("Options"),"url"],
             colModel: [
             {
                 name: "id",
@@ -105,7 +105,7 @@ objAppSystemController = {
             }
             ],
             treeGrid: true,
-            caption: "管理菜单",
+            caption: $.i18n.prop("Management Menu"),
             ExpandColumn: "menu",
             autowidth: true,
             //            width: 180,

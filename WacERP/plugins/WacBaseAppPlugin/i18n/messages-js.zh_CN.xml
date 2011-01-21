@@ -37,6 +37,14 @@
         <source>Please select</source>
         <target>请选择</target>
       </trans-unit>
+      <trans-unit>
+        <source>Options</source>
+        <target>选项</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Management Menu</source>
+        <target>管理菜单</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
