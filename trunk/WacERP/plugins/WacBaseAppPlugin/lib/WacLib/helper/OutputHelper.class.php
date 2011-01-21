@@ -47,11 +47,12 @@ class OutputHelper
                     return $this->outputJsonOrTextFormat($resultSet, $action, $params);
                     break;
                 case WacDataFormatType::$xml:
-                    return $this->outputXmlFormat($resultSet, $action, true, false, $params);
+                    return $this->outputXmlFormat($resultSet, $action, false, $params);
                     break;
                 case WacDataFormatType::$jsonFlexbox:
+                    $params = array("isConvertToXML" => false);
                     $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params["items"]);
-                    return $this->outputXmlFormat($resultSet, $action, false, false, $params);
+                    return $this->outputXmlFormat($resultSet, $action, false, $params);
                     break;
                 case WacDataFormatType::$text:
                 case WacDataFormatType::$txt:
@@ -224,11 +225,11 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputXmlFormat($resultSet, sfAction $action, $isConvertToXML=false, $formatOutput=false, $params=array())
+    public function outputXmlFormat($resultSet, sfAction $action, $formatOutput=false, $params=array("isConvertToXML" => true))
     {
         $this->setNoCacheHeader($action, false);
         $this->_response->setContentType('application/xml; encoding=utf-8');
-        if($isConvertToXML){
+        if(isset($params["isConvertToXML"]) && $params["isConvertToXML"]==true){
             $document = DOM::arrayToDOMDocument($resultSet, "root");
             $document->formatOutput = $formatOutput;
             return $action->renderText($document->saveXML());

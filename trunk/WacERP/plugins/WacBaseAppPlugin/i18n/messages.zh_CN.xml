@@ -43,23 +43,27 @@
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnEdit</source>
-        <target>编</target>
+        <target>编辑</target>
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnSave</source>
-        <target>存</target>
+        <target>存盘</target>
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnCancel</source>
-        <target>消</target>
+        <target>取消</target>
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnDel</source>
-        <target>删</target>
+        <target>删除</target>
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnDetail</source>
         <target>详细</target>
+      </trans-unit>
+      <trans-unit>
+        <source>JqGridBtnPrint</source>
+        <target>打印</target>
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnAudit</source>

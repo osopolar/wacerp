@@ -31,18 +31,24 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
 
+            // listen search event
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
+                var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
+                params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
+                $(moduleListId).jqGrid('setGridParam',{postData:params});
+                $(moduleListId).trigger("reloadGrid");
+//                Wac.log(data);
+            });
+
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
-//                var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
-//                params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
-//                $(moduleListId).jqGrid('setGridParam',{postData:params});
-//                $(moduleListId).trigger("reloadGrid");
-                var params = "";
-                params = $(moduleListId).getGridParam("editurl");
-                Wac.log(params);
-                params = $(moduleListId).getGridParam("url");
-                Wac.log(params);
-                params = $(moduleListId).getGridParam("postData");
-                Wac.log(params);
+                var params = {};
+                params.moduleName = moduleName;
+                params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
+                params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
+                params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
+                params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
+                params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,params);
             });
 
             $(moduleListId).jqGrid({
@@ -84,13 +90,9 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                       for(var i=0;i < ids.length;i++){
                           var cl = ids[i];
-                          be = "<input style='height:22px;width:28px;' type='button' value='编' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('editRow','"+cl+"', true, null, <?php echo $modulePrefixName; ?>Callback.save, '" + editUrl + "', WacEntity.extraParam);\" />";
-                          se = "<input style='height:22px;width:28px;' type='button' value='存' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('saveRow', '"+cl+"', <?php echo $modulePrefixName; ?>Callback.save, '" + editUrl + "', WacEntity.extraParam, null);\" />";
-                          ce = "<input style='height:22px;width:28px;' type='button' value='消' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('restoreRow', '"+cl+"');\" />";
-                          de = "<input style='height:22px;width:28px;' type='button' value='删' onclick=\"$('#<?php echo $moduleListId; ?>').jqGrid('delGridRow', '"+cl+"', {url:'" + delUrl + "', top: 200, left:500});\" />";
-                          $(moduleListId).jqGrid('setRowData',ids[i],{
-                              act:be+se+ce+de
-                          });
+                          <?php
+                            echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('be', 'se', 'ce', 'de'), true);
+                          ?>
                       }
                   },
 

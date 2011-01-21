@@ -51,7 +51,7 @@ echo "</span>\n";
             $(modulePrefixId + '_btnAdd').button({text: true,icons: {primary: "ui-icon-document"}});
             $(modulePrefixId+'_g1').buttonset();
 
-            $(modulePrefixId + '_btnExportSel').button({text: false,icons: {primary: "ui-icon-disk"}});
+            $(modulePrefixId + '_btnExportSel').button({text: false,icons: {primary: "ui-icon-arrowreturnthick-1-s"}});
             $(modulePrefixId + '_btnPrint').button({text: false,icons: {primary: "ui-icon-print"}});
             $(modulePrefixId+'_g2').buttonset();
 

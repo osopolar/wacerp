@@ -5,17 +5,19 @@
  * @author ben
  *
  * declare:
- * buttons = bv+ba+sa+be+de
+ * buttons = bv+ba+sa+be+de+ce
  * bv: button view
  * ba: button audit
  * sa: button add subitems
  * be: button edit
  * de: button delete
+ * ce: button cancel
+ * se: button save
  *
  */
 class WacModuleHelper
 {
-    public static $ctlBtns = array('bv','ba','sa','be','de');
+    public static $ctlBtns = array('bv','ba','sa','be','de','ce','se');
     
     public static function getInstance()
     {
@@ -123,14 +125,45 @@ class WacModuleHelper
         return "";
     }
 
-    public static function generateListEditFormBtn($module, $attachName="")
+    /*
+     * abstract function for get btn str
+     * @params = array(
+     *  - tag
+     *  - label
+     *  - event
+     *  - action  (notes: if given action, event action will be replace by action)
+     * )
+     */
+    protected static function getBtnStr($module, $attachName="", $params=array())
     {
-        $str =" be = ";
-        $str.=" \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.= "$.shout('#{$module}{$attachName}".sfConfig::get("app_wac_events_show_edit_form")."', {id: \" + cl +\" });";
-        $str.="\\\" value='".__("JqGridBtnEdit")."' style=\\\"height: 22px; width: 28px;\\\">\";\n";
+        $str = " {$params['tag']} = ";
+        $str.= "\"<button ";
+        // id
+        $str.= "id=\\\"{$module}{$attachName}_{$params['tag']}\" + cl +\"\\\" ";
+        // class
+//        $str.= "text=\\\"false\\\" icons=\\\"{primary: ui-icon-pencil}\\\" ";
+        // action
+        $str.= "onclick=\\\"javascript:";  //action
+        if(isset($params["action"])){
+            $str.= $params["action"];
+        }
+        elseif(isset($params["event"])){
+            $str.= "$.shout('#{$module}{$attachName}{$params["event"]}', {id: \" + cl +\" });\\\"";
+        }
+        $str.= " >";
+        // label
+        $str.= $params["label"];
+        $str.= "</button>\";\n";
 
         return $str;
+    }
+
+    public static function generateListEditFormBtn($module, $attachName="")
+    {
+        $params = array(
+            "tag"=>"be", "label"=>__("JqGridBtnEdit"), "event"=>sfConfig::get("app_wac_events_show_edit_form")
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -138,12 +171,11 @@ class WacModuleHelper
      */
     public static function generateListDelFormBtn($module, $attachName="")
     {
-        $str =" de = ";
-        $str.=" \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" jQuery('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\"";
-        $str.=" value='".__("JqGridBtnDel")."' style=\\\"height: 22px; width: 28px;\\\">\";\n";
-
-        return $str;
+        $params = array(
+            "tag"=>"de", "label"=>__("JqGridBtnDel"), 
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -151,12 +183,51 @@ class WacModuleHelper
      */
     public static function generateListViewFormBtn($module, $attachName="")
     {
-        $str =" bv = ";
-        $str.=" \"<input id=\\\"{$module}{$attachName}_bv\" + cl +\"\\\" class=\\\"{$module}{$attachName}_bv\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" wacPopupWindow(\'{$module}{$attachName}PopupWin\', \'printer/Form/pModule/{$module}/pAction/print/id/\" + cl +\"\', 650, 550 );\\\"";
-        $str.=" value='".__("JqGridBtnDetail")."' style=\\\"height: 22px; width: 50px;\\\">\";\n";
+        $params = array(
+            "tag"=>"bv", "label"=>__("JqGridBtnPrint"),
+            "action"=>" wacPopupWindow(\'{$module}{$attachName}PopupWin\', \'printer/Form/pModule/{$module}/pAction/print/id/\" + cl +\"\', 650, 550 );\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
+    }
 
-        return $str;
+    public static function generateInlineListEditFormBtn($module, $attachName="")
+    {
+        $modulePrefixName = $module.$attachName;
+        $params = array(
+            "tag"=>"be", "label"=>__("JqGridBtnEdit"),
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('editRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam);\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
+    }
+
+    public static function generateInlineListSaveFormBtn($module, $attachName="")
+    {
+        $modulePrefixName = $module.$attachName;
+        $params = array(
+            "tag"=>"se", "label"=>__("JqGridBtnSave"),
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('saveRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam, null);\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
+    }
+
+    public static function generateInlineListCancelFormBtn($module, $attachName="")
+    {
+        $modulePrefixName = $module.$attachName;
+        $params = array(
+            "tag"=>"ce", "label"=>__("JqGridBtnCancel"),
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('restoreRow', '\"+cl+\"');\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
+    }
+
+    public static function generateInlineListDelFormBtn($module, $attachName="")
+    {
+        $modulePrefixName = $module.$attachName;
+        $params = array(
+            "tag"=>"de", "label"=>__("JqGridBtnDel"),
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -164,25 +235,23 @@ class WacModuleHelper
      */
     public static function generateListAuditFormBtn($module, $attachName="")
     {
-        $str =" ba = ";
-        $str.=" \"<input id=\\\"{$module}{$attachName}_ba\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');\\\"";
-        $str.=" value='".__("JqGridBtnAudit")."' style=\\\"height: 22px; width: 50px;\\\">\";\n";
-
-        return $str;
+        $params = array(
+            "tag"=>"ba", "label"=>__("JqGridBtnAudit"),
+            "action"=>" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
      * generateListAddSubFormBtn
      */
-    public static function generateListAddSubFormBtn($module, $attachName="")
+    public static function generateListAddSubFormBtn($module, $subModule, $attachName="")
     {
-        $str =" sa = ";
-        $str.=" \"<input id=\\\"{$module}{$attachName}_sa\" + cl +\"\\\" type=\\\"button\\\" onclick=\\\"javascript:";
-        $str.=" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');\\\"";
-        $str.=" value='".__("JqGridBtnAddSubItem")."' style=\\\"height: 22px; width: 62px;\\\">\";\n";
-
-        return $str;
+        $params = array(
+            "tag"=>"sa", "label"=>__("JqGridBtnAddSubItem"),
+            "action"=>" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');\\\""
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -190,11 +259,11 @@ class WacModuleHelper
      */
     public static function generateSubListEditFormBtn($module, $attachName="")
     {
-        $str = "be =  \"<input id=\\\"{$module}{$attachName}_be\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"".__("JqGridBtnEdit")."\\\" onclick=\\\"javascript: \";\n";
-        $str .="be += \"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n";
-        $str .="be += \"\\\">\";\n";
-
-        return $str;
+        $params = array(
+            "tag"=>"be", "label"=>__("JqGridBtnEdit"),
+            "action"=>"\"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n"
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -202,11 +271,11 @@ class WacModuleHelper
      */
     public static function generateSubListDelFormBtn($module, $attachName="")
     {
-        $str ="de = \"<input id=\\\"{$module}{$attachName}_de\" + cl +\"\\\" type=\\\"button\\\" style=\\\"height: 22px; width: 28px;\\\" value=\\\"".__("JqGridBtnDel")."\\\" onclick=\\\"javascript: \";\n";
-        $str.="de += \"jQuery('#\" + subgrid_table_id + \"').jqGrid('delGridRow', '\"+cl+\"', {url:'\"+delUrl+\"'});\";\n";
-        $str.="de += \"\\\">\"\n";
-
-        return $str;
+        $params = array(
+            "tag"=>"de", "label"=>__("JqGridBtnEdit"),
+            "action"=>"$('#\" + subgrid_table_id + \"').jqGrid('delGridRow', '\"+cl+\"', {url:'\"+delUrl+\"'});\";\n"
+        );
+        return self::getBtnStr($module, $attachName, $params);
     }
 
     /*
@@ -215,13 +284,13 @@ class WacModuleHelper
     public static function generateSubListBtns($module, $subModule, $attachName="", $allowBtns=array("be", "de"))
     {
         $str="";
-        $str.="jQuery(\"#\"+subgrid_table_id).jqGrid('setRowData',ids[i],{";
+        $str.="$(\"#\"+subgrid_table_id).jqGrid('setRowData',ids[i],{";
 //        $str.="  act:be+de";
         $str.="act:";
         $str.=self::getAllowBtns($allowBtns, '+', $module);
         $str.=" });\n\n";
 
-        $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
+        $str.="var rowData = $(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
         $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$subModule}{$attachName}_be\"+cl).attr('disabled','disabled');\n";
@@ -229,24 +298,6 @@ class WacModuleHelper
         $str.= "}\n";
         return $str;
     }
-
-    /*
-     * generateSubListBtns
-     */
-//    public static function generateSubListDelBtn($module, $subModule, $attachName="")
-//    {
-//        $str="";
-//        $str.="jQuery(\"#\"+subgrid_table_id).jqGrid('setRowData',ids[i],{";
-//        $str.="  act:de";
-//        $str.=" });\n\n";
-//
-//        $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
-//        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
-//        $str.= "{\n";
-//        $str.= "\$(\"#{$subModule}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
-//        $str.= "}\n";
-//        return $str;
-//    }
 
     public static function getAllowBtns($allowBtns='all', $connector='+', $moduleName="")
     {
@@ -279,20 +330,75 @@ class WacModuleHelper
     }
 
     /*
-     * 
      * generateListBtns
+     * @module - module name
+     * @subModule - submodule name
+     * @attachName - attach name
+     * @allowBtns - the btns be asked to show, but also be filtered by user credentials
+     * @isInline - for inline action table or not
+     * @params - spare
      */
-    public static function generateListBtns($module, $subModule, $attachName="", $allowBtns='all')
+    public static function generateListBtns($module, $subModule, $attachName="", $allowBtns='all', $isInline=false, $params=array())
     {
         $str="";
-        $str.="jQuery(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('setRowData',ids[i],{";
-        $str.="act:";
-        $str.=self::getAllowBtns($allowBtns, '+', $module);
-        $str.=" });\n\n";
 
-        $str.="var rowData = jQuery(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('getRowData',cl);\n";
+        $btnArr = array();  // btn elements
+        if(!$isInline){
+            $btnArr['bv'] = self::generateListViewFormBtn($module, $attachName);  /* bv: button view          */
+            $btnArr['ba'] = self::generateListAuditFormBtn($module, $attachName); /* ba: button audit         */
+            $btnArr['sa'] = self::generateListAddSubFormBtn($module, $subModule, $attachName);          /* sa: button add subitems  */
+            $btnArr['be'] = self::generateListEditFormBtn($module, $attachName);  /* be: button edit          */
+            $btnArr['de'] = self::generateListDelFormBtn($module, $attachName);   /* de: button delete        */
+        }
+        else{
+            $btnArr['be'] = self::generateInlineListEditFormBtn($module, $attachName); /* ba: button edit         */
+            $btnArr['se'] = self::generateInlineListSaveFormBtn($module, $attachName);  /* be: button save          */
+            $btnArr['de'] = self::generateInlineListDelFormBtn($module, $attachName);   /* de: button delete        */
+            $btnArr['ce'] = self::generateInlineListCancelFormBtn($module, $attachName);  /* bv: button cancel          */
+        }
+
+        $btnInit = array();  // btn init actions
+        $btnInit['bv'] = "$(\"#{$module}{$attachName}_bv\"+cl).button({ text:false, icons: {primary: 'ui-icon-print'}});\n";
+        $btnInit['ba'] = "$(\"#{$module}{$attachName}_ba\"+cl).button({ text:false, icons: {primary: 'ui-icon-check'}});\n";
+        $btnInit['sa'] = "$(\"#{$module}{$attachName}_sa\"+cl).button({ text:false, icons: {primary: 'ui-icon-circle-plus'}});\n";
+        $btnInit['be'] = "$(\"#{$module}{$attachName}_be\"+cl).button({ text:false, icons: {primary: 'ui-icon-pencil'}});\n";
+        $btnInit['de'] = "$(\"#{$module}{$attachName}_de\"+cl).button({ text:false, icons: {primary: 'ui-icon-trash'}});\n";
+        $btnInit['ce'] = "$(\"#{$module}{$attachName}_ce\"+cl).button({ text:false, icons: {primary: 'ui-icon-cancel'}});\n";
+        $btnInit['se'] = "$(\"#{$module}{$attachName}_se\"+cl).button({ text:false, icons: {primary: 'ui-icon-disk'}});\n";
+
+        if($allowBtns!='all'){
+            foreach(self::$ctlBtns as $ctlBtnKey){
+                if(!in_array($ctlBtnKey, $allowBtns)){
+                    unset($btnArr[$ctlBtnKey]);
+                    unset($btnInit[$ctlBtnKey]);
+                }
+            }
+        }
+
+        if(count($btnArr)>0){
+            foreach($btnArr as $btnItem){
+                $str.=$btnItem;
+            }
+        }
+
+        $str.= "$(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('setRowData',ids[i],{";
+        $str.= "act:";
+        $str.= "'<span id=\\\"{$module}{$attachName}_btnSet' + cl +'\\\">' + ";
+        $str.= self::getAllowBtns($allowBtns, '+', $module);
+        $str.= " + '</span>'";
+        $str.= " });\n\n";
+
+        // setup buttonset
+        $str.= "$(\"#{$module}{$attachName}_btnSet\"+cl).buttonset();\n";
+        if(count($btnInit)>0){
+            foreach($btnInit as $btnItem){
+                $str.=$btnItem;
+            }
+        }
+
+        $str.= "var rowData = $(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('getRowData',cl);\n";
 //        $str.= "wacDebugLog('".WacEntityStatus::getId(WacEntityStatus::$audited).":' + rowData['status']);\n";
-        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
+        $str.= "if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$module}{$attachName}_ba\"+cl).attr('disabled','disabled');\n";
         $str.= "\$(\"#{$subModule}{$attachName}_sa\"+cl).attr('disabled','disabled');\n";

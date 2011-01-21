@@ -31,6 +31,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
             
+            // listen search event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
                 var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
                 params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
@@ -39,20 +40,8 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
 //                Wac.log(data);
             });
 
+            // listen export event, throw out show export form event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
-//                var params = {}};
-//                params = $(moduleListId).jqGrid('getGridParam',"url");
-//                Wac.log(params);
-//                params = $(moduleListId).jqGrid('getGridParam',"page");
-//                Wac.log(params);
-//                params = $(moduleListId).jqGrid('getGridParam',"sortname");
-//                Wac.log(params);
-//                 params = $(moduleListId).jqGrid('getGridParam',"sortorder");
-//                Wac.log(params);
-//                 params = $(moduleListId).jqGrid('getGridParam',"rowNum");
-//                Wac.log(params);
-//                params = $(moduleListId).getPostData();
-//                Wac.log(params);
                 var params = {};
                 params.moduleName = moduleName;
                 params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
@@ -108,13 +97,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                      var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                      for(var i=0;i < ids.length;i++){
                          var cl = ids[i];
-                        <?php echo WacModuleHelper::generateListViewFormBtn($moduleName, $moduleAttachName); ?>     // bv
-                        <?php echo WacModuleHelper::generateListAuditFormBtn($moduleName, $moduleAttachName); ?>    // ba
-                        <?php echo WacModuleHelper::generateListAddSubFormBtn($invokeParams['subItemModuleName']); ?>    // sa
-                        <?php echo WacModuleHelper::generateListEditFormBtn($moduleName, $moduleAttachName); ?>    // be
-                        <?php echo WacModuleHelper::generateListDelFormBtn($moduleName, $moduleAttachName); ?>    // de
-
-                        <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('be', 'de')); ?>
+                        <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('be', 'de'), false); ?>
                      }
                 },
 

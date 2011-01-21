@@ -52,7 +52,20 @@ echo "</div>\n";
                         text: $.i18n.prop("Close"),
                         click: function() { $(this).dialog("close"); }
                     }
-                ]
+                ],
+                open: function(){
+                    $($('.ui-dialog-buttonpane button')[0]).button({
+                        icons: {
+                            primary: 'ui-icon-check'
+                        }
+                    });
+
+                    $($('.ui-dialog-buttonpane button')[1]).button({
+                        icons: {
+                            primary: 'ui-icon-cancel'
+                        }
+                    });
+                }
                 
             });
         }
