@@ -18,4 +18,5 @@ all:
     search_in_list: _search_in_list_evt
     data_export: _data_export_select
     show_data_export_form: _show_data_export_form
+    show_data_print_form: _show_data_print_form
 

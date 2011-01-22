@@ -31,6 +31,11 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
 
+            // listen add event
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
+                $(moduleListId).jqGrid('editGridRow', "new", {});
+            });
+
             // listen search event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
                 var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
@@ -51,6 +56,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                 $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,params);
             });
 
+            var lastSelectId;
             $(moduleListId).jqGrid({
                   datatype: WacEntity.extraParam.dataFormat,
                   url: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/getList",
@@ -62,6 +68,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       '<?php echo __("Coding"); ?>',
                       '<?php echo __("Remark"); ?>',
                       '<?php echo __("Create Time"); ?>',
+                      '<?php echo __("Is avail"); ?>',
                       '<?php echo __("Action"); ?>'
                   ],
                   colModel:[
@@ -70,6 +77,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       {name:'code', index:'code', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:120, align:"left"},
                       {name:'memo', index:'memo', editable:true, width:150, edittype:"textarea", editoptions:{rows:"2",cols:"10"}, align:"center"},
                       {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, editable:false, align:"center"},
+                      {name:'is_avail', width:60, editable: true,edittype:"checkbox", formatter:availFormatter, unformat:availUnformatter, editoptions: {value:"1:0", defaultValue:"1"}, align:"center"},
                       {name:'act', width:180, sortable:false, align:"center"}
                   ],
                   jsonReader : WacEntity.jsonReader,
@@ -96,6 +104,13 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       }
                   },
 
+                  onSelectRow: function(id){
+                      if(id && id!==lastSelectId){
+                         $(moduleListId).jqGrid('restoreRow',lastSelectId);
+                         lastSelectId=id;
+                      }
+                  },
+
                   loadError : function(xhr,st,err){
                       Wac.log("Type: "+st+"; Response: "+ xhr.status + " "+xhr.statusText);
                   },
@@ -107,6 +122,14 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                   }
 
             });
+
+            function availFormatter(cellvalue, options, rowObject){
+                return (cellvalue == '1') ? $.i18n.prop("Yes") : $.i18n.prop("No");
+            }
+
+            function availUnformatter(cellvalue, options, rowObject){
+                return (cellvalue == $.i18n.prop("Yes")) ? "1" : "0";
+            }
 
 //          define a callback object to handle the callback, optional for this table
             <?php echo $modulePrefixName; ?>Callback = new WacJqGridCallback("<?php echo $modulePrefixName; ?>");

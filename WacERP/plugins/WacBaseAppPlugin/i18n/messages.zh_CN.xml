@@ -34,6 +34,10 @@
         <target>备注</target>
       </trans-unit>
       <trans-unit>
+        <source>Is avail</source>
+        <target>有效</target>
+      </trans-unit>
+      <trans-unit>
         <source>Create Time</source>
         <target>建立时间</target>
       </trans-unit>
@@ -88,6 +92,14 @@
       <trans-unit>
         <source>Close</source>
         <target>关闭</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Export Select</source>
+        <target>数据导出</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print</source>
+        <target>打印</target>
       </trans-unit>
       <trans-unit>
         <source>Please select export format</source>

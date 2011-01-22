@@ -11,7 +11,7 @@ echo "  <span><input name='code' id='{$modulePrefixName}_searchCode' class='ui-c
 echo "  <span id='{$modulePrefixName}_g1'>\n";
 echo "	  <button id='{$modulePrefixName}_btnSearch'>" . __("Search") . "</button>\n";
 if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
-  echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
+    echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
 }
 echo "  </span>\n";
 
@@ -55,7 +55,7 @@ echo "</span>\n";
             $(modulePrefixId + '_btnPrint').button({text: false,icons: {primary: "ui-icon-print"}});
             $(modulePrefixId+'_g2').buttonset();
 
-//            $(modulePrefixId+'_exportFormatBtns').buttonset();
+            //            $(modulePrefixId+'_exportFormatBtns').buttonset();
 
         };
 
@@ -70,30 +70,37 @@ echo "</span>\n";
                 triggerSearch();
             });
 
-
             $(modulePrefixId + '_btnSearch').bind("click", function(){
-               triggerSearch();
-            })
+                triggerSearch();
+            });
 
             $(modulePrefixId + '_btnAdd').bind("click", function(){
-               $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_add_form, {});
-            })
+                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_add_form, {});
+            });
 
+            $(modulePrefixId + '_btnPrint').bind("click", function(){
+                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_data_print_form,
+                {
+                    searchField: "code",
+                    searchString: $(searchFieldId).val(),
+                    searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
+                });
+            });
+            
             $(modulePrefixId + '_btnExportSel').bind("click", function(){
                 $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_data_export,{});
-            })
+            });
         };
         
 
         function triggerSearch(){            
-//            Wac.log($(searchFieldId).val());
+            //            Wac.log($(searchFieldId).val());
             $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list,
-              {
-                  searchField: "code",
-                  searchString: $(searchFieldId).val(),
-                  searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
-              }
-            );
+            {
+                searchField: "code",
+                searchString: $(searchFieldId).val(),
+                searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
+            });
         };
     });
 </script>
