@@ -71,6 +71,7 @@ class WacModule
           'wacGuardUser'                     => array('id'=>"57",'group'=>'1', 'name'=>"wacGuardUser", 'caption'=>"用户管理"),
 
           'wacI18n'                          => array('id'=>"58",'group'=>'1', 'name'=>"wacI18n", 'caption'=>"多语言服务"),
+          'wacPrint'                          => array('id'=>"59",'group'=>'1', 'name'=>"wacPrint", 'caption'=>"打印服务"),
     );
 
     public static function getInstance()
