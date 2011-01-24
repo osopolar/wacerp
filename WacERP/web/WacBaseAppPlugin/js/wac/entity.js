@@ -10,7 +10,8 @@ var WacEntity = {
     formStatus: new WacFormStatus(),
     jsonReader: new WacJsonReader(),
     extraParam: new WacExtraParams(),
-    jqGridMetas: new JqGridMetas()
+    jqGridMetas: new JqGridMetas(),
+    jqGridFormatter: new JqGridFormatter()
 
 //  modelObj        = new WacModel();
 //  openTabs        = new WacOpenTabs();
@@ -131,4 +132,17 @@ function JqGridMetas()
     this.searchOper   = "searchOper";
     this.searchString = "searchString";
 
+}
+
+function JqGridFormatter()
+{
+   this.availFormatter = function(cellvalue, options, rowObject)
+   {
+     return (cellvalue == '1') ? $.i18n.prop("Yes") : $.i18n.prop("No");
+   };
+
+   this.availUnformatter = function(cellvalue, options, rowObject)
+   {
+     return (cellvalue == $.i18n.prop("Yes")) ? "1" : "0";
+   }
 }

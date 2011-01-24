@@ -16,7 +16,8 @@ all:
     show_add_form: _show_add_form_evt
     show_edit_form: _show_edit_form_evt
     search_in_list: _search_in_list_evt
-    data_export: _data_export_select
+    data_export: _data_export
+    data_print: _data_print
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form
 
