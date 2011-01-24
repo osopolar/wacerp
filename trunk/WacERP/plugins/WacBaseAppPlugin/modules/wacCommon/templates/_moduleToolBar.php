@@ -4,6 +4,7 @@ $moduleName = $invokeParams['contextInfo']['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
 
 
+echo "<!-- {$modulePrefixName} toolbar, begin-->\n";
 echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
 
 echo "  <span><input name='code' id='{$modulePrefixName}_searchCode' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
@@ -79,12 +80,7 @@ echo "</span>\n";
             });
 
             $(modulePrefixId + '_btnPrint').bind("click", function(){
-                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_data_print_form,
-                {
-                    searchField: "code",
-                    searchString: $(searchFieldId).val(),
-                    searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
-                });
+                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_data_print, {});
             });
             
             $(modulePrefixId + '_btnExportSel').bind("click", function(){
@@ -104,3 +100,4 @@ echo "</span>\n";
         };
     });
 </script>
+<?php echo "<!-- {$modulePrefixName} toolbar, end-->\n";?>

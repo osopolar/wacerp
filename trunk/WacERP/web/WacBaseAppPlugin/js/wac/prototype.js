@@ -388,3 +388,4 @@ WacJqGridCallback = function(modulePrefixName)
     };
 
 }
+
