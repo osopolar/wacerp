@@ -18,7 +18,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
 
 ?>
 
-<?php echo "<!-- {$modulePrefixName} inlineTable, begin-->\n";?>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, begin");?>
 <div id="<?php echo $moduleListingTableId; ?>">
     <table id="<?php echo $moduleListId; ?>"></table>
     <div id="<?php echo $moduleListPagerId; ?>" ></div>
@@ -104,7 +104,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                           $(this).trigger("tabsload");   // inform tabs event listener
                       }
 
-                });
+                });  // grid end
 
                 $(moduleListId).jqGrid('navGrid',moduleListPagerId,
                     {edit:true, add:true, del:true, search:true, refresh:true, view:true, position:"left"},
@@ -114,7 +114,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                     {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
                     {afterComplete: <?php echo $modulePrefixName; ?>Callback.view}
                 );
-            };
+            };  // init end
 
             function bindEvents(){
                 // listen add event
@@ -132,7 +132,7 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                 });
 
                 $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
-                   Wac.log(data);
+//                   Wac.log(data);
                     var params = {};
                     params.moduleName = moduleName;
                     params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
@@ -159,4 +159,4 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
 
     </script>
 </div>
-<?php echo "<!-- {$modulePrefixName} inlineTable, end-->\n";?>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, end");?>

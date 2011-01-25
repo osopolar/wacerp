@@ -3,8 +3,7 @@ $modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['
 $moduleName = $invokeParams['contextInfo']['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
 
-
-echo "<!-- {$modulePrefixName} toolbar, begin-->\n";
+OutputHelper::getInstance()->writeNote("{$modulePrefixName}-ToolBar, end");
 echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
 
 echo "  <span><input name='code' id='{$modulePrefixName}_searchCode' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
@@ -100,4 +99,4 @@ echo "</span>\n";
         };
     });
 </script>
-<?php echo "<!-- {$modulePrefixName} toolbar, end-->\n";?>
+<?php OutputHelper::getInstance()->writeNote("{$modulePrefixName}-ToolBar, end");?>

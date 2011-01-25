@@ -17,7 +17,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
 
 ?>
 
-<?php echo "<!-- {$modulePrefixName} listingTable, begin-->\n";?>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, begin");?>
 <div id="<?php echo $moduleListingTableId; ?>">
     <table id="<?php echo $moduleListId; ?>"></table>
     <div id="<?php echo $moduleListPagerId; ?>" ></div>
@@ -97,19 +97,17 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                                     //        Wac.log("loadComplete");
                                     $(this).trigger("tabsload");   // inform tabs event listener
                                 }
+               }); // grid end
 
-                            }); // grid end
-
-                     $(moduleListId).jqGrid('navGrid',moduleListPagerId,
-                        {edit:false, add:false, del:false, search:true, refresh:true, view:false, position:"left"},
-                        {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.edit},
-                        {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.add},
-                        {afterComplete: <?php echo $modulePrefixName; ?>Callback.del},
-                        {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
-                        {afterComplete: <?php echo $modulePrefixName; ?>Callback.view});
-                     }
-         })
-
+               $(moduleListId).jqGrid('navGrid',moduleListPagerId,
+                {edit:false, add:false, del:false, search:true, refresh:true, view:false, position:"left"},
+                {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.edit},
+                {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.add},
+                {afterComplete: <?php echo $modulePrefixName; ?>Callback.del},
+                {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
+                {afterComplete: <?php echo $modulePrefixName; ?>Callback.view});
+          };  // init end
+         
         function bindEvents(){
             // listen search event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
@@ -131,10 +129,10 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
                 $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,params);
             });
-        }
+        };  //bindEvnts end
 
-
-     //]]>
-     </script>
+    })
+   //]]>
+</script>
 </div>
-<?php echo "<!-- {$modulePrefixName} listingTable, end-->\n";?>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, end");?>

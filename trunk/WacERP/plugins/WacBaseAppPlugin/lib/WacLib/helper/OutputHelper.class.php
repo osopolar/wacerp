@@ -300,7 +300,7 @@ class OutputHelper
 
     public function writeNote($v, $isReturnStr=false, $params=array())
     {
-        $format = "\n\n<!-- WacNote: %s-->\n\n";
+        $format = "\n<!-- WacNote: %s-->\n";
         $str = sprintf($format, $v);
         if(!$isReturnStr){
             echo $str;

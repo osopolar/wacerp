@@ -4,6 +4,7 @@
 all:
   components:      # Component Slots(included in layout) , for the widgets of public usage purpose
     dataExportWidget: [wacCommon, dataExportWidget]
+    printWidget: [wacPrint, innerWidget]
 
 default:
   http_metas:

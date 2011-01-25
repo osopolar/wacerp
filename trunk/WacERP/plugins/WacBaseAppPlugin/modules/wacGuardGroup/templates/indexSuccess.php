@@ -1,9 +1,9 @@
-<!-- ControlComponent, begin -->
 <?php
   $arrMainModuleTableFields = WacModuleHelper::getModuleTableFields($contextInfo["moduleName"]);  // got all fields from module table, they will be set as hidden fields in the table list
   $subItemModuleName="";
   $attachInfo = array("name"=>"");
 
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, begin");
   echo "<div id=\"".WacModuleHelper::getComponentsId($contextInfo["moduleName"])."\">\n\n";
 
   OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleToolbar Component Included.");
@@ -53,5 +53,5 @@
                   ));
 
   echo "</div>\n\n";
+  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, end");
 ?>
-<!-- ControlComponent, end -->
