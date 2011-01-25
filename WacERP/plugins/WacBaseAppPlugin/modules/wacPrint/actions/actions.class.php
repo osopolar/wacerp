@@ -8,18 +8,8 @@
  * @author     JianBinBi
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class printerActions extends WacCommonActions
-{
-    /**
-   * Executes an application defined process prior to execution of this sfAction object.
-   *
-   * By default, this method is empty.
-   */
-  public function preExecute() {
-      parent::preExecute();
-      $this->initPrintInclusion();
-  }
-    
+class printActions extends WacCommonActions
+{    
  /**
   * Executes index action
   *

@@ -12,8 +12,12 @@
   <body id="wacAppController">
     <?php echo $sf_content ?>
 
-    <!-- ToolkitWidgets, begin -->
-    <?php include_component_slot('dataExportWidget') ?>
-    <!-- ToolkitWidgets, end -->
+    <?php
+      OutputHelper::getInstance()->writeNote("Declare public ToolkitWidgets, begin");
+      include_component_slot('dataExportWidget'); // for data export
+      include_component_slot('printWidget'); // for print
+      OutputHelper::getInstance()->writeNote("Declare public ToolkitWidgets, end");
+    ?>
+
   </body>
 </html>

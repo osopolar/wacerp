@@ -3,6 +3,7 @@ $moduleName = $contextInfo['moduleName'];
 $componentName = $contextInfo['componentName'];
 $widgetName = "{$moduleName}_{$componentName}";
 
+OutputHelper::getInstance()->writeNote("{$moduleName}-{$componentName}, begin");
 echo "<div id=\"{$widgetName}\" style=\"display: none;\">\n";
 echo "    <form action=\"\"  name=\"{$widgetName}_form\" id=\"{$widgetName}_form\" method=\"post\">\n";
 echo "    <table width='100%'>\n";
@@ -110,3 +111,4 @@ echo "</div>\n";
         
     })
 </script>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$componentName}, end"); ?>
