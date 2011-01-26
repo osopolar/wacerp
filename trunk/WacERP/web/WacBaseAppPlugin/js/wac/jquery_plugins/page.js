@@ -32,8 +32,7 @@
                 else{
                     eval(options.target+".location='"+options.url+"'");
                 }
-            }
-            ,
+            },
             initUIBtn: function(){
                 //all hover and click logic for buttons
                 $(".fg-button:not(.ui-state-disabled)")
@@ -59,8 +58,19 @@
                         $(this).removeClass("ui-state-active");
                     }
                 });
-            }
-            ,
+            },
+            showBlockUI: function(id)
+            {
+                $.blockUI({
+                    message: $(id),
+                    css: {
+                        top: '5px',
+                        left: '10px',
+                        width: '98%',
+                        cursor: null
+                    }
+                });
+            },
             showBlockUILoading: function(id, msg)
             {
                 if(msg === undefined){
@@ -79,8 +89,7 @@
                         message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                     });
                 }
-            }
-            ,
+            },
             hideBlockUI: function(id)
             {
                 if(id === undefined)
@@ -91,8 +100,7 @@
                 {
                     $(id).unblock();
                 }
-            }
-            ,
+            },
             showTips: function(msg, title)
             {
                 if(title != undefined)
@@ -116,49 +124,40 @@
                         }
                     }
                 });
-            }
-            ,
+            },
             isEmpty: function(str){
                 return (str == null) || (str.length == 0);
-            }
-            ,
+            },
             isEmail: function(str){
                 if(isEmpty(str)) return false;
                 var re = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i
                 return re.test(str);
-            }
-            ,
+            },
             isAlpha: function(str){
                 var re = /[^a-zA-Z]/g
                 if (re.test(str)) return false;
                 return true;
-            }
-            ,
+            },
             isNumeric: function(str){
                 var re = /[\D]/g
                 if (re.test(str)) return false;
                 return true;
-            }
-            ,
+            },
             isAlphaNumeric: function(str){
                 var re = /[^a-zA-Z0-9]/g
                 if (re.test(str)) return false;
                 return true;
-            }
-            ,
+            },
             isLength: function(str, len){
                 return str.length == len;
-            }
-            ,
+            },
             isLengthBetween: function(str, min, max){
                 return (str.length >= min)&&(str.length <= max);
-            }
-            ,
+            },
             isPhoneNumber: function(str){
                 var re = /^\(?[2-9]\d{2}[\)\.-]?\s?\d{3}[\s\.-]?\d{4}$/
                 return re.test(str);
-            }
-            ,
+            },
             isDate: function(str){
                 var re = /^(\d{1,2})[\s\.\/-](\d{1,2})[\s\.\/-](\d{4})$/
                 if (!re.test(str)) return false;
@@ -175,8 +174,7 @@
                     var days = 31;
                 }
                 return (d >= 1 && d <= days);
-            }
-            ,
+            },
             is18YearOld: function(str){
                 var re = /^(\d{1,2})[\s\.\/-](\d{1,2})[\s\.\/-](\d{4})$/
                 if (!re.test(str)) return false;
@@ -199,12 +197,10 @@
                 }
 
                 return false;
-            }
-            ,
+            },
             isMatch: function(str1, str2){
                 return str1 == str2;
-            }
-            ,
+            },
             test: function(options) {
                 var defaults = {};
                 
@@ -217,7 +213,6 @@
                 return true;
             }
         };
-
 
         // Private methods
         function _privateMethod() {

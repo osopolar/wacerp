@@ -15,6 +15,8 @@ class WacDataFormatType
     public static $csv        = "csv";
     public static $text       = "text";
     public static $txt        = "txt";
+    public static $html       = "html";
+    public static $htmlTable  = "htmlTable";
     public static $pureText   = "pureText";
     public static $pureTextJs = "pureText.js";
 }

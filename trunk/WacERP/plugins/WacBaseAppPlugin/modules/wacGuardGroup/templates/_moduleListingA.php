@@ -118,6 +118,18 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                 //                Wac.log(data);
             });
 
+            // listen print event, throw out show print form event
+            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
+                var params = {};
+                params.moduleName = moduleName;
+                params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
+                params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
+                params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
+                params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
+                params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                $.shout(WacAppConfig.event.app_wac_events_show_data_print_form,params);
+            });
+
             // listen export event, throw out show export form event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
                 var params = {};

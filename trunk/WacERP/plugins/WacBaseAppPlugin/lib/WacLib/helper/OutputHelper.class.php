@@ -61,6 +61,12 @@ class OutputHelper
                 case WacDataFormatType::$pureText:
                     return $this->outputPureTextFormat($resultSet, $action, $params);
                     break;
+                case WacDataFormatType::$html:
+                    return $this->outputHtmlFormat($resultSet, $action, $params);
+                    break;
+                case WacDataFormatType::$htmlTable:
+                    return $this->outputHtmlTableFormat($resultSet, $action, $params);
+                    break;
                 case WacDataFormatType::$pureTextJs:   // for http request, but no any debug wrapping
                     return $this->outputPureTextJsFormat($resultSet, $action, $params);
                     break;
@@ -107,6 +113,8 @@ class OutputHelper
                         }
                     }
                     break;
+                case WacDataFormatType::$html:
+                    break;
                 case WacDataFormatType::$text:
                 case WacDataFormatType::$txt:
                 default:
@@ -135,6 +143,38 @@ class OutputHelper
             
         }
         return sfView::NONE;
+    }
+
+    /*
+     * return pure html text
+     * @params
+     * array $node - node info,
+     */
+    public function outputHtmlFormat($output, sfAction $action, $params=array())
+    {
+        if(isset($params["isCache"]) && $params["isCache"]){
+            $this->setCacheHeader($action, false);
+        }
+        else{
+           $this->setNoCacheHeader($action, false);
+        }
+        
+        $this->_response->setContentType('text/html; charset=utf-8');
+//        $action->setTemplate("debugBlank", "wacCommon");
+        return $action->renderText($output);
+    }
+
+    /*
+     * return pure html text
+     * @params
+     * array $node - node info,
+     */
+    public function outputHtmlTableFormat($resultSet, sfAction $action, $params=array())
+    {
+        $output = "";
+        $tableTpl = "htmlTableA";
+        $output = $action->getPartial(WacModule::getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
+        return $this->outputHtmlFormat($output, $action, $params);
     }
 
     /*
