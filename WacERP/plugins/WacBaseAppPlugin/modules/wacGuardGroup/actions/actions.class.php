@@ -10,6 +10,14 @@
  */
 class wacGuardGroupActions extends WacCommonActions
 {
+    /*
+   * override setupListMetaInfo method
+   */
+  protected function  setupListMetaInfo() {
+//        $metaInfo = JsCommonData::getListMetaDatum();
+//        $metaInfo["displayFields"][] = array("field")
+  }
+
   /*
    * override filter list
    */

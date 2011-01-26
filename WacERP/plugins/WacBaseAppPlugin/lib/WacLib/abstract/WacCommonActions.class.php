@@ -142,6 +142,15 @@ abstract class WacCommonActions extends sfActions {
         return $listObjs->toArray();
     }
 
+    /**
+     * setup shown list titles and fields
+     *   canbe override by children
+     * @return array result
+     */
+    protected function setupListMetaInfo() {
+        return array();
+    }
+
     /*
      * it act as a data provider, can be invoked by executeGetList and executeDataExport
      *
@@ -173,9 +182,11 @@ abstract class WacCommonActions extends sfActions {
 
 //      $filterResultSet = $resultSet;
         $filterResultSet = $this->filterList($resultSet);
+        
+        $listMetas = $this->setupListMetaInfo();
 
         $pager     = $this->mainModuleTable->getPager();
-        $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum());
+        $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum(), $listMetas);
         return $filterResultSet;
     }
 

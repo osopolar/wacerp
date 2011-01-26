@@ -93,6 +93,7 @@ class JqGridDataHelper {
         "totalPages"   => 1,
         "totalRecords" => 0,
         "userdata"     => array(),
+        "metas"        => array(),
         "items"        => array()
         );
     }
@@ -114,12 +115,13 @@ class JqGridDataHelper {
 //        }
 //        return $result;
 //    }
-    public function convert($resultSet, $pager, $userdata)
+    public function convert($resultSet, $pager, $userdata, $metas=array())
     {
         $result = $this->getCommonDatum();
         $result['currentPage']  = $pager->getPage();
         $result['totalPages']   = $pager->getLastPage();
         $result['totalRecords'] = $pager->getNumResults();
+        $result['metas']        = $metas;
         $result[self::$KEY_USER_DATA] = $userdata;
         if(is_array($resultSet) && count($resultSet)>0)
         {

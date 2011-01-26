@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of JsCommonDataHelper
+ * Description of JsCommonData
  *
  * generate common js data format
  *
@@ -32,6 +32,21 @@ class JsCommonData {
     public static function getCommonDatum() {
 
         return array('items' => array(), 'info'=>array());
+    }
+
+    /*
+     * return JsCommon list meata data structure
+     * @params
+     * array $node - node info,
+     */
+    public static function getListMetaDatum() {
+
+        return array('displayFields' => array(
+                        0 => array(
+                         "fieldName" => "",
+                         "label" => ""
+                        )
+        ));
     }
 
     /*
