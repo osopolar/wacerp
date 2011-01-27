@@ -46,21 +46,15 @@ $moduleListPagerId = WacModuleHelper::getPagerId($moduleName, $moduleAttachName)
                       editurl: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/doOperation/dataFormat/"+WacEntity.extraParam.dataFormat,
                       postData: WacEntity.extraParam,
                       colNames:[
-                          'id',
-                          '<?php echo __("Name"); ?>',
-                          '<?php echo __("Coding"); ?>',
-                          '<?php echo __("Remark"); ?>',
-                          '<?php echo __("Create Time"); ?>',
-                          '<?php echo __("Is avail"); ?>',
-                          '<?php echo __("Action"); ?>'
+                      <?php
+                        echo WacModuleHelper::generateJqGridDisplayColLabels($contextInfo["listCols"]);
+                      ?>
+                      '<?php echo __("Action"); ?>'
                       ],
                       colModel:[
-                          {name:'id', index:'id', editable:false, width:25},
-                          {name:'name', index:'name', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:250},
-                          {name:'code', index:'code', editable:true, formoptions:{elmsuffix:"(*)"}, editrules:{required:true}, width:120, align:"left"},
-                          {name:'memo', index:'memo', editable:true, width:150, edittype:"textarea", editoptions:{rows:"2",cols:"10"}, align:"center"},
-                          {name:'created_at', index:'created_at', sorttype:'date', datefmt:'Y-m-d', width:150, editable:false, align:"center"},
-                          {name:'is_avail', width:60, editable: true,edittype:"checkbox", formatter:WacEntity.jqGridFormatter.availFormatter, unformat:WacEntity.jqGridFormatter.availUnformatter, editoptions: {value:"1:0", defaultValue:"1"}, align:"center"},
+                        <?php
+                        echo WacModuleHelper::generateJqGridDisplayColModels($contextInfo["listCols"]);
+                        ?>
                           {name:'act', width:180, sortable:false, align:"center"}
                       ],
                       jsonReader : WacEntity.jsonReader,

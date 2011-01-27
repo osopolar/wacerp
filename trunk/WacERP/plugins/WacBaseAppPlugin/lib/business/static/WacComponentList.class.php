@@ -25,6 +25,9 @@ class WacComponentList
     //// module listing
     public static $moduleListingA             = "moduleListingA";
 
+    //// module list
+    public static $moduleList                 = "moduleList";
+
     //// module form
     public static $moduleForm                 = "moduleForm";
 

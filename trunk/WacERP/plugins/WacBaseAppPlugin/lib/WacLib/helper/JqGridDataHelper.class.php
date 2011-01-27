@@ -66,20 +66,27 @@ class JqGridDataHelper {
     }
 
     /*
-     * return original JqGridCommon format data structure
-     * @params
-     * array $node - node info,
+     * return a jqGrid col properties array
+     * @$cols = array, setup default values
      */
-//    public function getOriCommonDatum()
-//    {
-//        return array(
-//        "page"  =>1,
-//        "total"   => 1,
-//        "records" => 0,
-//        "userdata"=> array(),
-//        "rows"    => array()
-//        );
-//    }
+    public function getCol($cols = array()){
+        $default = array("colName" => "",
+            "label" => "",
+            "index" => "",
+            "align" => "center",
+            "width" => "30",
+            "sortable" => "true",
+            "editable" => "false",
+            "edittype" => "",
+            "editrules" => "",
+            "formoptions" => "",
+            "formatter" => "",
+            "unformat" => "",
+            "editoptions" => "",
+            "datefmt" => "");
+
+        return array_merge($default, $cols);
+    }
 
     /*
      * return Common format data structure
@@ -93,7 +100,7 @@ class JqGridDataHelper {
         "totalPages"   => 1,
         "totalRecords" => 0,
         "userdata"     => array(),
-        "metas"        => array(),
+        "metaInfo"     => array(),
         "items"        => array()
         );
     }
@@ -103,25 +110,13 @@ class JqGridDataHelper {
      * $resultSet - array()
      * $pager - doctrine pager
      */
-//    public function convert($resultSet, $pager)
-//    {
-//        $result = $this->getOriCommonDatum();
-//        $result['page']  = $pager->getPage();
-//        $result['total']   = $pager->getLastPage();
-//        $result['records'] = $pager->getNumResults();
-//        if(is_array($resultSet) && count($resultSet)>0)
-//        {
-//            $result['rows'] = $resultSet;
-//        }
-//        return $result;
-//    }
-    public function convert($resultSet, $pager, $userdata, $metas=array())
+    public function convert($resultSet, $pager, $userdata, $metaInfo=array())
     {
         $result = $this->getCommonDatum();
         $result['currentPage']  = $pager->getPage();
         $result['totalPages']   = $pager->getLastPage();
         $result['totalRecords'] = $pager->getNumResults();
-        $result['metas']        = $metas;
+        $result['metaInfo']     = $metaInfo;
         $result[self::$KEY_USER_DATA] = $userdata;
         if(is_array($resultSet) && count($resultSet)>0)
         {

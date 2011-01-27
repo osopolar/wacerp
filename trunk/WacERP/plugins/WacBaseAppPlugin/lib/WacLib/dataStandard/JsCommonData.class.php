@@ -41,12 +41,7 @@ class JsCommonData {
      */
     public static function getListMetaDatum() {
 
-        return array('displayFields' => array(
-                        0 => array(
-                         "fieldName" => "",
-                         "label" => ""
-                        )
-        ));
+        return array('displayCols' => array());
     }
 
     /*

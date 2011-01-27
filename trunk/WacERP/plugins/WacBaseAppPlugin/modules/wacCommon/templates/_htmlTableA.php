@@ -1,27 +1,29 @@
 <table width="100%" cellspacing="0" cellpadding="0" class="wacTable" >
     <tbody>
         <?php
-            $titleCol = "<td class=\"wacTableTitle\">%s</td>\n";
-            if(isset($resultSet["colNames"]) && count($resultSet["colNames"])>0)
-            {
+//        print_r($resultSet);
+        $displayCols = array();
+
+        $titleCol = "<td class=\"wacTableTitle\">%s</td>\n";
+        if (isset($resultSet["metaInfo"]["displayCols"]) && count($resultSet["metaInfo"]["displayCols"]) > 0) {
+            echo "<tr>\n";
+            foreach ($resultSet["metaInfo"]["displayCols"] as $col) {
+                $displayCols[] = $col["name"];
+                printf($titleCol, $col["label"]);
+            }
+            echo "</tr>\n";
+        }
+
+        $fieldCol = "<td class=\"wacTableField\">%s</td>\n";
+        if (isset($resultSet["items"]) && count($resultSet["items"]) > 0) {
+            foreach ($resultSet["items"] as $item) {
                 echo "<tr>\n";
-                foreach($resultSet["colNames"] as $colName){
-                        printf($titleCol, $colName);
+                foreach ($displayCols as $displayCol) {
+                    printf($fieldCol, $item[$displayCol]);
                 }
                 echo "</tr>\n";
             }
-
-            $fieldCol = "<td class=\"wacTableField\">%s</td>\n";
-            if(isset($resultSet["items"]) && count($resultSet["items"])>0)
-            {
-                foreach($resultSet["items"] as $item){
-                    echo "<tr>\n";
-                    foreach($item as $field){
-                        printf($fieldCol, $field);
-                    }
-                    echo "</tr>\n";
-                }
-            }
-       ?>
+        }
+        ?>
     </tbody>
 </table>
