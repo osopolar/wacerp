@@ -98,8 +98,64 @@ class WacModuleHelper
     }
 
     /*
+     * generate display col labels
+     * @params - jqgrid cols array
+     * return string
+     */
+    public static function generateJqGridDisplayColLabels($cols){
+        $str = "";
+        if(count($cols)>0){
+            $tmpArr = array();
+            foreach($cols as $col){
+                $tmpArr[]= "'{$col["label"]}'";
+            }
+            $str.= implode(",\n", $tmpArr).",\n";
+        }
+        return $str;
+    }
+
+    /*
+     * generate display col models
+     * @params - jqgrid cols array
+     * return string
+     */
+    public static function generateJqGridDisplayColModels($cols){
+        $str = "";
+        if(count($cols)>0){
+            $tmpArr1 = array();
+            foreach($cols as $col){
+                $tmpArr2 = array();
+                foreach($col as $k => $v){
+                    if($v !== ""){
+                        switch($k){
+                            case "sortable":
+                            case "editable":
+                            case "width":
+                            case "formoptions":
+                            case "editrules":
+                            case "formatter":
+                            case "unformat":
+                            case "editoptions":
+                                $tmpArr2[] = "{$k}:{$v}";
+                                break;
+                            case "label":
+                                break;
+                            default:
+                                $tmpArr2[] = "{$k}:'{$v}'";
+                                break;
+                        }
+                    }
+                }
+                $tmpArr1[]= "{".implode(",", $tmpArr2)."}";
+            }
+            $str.= implode(",\n", $tmpArr1).",\n";
+        }
+        return $str;
+    }
+
+    /*
      * generate hidden fields
-     * @params - (sfOutputEscaperArrayDecorator) objMainModuleTableFields
+     * @params - array objMainModuleTableFields
      * return string
      */
     public static function generateJqGridHiddenFields($arrMainModuleTableFields=array(), $isDetailDeclare=false, $isComma=true)

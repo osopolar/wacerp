@@ -72,30 +72,6 @@ abstract class WacCommonActions extends sfActions {
         $this->getResponse()->addJavaScript($this->getWacActionJs(), "last");
     }
 
-    /*
-   * adopt other js/css for pring action
-    */
-    public function initPrintInclusion() {
-        // js required
-        $this->getResponse()->addJavaScript('jquery/jquery-1.3.2.min.js', 'last');
-        $this->getResponse()->addJavaScript('jquery/jquery-ui-1.7.2.min.js', 'last');
-        $this->getResponse()->addJavaScript('jquery/jquery.printElement.js', 'last');
-        $this->getResponse()->addJavaScript('jquery/jquery.dump.js', 'last');
-        $this->getResponse()->addJavaScript('backend/printer/indexAction.js', 'last');
-        $this->getResponse()->addJavaScript('wac_common.js', 'last');
-        $this->getResponse()->addJavaScript('wac_debug.js', 'last');
-
-
-        // css required
-        $this->getResponse()->addStylesheet("jquery/jqueryUI/themes/smoothness/jquery-ui-1.7.2.custom.css", 'last', array("media"=>"screen"));
-//        $this->getResponse()->addStylesheet("jquery/jqueryUI/themes/cupertino/jquery-ui-1.7.2.custom.css", 'last', array("media"=>"screen"));
-//        $this->getResponse()->addStylesheet("jquery/jqueryUI/themes/sunny/jquery-ui-1.7.2.custom.css", 'last', array("media"=>"screen"));
-
-//        $this->getResponse()->addStylesheet("blueprint/screen.css", 'last', array("media"=>"screen, projection"));
-        $this->getResponse()->addStylesheet("blueprint/print.css", 'last', array("media"=>"print"));
-//        $this->getResponse()->addStylesheet("blueprint/ie.css", 'last', array("media"=>"screen, projection"));
-    }
-
     /**
      * Executes index action
      *
@@ -143,12 +119,20 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /**
-     * setup shown list titles and fields
+     * setup list meta info, e.g. shown list titles and fields
      *   canbe override by children
      * @return array result
      */
     protected function setupListMetaInfo() {
-        return array();
+        $sfController = sfContext::getInstance()->getController();
+        if($sfController->componentExists($this->innerContextInfo["moduleName"], WacComponentList::$moduleList)){
+            $moduleListComponent = $sfController->getComponent($this->innerContextInfo["moduleName"], WacComponentList::$moduleList);
+        }
+        else{
+            $moduleListComponent = $sfController->getComponent(WacModule::getName("wacCommon"), WacComponentList::$baseInlineTableA);
+        }
+        
+        return $moduleListComponent->getListMetaInfo();
     }
 
     /*
@@ -182,11 +166,10 @@ abstract class WacCommonActions extends sfActions {
 
 //      $filterResultSet = $resultSet;
         $filterResultSet = $this->filterList($resultSet);
-        
-        $listMetas = $this->setupListMetaInfo();
+        $pager        = $this->mainModuleTable->getPager();
+        $listMetaInfo = $this->setupListMetaInfo();
 
-        $pager     = $this->mainModuleTable->getPager();
-        $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum(), $listMetas);
+        $filterResultSet = $jqGridDataHelper->convert($filterResultSet, $pager, JsCommonData::getSuccessDatum(), $listMetaInfo);
         return $filterResultSet;
     }
 

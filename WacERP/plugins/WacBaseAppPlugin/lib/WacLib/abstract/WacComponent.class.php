@@ -10,13 +10,18 @@
  */
 
 abstract class WacComponent extends sfComponent {
+    protected $innerContextInfo = array();
+    
     // define a info holder
     public function execute($request) {
-        $this->contextInfo = array();
-        $this->contextInfo["componentName"]  = $this->getActionName();
-        $this->contextInfo["moduleName"]     = $this->getModuleName();
-        $this->contextInfo["componentJs"]    = $this->getComponentJs();
-        $this->contextInfo["wacComponentJs"] = $this->getWacComponentJs();
+        $this->innerContextInfo = array();
+        $this->innerContextInfo["componentName"]  = $this->getActionName();
+        $this->innerContextInfo["moduleName"]     = $this->getModuleName();
+        $this->innerContextInfo["componentJs"]    = $this->getComponentJs();
+        $this->innerContextInfo["wacComponentJs"] = $this->getWacComponentJs();
+        $this->innerContextInfo["listCols"]       = $this->setupJqGridCols();
+
+        $this->contextInfo = $this->innerContextInfo;  //assign to tpl
     }
 
     public function executeMain($request)
@@ -30,6 +35,27 @@ abstract class WacComponent extends sfComponent {
         $this->execute($request);
         $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');  // layout
     }
+
+    // canbe override by child method
+    public function setupJqGridCols(){
+        return array();
+    }
+
+    public function getListMetaInfo(){
+        $metaInfo = JsCommonData::getListMetaDatum();
+        if(!isset($this->innerContextInfo["listCols"])){
+            $this->innerContextInfo["listCols"] = $this->setupJqGridCols();
+        }
+
+        if(count($this->innerContextInfo["listCols"])>0){
+            foreach($this->innerContextInfo["listCols"] as $listCol){
+                $metaInfo["displayCols"][] = array("name"=>$listCol["name"], "label"=>$listCol["label"]);
+            }
+        }
+        
+        return $metaInfo;
+    }
+    
 
     public function getComponentName() {
         return $this->getActionName();
@@ -46,7 +72,7 @@ abstract class WacComponent extends sfComponent {
     public function getWacComponentJs($specName="") {
         return
         ($specName=="") ?
-        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$this->contextInfo["componentName"]
+        '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$this->innerContextInfo["componentName"]
                 :
         '/WacBaseAppPlugin/js/modules/'.$this->getModuleName().'/_'.$specName;
     }
