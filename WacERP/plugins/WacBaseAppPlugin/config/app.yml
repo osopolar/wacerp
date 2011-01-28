@@ -8,7 +8,6 @@ all:
   wac_setting:
     legal_website: http://WWW.WebAppClub.COM
     data_export_format:
-      htmlTable: htmlTable
       xml: xml
       json: json
       csv: csv

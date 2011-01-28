@@ -14,7 +14,7 @@ $modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams
 $moduleListingTableId = WacModuleHelper::getListingTableId($moduleName, $moduleAttachName);
 $moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachName);
 $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
-
+$moduleCaption        = WacModule::getCaption($moduleName) . __("List");
 //print_r($contextInfo);
 ?>
 
@@ -26,11 +26,13 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
     <script type="text/javascript">
         //<![CDATA[
         $(function(){
-            var moduleName = <?php echo "'{$moduleName}'" ?>;
+            var moduleName       = <?php echo "'{$moduleName}'" ?>;
             var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
             var modulePrefixId   = '#' + modulePrefixName;
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
+            var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
+
 
             //  define a callback object to handle the callback, optional for this table
             <?php echo $modulePrefixName; ?>Callback = new WacJqGridCallback("<?php echo $modulePrefixName; ?>");
@@ -66,7 +68,7 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
                         multiselect: false,
                         viewrecords: true,
                         pager: moduleListPagerId,
-                        caption:"<?php echo WacModule::getCaption($moduleName) . __("List"); ?>",
+                        caption:"<?php echo $moduleCaption; ?>",
                         height: '100%',
                         width: '100%',
 
@@ -114,7 +116,9 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             // listen print event, throw out show print form event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
                 var params = {};
-                params.moduleName = moduleName;
+                params.moduleName    = moduleName;
+                params.moduleCaption = moduleCaption;
+
                 params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
                 params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
                 params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
@@ -127,6 +131,8 @@ $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachNa
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
                 var params = {};
                 params.moduleName = moduleName;
+                params.moduleCaption = moduleCaption;
+                
                 params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
                 params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
                 params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");

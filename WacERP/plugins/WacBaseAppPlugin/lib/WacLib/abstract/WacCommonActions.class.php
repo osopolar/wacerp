@@ -115,7 +115,19 @@ abstract class WacCommonActions extends sfActions {
      * @return array result
      */
     protected function filterList($listObjs) {
-        return $listObjs->toArray();
+//        return $listObjs->toArray();
+
+        $filterArr = array();
+        if (count($listObjs) > 0) {
+            foreach ($listObjs as $listObj) {
+                $tmpArr = $listObj->toArray();
+                $tmpArr['is_avail_label'] = ($listObj->getIsAvail() == 1) ? $this->i18n->__("Yes") : $this->i18n->__("No");
+
+                $filterArr[] = $tmpArr;
+            }
+        }
+
+        return $filterArr;
     }
 
     /**

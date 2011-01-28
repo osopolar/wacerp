@@ -67,7 +67,11 @@
                         top: '5px',
                         left: '10px',
                         width: '98%',
-                        cursor: null
+                        border: '2px solid #aaa',
+                        cursor:	'default'
+                    },
+                    overlayCSS:  {
+                        cursor:	'pointer'
                     }
                 });
             },
