@@ -105,6 +105,14 @@
         <source>Please select export format</source>
         <target>请选择数据输出格式</target>
       </trans-unit>
+      <trans-unit>
+        <source>Yes</source>
+        <target>是</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No</source>
+        <target>否</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
