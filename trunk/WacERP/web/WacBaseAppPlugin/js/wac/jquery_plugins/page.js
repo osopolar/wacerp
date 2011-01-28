@@ -84,14 +84,28 @@
                 if(id === undefined)
                 {
                     $.blockUI({
-                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                        message: '<h3><img src="/WacBaseAppPlugin/images/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                     });
                 }
                 else
                 {
                     $(id).block({
-                        message: '<h3><img src="/images/common/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
+                        message: '<h3><img src="/WacBaseAppPlugin/images/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                     });
+                }
+            },
+            showLoader: function(id, msg)
+            {
+                var loaderStr = "<div class=\"wacLoader\"><div align=\"center\"><b>"+ msg +"</b></div>";
+                loaderStr += "<div align=\"center\"><img border=\"0\" alt=\"Loading...\" src=\"/WacBaseAppPlugin/images/js_icons/loader.gif\"></div></div>";
+
+                if(id === undefined)
+                {
+                    $("body").append(loaderStr);
+                }
+                else
+                {
+                    $(id).append(loaderStr);
                 }
             },
             hideBlockUI: function(id)

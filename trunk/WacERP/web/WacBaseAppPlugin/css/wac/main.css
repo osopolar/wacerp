@@ -129,6 +129,19 @@
 .wacCursor{cursor: pointer; cursor: hand;}
 .wacMove{cursor: move;}
 
+.wacLoader {
+    background-color: #FFFFFF;
+    border: 1px solid #5A667B;
+    color: #000000;
+    display: block;
+    font-family: Verdana,Tahoma,Helvetica,sans;
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 10px 0 16px;
+    text-align: left;
+    width: 300px;
+    z-index: 2;
+}
 .wacInputboxSearch1 {
 	width: 100px;
         height: 20px;
