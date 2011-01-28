@@ -43,7 +43,7 @@ echo "</div>\n";
             //            Wac.log("dataExportWidget init");
             $(moduleId + '_btnPrint').button({text: true, icons: {primary: "ui-icon-print"}});
             $(moduleId + '_btnClose').button({text: true, icons: {primary: "ui-icon-cancel"}});
-            $(moduleId+'_toolbar').buttonset();
+            $(moduleId+'_toolbar').buttonset();            
         }
 
         function bindEvents(){
@@ -67,8 +67,9 @@ echo "</div>\n";
 
             $(document).hear("#wacAppController", WacAppConfig.event.app_wac_events_show_data_print_form, function ($self, data) {  // listenerid, event name, callback
 //                Wac.log(data);
-                $(document).wacPage().showBlockUI(widgetId);
                 params = data;
+
+                $(document).wacPage().showBlockUI(widgetId);
                 loadPrintData(data);
             });
         }
@@ -77,6 +78,9 @@ echo "</div>\n";
             var submitUrl = WacAppConfig.baseUrl + data.moduleName + "/getList";
             var submitParams = $.extend({dataFormat: "htmlTable"}, data);
             submitUrl += "?" + $.param(submitParams);
+
+           $(document).wacPage().showLoader(moduleId + "_content", $.i18n.prop("data loading..."));
+//            $(moduleId + "_content").progressbar({value: 100});
             
             $.ajax({
                 url: submitUrl,
