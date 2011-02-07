@@ -16,7 +16,8 @@ class WacDataFormatType
     public static $text       = "text";
     public static $txt        = "txt";
     public static $html       = "html";
-    public static $htmlTable  = "htmlTable";
-    public static $pureText   = "pureText";
-    public static $pureTextJs = "pureText.js";
+    public static $htmlTable  = "htmlTable";  // show the data resultset in a table
+    public static $htmlEntityView  = "htmlEntityView";  // show a entity view
+    public static $pureText        = "pureText";
+    public static $pureTextJs      = "pureText.js";
 }

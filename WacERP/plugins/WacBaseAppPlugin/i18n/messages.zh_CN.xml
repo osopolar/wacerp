@@ -113,6 +113,14 @@
         <source>No</source>
         <target>否</target>
       </trans-unit>
+      <trans-unit>
+        <source>Total</source>
+        <target>总共</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Item(s)</source>
+        <target>条</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

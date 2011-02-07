@@ -78,7 +78,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                             var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                             for(var i=0;i < ids.length;i++){
                                 var cl = ids[i];
-                                <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('be', 'de'), false); ?>
+                                <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('bv', 'be', 'de'), false); ?>
                             }
                         },
 
@@ -118,6 +118,8 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                 var params = {};
                 params.moduleName    = moduleName;
                 params.moduleCaption = moduleCaption;
+                params.moduleAction  = "getList";
+                params.dataFormat    = "htmlTable";
 
                 params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
                 params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
