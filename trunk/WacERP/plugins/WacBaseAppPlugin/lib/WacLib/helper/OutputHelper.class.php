@@ -67,6 +67,9 @@ class OutputHelper
                 case WacDataFormatType::$htmlTable:
                     return $this->outputHtmlTableFormat($resultSet, $action, $params);
                     break;
+                case WacDataFormatType::$htmlEntityView:
+                    return $this->outputHtmlEntityViewFormat($resultSet, $action, $params);
+                    break;
                 case WacDataFormatType::$pureTextJs:   // for http request, but no any debug wrapping
                     return $this->outputPureTextJsFormat($resultSet, $action, $params);
                     break;
@@ -167,12 +170,26 @@ class OutputHelper
     /*
      * return pure html text
      * @params
-     * array $node - node info,
+     * array $resultSet - data info,
      */
     public function outputHtmlTableFormat($resultSet, sfAction $action, $params=array())
     {
         $output = "";
         $tableTpl = "htmlTableA";
+        $output = $action->getPartial(WacModule::getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
+        return $this->outputHtmlFormat($output, $action, $params);
+    }
+
+    /*
+     * return pure html text
+     * @params
+     * array $resultSet - data info,
+     */
+    public function outputHtmlEntityViewFormat($resultSet, sfAction $action, $params=array())
+    {
+//        return $this->outputJsonOrTextFormat($resultSet, $action, $params);
+        $output = "";
+        $tableTpl = "htmlEntityViewA";
         $output = $action->getPartial(WacModule::getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
         return $this->outputHtmlFormat($output, $action, $params);
     }

@@ -27,3 +27,12 @@
         ?>
     </tbody>
 </table>
+<table width="100%" cellspacing="0" cellpadding="0" class="wacTable" >
+    <tbody>
+        <tr>
+            <td align="right">
+                <?php echo __("Total") . $resultSet["totalRecords"] . __("Item(s)"); ?>
+            </td>
+        </tr>
+    </tbody>
+</table>

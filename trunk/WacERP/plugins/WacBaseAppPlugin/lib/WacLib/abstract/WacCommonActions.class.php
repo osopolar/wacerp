@@ -194,6 +194,13 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
+    * @return the data array
+    */
+    public function executeView(sfWebRequest $request) {
+        return OutputHelper::getInstance()->output($this->getList($request), $this);
+    }
+
+    /*
      * export data according to exportFormat
     */
     public function executeDataExport(sfWebRequest $request) {

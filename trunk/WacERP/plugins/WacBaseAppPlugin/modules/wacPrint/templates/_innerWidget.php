@@ -70,14 +70,14 @@ echo "</div>\n";
                 params = data;
 
                 $(document).wacPage().showBlockUI(widgetId);
-                loadPrintData(data);
+                loadPrintData(params);
             });
         }
 
-        function loadPrintData(data){
-            var submitUrl = WacAppConfig.baseUrl + data.moduleName + "/getList";
-            var submitParams = $.extend({dataFormat: "htmlTable"}, data);
-            submitUrl += "?" + $.param(submitParams);
+        function loadPrintData(params){
+            var submitUrl = WacAppConfig.baseUrl + params.moduleName + "/" + params.moduleAction;
+            var submitParams = $.extend({dataFormat: "htmlTable"}, params);
+//            submitUrl += "?" + $.param(submitParams);
 
            $(document).wacPage().showLoader(moduleId + "_content", $.i18n.prop("data loading..."));
 //            $(moduleId + "_content").progressbar({value: 100});

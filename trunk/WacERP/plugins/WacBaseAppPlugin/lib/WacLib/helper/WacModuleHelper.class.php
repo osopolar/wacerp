@@ -6,7 +6,7 @@
  *
  * declare:
  * buttons = bv+ba+sa+be+de+ce
- * bv: button view
+ * bv: button view/print
  * ba: button audit
  * sa: button add subitems
  * be: button edit
@@ -201,7 +201,7 @@ class WacModuleHelper
         // action
         $str.= "onclick=\\\"javascript:";  //action
         if(isset($params["action"])){
-            $str.= $params["action"];
+            $str.= $params["action"]."\\\"";
         }
         elseif(isset($params["event"])){
             $str.= "$.shout('#{$module}{$attachName}{$params["event"]}', {id: \" + cl +\" });\\\"";
@@ -239,9 +239,21 @@ class WacModuleHelper
      */
     public static function generateListViewFormBtn($module, $attachName="")
     {
+        $actionStr = "$.shout(WacAppConfig.event.app_wac_events_show_data_print_form, {";
+        $actionStr .= "moduleName:\'{$module}\',";
+        $actionStr .= "moduleAction:\'view\',";
+        $actionStr .= "moduleCaption:\'view\" + cl +\"\' ,";
+        $actionStr .= "dataFormat:\'".WacDataFormatType::$htmlEntityView."\',";
+        $actionStr .= JqGridDataHelper::$KEY_SEARCH.":\'true\',";
+        $actionStr .= JqGridDataHelper::$KEY_SEARCH_FIELD.":\'id',";
+        $actionStr .= JqGridDataHelper::$KEY_SEARCH_OPER.":\'eq\',";
+        $actionStr .= JqGridDataHelper::$KEY_SEARCH_STRING.":\" + cl +\"";
+        $actionStr .= "});";
+
         $params = array(
-            "tag"=>"bv", "label"=>__("JqGridBtnPrint"),
-            "action"=>" wacPopupWindow(\'{$module}{$attachName}PopupWin\', \'printer/Form/pModule/{$module}/pAction/print/id/\" + cl +\"\', 650, 550 );\\\""
+            "tag"=>"bv",
+            "label"=>__("JqGridBtnPrint"),
+            "action"=>$actionStr
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -251,7 +263,7 @@ class WacModuleHelper
         $modulePrefixName = $module.$attachName;
         $params = array(
             "tag"=>"be", "label"=>__("JqGridBtnEdit"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('editRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam);\\\""
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('editRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam);"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -261,7 +273,7 @@ class WacModuleHelper
         $modulePrefixName = $module.$attachName;
         $params = array(
             "tag"=>"se", "label"=>__("JqGridBtnSave"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('saveRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam, null);\\\""
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('saveRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam, null);"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -271,7 +283,7 @@ class WacModuleHelper
         $modulePrefixName = $module.$attachName;
         $params = array(
             "tag"=>"ce", "label"=>__("JqGridBtnCancel"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('restoreRow', '\"+cl+\"');\\\""
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('restoreRow', '\"+cl+\"');"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -281,7 +293,7 @@ class WacModuleHelper
         $modulePrefixName = $module.$attachName;
         $params = array(
             "tag"=>"de", "label"=>__("JqGridBtnDel"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\""
+            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -293,7 +305,7 @@ class WacModuleHelper
     {
         $params = array(
             "tag"=>"ba", "label"=>__("JqGridBtnAudit"),
-            "action"=>" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');\\\""
+            "action"=>" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
@@ -305,7 +317,7 @@ class WacModuleHelper
     {
         $params = array(
             "tag"=>"sa", "label"=>__("JqGridBtnAddSubItem"),
-            "action"=>" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');\\\""
+            "action"=>" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');"
         );
         return self::getBtnStr($module, $attachName, $params);
     }
