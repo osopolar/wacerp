@@ -126,6 +126,12 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                 params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
                 params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
                 params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+
+//                Wac.log($(moduleListId).jqGrid('getGridParam',"prmNames"));
+//                Wac.log($(moduleListId).jqGrid('getGridParam',"search"));
+//                Wac.log($(moduleListId).jqGrid('getGridParam',"postData"));
+
+
                 $.shout(WacAppConfig.event.app_wac_events_show_data_print_form,params);
             });
 
