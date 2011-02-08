@@ -411,8 +411,8 @@ class WacModuleHelper
         $str="";
 
         $btnArr = array();  // btn elements
+        $btnArr['bv'] = self::generateListViewFormBtn($module, $attachName);  /* bv: button view          */
         if(!$isInline){
-            $btnArr['bv'] = self::generateListViewFormBtn($module, $attachName);  /* bv: button view          */
             $btnArr['ba'] = self::generateListAuditFormBtn($module, $attachName); /* ba: button audit         */
             $btnArr['sa'] = self::generateListAddSubFormBtn($module, $subModule, $attachName);          /* sa: button add subitems  */
             $btnArr['be'] = self::generateListEditFormBtn($module, $attachName);  /* be: button edit          */

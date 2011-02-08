@@ -196,6 +196,12 @@ WacSystemLog:
     content: string()
     pr_str1: string(255)
     pr_str2: string(255)
+  relations:
+    user:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      type: one
 WacSystemParameter:
   connection: wac_db_connection1
   actAs:      [Timestampable]

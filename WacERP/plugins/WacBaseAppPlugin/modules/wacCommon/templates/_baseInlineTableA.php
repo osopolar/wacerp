@@ -77,7 +77,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                           for(var i=0;i < ids.length;i++){
                               var cl = ids[i];
                               <?php
-                                echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('be', 'se', 'ce', 'de'), true);
+                                echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, $contextInfo["operatorBtns"], true);
                               ?>
                           }
                       },
@@ -131,12 +131,15 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                     var params = {};
                     params.moduleName = moduleName;
                     params.moduleCaption = moduleCaption;
-
+                    params.moduleAction  = "getList";
+                    params.dataFormat    = "htmlTable";
+                    
                     params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
                     params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
                     params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
                     params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
                     params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                    
                     $.shout(WacAppConfig.event.app_wac_events_show_data_print_form,params);
                 });
 

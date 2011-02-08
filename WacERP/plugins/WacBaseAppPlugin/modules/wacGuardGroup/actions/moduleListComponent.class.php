@@ -2,7 +2,7 @@
 /**
  * manage the module list
  */
-class moduleListComponent extends WacComponent
+class moduleListComponent extends WacModuleListComponent
 {
     // override parent method
     public function setupJqGridCols(){
@@ -16,6 +16,11 @@ class moduleListComponent extends WacComponent
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"permissions_names", "label"=>$i18n->__("Remark"), "index"=>"permissions_names", "sortable"=>"false", "width"=>"450"));
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"created_at", "label"=>$i18n->__("Create Time"), "index"=>"created_at", "sorttype"=>"date",  "datefmt"=>"Y-m-d",  "width"=>"150"));
         return $listCols;
+    }
+
+    public function setupOperatorBtns(){
+        // pls refer to WacModuleHelper::$ctlBtns
+        return array('bv', 'be', 'de');
     }
 
     public function execute($request)

@@ -34,4 +34,10 @@ class WacComponentList
     //// buttons bar for the module
     public static $moduleButtonBar            = "moduleButtonBar";
 
+    //// module inline list
+    public static $moduleIndexInlineWidget    = "moduleIndexInlineWidget";
+
+    //// module list
+    public static $moduleIndexListWidget      = "moduleIndexListWidget";
+
 }
