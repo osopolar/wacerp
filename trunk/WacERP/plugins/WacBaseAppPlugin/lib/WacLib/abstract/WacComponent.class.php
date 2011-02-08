@@ -19,7 +19,6 @@ abstract class WacComponent extends sfComponent {
         $this->innerContextInfo["moduleName"]     = $this->getModuleName();
         $this->innerContextInfo["componentJs"]    = $this->getComponentJs();
         $this->innerContextInfo["wacComponentJs"] = $this->getWacComponentJs();
-        $this->innerContextInfo["listCols"]       = $this->setupJqGridCols();
 
         $this->contextInfo = $this->innerContextInfo;  //assign to tpl
     }
@@ -35,28 +34,7 @@ abstract class WacComponent extends sfComponent {
         $this->execute($request);
         $this->getResponse()->addJavaScript($this->getWacComponentJs(), '');  // layout
     }
-
-    // canbe override by child method
-    public function setupJqGridCols(){
-        return array();
-    }
-
-    public function getListMetaInfo(){
-        $metaInfo = JsCommonData::getListMetaDatum();
-        if(!isset($this->innerContextInfo["listCols"])){
-            $this->innerContextInfo["listCols"] = $this->setupJqGridCols();
-        }
-
-        if(count($this->innerContextInfo["listCols"])>0){
-            foreach($this->innerContextInfo["listCols"] as $listCol){
-                $metaInfo["displayCols"][] = array("name"=>$listCol["name"], "label"=>$listCol["label"]);
-            }
-        }
-        
-        return $metaInfo;
-    }
-    
-
+   
     public function getComponentName() {
         return $this->getActionName();
     }

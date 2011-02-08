@@ -1,11 +1,8 @@
 <?php
 /*
+ *  use for creating inline list widget
  *  here defines widgets logic of the module
- *  for example:
- *   define a common module list widget -
- *   include_partial(WacModule::getName("wacCommon")."/".WacComponentList::$moduleIndexInlineWidget, array('contextInfo'=>$contextInfo));
  */
-
 
   $subItemModuleName="";
   $attachInfo = array("name"=>"");
@@ -29,8 +26,8 @@
   include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
               array(
                      'mode'         => 'component',
-                     'widgetModule' => $contextInfo["moduleName"],       // for custom module component list
-                     'widgetName'   => WacComponentList::$moduleList,
+                     'widgetModule' => WacModule::getName("wacCommon"),
+                     'widgetName'   => WacComponentList::$baseInlineTableA,
                      'invokeParams' => array(
                                            'contextInfo' => $contextInfo,
                                            'subItemModuleName' => $subItemModuleName,
@@ -38,16 +35,6 @@
                                            )
                   ));
 
-
-//  OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleForm Component Included.");
-//  include_component($contextInfo["moduleName"], WacComponentList::$moduleForm,
-//              array(
-//                     'invokeParams' => array(
-//                                           'contextInfo' => $contextInfo,
-//                                           'attachInfo'  => $attachInfo,
-//                                           )
-//                  ));
-
-  echo "</div>\n\n";
+  echo "</div>\n";
   OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, end");
 ?>

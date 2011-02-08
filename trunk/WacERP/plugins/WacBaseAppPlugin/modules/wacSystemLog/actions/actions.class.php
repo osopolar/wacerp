@@ -10,5 +10,24 @@
  */
 class wacSystemLogActions extends WacCommonActions
 {
+    /*
+   * override filter list
+   */
+  public function filterList($listObjs)
+  {
+      $filterArr = array();
+      if(count($listObjs) > 0)
+      {
+          foreach($listObjs as $listObj)
+          {
+              $tmpArr = $listObj->toArray();
+              $tmpArr['user_name'] = $listObj->getUser()->getUsername();
+
+              $filterArr[] = $tmpArr;
+          }
+      }
+
+      return $filterArr;
+  }
     
 }

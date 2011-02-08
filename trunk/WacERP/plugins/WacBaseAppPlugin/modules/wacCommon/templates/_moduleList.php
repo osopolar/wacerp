@@ -78,7 +78,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                             var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                             for(var i=0;i < ids.length;i++){
                                 var cl = ids[i];
-                                <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, array('bv', 'be', 'de'), false); ?>
+                                <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, $contextInfo["operatorBtns"], false); ?>
                             }
                         },
 
