@@ -20,8 +20,8 @@ default:
   stylesheets:
 #    main:            main.css
 
-#    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.7.custom/smoothness/jquery-ui-1.8.7.custom.css
-    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.8.custom/smoothness/jquery-ui-1.8.8.custom.css
+#    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.8.custom/smoothness/jquery-ui-1.8.8.custom.css
+    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.9.custom/smoothness/jquery-ui-1.8.9.custom.css
 
 #    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.1/ui.jqgrid.css
     ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
@@ -38,10 +38,11 @@ default:
 
     wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars
 
-#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.7.custom/jquery-ui-1.8.7.custom.min.js     # jquery-ui
-#    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.7.custom/jquery-ui-i18n.js     # jquery-ui-i18n
-    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-1.8.8.custom.min.js     # jquery-ui
-    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-1.8.8.custom.min.js     # jquery-ui
+#    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.min.js     # jquery-ui
+    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+
     jquery.layout: /WacBaseAppPlugin/js/jquery/plugins/jquery.layout-1.3.0/jquery.layout.js     # jquery.layout
 
     jquery.blockUI: /WacBaseAppPlugin/js/jquery/plugins/blockUI/jquery.blockUI.js     # jquery.blockUI
