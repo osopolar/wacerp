@@ -4,7 +4,7 @@
  */
 class moduleListComponent extends WacModuleListComponent
 {
-    // override parent method
+    // override setupJqGridCols method
     public function setupJqGridCols(){
         $jqGridDataHelper = JqGridDataHelper::getInstance();
         $i18n = sfContext::getInstance()->getI18N();

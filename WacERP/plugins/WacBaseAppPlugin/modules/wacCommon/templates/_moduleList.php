@@ -32,6 +32,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
             var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
             var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
             var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
+            var toolbarSearchField = <?php echo "'{$contextInfo["toolbarSearchField"]}'" ?>;
 
 
             //  define a callback object to handle the callback, optional for this table
@@ -107,7 +108,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
             // listen search event
             $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
                 var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
-                params.searchField = "name";  // this is a special case, for the name is code on table guardgroup
+                params.searchField = toolbarSearchField;  // this is a special case, for the name is code on table guardgroup
                 $(moduleListId).jqGrid('setGridParam',{postData:params});
                 $(moduleListId).trigger("reloadGrid");
                 //                Wac.log(data);
