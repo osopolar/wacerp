@@ -16,4 +16,32 @@ class PluginWacSystemLogTable extends WacCommonTable
     {
         return Doctrine_Core::getTable('PluginWacSystemLog');
     }
+
+    /*
+     * return a custom list
+     */
+    public function getCustomList($arrParams, $page=1, $maxPerPage=20, $isArr=true)
+    {
+       $objQuery = $this->createQuery('t1')
+                ->select('t1.*')
+                ->from("WacSystemLog t1")
+                ->leftJoin("t1.user su");
+
+        if(is_array($arrParams) && count($arrParams)>0)
+        {
+            QueryHelper::processOption($objQuery, $arrParams);  // dont set "offset" and "limit" option in it
+        }
+
+        $this->_pager = new Doctrine_Pager($objQuery, $page, $maxPerPage);
+        if($isArr)
+        {
+            $items = $this->_pager->execute(array(), Doctrine::HYDRATE_ARRAY);
+        }
+        else
+        {
+            $items = $this->_pager->execute();
+        }
+        $objQuery->free();
+        return $items;
+    }
 }

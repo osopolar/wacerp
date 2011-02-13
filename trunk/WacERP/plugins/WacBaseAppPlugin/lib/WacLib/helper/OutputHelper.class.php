@@ -255,7 +255,7 @@ class OutputHelper
      * @params
      * array $node - node info,
      */
-    public function outputJsonOrTextFormat(array $resultSet, sfAction $action, $params=array())
+    public function outputJsonOrTextFormat($resultSet, sfAction $action, $params=array())
     {
         $output = '';
         if ($this->_request->isXmlHttpRequest()) {

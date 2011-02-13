@@ -4,6 +4,10 @@
  */
 class moduleListComponent extends WacModuleListComponent
 {
+    public function setupToolbarSearchField(){
+        return "username";
+    }
+
     // override parent method
     public function setupJqGridCols(){
         $jqGridDataHelper = JqGridDataHelper::getInstance();

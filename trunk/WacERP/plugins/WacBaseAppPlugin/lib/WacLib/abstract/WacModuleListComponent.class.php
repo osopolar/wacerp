@@ -20,7 +20,13 @@ abstract class WacModuleListComponent extends WacComponent {
         if(isset($this->contextInfo)){
             $this->contextInfo["listCols"] = $this->setupJqGridCols();
             $this->contextInfo["operatorBtns"] = $this->setupOperatorBtns();
+            $this->contextInfo["toolbarSearchField"] = $this->setupToolbarSearchField();
         }
+    }
+
+    // canbe override by child method
+    public function setupToolbarSearchField(){
+        return "name";
     }
 
     // canbe override by child method
