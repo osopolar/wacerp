@@ -121,6 +121,54 @@
         <source>Item(s)</source>
         <target>条</target>
       </trans-unit>
+      <trans-unit>
+        <source>User Name</source>
+        <target>用户名</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Group Name</source>
+        <target>组名</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status</source>
+        <target>状态</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Active</source>
+        <target>活跃</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Inactive</source>
+        <target>冬眠</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Valid</source>
+        <target>有效</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Invalid</source>
+        <target>无效</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Not Save</source>
+        <target>未保存</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Init</source>
+        <target>初始</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Processing</source>
+        <target>进行中</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Audited</source>
+        <target>已审批</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status Finish</source>
+        <target>已完结</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

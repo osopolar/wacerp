@@ -22,7 +22,7 @@ class wacGuardUserActions extends WacCommonActions
           {
               $tmpArr = $listObj->toArray();
               $tmpArr['groups_names'] = $listObj->getGroupsDescription();
-              $tmpArr['status'] = WacEntityStatus::getActiveCaption($listObj->getIsActive());              
+              $tmpArr['status'] = $this->i18n->__(WacEntityStatus::getActiveCaption($listObj->getIsActive()));
 
               $filterArr[] = $tmpArr;
           }
@@ -46,12 +46,7 @@ class wacGuardUserActions extends WacCommonActions
          $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
          return $result;
       }
-
-//      if($this->mainModuleTable->isExistedName($reqParams['name'], $id))
-//      {
-//         $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
-//         return $result;
-//      }
+      
       return $result;
   }
 
@@ -94,7 +89,7 @@ class wacGuardUserActions extends WacCommonActions
                                    );
       }
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
@@ -140,7 +135,7 @@ class wacGuardUserActions extends WacCommonActions
                                    );
       }
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
@@ -166,7 +161,7 @@ class wacGuardUserActions extends WacCommonActions
 
 //      $resultSet['items']['default']['currency_code_name'] = Doctrine::getTable(WacTable::$systemParameter)->getValueByCode(WacAppSettingCode::$currency);
 
-      return OutputHelper::getInstance()->outputJsonOrTextFormat($resultSet, $this);
+      return OutputHelper::getInstance()->output($resultSet, $this);
 
   }
 
