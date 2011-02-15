@@ -4,7 +4,6 @@
  *  Two tags need to be replaced with the module name, they are:
  *  wacGuardGroup
  *  WacGuardGroup
- *  wac_guard_group
  */
 
 

@@ -46,11 +46,6 @@ class wacGuardGroupActions extends WacCommonActions
          return $result;
       }
 
-//      if($this->mainModuleTable->isExistedName($reqParams['name'], $id))
-//      {
-//         $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
-//         return $result;
-//      }
       return $result;
   }
 

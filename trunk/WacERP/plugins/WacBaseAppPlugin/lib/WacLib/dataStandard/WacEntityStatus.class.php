@@ -8,9 +8,9 @@
 class WacEntityStatus
 {
     public static $active     = "active";
-    public static $inActive   = "inActive";
-    public static $avail      = "avail";
-    public static $inAvail    = "inAvail";
+    public static $inactive   = "inactive";
+    public static $valid      = "valid";
+    public static $invalid    = "invalid";
 
     public static $notsave    = "notsave";
     public static $init       = "init";
@@ -19,16 +19,16 @@ class WacEntityStatus
     public static $audited    = "audited";
 
     public static $params = array(
-        'active'    => array('id'=>"0", 'value'=>1, 'group'=>'1', 'name'=>"active", 'caption'=>"活跃"),
-        'inActive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inActive", 'caption'=>"冬眠"),
-        'avail'     => array('id'=>"2", 'value'=>1, 'group'=>'2', 'name'=>"avail", 'caption'=>"有效"),
-        'inAvail'  => array('id'=>"3", 'value'=>0, 'group'=>'2', 'name'=>"inAvail", 'caption'=>"无效"),
+        'active'    => array('id'=>"0", 'value'=>1, 'group'=>'1', 'name'=>"active", 'caption'=>"Status Active"),
+        'inactive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inActive", 'caption'=>"Status Inactive"),
+        'valid'     => array('id'=>"2", 'value'=>1, 'group'=>'2', 'name'=>"avail", 'caption'=>"Status Valid"),
+        'invalid'  => array('id'=>"3", 'value'=>0, 'group'=>'2', 'name'=>"inAvail", 'caption'=>"Status Invalid"),
 
-        'notsave'        => array('id'=>"4", 'value'=>4, 'group'=>'3', 'name'=>"notsave", 'caption'=>"未保存"),
-        'init'           => array('id'=>"5", 'value'=>5, 'group'=>'3', 'name'=>"init", 'caption'=>"初始"),
-        'processing'     => array('id'=>"6", 'value'=>6, 'group'=>'3', 'name'=>"processing", 'caption'=>"进行中"),
-        'audited'        => array('id'=>"7", 'value'=>7, 'group'=>'3', 'name'=>"audited", 'caption'=>"已审批"),
-        'finish'         => array('id'=>"100", 'value'=>100, 'group'=>'3', 'name'=>"finish", 'caption'=>"已完结"),
+        'notsave'        => array('id'=>"4", 'value'=>4, 'group'=>'3', 'name'=>"notsave", 'caption'=>"Status Not Save"),
+        'init'           => array('id'=>"5", 'value'=>5, 'group'=>'3', 'name'=>"init", 'caption'=>"Status Init"),
+        'processing'     => array('id'=>"6", 'value'=>6, 'group'=>'3', 'name'=>"processing", 'caption'=>"Status Processing"),
+        'audited'        => array('id'=>"7", 'value'=>7, 'group'=>'3', 'name'=>"audited", 'caption'=>"Status Audited"),
+        'finish'         => array('id'=>"100", 'value'=>100, 'group'=>'3', 'name'=>"finish", 'caption'=>"Status Finish"),
     );
 
     public static function getInstance()
