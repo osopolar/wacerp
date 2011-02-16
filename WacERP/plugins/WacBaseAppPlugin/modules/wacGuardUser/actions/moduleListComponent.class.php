@@ -18,9 +18,19 @@ class moduleListComponent extends WacModuleListComponent
         return $listCols;
     }
 
+    /*
+     * setup operation btns on the list
+     */
     public function setupOperatorBtns(){
         // pls refer to WacModuleHelper::$ctlBtns
         return array('bv', 'be', 'de');
+    }
+
+    /*
+     * when key search is actived on the toolbar, which fieldname should be found, default is "name"
+     */
+    public function setupToolbarSearchField(){
+        return "username";
     }
 
     public function execute($request)

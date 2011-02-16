@@ -72,9 +72,9 @@ class wacGuardUserActions extends WacCommonActions
               if(isset($reqParams['password']))      {$targetItem->setPassword($reqParams['password']);}
               if(isset($reqParams['username']))      {$targetItem->setUsername($reqParams['username']);}
               $targetItem->setIsActive(isset($reqParams['is_active'])?1:0);
-              if(isset($reqParams['group_list']) && count($reqParams['group_list'])>0)
+              if(isset($reqParams['user_group_list']) && count($reqParams['user_group_list'])>0)
               {
-                  $targetItem->link('groups', $reqParams['group_list']);
+                  $targetItem->link('groups', $reqParams['user_group_list']);
               }
               
               $targetItem->save();
@@ -119,9 +119,9 @@ class wacGuardUserActions extends WacCommonActions
 
               $targetItem->unlink('groups');
               
-              if(isset($reqParams['group_list']) && count($reqParams['group_list'])>0)
+              if(isset($reqParams['user_group_list']) && count($reqParams['user_group_list'])>0)
               {
-                  $targetItem->link('groups', $reqParams['group_list']);
+                  $targetItem->link('groups', $reqParams['user_group_list']);
               }
 
               $targetItem->save();
