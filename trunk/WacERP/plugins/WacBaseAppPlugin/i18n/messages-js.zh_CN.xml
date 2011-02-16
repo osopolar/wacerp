@@ -6,7 +6,7 @@
     <body>
       <!-- Actions -->
       <trans-unit>
-        <source>please select one permission at least!</source>
+        <source>Please select one permission at least!</source>
         <target>请选择至少一个权限!</target>
       </trans-unit>
       <trans-unit>
@@ -52,6 +52,14 @@
       <trans-unit>
         <source>No</source>
         <target>否</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password is not the same, please try again</source>
+        <target>输入的密码不一致,请再试试!</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Please select one item at least</source>
+        <target>请至少选择一项!</target>
       </trans-unit>
     </body>
   </file>

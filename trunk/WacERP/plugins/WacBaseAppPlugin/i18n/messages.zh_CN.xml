@@ -130,12 +130,20 @@
         <target>组名</target>
       </trans-unit>
       <trans-unit>
-        <source>Status</source>
-        <target>状态</target>
+        <source>Password</source>
+        <target>密码</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password</source>
+        <target>密码</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Confirm</source>
+        <target>确认</target>
       </trans-unit>
       <trans-unit>
         <source>Status Active</source>
-        <target>活跃</target>
+        <target>激活</target>
       </trans-unit>
       <trans-unit>
         <source>Status Inactive</source>
@@ -168,6 +176,10 @@
       <trans-unit>
         <source>Status Finish</source>
         <target>已完结</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User Group</source>
+        <target>用户组</target>
       </trans-unit>
     </body>
   </file>

@@ -20,9 +20,9 @@ class WacEntityStatus
 
     public static $params = array(
         'active'    => array('id'=>"0", 'value'=>1, 'group'=>'1', 'name'=>"active", 'caption'=>"Status Active"),
-        'inactive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inActive", 'caption'=>"Status Inactive"),
+        'inactive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inactive", 'caption'=>"Status Inactive"),
         'valid'     => array('id'=>"2", 'value'=>1, 'group'=>'2', 'name'=>"avail", 'caption'=>"Status Valid"),
-        'invalid'  => array('id'=>"3", 'value'=>0, 'group'=>'2', 'name'=>"inAvail", 'caption'=>"Status Invalid"),
+        'invalid'  => array('id'=>"3", 'value'=>0, 'group'=>'2', 'name'=>"invalid", 'caption'=>"Status Invalid"),
 
         'notsave'        => array('id'=>"4", 'value'=>4, 'group'=>'3', 'name'=>"notsave", 'caption'=>"Status Not Save"),
         'init'           => array('id'=>"5", 'value'=>5, 'group'=>'3', 'name'=>"init", 'caption'=>"Status Init"),
@@ -48,8 +48,8 @@ class WacEntityStatus
     public static function getActiveCaption($v)
     {
         $activeRow = self::$params[self::$active];
-        $inActiveRow = self::$params[self::$inActive];
-        return ($v==$activeRow['value']) ? $activeRow['caption'] : $inActiveRow['caption'];
+        $inactiveRow = self::$params[self::$inactive];
+        return ($v==$activeRow['value']) ? $activeRow['caption'] : $inactiveRow['caption'];
     }
 
     /*

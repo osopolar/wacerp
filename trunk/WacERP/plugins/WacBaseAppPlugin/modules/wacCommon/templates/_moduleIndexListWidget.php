@@ -11,7 +11,7 @@ $attachInfo = array("name" => "");
 OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, begin");
 echo "<div id=\"" . WacModuleHelper::getComponentsId($contextInfo["moduleName"]) . "\">\n\n";
 
-if (in_array(WacComponentList::$moduleToolBar, $includeWidges)) {
+if (in_array(WacComponentList::$moduleToolBar, $includeWidgets)) {
     OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleToolbar Component Included.");
     include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
             array(
@@ -25,7 +25,7 @@ if (in_array(WacComponentList::$moduleToolBar, $includeWidges)) {
     ));
 }
 
-if (in_array(WacComponentList::$moduleToolBar, $includeWidges)) {
+if (in_array(WacComponentList::$moduleList, $includeWidgets)) {
     OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleList Component Included.");
     include_component(WacModule::getName("wacCommon"), WacComponentList::$embedWidget,
             array(
@@ -40,7 +40,7 @@ if (in_array(WacComponentList::$moduleToolBar, $includeWidges)) {
     ));
 }
 
-if (in_array(WacComponentList::$moduleToolBar, $includeWidges)) {
+if (in_array(WacComponentList::$moduleForm, $includeWidgets)) {
     OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleForm Component Included.");
     include_component($contextInfo["moduleName"], WacComponentList::$moduleForm,
             array(
