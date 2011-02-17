@@ -90,6 +90,7 @@ function WacGuardUserForm(){
             $(_self.moduleId + "_password").attr("value", "000000");
             $(_self.moduleId + "_password_confirm").attr("value", "000000");
             $(_self.moduleId + "_is_active").attr("checked", (_self.modelEntity.is_active=='true'));
+//            Wac.log(_self.modelEntity);
         }
 
          _self.prototype.setupDefaults(_self, defaultValueObj);
