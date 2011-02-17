@@ -7,6 +7,9 @@
  */
 class WacComponentList
 {
+    //// embed all widget
+    public static $all                        = "all";
+
     //// embed widget, flexibly to change the embed components
     public static $embedWidget                = "embedWidget";
 
@@ -39,5 +42,19 @@ class WacComponentList
 
     //// module list
     public static $moduleIndexListWidget      = "moduleIndexListWidget";
+
+    /*
+     * to judge if embedWidge should be include or not
+     * @$embedWidget - current widget
+     * @ownsWidgets - mix, array widget names  or string "all"
+     */
+    public static function ownsWidget($embedWidget, $ownsWidgets){
+        if(is_array($ownsWidgets)){
+            return in_array($embedWidget, $ownsWidgets);
+        }
+        else{
+            return ($ownsWidgets == self::$all);
+        }
+    }
 
 }

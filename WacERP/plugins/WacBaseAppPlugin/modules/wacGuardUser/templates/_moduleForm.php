@@ -13,7 +13,7 @@ echo "<div id=\"".$formDialogId."\" title=\"".WacModule::getCaption($modulePrefi
             <div class="wacFormRow">
                 <div class="wacFormItemLeft "><?php echo __("User Name");?></div>
                 <div class="wacFormItemRight">
-                    <input name="username" id="<?php echo $modulePrefixName; ?>_name" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    <input name="username" id="<?php echo $modulePrefixName; ?>_username" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
                 </div>
                 <div class="wacFormClear"></div>
             </div>
