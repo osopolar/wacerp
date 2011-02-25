@@ -108,6 +108,8 @@ function WacFormPrototype()
 
         $(document).wacPage().showBlockUILoading(children.formDialogId);
 
+        $("input[type=text][id*='" + children.moduleName + "']").attr("value", "");
+
         var params ={dataFormat :'json'};
         if(children.inputMode == WacEntity.formInputMode.edit)   // use default values
         {
@@ -131,9 +133,7 @@ function WacFormPrototype()
 
     this.initFormDataCallBack = function(children, jsonData){
         Wac.log("WacFormPrototype initFormDataCallBack", debug);
-
         children.setupDefaults(jsonData['items']['default']);
-
         $(document).wacPage().hideBlockUI(children.formDialogId);
     };
 
@@ -215,6 +215,7 @@ function WacFormPrototype()
         {
             $(document).wacPage().showTips(jsonData.info.message);
             $(children.listId).trigger("reloadGrid");
+            $(children.formDialogId).dialog('close');
         }
 
         $(document).wacPage().hideBlockUI(children.formDialogId);
