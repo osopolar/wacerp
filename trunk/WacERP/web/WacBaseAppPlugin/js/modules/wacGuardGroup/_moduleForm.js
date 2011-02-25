@@ -105,7 +105,7 @@ function WacGuardGroupForm(){
             return validateFlag;
         }
 
-        if($(_self.moduleId + "_sf_guard_group_permissions_list :selected").length == 0)
+        if(validateFlag && $(_self.moduleId + "_sf_guard_group_permissions_list :selected").length == 0)
         {
             $(document).wacPage().showTips($.i18n.prop('Please select one permission at least!'));
             validateFlag = false;

@@ -8,10 +8,9 @@
 
 /***** init section, begin *****/
 $(document).ready(
-    function(){
+  function(){
         var wacGuardUserForm = new WacGuardUserForm();
-    }
-    );
+});
 
 
 function WacGuardUserForm(){
@@ -108,13 +107,13 @@ function WacGuardUserForm(){
             return validateFlag;
         }
 
-        if($(_self.moduleId + "_password").val() != $(_self.moduleId + "_password_confirm").val())
+        if(validateFlag && ($(_self.moduleId + "_password").val() != $(_self.moduleId + "_password_confirm").val()))
         {
             $(document).wacPage().showTips($.i18n.prop('Password is not the same, please try again!'));
             validateFlag = false;
         }
 
-        if($(_self.moduleId + "_sf_guard_user_group_list :selected").length == 0)
+        if(validateFlag && ($(_self.moduleId + "_sf_guard_user_group_list :selected").length == 0))
         {
             $(document).wacPage().showTips($.i18n.prop('Please select one item at least!'));
             validateFlag = false;
