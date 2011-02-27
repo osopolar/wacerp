@@ -42,8 +42,8 @@ abstract class WacModuleListComponent extends WacComponent {
      * setup operation btns on the list
      */
     public function setupOperatorBtns(){
-        // pls refer to WacModuleHelper::$ctlBtns
-        return array();
+         // pls refer to WacModuleHelper::$ctlBtns
+        return array('bv', 'be', 'se', 'ce', 'de');
     }
 
     public function getListMetaInfo(){

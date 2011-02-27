@@ -6,7 +6,7 @@
   include_partial(WacModule::getName("wacCommon")."/".WacComponentList::$moduleIndexListWidget,
           array(
               'contextInfo' => $contextInfo,
-              'ownsWidgets' => array(
+              'enableWidgets' => array(
                   WacComponentList::$moduleToolBar,
                   WacComponentList::$moduleList,
                   WacComponentList::$moduleForm

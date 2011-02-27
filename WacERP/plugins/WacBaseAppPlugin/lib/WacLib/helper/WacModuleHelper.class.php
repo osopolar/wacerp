@@ -4,19 +4,21 @@
  *
  * @author ben
  *
- * declare:
- * buttons = bv+ba+sa+be+de+ce
- * bv: button view/print
- * ba: button audit
- * sa: button add subitems
- * be: button edit
- * de: button delete
- * ce: button cancel
- * se: button save
  *
  */
 class WacModuleHelper
 {
+    protected static $_instance;
+    
+//     * declare:
+//     * buttons = bv+ba+sa+be+de+ce
+//     * bv: button view/print
+//     * ba: button audit
+//     * sa: button add subitems
+//     * be: button edit
+//     * de: button delete
+//     * ce: button cancel
+//     * se: button save
     public static $ctlBtns = array('bv','ba','sa','be','de','ce','se');
     
     public static function getInstance()
