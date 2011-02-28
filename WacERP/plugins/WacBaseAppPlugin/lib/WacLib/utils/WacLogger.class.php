@@ -7,11 +7,18 @@
  * @author     ben
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
-class WacLogger {
+class WacLogger extends WacCommonData
+{
     public static $_instance=null;
-    
+
     public static $logTypeSys = "1";
     public static $logTypeUser = "2";
+
+    protected $_params = array(
+        'sys'  => array('id'=>"1", 'value'=>1, 'group'=>'1', 'name'=>"sys", 'caption'=>"Log Type System"),
+        'user' => array('id'=>"2", 'value'=>2, 'group'=>'1', 'name'=>"user", 'caption'=>"Log Type User")
+    );
+
 
     public $loggerTable = null;
     public $msgTable = null;

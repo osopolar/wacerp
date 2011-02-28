@@ -262,12 +262,12 @@ abstract class WacCommonActions extends sfActions {
 
         $id = ($reqParams['id']!=JqGridDataHelper::$KEY_EMPTY) ? $reqParams['id'] : 0;
         if($this->mainModuleTable->isExistedCode($reqParams['code'], $id)) {
-            $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['code']), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['code']), WacErrorCode::$duplicatedName);
             return $result;
         }
 
         if($this->mainModuleTable->isExistedName($reqParams['name'], $id)) {
-            $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
             return $result;
         }
         return $result;
@@ -372,7 +372,7 @@ abstract class WacCommonActions extends sfActions {
                     $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getSuccessDatum();
                 }
                 else {
-                    $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$deleteError), WacErrorCode::$deleteError);
+                    $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$deleteError), WacErrorCode::$deleteError);
                     break;
                 }
             }

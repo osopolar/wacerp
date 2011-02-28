@@ -176,19 +176,20 @@ abstract class WacCommonTable extends Doctrine_Table
      * judge the attribute is existed or not
      * @return boolean
      */
-    public function isExistedAttribute($attribute, $val, $exceptId=0)
+    public function isExistedAttribute($attribute, $val, $exceptId=0, $igroneStatus=true)
     {
+        $conditionStr = $igroneStatus ? "":" t1.is_avail=1 and ";
         if($exceptId==0)
         {
             $objQuery = $this->createQuery('t1')
              ->select("count(*) as total")
-             ->where("t1.is_avail=1 and t1.{$attribute}='{$val}'");
+             ->where("{$conditionStr} t1.{$attribute}='{$val}'");
         }
         else
         {
             $objQuery = $this->createQuery('t1')
              ->select("count(*) as total")
-             ->where("t1.is_avail=1 and t1.{$attribute}='{$val}' and t1.id<>'{$exceptId}'");
+             ->where("{$conditionStr} t1.{$attribute}='{$val}' and t1.id<>'{$exceptId}'");
         }
         $dataResult = $objQuery->fetchOne();
         $objQuery->free();        
@@ -199,18 +200,18 @@ abstract class WacCommonTable extends Doctrine_Table
      * judge the id is existed or not
      * @return boolean
      */
-    public function isExistedId($val, $exceptId=0)
+    public function isExistedId($val, $exceptId=0, $igroneStatus=true)
     {
-        return $this->isExistedAttribute("id", $val, $exceptId);
+        return $this->isExistedAttribute("id", $val, $exceptId, $igroneStatus);
     }
 
     /*
      * judge the code is existed or not
      * @return boolean
      */
-    public function isExistedCode($val, $exceptId=0)
+    public function isExistedCode($val, $exceptId=0, $igroneStatus=true)
     {
-        return $this->isExistedAttribute("code", $val, $exceptId);
+        return $this->isExistedAttribute("code", $val, $exceptId, $igroneStatus);
     }
 
     /*

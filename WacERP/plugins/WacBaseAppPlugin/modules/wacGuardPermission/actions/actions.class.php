@@ -19,7 +19,7 @@ class wacGuardPermissionActions extends WacCommonActions {
 
         $id = ($reqParams['id'] != JqGridDataHelper::$KEY_EMPTY) ? $reqParams['id'] : 0;
         if ($this->mainModuleTable->isExistedName($reqParams['name'], $id)) {
-            $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
             return $result;
         }
 

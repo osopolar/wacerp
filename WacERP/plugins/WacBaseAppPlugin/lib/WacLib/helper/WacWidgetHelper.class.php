@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of WacWidgetHelper
  * build up the widgets
@@ -6,21 +7,19 @@
  * @author ben
  *
  */
-class WacWidgetHelper
-{
+class WacWidgetHelper {
+
     protected static $_instance;
 
-    public static function getInstance()
-    {
+    public static function getInstance() {
         $class = __CLASS__;
-        if(is_null(self::$_instance)) {
+        if (is_null(self::$_instance)) {
             self::$_instance = new $class();
         }
         return self::$_instance;
     }
 
-    public function __construct()			// construct method
-    {
+    public function __construct() {   // construct method
         ;
     }
 
@@ -37,17 +36,50 @@ class WacWidgetHelper
      * return string
      * @moduleName - module name
      * @widgetName - widget name
-     *  'contextInfo' => $contextInfo,  // module context info
-     *  'ownsWidgets' => array()
+     * @params = array(
+      'contextInfo'   => $contextInfo,
+      'enableWidgets' => array(                                       // enable sub widgets
+      WacComponentList::$moduleToolBar,
+      WacComponentList::$moduleList
+      )
+      )
      */
-    public function getWidget($moduleName, $widgetName, $contextInfo, $enableWidgets, $params=array())
-   {
+
+    public function getWidget($moduleName, $widgetName, $params=array()) {
         return get_partial(
                 "{$moduleName}/{$widgetName}",
-                array(
-                    'contextInfo'   => $contextInfo,
-                    'enableWidgets' => $enableWidgets
-                ));
+                $params
+        );
+    }
+
+    /*
+     * to judge if embedWidge should be include or not
+     * @$embedWidget - current widget
+     * @enableWidgets - mix, array widget names  or string "all"
+     */
+    public static function enableWidget($embedWidget, $enableWidgets){
+        if(is_array($enableWidgets)){
+            return in_array($embedWidget, $enableWidgets);
+        }
+        else{
+            return ($enableWidgets == WacComponentList::$all);
+        }
+    }
+
+    /*
+     * smartly get module name
+     *
+     * @ $moduleContextInfo - module context info
+     * @ return - if moudle component existed then return it , otherwise return common's
+     */
+    public static function getModuleName($moduleContextInfo, $componentName){
+        $sfController = sfContext::getInstance()->getController();
+        if($sfController->componentExists($moduleContextInfo["moduleName"], $componentName)){
+            return $moduleContextInfo["moduleName"];
+        }
+        else{
+            return WacModule::getName("wacCommon");
+        }
     }
 
 }

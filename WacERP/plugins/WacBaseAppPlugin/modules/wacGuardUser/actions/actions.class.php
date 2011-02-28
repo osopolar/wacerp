@@ -22,7 +22,7 @@ class wacGuardUserActions extends WacCommonActions
           {
               $tmpArr = $listObj->toArray();
               $tmpArr['groups_names'] = $listObj->getGroupsDescription();
-              $tmpArr['status'] = $this->i18n->__(WacEntityStatus::getActiveCaption($listObj->getIsActive()));
+              $tmpArr['status'] = $this->i18n->__(WacEntityStatus::getInstance()->getActiveCaption($listObj->getIsActive()));
 
               $filterArr[] = $tmpArr;
           }
@@ -43,7 +43,7 @@ class wacGuardUserActions extends WacCommonActions
       $id = isset($reqParams['id']) ? $reqParams['id'] : 0;
       if($this->mainModuleTable->isExistedName($reqParams['username'], $id))
       {
-         $result = JsCommonData::getErrorDatum(WacErrorCode::getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
+         $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
          return $result;
       }
       

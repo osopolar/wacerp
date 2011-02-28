@@ -109,6 +109,7 @@ function WacFormPrototype()
         $(document).wacPage().showBlockUILoading(children.formDialogId);
 
         $("input[type=text][id*='" + children.moduleName + "']").attr("value", "");
+        $("textarea[id*='" + children.moduleName + "']").attr("value", "");
 
         var params ={dataFormat :'json'};
         if(children.inputMode == WacEntity.formInputMode.edit)   // use default values

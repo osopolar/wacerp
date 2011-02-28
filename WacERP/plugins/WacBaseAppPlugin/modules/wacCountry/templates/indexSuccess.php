@@ -4,9 +4,15 @@
  *  here defines widgets logic of the module
  */
 
-include_partial(WacModule::getName("wacCommon") . "/" . WacComponentList::$moduleIndexInlineWidget,
+echo WacWidgetHelper::getInstance()->getWidget(
+        WacModule::getName("wacCommon"),             // be invoked module name
+        WacComponentList::$moduleIndexInlineWidget,    // be invoked widget name
         array(
-            'contextInfo' => $contextInfo,
-            'enableWidgets' => WacComponentList::$all
-));
+            'contextInfo'   => $contextInfo,                                // current module context info
+            'enableWidgets' => array(                                       // enable sub widgets
+                          WacComponentList::$moduleToolBar,
+                          WacComponentList::$baseInlineTableA
+            )
+        )
+);
 ?>

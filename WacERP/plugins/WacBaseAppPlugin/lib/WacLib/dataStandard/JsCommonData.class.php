@@ -7,7 +7,7 @@
  * @author ben
  */
 class JsCommonData {
-    public static $_instance=null;
+    protected static $_instance=null;
     public static $_nodeCount=0;
 
 
