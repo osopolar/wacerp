@@ -5,16 +5,16 @@
  *
  * @author ben
  */
-class WacErrorCode
+class WacErrorCode extends WacCommonData
 {
-    public static $_instance=null;
+    protected static $_instance=null;
 
     protected static $_defaultLang = 'cn';
     
     public static $duplicatedName = '0001';
 
     // if too much options, we can store them to db table
-    public static $params = array(
+    protected $_params = array(
                                   '0001'=> array(
                                               'en'=>array('info'=>"'%s' is duplicated name!"),
                                               'cn'=>array('info'=>"错误！ '%s', 该项名字已存在!"),
@@ -37,9 +37,9 @@ class WacErrorCode
     /*
      * get error info
      */
-    public static function getInfo($code, $attachMsg="field")
+    public function getInfo($code, $attachMsg="field")
     {
-        return sprintf(self::$params[$code][self::$_defaultLang]['info'], $attachMsg);
+        return sprintf($this->_params[$code][self::$_defaultLang]['info'], $attachMsg);
     }
 
     public function getDefaultLang()

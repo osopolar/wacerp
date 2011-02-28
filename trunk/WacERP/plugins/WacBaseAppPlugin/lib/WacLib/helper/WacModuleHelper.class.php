@@ -361,7 +361,7 @@ class WacModuleHelper
         $str.=" });\n\n";
 
         $str.="var rowData = $(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
-        $str.="if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
+        $str.="if(rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$subModule}{$attachName}_be\"+cl).attr('disabled','disabled');\n";
         $str.= "\$(\"#{$subModule}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
@@ -467,8 +467,8 @@ class WacModuleHelper
         }
 
         $str.= "var rowData = $(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('getRowData',cl);\n";
-//        $str.= "wacDebugLog('".WacEntityStatus::getId(WacEntityStatus::$audited).":' + rowData['status']);\n";
-        $str.= "if(rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getId(WacEntityStatus::$finish).")";
+//        $str.= "wacDebugLog('".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited).":' + rowData['status']);\n";
+        $str.= "if(rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
         $str.= "\$(\"#{$module}{$attachName}_ba\"+cl).attr('disabled','disabled');\n";
         $str.= "\$(\"#{$subModule}{$attachName}_sa\"+cl).attr('disabled','disabled');\n";

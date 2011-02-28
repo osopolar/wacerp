@@ -142,6 +142,10 @@
         <target>确认</target>
       </trans-unit>
       <trans-unit>
+        <source>Status</source>
+        <target>状态</target>
+      </trans-unit>
+      <trans-unit>
         <source>Status Active</source>
         <target>激活</target>
       </trans-unit>
@@ -180,6 +184,14 @@
       <trans-unit>
         <source>User Group</source>
         <target>用户组</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Log Type System</source>
+        <target>系统操作</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Log Type User</source>
+        <target>用户操作</target>
       </trans-unit>
     </body>
   </file>

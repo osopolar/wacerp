@@ -43,18 +43,6 @@ class WacComponentList
     //// module list
     public static $moduleIndexListWidget      = "moduleIndexListWidget";
 
-    /*
-     * to judge if embedWidge should be include or not
-     * @$embedWidget - current widget
-     * @enableWidgets - mix, array widget names  or string "all"
-     */
-    public static function enableWidget($embedWidget, $enableWidgets){
-        if(is_array($enableWidgets)){
-            return in_array($embedWidget, $enableWidgets);
-        }
-        else{
-            return ($enableWidgets == self::$all);
-        }
-    }
+    
 
 }

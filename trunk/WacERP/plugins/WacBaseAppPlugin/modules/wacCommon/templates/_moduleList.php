@@ -25,7 +25,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
 
     <script type="text/javascript">
         //<![CDATA[
-        $(function(){
+        $("#<?php echo $moduleListingTableId; ?>").ready(function(){
             var moduleName       = <?php echo "'{$moduleName}'" ?>;
             var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
             var modulePrefixId   = '#' + modulePrefixName;

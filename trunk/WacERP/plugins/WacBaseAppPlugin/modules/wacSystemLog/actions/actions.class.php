@@ -19,6 +19,7 @@ class wacSystemLogActions extends WacCommonActions
             foreach ($listObjs as $listObj) {
                 $tmpArr = $listObj->toArray();
                 $tmpArr['user_name'] = $listObj->getUser()->getUsername();
+                $tmpArr['type']      = $this->i18n->__(WacLogger::getInstance()->getCaptionById($listObj->getType()));
 
                 $filterArr[] = $tmpArr;
             }
