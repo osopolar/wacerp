@@ -4,10 +4,15 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Folder Expanded="Yes" Name="BizObjects">
-			<Folder Expanded="Yes" Name="BizOrders" Selected="Yes">
+		<Folder Expanded="Yes" Name="Biz Objects">
+			<Folder Expanded="Yes" Name="BizOrders">
 				<Model ID="{24DED88D-EE02-4262-870F-DFC99E86FC6B}" Name="ObjectOrientedModel_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="ObjectOrientedModel_1.oom"/>
 			</Folder>
+		</Folder>
+		<Folder Name="Database"/>
+		<Folder Name="UserCase"/>
+		<Folder Expanded="Yes" Name="UI Component">
+			<Model ID="{CB7BDA7C-F3FE-4DE8-BC09-03BB6D0ADBA4}" Name="UI Component Structure Diagram" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="UI_Component_Structure_Diagram.oom"/>
 		</Folder>
 	</Local>
 	<BrowserModule Name="Repository"/>
