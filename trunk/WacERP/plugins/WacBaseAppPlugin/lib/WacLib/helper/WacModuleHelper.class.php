@@ -36,11 +36,27 @@ class WacModuleHelper
     }
 
     /*
+     * getWidgetId
+     */
+    public static function getWidgetId($module, $attachInfo=array())
+    {
+        return isset($attachInfo["name"]) ? $module.$attachInfo["name"]."Widget" : $module."Widget";
+    }
+
+    /*
      * getComponentsId
      */
     public static function getComponentsId($module, $attachName="")
     {
         return $module.$attachName."Component";
+    }
+
+    /*
+     * getTreeId
+     */
+    public static function getTreeId($module, $attachName="")
+    {
+        return $module.$attachName."Tree";
     }
 
     /*

@@ -7,9 +7,10 @@
 
 $subItemModuleName = "";
 $attachInfo = array("name" => "");
+$widgetName = WacModuleHelper::getWidgetId($contextInfo["moduleName"], $attachInfo);
 
-OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, begin");
-echo "<div id=\"" . WacModuleHelper::getComponentsId($contextInfo["moduleName"]) . "\">\n\n";
+OutputHelper::getInstance()->writeNote("{$widgetName}, begin");
+echo "<div id=\"{$widgetName}\">\n\n";
 
 if (WacWidgetHelper::enableWidget(WacComponentList::$moduleToolBar, $enableWidgets)) {
     OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]} ModuleToolbar Component Included.");
@@ -17,7 +18,7 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleToolBar, $enableWidge
             array(
                 'mode' => 'partial',
                 'widgetModule' => WacWidgetHelper::getModuleName($contextInfo, WacComponentList::$moduleToolBar),
-                'widgetName'   => WacComponentList::$moduleToolBar,
+                'widgetName' => WacComponentList::$moduleToolBar,
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
                     'attachInfo' => $attachInfo
@@ -31,7 +32,7 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleList, $enableWidgets)
             array(
                 'mode' => 'component',
                 'widgetModule' => WacWidgetHelper::getModuleName($contextInfo, WacComponentList::$moduleList),
-                'widgetName'   => WacComponentList::$moduleList,
+                'widgetName' => WacComponentList::$moduleList,
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
                     'subItemModuleName' => $subItemModuleName,
@@ -46,7 +47,7 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleForm, $enableWidgets)
             array(
                 'mode' => 'component',
                 'widgetModule' => WacWidgetHelper::getModuleName($contextInfo, WacComponentList::$moduleForm),
-                'widgetName'   => WacComponentList::$moduleForm,
+                'widgetName' => WacComponentList::$moduleForm,
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
                     'attachInfo' => $attachInfo
@@ -55,5 +56,5 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleForm, $enableWidgets)
 }
 
 echo "</div>\n\n";
-OutputHelper::getInstance()->writeNote("{$contextInfo["moduleName"]}, end");
+OutputHelper::getInstance()->writeNote("{$widgetName}, end");
 ?>
