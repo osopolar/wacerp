@@ -1,14 +1,14 @@
 <?php
 
 /**
- * wacGuardGroup actions.
+ * wacFileManager actions.
  *
  * @package    Wac
- * @subpackage wacGuardGroup
+ * @subpackage wacFileManager
  * @author     JianBinBi
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class wacGuardGroupActions extends WacCommonActions
+class wacFileManagerActions extends WacCommonActions
 {
   /*
    * override filter list
@@ -21,7 +21,8 @@ class wacGuardGroupActions extends WacCommonActions
           foreach($listObjs as $listObj)
           {
               $tmpArr = $listObj->toArray();
-              $tmpArr['permissions_names'] = $listObj->getPermissionsNames();
+              $tmpArr['groups_names'] = $listObj->getGroupsDescription();
+              $tmpArr['status'] = $this->i18n->__(WacEntityStatus::getInstance()->getActiveCaption($listObj->getIsActive()));
 
               $filterArr[] = $tmpArr;
           }
@@ -40,12 +41,12 @@ class wacGuardGroupActions extends WacCommonActions
 
 
       $id = isset($reqParams['id']) ? $reqParams['id'] : 0;
-      if($this->mainModuleTable->isExistedName($reqParams['name'], $id))
+      if($this->mainModuleTable->isExistedName($reqParams['username'], $id))
       {
-         $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
+         $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
          return $result;
       }
-
+      
       return $result;
   }
 
@@ -54,6 +55,7 @@ class wacGuardGroupActions extends WacCommonActions
    */
   public function executeAdd(sfWebRequest $request)
   {
+      
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)
@@ -67,12 +69,12 @@ class wacGuardGroupActions extends WacCommonActions
 
           if(count($reqParams)>0) {
 //              $targetItem->set($reqParams['']);
-              if(isset($reqParams['name'])) {$targetItem->setName($reqParams['name']);}
-              if(isset($reqParams['description'])) {$targetItem->setDescription($reqParams['description']);}
-
-              if(isset($reqParams['permission_list']) && count($reqParams['permission_list'])>0)
+              if(isset($reqParams['password']))      {$targetItem->setPassword($reqParams['password']);}
+              if(isset($reqParams['username']))      {$targetItem->setUsername($reqParams['username']);}
+              $targetItem->setIsActive(isset($reqParams['is_active'])?1:0);
+              if(isset($reqParams['user_group_list']) && count($reqParams['user_group_list'])>0)
               {
-                  $targetItem->link('permissions', $reqParams['permission_list']);
+                  $targetItem->link('groups', $reqParams['user_group_list']);
               }
               
               $targetItem->save();
@@ -98,7 +100,7 @@ class wacGuardGroupActions extends WacCommonActions
   {
       // forward to 404 if no id
       $this->forward404Unless($request->hasParameter('id'));
-
+      
       $resultSet = JsCommonData::getCommonDatum();
       $inspectResult = $this->inspectDataValidation($request);
       if($inspectResult['status'] == WacOperationStatus::$Error)
@@ -111,14 +113,15 @@ class wacGuardGroupActions extends WacCommonActions
           $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
 
           if(count($reqParams)>0) {
-              $targetItem->unlink('permissions');
-              
-              if(isset($reqParams['name'])) {$targetItem->setName($reqParams['name']);}
-              if(isset($reqParams['description'])) {$targetItem->setDescription($reqParams['description']);}
+              if(isset($reqParams['password']) && $reqParams['password']!="000000") {$targetItem->setPassword($reqParams['password']);}
+              if(isset($reqParams['username'])) {$targetItem->setUsername($reqParams['username']);}
+              $targetItem->setIsActive(isset($reqParams['is_active'])?1:0);
 
-              if(isset($reqParams['permission_list']) && count($reqParams['permission_list'])>0)
+              $targetItem->unlink('groups');
+              
+              if(isset($reqParams['user_group_list']) && count($reqParams['user_group_list'])>0)
               {
-                  $targetItem->link('permissions', $reqParams['permission_list']);
+                  $targetItem->link('groups', $reqParams['user_group_list']);
               }
 
               $targetItem->save();
@@ -144,16 +147,16 @@ class wacGuardGroupActions extends WacCommonActions
       $resultSet = JsCommonData::getCommonDatum();
       $resultSet['info'] = JsCommonData::getSuccessDatum();
 
-      $resultSet['items']['permission'] = Doctrine::getTable(WacTable::$wacGuardPermission)->getIdDescriptionHash();
+      $resultSet['items']['group'] = Doctrine::getTable(WacTable::$wacGuardGroup)->getIdDescriptionHash();
 
       if($request->hasParameter('id'))
       {
           $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
-          $resultSet['items']['group_permission'] = $targetItem->getPermissionsIds(true);
+          $resultSet['items']['user_group'] = $targetItem->getGroupsIds(true);
       }
       else
       {
-          $resultSet['items']['group_permission'] = array();
+          $resultSet['items']['user_group'] = array();
       }
 
 //      $resultSet['items']['default']['currency_code_name'] = Doctrine::getTable(WacTable::$systemParameter)->getValueByCode(WacAppSettingCode::$currency);

@@ -34,6 +34,9 @@ class WacComponentList
     //// module form
     public static $moduleForm                 = "moduleForm";
 
+    //// module tree
+    public static $moduleTree                 = "moduleTree";
+
     //// buttons bar for the module
     public static $moduleButtonBar            = "moduleButtonBar";
 
@@ -42,6 +45,9 @@ class WacComponentList
 
     //// module list
     public static $moduleIndexListWidget      = "moduleIndexListWidget";
+
+    //// module list
+    public static $moduleIndexTreeWidget      = "moduleIndexTreeWidget";
 
     
 
