@@ -121,7 +121,7 @@ abstract class WacCommonActions extends sfActions {
         if (count($listObjs) > 0) {
             foreach ($listObjs as $listObj) {
                 $tmpArr = $listObj->toArray();
-                $tmpArr['is_avail_label'] = ($listObj->getIsAvail() == 1) ? $this->i18n->__("Yes") : $this->i18n->__("No");
+//                $tmpArr['is_avail_label'] = ($listObj->getIsAvail() == 1) ? $this->i18n->__("Yes") : $this->i18n->__("No");
 
                 $filterArr[] = $tmpArr;
             }

@@ -8,7 +8,7 @@ class WacParameterType extends WacCommonData
 {
     protected static $_instance=null;
     
-    protected $params = array(
+    protected $_params = array(
         'common' => array('id'=>"0", 'group'=>'1', 'name'=>"common", 'caption'=>"Type Common"),
         'special' => array('id'=>"1", 'group'=>'1', 'name'=>"special", 'caption'=>"Type Special"),
     );
