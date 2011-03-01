@@ -125,5 +125,14 @@ class JqGridDataHelper {
         return $result;
     }
 
+//    public function getEditOptions($hashDs){
+//        $strPattern = "{value:\"%s\"}";
+//        $valueStr = "";
+//        if(count($hashDs)>0){
+//            $valueS
+//        }
+//        return sprintf($strPattern, $valueStr);
+//    }
+
 }
 

@@ -109,31 +109,49 @@ abstract class WacCommonData
     /*
      *
      */
-    public function getIdCaptionHash($isArr=true, $spliter=':', $pairSpliter=';' )
+    public function getIdCaptionHash($isArr=true, $spliter=':', $pairSpliter=';', $isI18N=false )
     {
-        return $this->getAttributeHash('id', 'caption', $isArr, $spliter);
+        return $this->getAttributeHash('id', 'caption', $isArr, $spliter, $pairSpliter, $isI18N);
     }
 
     /*
      * get Hash array or string
      */
-    public function getAttributeHash($keyName, $valName, $isArr=true, $spliter=':', $pairSpliter=';')
+    public function getAttributeHash($keyName, $valName, $isArr=true, $spliter=':', $pairSpliter=';', $isI18N=false)
     {
         $tmpArr = array();
-
-        if($isArr)
-        {
-            foreach($this->_params as $param) {
-                $tmpArr[$param[$keyName]] = $param[$valName];
+        if(!$isI18N){
+            if($isArr)
+            {
+                foreach($this->_params as $param) {
+                    $tmpArr[$param[$keyName]] = $param[$valName];
+                }
+                return $tmpArr;
             }
-            return $tmpArr;
+            else
+            {
+                foreach($this->_params as $param) {
+                    $tmpArr[] = $param[$keyName].$spliter.$param[$valName];
+                }
+                return implode($pairSpliter, $tmpArr);
+            }
         }
-        else
-        {
-            foreach($this->_params as $param) {
-                $tmpArr[] = $param[$keyName].$spliter.$param[$valName];
+        else{
+            $i18n = sfContext::getInstance()->getI18N();
+            if($isArr)
+            {
+                foreach($this->_params as $param) {
+                    $tmpArr[$param[$keyName]] = $i18n->__($param[$valName]);
+                }
+                return $tmpArr;
             }
-            return implode($pairSpliter, $tmpArr);
+            else
+            {
+                foreach($this->_params as $param) {
+                    $tmpArr[] = $param[$keyName].$spliter.$i18n->__($param[$valName]);
+                }
+                return implode($pairSpliter, $tmpArr);
+            }
         }
     }
 

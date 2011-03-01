@@ -193,6 +193,34 @@
         <source>Log Type User</source>
         <target>用户操作</target>
       </trans-unit>
+      <trans-unit>
+        <source>Data Type</source>
+        <target>数据类型</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type</source>
+        <target>类型</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value</source>
+        <target>值</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type Char</source>
+        <target>字符类型</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type Decimal</source>
+        <target>小数类型(0.00)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type Int</source>
+        <target>整数类型</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type Boolean</source>
+        <target>逻辑类型(1 true/0 false)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
