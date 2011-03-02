@@ -5,7 +5,7 @@
  */
 
 echo WacWidgetHelper::getInstance()->getWidget(
-        WacModule::getName("wacCommon"),             // be invoked module name
+        WacModule::getInstance()->getName("wacCommon"),             // be invoked module name
         WacComponentList::$moduleIndexInlineWidget,    // be invoked widget name
         array(
             'contextInfo'   => $contextInfo,                                // current module context info

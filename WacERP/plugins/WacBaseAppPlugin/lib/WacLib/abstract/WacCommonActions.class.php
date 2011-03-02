@@ -141,7 +141,7 @@ abstract class WacCommonActions extends sfActions {
             $moduleListComponent = $sfController->getComponent($this->innerContextInfo["moduleName"], WacComponentList::$moduleList);
         }
         else{
-            $moduleListComponent = $sfController->getComponent(WacModule::getName("wacCommon"), WacComponentList::$baseInlineTableA);
+            $moduleListComponent = $sfController->getComponent(WacModule::getInstance()->getName("wacCommon"), WacComponentList::$baseInlineTableA);
         }
         
         return $moduleListComponent->getListMetaInfo();
@@ -207,7 +207,7 @@ abstract class WacCommonActions extends sfActions {
     public function executeDataExport(sfWebRequest $request) {
         $params = array(
             "contextInfo" => $this->innerContextInfo,
-            "fileName"    =>  WacModule::getCaption($this->innerContextInfo["moduleName"]).$this->i18n->__("List")
+            "fileName"    =>  WacModule::getInstance()->getCaption($this->innerContextInfo["moduleName"]).$this->i18n->__("List")
         );
         return OutputHelper::getInstance()->export($this->getList($request), $this, $params);
 
@@ -504,7 +504,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
+                "target"=> WacModule::getInstance()->getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$targetObj->getId());
         $this->wacLogger->logOperation(WacOperationType::$add, $logParams);
     }
@@ -517,7 +517,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
+                "target"=> WacModule::getInstance()->getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$request->getParameter('id'));
         $this->wacLogger->logOperation(WacOperationType::$edit, $logParams);
     }
@@ -530,7 +530,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
+                "target"=> WacModule::getInstance()->getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$request->getParameter('id'));
         $this->wacLogger->logOperation(WacOperationType::$del, $logParams);
     }
@@ -543,7 +543,7 @@ abstract class WacCommonActions extends sfActions {
         $logParams = array("type"=>WacLogger::$logTypeUser,
                 "userId"=>$this->getUser()->getGuardUser()->getId(),
                 "userName"=>$this->getUser()->getGuardUser()->getUsername(),
-                "target"=> WacModule::getCaption($this->innerContextInfo["moduleName"]),
+                "target"=> WacModule::getInstance()->getCaption($this->innerContextInfo["moduleName"]),
                 "targetId"=>$targetObj->getId());
         $this->wacLogger->logOperation(WacOperationType::$audit, $logParams);
     }

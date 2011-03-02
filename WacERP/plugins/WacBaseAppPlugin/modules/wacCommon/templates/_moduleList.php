@@ -14,7 +14,7 @@ $modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams
 $moduleListingTableId = WacModuleHelper::getListingTableId($moduleName, $moduleAttachName);
 $moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachName);
 $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
-$moduleCaption        = WacModule::getCaption($moduleName) . __("List");
+$moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("List");
 //print_r($contextInfo);
 ?>
 

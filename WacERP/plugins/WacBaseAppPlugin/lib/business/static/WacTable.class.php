@@ -79,13 +79,7 @@ class WacTable {
     public static $wacUnitRatio = "WacUnitRatio";
     public static $wacCurrencyRatio = "WacCurrencyRatio";
 
-//    public static $wacCleanUpFormItemConsume = "WacCleanUpFormItemConsume";
-//    public static $wacFinalClothFormItemConsume = "WacFinalClothFormItemConsume";
-
-//    public static $wacFinalClothQcWrapperForm = "WacFinalClothQcWrapperForm";
-//    public static $wacFinalClothQcTestForm = "WacFinalClothQcTestForm";
-//    public static $wacFinalClothQcTestFormItem = "WacFinalClothQcTestFormItem";
-//    public static $wacFinalClothQcTestHistory = "WacFinalClothQcTestHistory";
+    public static $wacFileManager = "WacFile";
 
 
     /*
