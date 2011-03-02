@@ -8,7 +8,7 @@
  * @author     JianBinBi
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class wacFileManagerActions extends WacCommonActions
+class wacFileManagerActions extends WacTreeActions
 {
   /*
    * override filter list

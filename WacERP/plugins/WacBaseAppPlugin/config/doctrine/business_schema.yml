@@ -28,7 +28,7 @@ WacFile:
       type: integer(8)
       default: '0'
       notnull: true
-    type:
+    user_id:
       type: integer(8)
       default: '0'
       notnull: true
@@ -52,6 +52,7 @@ WacFile:
       type: timestamp(25)
       default: '0000-00-00 00:00:00'
       notnull: true
+    type: string(255)
     code: string(255)
     name: string(255)
     caption: string(255)
@@ -59,3 +60,9 @@ WacFile:
     memo: string()
     pr_str1: string(255)
     pr_str2: string(255)
+  relations:
+    user:
+      class: sfGuardUser
+      local: user_id
+      foreign: id
+      type: one

@@ -3,7 +3,9 @@
 /**
  * WacCommonActions actions.
  *
- * @package    WacStorehouse
+ * Descriptions: provides common methods for wac action
+ *
+ * @package    Wac
  * @subpackage lib
  * @author     ben
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
