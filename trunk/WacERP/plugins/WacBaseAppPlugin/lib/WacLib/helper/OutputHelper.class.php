@@ -176,7 +176,7 @@ class OutputHelper
     {
         $output = "";
         $tableTpl = "htmlTableA";
-        $output = $action->getPartial(WacModule::getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
+        $output = $action->getPartial(WacModule::getInstance()->getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
         return $this->outputHtmlFormat($output, $action, $params);
     }
 
@@ -190,7 +190,7 @@ class OutputHelper
 //        return $this->outputJsonOrTextFormat($resultSet, $action, $params);
         $output = "";
         $tableTpl = "htmlEntityViewA";
-        $output = $action->getPartial(WacModule::getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
+        $output = $action->getPartial(WacModule::getInstance()->getName("wacCommon")."/".$tableTpl, array('resultSet' => $resultSet));
         return $this->outputHtmlFormat($output, $action, $params);
     }
 
@@ -245,9 +245,9 @@ class OutputHelper
                 $resultSet["output"] = $output;
                 $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
             }
-            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
+            return $action->renderText($action->getPartial(WacModule::getInstance()->getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
         }
-        return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/blank', array('output' => $output)));
+        return $action->renderText($action->getPartial(WacModule::getInstance()->getName("wacCommon").'/blank', array('output' => $output)));
     }
 
     /*
@@ -272,7 +272,7 @@ class OutputHelper
                 $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
             }
 
-            return $action->renderText($action->getPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
+            return $action->renderText($action->getPartial(WacModule::getInstance()->getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
         }
         return $action->renderText($output);
     }
@@ -302,7 +302,7 @@ class OutputHelper
     public function debugRequest(sfAction $action)
     {
         $reqParams = $this->_request->getParameterHolder()->getAll();
-        return $action->renderPartial(WacModule::getName("wacCommon").'/debugBlank', array('output' => $reqParams));
+        return $action->renderPartial(WacModule::getInstance()->getName("wacCommon").'/debugBlank', array('output' => $reqParams));
     }
 
     /*
@@ -359,6 +359,19 @@ class OutputHelper
     {
         $format = "\n<!-- WacNote: %s-->\n";
         $str = sprintf($format, $v);
+        if(!$isReturnStr){
+            echo $str;
+        }
+        else{
+            return $str;
+        }
+    }
+
+    public function noteComponent($moduleContextInfo, $componentId, $beginFlag=true, $isReturnStr=false, $params=array())
+    {
+        $strPattern = "\n<!-- WacNote: Component %s/%s (id: %s), %s -->\n";
+        $str = sprintf($strPattern, $moduleContextInfo["moduleName"], $moduleContextInfo["componentName"], $componentId, ($beginFlag ? "begin":"end"));
+
         if(!$isReturnStr){
             echo $str;
         }

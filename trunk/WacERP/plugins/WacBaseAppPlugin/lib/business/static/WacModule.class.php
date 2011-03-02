@@ -4,9 +4,11 @@
  *
  * @author ben
  */
-class WacModule
+class WacModule extends WacCommonData
 {
-    public static $params = array(
+    protected static $_instance=null;
+    
+    protected $_params = array(
           'wacCommon'         => array('id'=>"0", 'group'=>'1', 'name'=>"wacCommon", 'caption'=>"公共模块"),
 //          'wacJar'            => array('id'=>"1", 'group'=>'1', 'name'=>"wacJar", 'caption'=>"缸号"),
 //          'wacAxis'           => array('id'=>"2", 'group'=>'1', 'name'=>"wacAxis", 'caption'=>"轴号"),
@@ -72,6 +74,7 @@ class WacModule
 
           'wacI18n'                          => array('id'=>"58",'group'=>'1', 'name'=>"wacI18n", 'caption'=>"多语言服务"),
           'wacPrint'                          => array('id'=>"59",'group'=>'1', 'name'=>"wacPrint", 'caption'=>"打印服务"),
+          'wacFileManager'                    => array('id'=>"60",'group'=>'1', 'name'=>"wacFileManager", 'caption'=>"打印服务"),
     );
 
     public static function getInstance()
@@ -88,36 +91,36 @@ class WacModule
         ;
     }
 
-    /*
-     * get attribute
-     */
-    public static function getAttribute($module, $attribute)
-    {
-        return self::$params[$module][$attribute];
-    }
-
-    /*
-     * getId
-     */
-    public static function getId($module)
-    {
-        return self::getAttribute($module, 'id');
-    }
-
-    /*
-     * getName
-     */
-    public static function getName($module)
-    {
-        return self::getAttribute($module, 'name');
-    }
-
-    /*
-     * getCaption
-     */
-    public static function getCaption($module)
-    {
-        return self::getAttribute($module, 'caption');
-    }
+//    /*
+//     * get attribute
+//     */
+//    public static function getAttribute($module, $attribute)
+//    {
+//        return self::$_params[$module][$attribute];
+//    }
+//
+//    /*
+//     * getId
+//     */
+//    public static function getId($module)
+//    {
+//        return self::getAttribute($module, 'id');
+//    }
+//
+//    /*
+//     * getName
+//     */
+//    public static function getName($module)
+//    {
+//        return self::getAttribute($module, 'name');
+//    }
+//
+//    /*
+//     * getCaption
+//     */
+//    public static function getCaption($module)
+//    {
+//        return self::getAttribute($module, 'caption');
+//    }
 
 }

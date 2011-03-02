@@ -15,7 +15,7 @@ $moduleAttachName     = $invokeParams['attachInfo']['name'];
 $moduleListingTableId = WacModuleHelper::getListingTableId($moduleName, $moduleAttachName);
 $moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachName);
 $moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
-$moduleCaption        = WacModule::getCaption($moduleName) . __("List");
+$moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("List");
 ?>
 
 <?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, begin");?>
@@ -67,7 +67,7 @@ $moduleCaption        = WacModule::getCaption($moduleName) . __("List");
                       multiselect: true,
                       viewrecords: true,
                       pager: moduleListPagerId,
-                      caption:"<?php echo WacModule::getCaption($moduleName) . __("List"); ?>",
+                      caption:"<?php echo WacModule::getInstance()->getCaption($moduleName) . __("List"); ?>",
                       height: '100%',
                       width: '100%',
 

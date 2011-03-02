@@ -12,40 +12,5 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
-    public function getGroupsNames($isArr=false, $separator=',')
-    {
-        return $this->getGroupsAttribute("name", $isArr, $separator);
-    }
-
-    public function getGroupsDescription($isArr=false, $separator=',')
-    {
-        return $this->getGroupsAttribute("description", $isArr, $separator);
-    }
-
-    public function getGroupsIds($isArr=false, $separator=',')
-    {
-        return $this->getGroupsAttribute("id", $isArr, $separator);
-    }
-
-    public function getGroupsAttribute($attribute, $isArr=false, $separator=',')
-    {
-        $tmpArr = array();
-        $groups = $this->getGroups();
-        if($groups->count()>0)
-        {
-            foreach($groups as $group)
-            {
-                $method = "get".ucfirst($attribute);
-                $tmpArr[] = $group->$method();
-            }
-        }
-
-        if(!$isArr)
-        {
-            return implode($separator, $tmpArr);
-        }
-
-        return $tmpArr;
-    }
-
+    
 }

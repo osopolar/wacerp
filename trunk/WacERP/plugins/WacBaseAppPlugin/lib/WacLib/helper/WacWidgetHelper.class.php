@@ -78,7 +78,7 @@ class WacWidgetHelper {
             return $moduleContextInfo["moduleName"];
         }
         else{
-            return WacModule::getName("wacCommon");
+            return WacModule::getInstance()->getName("wacCommon");
         }
     }
 

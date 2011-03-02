@@ -47,7 +47,7 @@ class WacComponentList
     public static $moduleIndexListWidget      = "moduleIndexListWidget";
 
     //// module list
-    public static $moduleIndexTreeWidget      = "moduleIndexTreeWidget";
+    public static $fileManagerWidget          = "fileManagerWidget";
 
     
 

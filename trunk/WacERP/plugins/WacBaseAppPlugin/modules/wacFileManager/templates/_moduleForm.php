@@ -4,7 +4,7 @@ $moduleAttachName     = $invokeParams['attachInfo']['name'];
 $modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams['attachInfo']['name'];
 $formDialogId = WacModuleHelper::getFormDialogId($modulePrefixName);
 $formId       = WacModuleHelper::getFormId($modulePrefixName);
-echo "<div id=\"".$formDialogId."\" title=\"".WacModule::getCaption($modulePrefixName)."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
+echo "<div id=\"".$formDialogId."\" title=\"".WacModule::getInstance()->getCaption($modulePrefixName)."\" class=\"ui-widget\" style=\"display: none\" >\n\n";
 ?>
 <!-- form, begin-->
 <form name="<?php echo $formId;?>" id="<?php echo $formId;?>" method="post" class="wacFormA">
