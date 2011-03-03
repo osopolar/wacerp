@@ -26,7 +26,7 @@ $menuStr.="<row><cell>20007</cell><cell>默认参数</cell><cell>wacSystemParame
 
 $menuStr.="<row><cell>21001</cell><cell>系统工具</cell><cell></cell><cell>0</cell><cell>21001</cell><cell>22000</cell><cell>false</cell><cell>false</cell></row>";
 $menuStr.="<row><cell>21002</cell><cell>工作日志</cell><cell>wacSystemLog/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
-//$menuStr.="<row><cell>21003</cell><cell>备份工具</cell><cell>backup/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
+$menuStr.="<row><cell>21003</cell><cell>文件管理</cell><cell>wacFileManager/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
 
 $menuStr.="<row><cell>22001</cell><cell>运行参数设置</cell><cell></cell><cell>0</cell><cell>22001</cell><cell>23000</cell><cell>false</cell><cell>false</cell></row>";
 //$menuStr.="<row><cell>22002</cell><cell>工厂</cell><cell>factory/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";

@@ -13,21 +13,23 @@ $moduleAttachName = $invokeParams['attachInfo']['name'];
 $modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
 $moduleTreeId = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
 $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
-//print_r($contextInfo);
+//print_r($invokeParams['contextInfo']);
 ?>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, true); ?>
-<div id="<?php echo $moduleTreeId; ?>"></div>
+<div id="<?php echo $moduleTreeId; ?>" class="wacTreeFrame"></div>
 
 <script type="text/javascript">
     //<![CDATA[
     $("#<?php echo $moduleTreeId; ?>").ready(function(){
+        var wacImagesPath    = <?php echo "'".sfConfig::get("app_wac_setting_images_path")."'" ?>;
+
         var moduleName       = <?php echo "'{$moduleName}'" ?>;
         var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
         var modulePrefixId   = '#' + modulePrefixName;
         var moduleTreeId     = '#' + <?php echo "'{$moduleTreeId}'" ?>;
         var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-        var moduleUrl         = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
 
 
         init();
@@ -91,23 +93,23 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             "valid_children" : "none",
                             // If we specify an icon for the default type it WILL OVERRIDE the theme icons
                             "icon" : {
-                                "image" : "./file.png"
+                                "image" : wacImagesPath + "js_icons/leaf.png"
                             }
                         },
                         // The `folder` type
-                        "folder" : {
+                        "branch" : {
                             // can have files and other folders inside of it, but NOT `drive` nodes
-                            "valid_children" : [ "default", "folder" ],
+                            "valid_children" : [ "default", "branch" ],
                             "icon" : {
-                                "image" : "./folder.png"
+                                "image" : wacImagesPath + "js_icons/branch.png"
                             }
                         },
                         // The `drive` nodes 
-                        "drive" : {
+                        "root" : {
                             // can have files and folders inside, but NOT other `drive` nodes
-                            "valid_children" : [ "default", "folder" ],
+                            "valid_children" : [ "default", "branch" ],
                             "icon" : {
-                                "image" : "./root.png"
+                                "image" : wacImagesPath + "js_icons/root.png"
                             },
                             // those options prevent the functions with the same name to be used on the `drive` type nodes
                             // internally the `before` event is used
@@ -135,13 +137,13 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
             .bind("create.jstree", function (e, data) {
                 $.post(
                 moduleUrl + "createNode",
-                { 
+                {
                     "dataFormat" : "json",
-                    "id" : data.rslt.parent.attr("id").replace("node_",""), 
+                    "id" : data.rslt.parent.attr("id").replace("node_",""),
                     "position" : data.rslt.position,
-                    "title" : data.rslt.name,
+                    "caption" : data.rslt.name,
                     "type" : data.rslt.obj.attr("rel")
-                }, 
+                },
                 function (r) {
                     if(r.status) {
                         $(data.rslt.obj).attr("id", "node_" + r.id);
@@ -151,69 +153,69 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                     }
                 }
             );
-            })
-            .bind("remove.jstree", function (e, data) {
-                data.rslt.obj.each(function () {
-                    $.ajax({
-                        async : false,
-                        type: 'POST',
-                        url: moduleUrl + "removeNode",
-                        data : { 
-                            "dataFormat" : "json",
-                            "id" : this.id.replace("node_","")
-                        }, 
-                        success : function (r) {
-                            if(!r.status) {
-                                data.inst.refresh();
-                            }
-                        }
-                    });
-                });
-            })
-            .bind("rename.jstree", function (e, data) {
-                $.post(
-                moduleUrl + "renameNode",
-                { 
-                    "dataFormat" : "json",
-                    "id" : data.rslt.obj.attr("id").replace("node_",""),
-                    "title" : data.rslt.new_name
-                }, 
-                function (r) {
-                    if(!r.status) {
-                        $.jstree.rollback(data.rlbk);
-                    }
-                }
-            );
-            })
-            .bind("move_node.jstree", function (e, data) {
-                data.rslt.o.each(function (i) {
-                    $.ajax({
-                        async : false,
-                        type: 'POST',
-                        url: moduleUrl + "moveNode",
-                        data : { 
-                            "dataFormat" : "json",
-                            "id" : $(this).attr("id").replace("node_",""), 
-                            "ref" : data.rslt.np.attr("id").replace("node_",""), 
-                            "position" : data.rslt.cp + i,
-                            "title" : data.rslt.name,
-                            "copy" : data.rslt.cy ? 1 : 0
-                        },
-                        success : function (r) {
-                            if(!r.status) {
-                                $.jstree.rollback(data.rlbk);
-                            }
-                            else {
-                                $(data.rslt.oc).attr("id", "node_" + r.id);
-                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-                                }
-                            }
-                            $("#analyze").click();
-                        }
-                    });
-                });
             });
+//            .bind("remove.jstree", function (e, data) {
+//                data.rslt.obj.each(function () {
+//                    $.ajax({
+//                        async : false,
+//                        type: 'POST',
+//                        url: moduleUrl + "removeNode",
+//                        data : {
+//                            "dataFormat" : "json",
+//                            "id" : this.id.replace("node_","")
+//                        },
+//                        success : function (r) {
+//                            if(!r.status) {
+//                                data.inst.refresh();
+//                            }
+//                        }
+//                    });
+//                });
+//            })
+//            .bind("rename.jstree", function (e, data) {
+//                $.post(
+//                moduleUrl + "renameNode",
+//                {
+//                    "dataFormat" : "json",
+//                    "id" : data.rslt.obj.attr("id").replace("node_",""),
+//                    "title" : data.rslt.new_name
+//                },
+//                function (r) {
+//                    if(!r.status) {
+//                        $.jstree.rollback(data.rlbk);
+//                    }
+//                }
+//            );
+//            })
+//            .bind("move_node.jstree", function (e, data) {
+//                data.rslt.o.each(function (i) {
+//                    $.ajax({
+//                        async : false,
+//                        type: 'POST',
+//                        url: moduleUrl + "moveNode",
+//                        data : {
+//                            "dataFormat" : "json",
+//                            "id" : $(this).attr("id").replace("node_",""),
+//                            "ref" : data.rslt.np.attr("id").replace("node_",""),
+//                            "position" : data.rslt.cp + i,
+//                            "title" : data.rslt.name,
+//                            "copy" : data.rslt.cy ? 1 : 0
+//                        },
+//                        success : function (r) {
+//                            if(!r.status) {
+//                                $.jstree.rollback(data.rlbk);
+//                            }
+//                            else {
+//                                $(data.rslt.oc).attr("id", "node_" + r.id);
+//                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+//                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+//                                }
+//                            }
+//                            $("#analyze").click();
+//                        }
+//                    });
+//                });
+//            });
         };  // init end
          
         function bindEvents(){};  //bindEvnts end

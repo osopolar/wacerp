@@ -84,7 +84,7 @@ abstract class BaseWacFile extends sfDoctrineRecord
 {
     public function setTableDefinition()
     {
-        $this->setTableName('wac_country');
+        $this->setTableName('wac_file');
         $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
              'primary' => true,
