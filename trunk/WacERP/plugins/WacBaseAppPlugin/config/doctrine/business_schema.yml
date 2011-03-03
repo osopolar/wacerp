@@ -1,7 +1,7 @@
 WacFile:
   connection: wac_db_connection1
   actAs:      [Timestampable]
-  tableName: wac_country
+  tableName: wac_file
   #package: wacBaseAppPlugin.business.
   columns:
     id:

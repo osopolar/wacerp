@@ -10,39 +10,51 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * Return a list
      */
-    public function getList($params, $page=1, $maxPerPage=20, $isArr=true, $isConcise=true)
-//    public function getList($params = array(), $isArr=false, $isConcise=true)
-    {
-        if($isConcise)
-        {
-            $objQuery = $this->createQuery('t1')
-            ->select('t1.id, t1.parent, t1.node_type, t1.self_layer, t1.code, t1.name')
-            ->where('t1.is_avail=1');
-        }
-        else
-        {
-            $objQuery = $this->createQuery('t1')
-            ->select('t1.*')
-            ->where('t1.is_avail=1');
-        }
-
-        QueryHelper::processOption($objQuery, $params);
-        $dataResult = $isArr ? $objQuery->fetchArray() : $objQuery->execute();
-        $objQuery->free();
-        return $dataResult;
-    }
+//    public function getList($params, $page=1, $maxPerPage=20, $isArr=true, $isConcise=true)
+////    public function getList($params = array(), $isArr=false, $isConcise=true)
+//    {
+//        if($isConcise)
+//        {
+//            $objQuery = $this->createQuery('t1')
+//            ->select('t1.id, t1.parent, t1.node_type, t1.self_layer, t1.code, t1.name')
+//            ->where('t1.is_avail=1');
+//        }
+//        else
+//        {
+//            $objQuery = $this->createQuery('t1')
+//            ->select('t1.*')
+//            ->where('t1.is_avail=1');
+//        }
+//
+//        QueryHelper::processOption($objQuery, $params);
+//        $dataResult = $isArr ? $objQuery->fetchArray() : $objQuery->execute();
+//        $objQuery->free();
+//        return $dataResult;
+//    }
 
     /*
      * getListByParent
+     *
+     * $parent - node object
      */
-    public function getListByParent($id, $rowsLimit=500, $isArr= false, $isConcise=true, $orderBy= "t1.id asc")
+    public function getChildren($parent, $recursive=false, $isArr= false, $maxPerPage=-1, $orderBy= "t1.id asc", $params=array())
     {
-        $params = array();
-        $params['andWhere'][] = "t1.parent='{$id}'";
-        $params['limit']      = $rowsLimit;
-        $params['orderBy']    = $orderBy;
+        $arrParam = array();
+        $arrParam['orderBy'] = $orderBy;
 
-        return $this->getList($params, 1, $rowsLimit, $isArr);
+        if($recursive){  // get all children
+            $arrParam['andWhere'][] = "t1.left>=".$parent->getLeft();
+            $arrParam['andWhere'][] = "t1.right<=".$parent->getRight();
+        }
+        else{
+            $arrParam['andWhere'][] = "t1.parent_id=".$parent->getId();
+        }
+
+
+        $limitRows = ($maxPerPage == -1) ? 10000 : $maxPerPage;
+
+        return $this->getAbstractList($arrParam, 1, $limitRows, $isArr);
+
     }
 
     /*
@@ -91,30 +103,7 @@ abstract class WacTreeTable extends WacCommonTable
         return $this->getHashList("id", "name", $params);
     }
 
-    /*
-     * judge the code is existed or not
-     * @return boolean
-     */
-    public function isExistedCode($val, $exceptId=0)
-    {
-        if($exceptId==0)
-        {
-            $objQuery = $this->createQuery('t1')
-             ->select("count(*) as total")
-             ->where("t1.is_avail=1 and t1.code='{$val}'");
-        }
-        else
-        {
-            $objQuery = $this->createQuery('t1')
-             ->select("count(*) as total")
-             ->where("t1.is_avail=1 and t1.code='{$val}' and t1.id<>'{$exceptId}'");
-        }
-
-        $dataResult = $objQuery->fetchOne();
-        $objQuery->free();
-        return ($dataResult['total']>0);
-    }
-
+    
     /*
      * has children of the node
      * @return boolean

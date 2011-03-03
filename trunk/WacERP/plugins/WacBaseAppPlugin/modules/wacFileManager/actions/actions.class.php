@@ -11,27 +11,6 @@
 class wacFileManagerActions extends WacTreeActions
 {
   /*
-   * override filter list
-   */
-  public function filterList($listObjs)
-  {
-      $filterArr = array();
-      if(count($listObjs) > 0)
-      {
-          foreach($listObjs as $listObj)
-          {
-              $tmpArr = $listObj->toArray();
-              $tmpArr['groups_names'] = $listObj->getGroupsDescription();
-              $tmpArr['status'] = $this->i18n->__(WacEntityStatus::getInstance()->getActiveCaption($listObj->getIsActive()));
-
-              $filterArr[] = $tmpArr;
-          }
-      }
-
-      return $filterArr;
-  }
-
-  /*
    * @return inspect result
    */
   public function inspectDataValidation(sfWebRequest $request, $params=array())
