@@ -22,7 +22,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
 <script type="text/javascript">
     //<![CDATA[
     $("#<?php echo $moduleTreeId; ?>").ready(function(){
-        var wacImagesPath    = <?php echo "'".sfConfig::get("app_wac_setting_images_path")."'" ?>;
+        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
         var moduleName       = <?php echo "'{$moduleName}'" ?>;
         var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
@@ -127,6 +127,57 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                     // this makes the node with ID node_4 selected onload
                     "initially_select" : [ "node_4" ]
                 },
+
+                // contextmenu
+                "contextmenu": {
+                    items : { // Could be a function that should return an object like this one
+                        "create_branch" : {
+                            "icon" : wacImagesPath + "js_icons/branch.png",
+                            "separator_before"  : false,
+			    "separator_after"   : true,
+                            "label"             : "<?php echo __("Create Folder");?>",
+                            "action"            : function (obj) {Wac.log(obj); this.create(obj); }
+                        },
+                        "create" : {
+                            "icon" : wacImagesPath + "js_icons/file.png",
+                            "label" : "<?php echo __("Create File");?>"
+                        },
+                        "rename" : {
+                            "icon" : wacImagesPath + "js_icons/edit.png",
+                            "label" : "<?php echo __("Rename");?>"
+                        },
+                        "remove" : {
+                            "icon" : wacImagesPath + "js_icons/delete.png",
+                            "label" : "<?php echo __("Delete");?>"
+                        },
+                        "ccp" : {
+                            "icon" : wacImagesPath + "js_icons/They-reply-technosorcery-icon.png",
+                            "separator_after" : false,
+                            "label" : "<?php echo __("Edit");?>",
+                            "submenu" : {
+                                "cut" : {
+                                    "icon" : wacImagesPath + "js_icons/cut.png",
+                                    "separator_before"	: false,
+                                    "separator_after"	: false,
+                                    "label"             : "<?php echo __("Cut");?>"
+                                },
+                                "copy" : {
+                                    "icon" : wacImagesPath + "js_icons/copy.png",
+                                    "separator_before"	: false,
+                                    "separator_after"	: false,
+                                    "label"             : "<?php echo __("Copy");?>"
+                                },
+                                "paste" : {
+                                    "icon" : wacImagesPath + "js_icons/paste.png",
+                                    "separator_before"	: false,
+                                    "separator_after"	: false,
+                                    "label"             : "<?php echo __("Paste");?>"
+                                }
+                            }
+                        }
+                    }
+                },
+
                 // the core plugin - not many options here
                 "core" : { 
                     // just open those two nodes up
@@ -153,69 +204,71 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                     }
                 }
             );
+            })
+            .bind("remove.jstree", function (e, data) {
+                if(data !== undefined){
+                    data.rslt.obj.each(function () {
+                        $.ajax({
+                            async : false,
+                            type: 'POST',
+                            url: moduleUrl + "removeNode",
+                            data : {
+                                "dataFormat" : "json",
+                                "id" : this.id.replace("node_","")
+                            },
+                            success : function (r) {
+                                if(!r.status) {
+                                    data.inst.refresh();
+                                }
+                            }
+                        });
+                    });
+                }
+            })
+            .bind("rename.jstree", function (e, data) {
+                $.post(
+                moduleUrl + "editNode",
+                {
+                    "dataFormat" : "json",
+                    "id" : data.rslt.obj.attr("id").replace("node_",""),
+                    "caption" : data.rslt.new_name
+                },
+                function (r) {
+                    if(!r.status) {
+                        $.jstree.rollback(data.rlbk);
+                    }
+                }
+            );
             });
-//            .bind("remove.jstree", function (e, data) {
-//                data.rslt.obj.each(function () {
-//                    $.ajax({
-//                        async : false,
-//                        type: 'POST',
-//                        url: moduleUrl + "removeNode",
-//                        data : {
-//                            "dataFormat" : "json",
-//                            "id" : this.id.replace("node_","")
-//                        },
-//                        success : function (r) {
-//                            if(!r.status) {
-//                                data.inst.refresh();
-//                            }
-//                        }
-//                    });
-//                });
-//            })
-//            .bind("rename.jstree", function (e, data) {
-//                $.post(
-//                moduleUrl + "renameNode",
-//                {
-//                    "dataFormat" : "json",
-//                    "id" : data.rslt.obj.attr("id").replace("node_",""),
-//                    "title" : data.rslt.new_name
-//                },
-//                function (r) {
-//                    if(!r.status) {
-//                        $.jstree.rollback(data.rlbk);
-//                    }
-//                }
-//            );
-//            })
-//            .bind("move_node.jstree", function (e, data) {
-//                data.rslt.o.each(function (i) {
-//                    $.ajax({
-//                        async : false,
-//                        type: 'POST',
-//                        url: moduleUrl + "moveNode",
-//                        data : {
-//                            "dataFormat" : "json",
-//                            "id" : $(this).attr("id").replace("node_",""),
-//                            "ref" : data.rslt.np.attr("id").replace("node_",""),
-//                            "position" : data.rslt.cp + i,
-//                            "title" : data.rslt.name,
-//                            "copy" : data.rslt.cy ? 1 : 0
-//                        },
-//                        success : function (r) {
-//                            if(!r.status) {
-//                                $.jstree.rollback(data.rlbk);
-//                            }
-//                            else {
-//                                $(data.rslt.oc).attr("id", "node_" + r.id);
-//                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-//                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-//                                }
-//                            }
-//                            $("#analyze").click();
-//                        }
-//                    });
-//                });
-//            });
+            //            .bind("move_node.jstree", function (e, data) {
+            //                data.rslt.o.each(function (i) {
+            //                    $.ajax({
+            //                        async : false,
+            //                        type: 'POST',
+            //                        url: moduleUrl + "moveNode",
+            //                        data : {
+            //                            "dataFormat" : "json",
+            //                            "id" : $(this).attr("id").replace("node_",""),
+            //                            "ref" : data.rslt.np.attr("id").replace("node_",""),
+            //                            "position" : data.rslt.cp + i,
+            //                            "caption" : data.rslt.name,
+            //                            "copy" : data.rslt.cy ? 1 : 0
+            //                        },
+            //                        success : function (r) {
+            //                            if(!r.status) {
+            //                                $.jstree.rollback(data.rlbk);
+            //                            }
+            //                            else {
+            //                                $(data.rslt.oc).attr("id", "node_" + r.id);
+            //                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+            //                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+            //                                }
+            //                            }
+            //                            $("#analyze").click();
+            //                        }
+            //                    });
+            //                });
+            //            });
         };  // init end
          
         function bindEvents(){};  //bindEvnts end

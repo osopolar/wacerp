@@ -16,11 +16,11 @@ WacFile:
       type: integer(8)
       default: '0'
       notnull: true
-    left:
+    left_number:
       type: integer(8)
       default: '0'
       notnull: true
-    right:
+    right_number:
       type: integer(8)
       default: '0'
       notnull: true
@@ -64,5 +64,10 @@ WacFile:
     user:
       class: sfGuardUser
       local: user_id
+      foreign: id
+      type: one
+    parent:
+      class: WacFile
+      local: parent_id
       foreign: id
       type: one

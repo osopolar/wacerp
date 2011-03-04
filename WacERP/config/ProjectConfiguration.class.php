@@ -14,6 +14,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('WacBaseAppPlugin');
 
     $this->setupCorePluginsCustomConfig();
+
   }
 
   public function setupCorePluginsCustomConfig() {

@@ -75,52 +75,6 @@ class wacFileManagerActions extends WacTreeActions
   /*
    * @return list data array
    */
-  public function executeEdit(sfWebRequest $request)
-  {
-      // forward to 404 if no id
-      $this->forward404Unless($request->hasParameter('id'));
-      
-      $resultSet = JsCommonData::getCommonDatum();
-      $inspectResult = $this->inspectDataValidation($request);
-      if($inspectResult['status'] == WacOperationStatus::$Error)
-      {
-          $resultSet['info'] = $inspectResult;
-      }
-      else
-      {
-          $reqParams  = $this->getRequest()->getParameterHolder()->getAll();
-          $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
-
-          if(count($reqParams)>0) {
-              if(isset($reqParams['password']) && $reqParams['password']!="000000") {$targetItem->setPassword($reqParams['password']);}
-              if(isset($reqParams['username'])) {$targetItem->setUsername($reqParams['username']);}
-              $targetItem->setIsActive(isset($reqParams['is_active'])?1:0);
-
-              $targetItem->unlink('groups');
-              
-              if(isset($reqParams['user_group_list']) && count($reqParams['user_group_list'])>0)
-              {
-                  $targetItem->link('groups', $reqParams['user_group_list']);
-              }
-
-              $targetItem->save();
-
-              $this->afterEdit($request, $targetItem);  // log
-          }
-
-          $resultSet['items'][0] = $targetItem->toArray();
-          $resultSet['info']     = JsCommonData::getSuccessDatum(
-                                       Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_edit_succ")
-                                   );
-      }
-
-      return OutputHelper::getInstance()->output($resultSet, $this);
-
-  }
-
-  /*
-   * @return list data array
-   */
   public function executeGetFormData(sfWebRequest $request)
   {
       $resultSet = JsCommonData::getCommonDatum();
