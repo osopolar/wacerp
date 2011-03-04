@@ -6,6 +6,10 @@
             <line>15</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/modules/wacCommon/templates/_moduleTree.php</url>
+            <line>135</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemManagement/layout.js</url>
             <line>40</line>
             <line>67</line>
@@ -21,6 +25,14 @@
             <line>133</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeTable.class.php</url>
+            <line>14</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeActions.class.php</url>
+            <line>17</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/modules/wacGuardGroup/_moduleForm.js</url>
             <line>11</line>
             <line>48</line>
@@ -29,10 +41,10 @@
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/WacModuleHelper.class.php</url>
-            <line>104</line>
-            <line>217</line>
-            <line>260</line>
-            <line>459</line>
+            <line>120</line>
+            <line>233</line>
+            <line>276</line>
+            <line>475</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/css/common/wac/layout.css</url>
@@ -40,8 +52,12 @@
             <line>64</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/JsTreeDataHelper.class.php</url>
+            <line>181</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacCommonActions.class.php</url>
-            <line>200</line>
+            <line>202</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/OutputHelper.class.php</url>
@@ -64,7 +80,7 @@
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/prototype.js</url>
-            <line>134</line>
+            <line>135</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/main.js</url>

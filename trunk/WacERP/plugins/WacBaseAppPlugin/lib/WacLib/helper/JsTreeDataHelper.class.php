@@ -176,7 +176,25 @@ class JsTreeDataHelper {
      */
     public function createNode($parent, $srcTable, $params=array())
     {
-        
+        return $srcTable->createNode($parent, $params);
+    }
+
+     /*
+     * editNode
+     * @return new node object
+     */
+    public function editNode($parent, $srcTable, $params=array())
+    {
+        return $srcTable->editNode($parent, $params);
+    }
+
+    /*
+     * removeNode
+     * @return new node object
+     */
+    public function removeNode($parent, $srcTable, $params=array())
+    {
+        return $srcTable->removeNode($parent, $params);
     }
 
     /*
@@ -211,11 +229,15 @@ class JsTreeDataHelper {
         }
     }
 
-    public function getSuccDatum($id){
-        return array(
-            "status" => 1,
-            "id" => $id
-        );
+    public function getSuccDatum($id=0){
+        if($id!=0){
+            return array(
+                "status" => 1,
+                "id" => $id
+            );
+        }
+
+        return array( "status" => 1);
     }
 
     public function getErrDatum(){

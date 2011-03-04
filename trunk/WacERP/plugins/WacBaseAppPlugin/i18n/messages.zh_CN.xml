@@ -221,6 +221,38 @@
         <source>Type Boolean</source>
         <target>逻辑类型(1 true/0 false)</target>
       </trans-unit>
+      <trans-unit>
+        <source>Create Folder</source>
+        <target>创建文件夹</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create File</source>
+        <target>创建文件</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Rename</source>
+        <target>重命名</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete</source>
+        <target>删除</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit</source>
+        <target>编辑</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cut</source>
+        <target>剪切</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Copy</source>
+        <target>复制</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Paste</source>
+        <target>粘贴</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

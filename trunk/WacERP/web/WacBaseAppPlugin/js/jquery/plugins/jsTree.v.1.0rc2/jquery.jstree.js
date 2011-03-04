@@ -2984,6 +2984,12 @@
 			select_node : false, // requires UI plugin
 			show_at_node : true,
 			items : { // Could be a function that should return an object like this one
+				"create_branch" : {
+					"separator_before"	: false,
+					"separator_after"	: true,
+					"label"				: "Create",
+					"action"			: function (obj) { this.create(obj); }
+				},
 				"create" : {
 					"separator_before"	: false,
 					"separator_after"	: true,
