@@ -5,8 +5,10 @@
 abstract class WacTreeTable extends WacCommonTable
 {
     protected static $_maxNodesPerGet = 10000;
-    public $maxLayerNum = 10;
-    public $limitNodes = 500;  // number per get list
+    protected $_customFilterParams = array();
+
+//    public $maxLayerNum = 10;
+//    public $limitNodes = 500;  // number per get list
 
     /*
      * getListByParent
@@ -17,7 +19,7 @@ abstract class WacTreeTable extends WacCommonTable
     {
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
-
+        $arrParam['andWhere'][] = "t1.is_avail=1";
         if($recursive){  // get all children
             $arrParam['andWhere'][] = "t1.left_number>=".$parent->getLeftNumber();
             $arrParam['andWhere'][] = "t1.right_number<=".$parent->getRightNumber();
@@ -25,10 +27,10 @@ abstract class WacTreeTable extends WacCommonTable
         else{
             $arrParam['andWhere'][] = "t1.parent_id=".$parent->getId();
         }
-        
+
         $limitRows = ($maxPerPage == -1) ? self::$_maxNodesPerGet : $maxPerPage;
 
-        return $this->getAbstractList($arrParam, 1, $limitRows, $isArr);
+        return $this->getAbstractList(array_merge_recursive($arrParam, $this->getCustomFilter()), 1, $limitRows, $isArr);
     }
 
     /*
@@ -37,10 +39,10 @@ abstract class WacTreeTable extends WacCommonTable
     public function getAllLeaf(Doctrine_Record $node, $isArr= false, $maxPerPage=-1, $orderBy= "t1.id asc"){
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
-
+        $arrParam['andWhere'][] = "t1.is_avail=1";
         $arrParam['andWhere'][] = "t1.right_number = t1.left_number + 1";
         $limitRows = ($maxPerPage == -1) ? self::$_maxNodesPerGet : $maxPerPage;
-        return $this->getAbstractList($arrParam, 1, $limitRows, $isArr);
+        return $this->getAbstractList(array_merge_recursive($arrParam, $this->getCustomFilter()), 1, $limitRows, $isArr);
     }
 
     /*
@@ -68,16 +70,28 @@ abstract class WacTreeTable extends WacCommonTable
      * updateNodes after create a node
      */
     public function updateTreeAfterCreate($parent){
+        $customFilterStr = $this->getCustomFilter(true);
+
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("right_number", "right_number + 2")
-                        ->where("right_number>=" . $parent->getRightNumber());
+                        ->where("right_number>=" . $parent->getRightNumber())
+                        ->andWhere("is_avail=1");
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+
         $objQuery->execute();
 
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("left_number", "left_number + 2")
-                        ->where("left_number>" . $parent->getRightNumber());
+                        ->where("left_number>" . $parent->getRightNumber())
+                        ->andWhere("is_avail=1");
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+
         $objQuery->execute();
         $objQuery->free();
     }
@@ -127,22 +141,80 @@ abstract class WacTreeTable extends WacCommonTable
      * updateNodes after remove a node
      */
     public function updateTreeAfterRemove($node){
+        $customFilterStr = $this->getCustomFilter(true);
         $minusNumber = $node->getRightNumber() - $node->getLeftNumber() + 1;
+        
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("right_number", "right_number - {$minusNumber}")
-                        ->where("right_number>" . $node->getRightNumber());
+                        ->where("right_number>" . $node->getRightNumber())
+                        ->andWhere("is_avail=1");
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+
         $objQuery->execute();
 
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("left_number", "left_number - {$minusNumber}")
-                        ->where("left_number>" . $node->getRightNumber());
+                        ->where("left_number>" . $node->getRightNumber())
+                        ->andWhere("is_avail=1");
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+        
         $objQuery->execute();
         $objQuery->free();
     }
 
-    
+//    public function getFilter($fixParams, $toStr=false){
+//        if(!$toStr){
+//            return array_merge_recursive($fixParams, $this->getCustomFilter());
+//        }
+//        {
+//            $filterStr = "";
+//            $filterParams =
+//        }
+//    }
+
+    /*
+     * set custom filter params in the tree
+     * canbe override by children
+     * @params - array("Key"=>"Value"), looks like
+     *   $params = array(
+     *      "user_id" => 1
+     *   )
+     */
+    public function setCustomFilter(array $params){
+        $this->_customFilterParams = $params;
+    }
+
+    /*
+     * get custom filter params in the tree
+     * canbe override by children
+     */
+    public function getCustomFilter($toStr=false){
+        if(!$toStr){
+            $arrParams = array();
+            if(is_array($this->_customFilterParams) && count($this->_customFilterParams)>0){
+                foreach($this->_customFilterParams as $k => $v){
+                    $arrParams['andWhere'][] = "t1.{$k}={$v}";
+                }
+            }
+            return $arrParams;
+        }
+        else{
+            $filterStr = "";
+            if(is_array($this->_customFilterParams) && count($this->_customFilterParams)>0){
+                foreach($this->_customFilterParams as $k => $v){
+                    $arrParams[] = "t1.{$k}={$v}";
+                }
+                $filterStr = implode(" and ", $arrParams);
+            }
+            return $filterStr;
+        }
+    }
 
 
 //    /*
