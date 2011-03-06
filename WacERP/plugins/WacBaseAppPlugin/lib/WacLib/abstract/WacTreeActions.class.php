@@ -11,6 +11,7 @@
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
 abstract class WacTreeActions extends WacCommonActions {
+
     /*
      * _getChildren
      * @return array $filterResultSet
@@ -88,6 +89,28 @@ abstract class WacTreeActions extends WacCommonActions {
     }
 
     /*
+     * _moveNode
+     * @return result array
+     */
+
+    protected function _moveNode(sfWebRequest $request) {
+        $this->forward404Unless($request->hasParameter('id'));
+
+        $jsTreeDataHelper = JsTreeDataHelper::getInstance();
+        $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
+
+        if ($node) {
+//            $params = $this->_mapData($request);
+            $jsTreeDataHelper->moveNode($node, $this->mainModuleTable, $params);
+            return $jsTreeDataHelper->getSuccDatum($node->getId());
+        } else {
+            throw new sfException("Wac Error: require valid node id in the tree!");
+        }
+
+        return $jsTreeDataHelper->getErrDatum();
+    }
+
+    /*
      * _removeNode
      * @return result array
      */
@@ -149,6 +172,14 @@ abstract class WacTreeActions extends WacCommonActions {
 
     public function executeEditNode(sfWebRequest $request) {
         return OutputHelper::getInstance()->output($this->_editNode($request), $this);
+    }
+
+    /*
+     * @return list data array
+     */
+
+    public function executeMoveNode(sfWebRequest $request) {
+        return OutputHelper::getInstance()->output($this->_moveNode($request), $this);
     }
 
 }

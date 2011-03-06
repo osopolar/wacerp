@@ -91,7 +91,16 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             // I want this type to have no children (so only leaf nodes)
                             // In my case - those are files
                             "valid_children" : "none",
-                            // If we specify an icon for the default type it WILL OVERRIDE the theme icons
+                            // If we specify an icon for the leaf type it WILL OVERRIDE the theme icons
+                            "icon" : {
+                                "image" : wacImagesPath + "js_icons/leaf.png"
+                            }
+                        },
+                        "leaf" : {
+                            // I want this type to have no children (so only leaf nodes)
+                            // In my case - those are files
+                            "valid_children" : "none",
+                            // If we specify an icon for the leaf type it WILL OVERRIDE the theme icons
                             "icon" : {
                                 "image" : wacImagesPath + "js_icons/leaf.png"
                             }
@@ -99,7 +108,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                         // The `folder` type
                         "branch" : {
                             // can have files and other folders inside of it, but NOT `drive` nodes
-                            "valid_children" : [ "default", "branch" ],
+                            "valid_children" : [ "default", "branch", "leaf" ],
                             "icon" : {
                                 "image" : wacImagesPath + "js_icons/branch.png"
                             }
@@ -107,7 +116,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                         // The `drive` nodes 
                         "root" : {
                             // can have files and folders inside, but NOT other `drive` nodes
-                            "valid_children" : [ "default", "branch" ],
+                            "valid_children" : [ "default","root", "branch", "leaf" ],
                             "icon" : {
                                 "image" : wacImagesPath + "js_icons/root.png"
                             },
@@ -136,11 +145,16 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             "separator_before"  : false,
 			    "separator_after"   : true,
                             "label"             : "<?php echo __("Create Folder");?>",
-                            "action"            : function (obj) {Wac.log(obj); this.create(obj); }
+                            "action"            : function (obj) {
+                                                      this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeBranch; ?>" } });
+                                                   }
                         },
                         "create" : {
                             "icon" : wacImagesPath + "js_icons/file.png",
-                            "label" : "<?php echo __("Create File");?>"
+                            "label" : "<?php echo __("Create File");?>",
+                            "action"            : function (obj) {
+                                                      this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>" } });
+                                                   }
                         },
                         "rename" : {
                             "icon" : wacImagesPath + "js_icons/edit.png",
@@ -239,36 +253,36 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                     }
                 }
             );
+            })
+            .bind("move_node.jstree", function (e, data) {
+                data.rslt.o.each(function (i) {
+                    $.ajax({
+                        async : false,
+                        type: 'POST',
+                        url: moduleUrl + "moveNode",
+                        data : {
+                            "dataFormat" : "json",
+                            "id" : $(this).attr("id").replace("node_",""),
+                            "ref" : data.rslt.np.attr("id").replace("node_",""),
+                            "position" : data.rslt.cp + i,
+                            "caption" : data.rslt.name,
+                            "copy" : data.rslt.cy ? 1 : 0
+                        },
+                        success : function (r) {
+                            if(!r.status) {
+                                $.jstree.rollback(data.rlbk);
+                            }
+                            else {
+                                $(data.rslt.oc).attr("id", "node_" + r.id);
+                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+                                }
+                            }
+                            $("#analyze").click();
+                        }
+                    });
+                });
             });
-            //            .bind("move_node.jstree", function (e, data) {
-            //                data.rslt.o.each(function (i) {
-            //                    $.ajax({
-            //                        async : false,
-            //                        type: 'POST',
-            //                        url: moduleUrl + "moveNode",
-            //                        data : {
-            //                            "dataFormat" : "json",
-            //                            "id" : $(this).attr("id").replace("node_",""),
-            //                            "ref" : data.rslt.np.attr("id").replace("node_",""),
-            //                            "position" : data.rslt.cp + i,
-            //                            "caption" : data.rslt.name,
-            //                            "copy" : data.rslt.cy ? 1 : 0
-            //                        },
-            //                        success : function (r) {
-            //                            if(!r.status) {
-            //                                $.jstree.rollback(data.rlbk);
-            //                            }
-            //                            else {
-            //                                $(data.rslt.oc).attr("id", "node_" + r.id);
-            //                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-            //                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-            //                                }
-            //                            }
-            //                            $("#analyze").click();
-            //                        }
-            //                    });
-            //                });
-            //            });
         };  // init end
          
         function bindEvents(){};  //bindEvnts end
