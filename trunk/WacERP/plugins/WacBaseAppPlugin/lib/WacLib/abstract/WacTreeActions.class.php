@@ -95,13 +95,15 @@ abstract class WacTreeActions extends WacCommonActions {
 
     protected function _moveNode(sfWebRequest $request) {
         $this->forward404Unless($request->hasParameter('id'));
+        $this->forward404Unless($request->hasParameter('target_parent_id'));
 
         $jsTreeDataHelper = JsTreeDataHelper::getInstance();
         $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
+        $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
 
         if ($node) {
-//            $params = $this->_mapData($request);
-            $jsTreeDataHelper->moveNode($node, $this->mainModuleTable, $params);
+            $params = $request->getParameterHolder()->getAll();
+            $jsTreeDataHelper->moveNode($node, $targetParentNode, $this->mainModuleTable, $params);
             return $jsTreeDataHelper->getSuccDatum($node->getId());
         } else {
             throw new sfException("Wac Error: require valid node id in the tree!");
