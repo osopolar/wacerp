@@ -14,12 +14,15 @@ abstract class WacTreeTable extends WacCommonTable
      * getListByParent
      *
      * $parent - node object
+     * $isAvail - can be "all", "1", "0"
      */
-    public function getChildren($parent, $recursive=false, $isArr= false, $maxPerPage=-1, $orderBy= "t1.id asc", $params=array())
+    public function getChildren($parent, $recursive=false, $isArr= false, $maxPerPage=-1, $isAvail="all",$orderBy= "t1.left_number asc", $params=array())
     {
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
-        $arrParam['andWhere'][] = "t1.is_avail=1";
+        if($isAvail != "all"){
+            $arrParam['andWhere'][] = "t1.is_avail={$isAvail}";
+        }
         if($recursive){  // get all children
             $arrParam['andWhere'][] = "t1.left_number>=".$parent->getLeftNumber();
             $arrParam['andWhere'][] = "t1.right_number<=".$parent->getRightNumber();
@@ -36,7 +39,7 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * getAllLeaf
      */
-    public function getAllLeaf(Doctrine_Record $node, $isArr= false, $maxPerPage=-1, $orderBy= "t1.id asc"){
+    public function getAllLeaf(Doctrine_Record $node, $isArr= false, $maxPerPage=-1, $orderBy= "t1.left_number asc"){
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
         $arrParam['andWhere'][] = "t1.is_avail=1";
@@ -51,7 +54,7 @@ abstract class WacTreeTable extends WacCommonTable
      */
     public function createNode($parent, $params=array()){
         
-        $this->updateTreeAfterCreate($parent);
+        $this->updateTreeAfterCreate($parent, "1");
 
         $newNode = $this->create($params);
         $newNode->setParentId($parent->getId());
@@ -69,7 +72,7 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * updateNodes after create a node
      */
-    public function updateTreeAfterCreate($parent){
+    public function updateTreeAfterCreate($parent, $isAvail="all"){
         $customFilterStr = $this->getCustomFilter(true);
 
         $objQuery = $this->createQuery()
@@ -77,6 +80,10 @@ abstract class WacTreeTable extends WacCommonTable
                         ->set("right_number", "right_number + 2")
                         ->where("right_number>=" . $parent->getRightNumber())
                         ->andWhere("is_avail=1");
+        if($isAvail != "all"){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+        
         if($customFilterStr!=""){
             $objQuery->andWhere($customFilterStr);
         }
@@ -86,8 +93,12 @@ abstract class WacTreeTable extends WacCommonTable
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("left_number", "left_number + 2")
-                        ->where("left_number>" . $parent->getRightNumber())
-                        ->andWhere("is_avail=1");
+                        ->where("left_number>" . $parent->getRightNumber());
+
+        if($isAvail != "all"){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+
         if($customFilterStr!=""){
             $objQuery->andWhere($customFilterStr);
         }
@@ -110,6 +121,47 @@ abstract class WacTreeTable extends WacCommonTable
         
     }
 
+    /*
+     * moveNode
+     * @return node
+     */
+    public function moveNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
+
+        $this->disableBranch($node);
+        $this->updateTreeAfterRemove($node, "1");
+        $node->setParentId($targetParentNode->getId());
+        $this->enableBranch($node);
+        $this->updateTreeAfterCreate($node, "1");
+    }
+
+    public function enableBranch($node){
+        $properties = array("is_avail"=>"1");
+        return $this->setBranchProperties($properties, $node);
+    }
+
+    public function disableBranch($node){
+        $properties = array("is_avail"=>"0");
+        return $this->setBranchProperties($properties, $node);
+    }
+
+    /*
+     * setNodeProperties
+     */
+    public function setBranchProperties(array $properties, $theNode, $recursive=true, $maxPerPage=-1){
+        $nodes = $this->getChildren($theNode, $recursive, false, $maxPerPage);
+        if($nodes->count(0) > 0){
+            foreach($nodes as $node){
+                if(is_array($properties) && count($properties)>0){
+                    foreach($properties as $k=>$v){
+                         $node->set($k, $v);
+                    }
+                    $node->save();
+                }
+            }
+        }
+        return true;
+    }
+
 
     /*
      * removeNode
@@ -128,7 +180,7 @@ abstract class WacTreeTable extends WacCommonTable
             }
         }
         
-        $this->updateTreeAfterRemove($node);
+        $this->updateTreeAfterRemove($node, "1");
 
         if($succFlag){
             $succFlag = $node->delete();
@@ -139,16 +191,21 @@ abstract class WacTreeTable extends WacCommonTable
 
     /*
      * updateNodes after remove a node
+     * $isAvail - can be "all", "1", "0"
      */
-    public function updateTreeAfterRemove($node){
+    public function updateTreeAfterRemove($node, $isAvail="all"){
         $customFilterStr = $this->getCustomFilter(true);
         $minusNumber = $node->getRightNumber() - $node->getLeftNumber() + 1;
         
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
                         ->set("right_number", "right_number - {$minusNumber}")
-                        ->where("right_number>" . $node->getRightNumber())
-                        ->andWhere("is_avail=1");
+                        ->where("right_number>" . $node->getRightNumber());
+                        
+        if($isAvail != "all"){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+
         if($customFilterStr!=""){
             $objQuery->andWhere($customFilterStr);
         }
@@ -242,7 +299,7 @@ abstract class WacTreeTable extends WacCommonTable
 //    /*
 //     * return ids array or objects colleciton
 //     */
-//    public function getIdsByCodes($codes=array(), $rowsLimit=500, $isArr=true, $orderBy= "t1.id asc")
+//    public function getIdsByCodes($codes=array(), $rowsLimit=500, $isArr=true, $orderBy= "t1.left_number asc")
 //    {
 //        $params = array();
 //        $params['andWhere'][] = "t1.code in (\"".implode('","', $codes)."\")";
@@ -267,7 +324,7 @@ abstract class WacTreeTable extends WacCommonTable
 //        }
 //    }
 //
-//    public function getListByParents($parents=array(), $rowsLimit=500, $isArr= false, $orderBy= "t1.id asc")
+//    public function getListByParents($parents=array(), $rowsLimit=500, $isArr= false, $orderBy= "t1.left_number asc")
 //    {
 //        $params = array();
 //        $params['andWhere'][] = "t1.parent in (".implode(',', $parents).")";
@@ -276,7 +333,7 @@ abstract class WacTreeTable extends WacCommonTable
 //        return $this->getList($params, 1, $rowsLimit, $isArr);
 //    }
 //
-//    public function getIdNameHashListByParents($parents=array(), $rowsLimit=500, $orderBy= "t1.id asc")
+//    public function getIdNameHashListByParents($parents=array(), $rowsLimit=500, $orderBy= "t1.left_number asc")
 //    {
 //        $params = array();
 //        $params['andWhere'][] = "t1.parent in (".implode(',', $parents).")";

@@ -189,6 +189,15 @@ class JsTreeDataHelper {
     }
 
     /*
+     * moveNode
+     * @return new node object
+     */
+    public function moveNode($node, $targetParentNode, $srcTable, $params=array())
+    {
+        return $srcTable->moveNode($node, $targetParentNode, $params);
+    }
+
+    /*
      * removeNode
      * @return new node object
      */

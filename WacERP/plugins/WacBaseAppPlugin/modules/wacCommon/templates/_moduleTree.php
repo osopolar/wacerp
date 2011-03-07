@@ -263,7 +263,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                         data : {
                             "dataFormat" : "json",
                             "id" : $(this).attr("id").replace("node_",""),
-                            "ref" : data.rslt.np.attr("id").replace("node_",""),
+                            "target_parent_id" : data.rslt.np.attr("id").replace("node_",""),
                             "position" : data.rslt.cp + i,
                             "caption" : data.rslt.name,
                             "copy" : data.rslt.cy ? 1 : 0
