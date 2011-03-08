@@ -30,12 +30,13 @@ default:
     wac.layout: /WacBaseAppPlugin/css/wac/layout.css
 
   javascripts:
-#    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
-#    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
-#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.4.4/jquery-1.4.4.min.js     # jquery
-    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
-    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
-    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
+    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery-1.4.2.js     # jquery
+    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
+    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
+
+#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
+#    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
+#    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
 
     wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars
 
