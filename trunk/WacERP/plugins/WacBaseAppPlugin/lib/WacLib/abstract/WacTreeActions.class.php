@@ -140,7 +140,6 @@ abstract class WacTreeActions extends WacCommonActions {
         if(isset($reqParams["position"])) {$params["position"] = $reqParams["position"];}
         if(isset($reqParams["type"]))     {$params["type"] = $reqParams["type"];}
         if(isset($reqParams["caption"]))  {$params["caption"] = $reqParams["caption"];}
-        if(isset($reqParams["position"])) {$params["position"] = $reqParams["position"];}
         return $params;
     }
 

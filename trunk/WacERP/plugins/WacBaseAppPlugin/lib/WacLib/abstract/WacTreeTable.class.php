@@ -14,13 +14,13 @@ abstract class WacTreeTable extends WacCommonTable
      * getListByParent
      *
      * $parent - node object
-     * $isAvail - can be "all", "1", "0"
+     * $isAvail - can be -1, 1, 0
      */
-    public function getChildren($parent, $recursive=false, $isArr= false, $maxPerPage=-1, $isAvail="all", $orderBy= "t1.left_number asc", $params=array())
+    public function getChildren($parent, $recursive=false, $isArr= false, $maxPerPage=-1, $isAvail=-1, $orderBy= "t1.left_number asc, t1.position asc", $params=array())
     {
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $arrParam['andWhere'][] = "t1.is_avail={$isAvail}";
         }
         if($recursive){  // get all children
@@ -39,10 +39,10 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * getAllLeaf
      */
-    public function getAllLeaf(Doctrine_Record $node, $isArr= false, $maxPerPage=-1, $isAvail="all", $orderBy= "t1.left_number asc"){
+    public function getAllLeaf(Doctrine_Record $node, $isArr= false, $maxPerPage=-1, $isAvail=-1, $orderBy= "t1.left_number asc"){
         $arrParam = array();
         $arrParam['orderBy'] = $orderBy;
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $arrParam['andWhere'][] = "t1.is_avail={$isAvail}";
         }
         $arrParam['andWhere'][] = "t1.right_number = t1.left_number + 1";
@@ -54,9 +54,9 @@ abstract class WacTreeTable extends WacCommonTable
      * createNode
      * @return node
      */
-    public function createNode($parent, $params=array(), $isAvail="all"){
+    public function createNode($parent, $params=array(), $isAvail=-1){
         
-        $this->updateTreeBeforeCreate($parent, $isAvail);
+        $this->updateTreeBeforeCreate($parent, $params["position"],1, $isAvail);
 
         $newNode = $this->create($params);
         $newNode->setParentId($parent->getId());
@@ -72,32 +72,53 @@ abstract class WacTreeTable extends WacCommonTable
 
     /*
      * updateNodes before create a node
+     * $nodesNum = nodes number
      */
-    public function updateTreeBeforeCreate($parent, $isAvail="all"){
+    public function updateTreeBeforeCreate($parent, $position=0, $nodesNum=1, $isAvail=-1){
         $customFilterStr = $this->getCustomFilter(true);
+        $increaseNum = $nodesNum * 2;
 
-        //update right number greater than the node
+        //update ancestor's branch nodes
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
-                        ->set("right_number", "right_number + 2")
+                        ->set("right_number", "right_number + {$increaseNum}")
                         ->where("right_number>=" . $parent->getRightNumber());
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
-        
+
         if($customFilterStr!=""){
             $objQuery->andWhere($customFilterStr);
         }
 
         $objQuery->execute();
 
-        //update left number greater than the node
+        //update greater branch's nodes
         $objQuery = $this->createQuery()
                         ->update($this->getComponentName()." t1")
-                        ->set("left_number", "left_number + 2")
+                        ->set("left_number", "left_number + {$increaseNum}")
                         ->where("left_number>" . $parent->getRightNumber());
 
-        if($isAvail != "all"){
+        if($isAvail != -1){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+
+        $objQuery->execute();
+
+         //update same layer nodes 
+        $objQuery = $this->createQuery()
+                        ->update($this->getComponentName()." t1")
+                        ->set("left_number", "left_number + {$increaseNum}")
+                        ->set("right_number", "right_number + {$increaseNum}")
+                        ->where("left_number>" . $parent->getLeftNumber())
+                        ->andWhere("right_number<" . $parent->getRightNumber())
+                        ->andWhere("position>=" . $position);
+
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
 
@@ -112,7 +133,29 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * updateNodes after create a node
      */
-    public function updateTreeAfterCreate($node, $isAvail="all"){
+    public function updateTreeAfterCreate($node, $isAvail=-1){
+        //update position
+        $customFilterStr = $this->getCustomFilter(true);
+        $objQuery = $this->createQuery()
+                        ->update($this->getComponentName()." t1")
+                        ->set("position", "position + 1")
+                        ->where("parent_id=" . $node->getParentId())
+                        ->andWhere("position>". $node->getPosition());
+        if($isAvail != -1){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+        $objQuery->execute();
+        $objQuery->free();
+    }
+
+    /*
+     * updateNodes after create a node
+     */
+    public function updateTreeAfterInsert($node, $isAvail=-1){
         //update position
         $customFilterStr = $this->getCustomFilter(true);
         $objQuery = $this->createQuery()
@@ -120,7 +163,7 @@ abstract class WacTreeTable extends WacCommonTable
                         ->set("position", "position + 1")
                         ->where("parent_id=" . $node->getParentId())
                         ->andWhere("position>=". $node->getPosition());
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
 
@@ -151,23 +194,90 @@ abstract class WacTreeTable extends WacCommonTable
      */
     public function moveNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
 
-//        $this->disableBranch($node, "1");
-//        $this->updateTreeBeforeRemove($node, "1");
-//
-//        $node->setParentId($targetParentNode->getId());
-//        $node->setPosition($params["position"]);
-//        $node->save();
-//
-        $this->enableBranch($node, "0");
-//        $this->updateTreeBeforeCreate($node, "1");
+        $this->updateTreeBeforeRemove($node, 1);
+        $this->disableNode($node, 1);
+        $this->updateTreeAfterRemove($node, 1);
+
+        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+
+        $node->setParentId($targetParentNode->getId());
+        $node->setPosition($params["position"]);
+        $node->save();
+        
+        $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
+        $this->updateTreeBeforeCreate($targetParentNode, $params["position"], $nodesNum, 1);        
+        $this->reindexNode($node, $targetParentNode, 0, $params);
+        $this->updateTreeAfterInsert($node, 1);
+        $this->enableNode($node, "0");
+        
+        return $node;
     }
 
-    public function disableBranch($node, $isAvail="all"){
+    /*
+     * reindexNode
+     */
+    public function reindexNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $isAvail=-1, $params=array()){
+        $customFilterStr    = $this->getCustomFilter(true);
+        $prevNode           = $this->getPrevNode($targetParentNode, $params["position"]);
+        $nodeLevel          = ($params["position"] == 0) ? $prevNode->getLevel() + 1 : $prevNode->getLevel();
+//        $nodeLeftNumber     = $prevNode->getLeftNumber() + 1;
+//        $nodeRightNumber    = $prevNode->getRightNumber() + 1;
+        $nodeIncreaseNumber = ($params["position"] == 0) ? $prevNode->getLeftNumber() + 1 : $prevNode->getRightNumber() + 1;
+        $oriNodeLeftNumber  = $node->getLeftNumber();
+        $oriNodeLevel       = $node->getLevel();
+
+        //update left/right number in the moving node branch
+        $objQuery = $this->createQuery()
+                        ->update($this->getComponentName()." t1")
+                        ->set("left_number", "left_number - {$oriNodeLeftNumber} + {$nodeIncreaseNumber}")
+                        ->set("right_number", "right_number - {$oriNodeLeftNumber} + {$nodeIncreaseNumber}")
+                        ->set("level", "level - {$oriNodeLevel} + {$nodeLevel}")
+                        ->where("left_number>=" . $node->getLeftNumber())
+                        ->andWhere("right_number<=" . $node->getRightNumber());
+
+        if($isAvail != -1){
+            $objQuery->andWhere("is_avail={$isAvail}");
+        }
+
+        if($customFilterStr!=""){
+            $objQuery->andWhere($customFilterStr);
+        }
+        $objQuery->execute();
+        $node->refresh();
+    }
+
+    /*
+     * get previous node
+     *@return node
+     */
+    public function getPrevNode($parent, $position=0){
+        if($position == 0){
+            return $parent;
+        }
+        else{
+            $objQuery = $this->createQuery('t1')
+                    ->select("*")
+                    ->where("parent_id=".$parent->getId())
+                    ->andWhere("position<".$position)
+                    ->orderBy("position desc");
+            $node = $objQuery->fetchOne();
+
+            $objQuery->free();
+            if($node!=false){
+                return $node;
+            }
+            else{
+                return $parent;
+            }
+        }
+    }
+
+    public function disableNode($node, $isAvail=-1){
         $properties = array("is_avail"=>"0");
         return $this->setBranchProperties($properties, $node, true, -1, $isAvail);
     }
 
-    public function enableBranch($node, $isAvail="all"){
+    public function enableNode($node, $isAvail=-1){
         $properties = array("is_avail"=>"1");
         return $this->setBranchProperties($properties, $node, true, -1, $isAvail);
     }
@@ -175,7 +285,7 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * setNodeProperties
      */
-    public function setBranchProperties(array $properties, $theNode, $recursive=true, $maxPerPage=-1, $isAvail="all"){
+    public function setBranchProperties(array $properties, $theNode, $recursive=true, $maxPerPage=-1, $isAvail=-1){
         $nodes = $this->getChildren($theNode, $recursive, false, $maxPerPage, $isAvail);
         if($nodes->count(0) > 0){
             foreach($nodes as $node){
@@ -195,7 +305,7 @@ abstract class WacTreeTable extends WacCommonTable
      * removeNode
      * @return node
      */
-    public function removeNode($node, $params=array(), $isAvail="all"){
+    public function removeNode($node, $params=array(), $isAvail=-1){
         $children = $this->getChildren($node, true);
 
         $succFlag = true;
@@ -219,9 +329,9 @@ abstract class WacTreeTable extends WacCommonTable
 
     /*
      * updateNodes before remove a node
-     * $isAvail - can be "all", "1", "0"
+     * $isAvail - can be -1, "1", "0"
      */
-    public function updateTreeBeforeRemove($node, $isAvail="all"){
+    public function updateTreeBeforeRemove($node, $isAvail=-1){
         $customFilterStr = $this->getCustomFilter(true);
         $minusNumber = $node->getRightNumber() - $node->getLeftNumber() + 1;
 
@@ -231,7 +341,7 @@ abstract class WacTreeTable extends WacCommonTable
                         ->set("right_number", "right_number - {$minusNumber}")
                         ->where("right_number>" . $node->getRightNumber());
                         
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
 
@@ -245,7 +355,7 @@ abstract class WacTreeTable extends WacCommonTable
                         ->update($this->getComponentName()." t1")
                         ->set("left_number", "left_number - {$minusNumber}")
                         ->where("left_number>" . $node->getRightNumber());
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
         
@@ -253,13 +363,15 @@ abstract class WacTreeTable extends WacCommonTable
             $objQuery->andWhere($customFilterStr);
         }
         $objQuery->execute();
+
+        $objQuery->free();
     }
 
     /*
      * updateNodes after remove a node
-     * $isAvail - can be "all", "1", "0"
+     * $isAvail - can be -1, "1", "0"
      */
-    public function updateTreeAfterRemove($node, $isAvail="all"){
+    public function updateTreeAfterRemove($node, $isAvail=-1){
         //update position
         $customFilterStr = $this->getCustomFilter(true);
         $objQuery = $this->createQuery()
@@ -267,7 +379,7 @@ abstract class WacTreeTable extends WacCommonTable
                         ->set("position", "position - 1")
                         ->where("parent_id=" . $node->getParentId())
                         ->andWhere("position>". $node->getPosition());
-        if($isAvail != "all"){
+        if($isAvail != -1){
             $objQuery->andWhere("is_avail={$isAvail}");
         }
 
@@ -296,8 +408,8 @@ abstract class WacTreeTable extends WacCommonTable
      * canbe override by children
      */
     public function getCustomFilter($toStr=false){
+        $arrParams = array();
         if(!$toStr){
-            $arrParams = array();
             if(is_array($this->_customFilterParams) && count($this->_customFilterParams)>0){
                 foreach($this->_customFilterParams as $k => $v){
                     $arrParams['andWhere'][] = "t1.{$k}={$v}";

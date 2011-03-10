@@ -134,7 +134,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                 // the UI plugin - it handles selecting/deselecting/hovering nodes
                 "ui" : {
                     // this makes the node with ID node_4 selected onload
-                    "initially_select" : [ "node_4" ]
+                    "initially_select" : [ "node_2" ]
                 },
 
                 // contextmenu
@@ -196,7 +196,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                 "core" : { 
                     // just open those two nodes up
                     // as this is an AJAX enabled tree, both will be downloaded from the server
-                    "initially_open" : [ "node_2" , "node_3" , "node_6" ] 
+                    "initially_open" : [] 
                 }
             })
             .bind("create.jstree", function (e, data) {

@@ -1,7 +1,8 @@
 <?php
 
 $appEnv = array(
-    "baseUrl" => $sf_request->getUriPrefix().url_for('@homepage'),
+//    "baseUrl" => $sf_request->getUriPrefix().url_for('@homepage'),
+    "baseUrl" => $sf_request->getUriPrefix().url_for('@homepage')."backend_dev.php/",
     "culture" => sfConfig::get("sf_default_culture"),
 );
 
