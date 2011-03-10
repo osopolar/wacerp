@@ -2,44 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/console/index.js</url>
-            <line>15</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/modules/wacCommon/templates/_moduleTree.php</url>
-            <line>135</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemManagement/layout.js</url>
-            <line>40</line>
-            <line>67</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/main.js</url>
-            <line>26</line>
-            <line>116</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appTestController/layout.js</url>
-            <line>87</line>
-            <line>133</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeTable.class.php</url>
-            <line>14</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeActions.class.php</url>
-            <line>17</line>
-        </file>
-        <file>
-            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/modules/wacGuardGroup/_moduleForm.js</url>
-            <line>11</line>
-            <line>48</line>
-            <line>95</line>
-            <line>126</line>
-        </file>
-        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/WacModuleHelper.class.php</url>
             <line>120</line>
             <line>233</line>
@@ -52,12 +14,30 @@
             <line>64</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/console/index.js</url>
+            <line>15</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/modules/wacCommon/templates/_moduleTree.php</url>
+            <line>186</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/JsTreeDataHelper.class.php</url>
-            <line>181</line>
+            <line>119</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacCommonActions.class.php</url>
             <line>202</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemManagement/layout.js</url>
+            <line>40</line>
+            <line>67</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appSystemController/main.js</url>
+            <line>26</line>
+            <line>116</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/helper/OutputHelper.class.php</url>
@@ -79,6 +59,11 @@
             <line>81</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/js/apps/backend/appTestController/layout.js</url>
+            <line>87</line>
+            <line>133</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/prototype.js</url>
             <line>135</line>
         </file>
@@ -88,8 +73,25 @@
             <line>65</line>
         </file>
         <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeTable.class.php</url>
+            <line>18</line>
+            <line>75</line>
+            <line>151</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/lib/WacLib/abstract/WacTreeActions.class.php</url>
+            <line>16</line>
+        </file>
+        <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/wac/models.js</url>
             <line>232</line>
+        </file>
+        <file>
+            <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/web/WacBaseAppPlugin/js/modules/wacGuardGroup/_moduleForm.js</url>
+            <line>11</line>
+            <line>48</line>
+            <line>95</line>
+            <line>126</line>
         </file>
         <file>
             <url>file:/D:/WebAppChina/WacERP/trunk/WacERP/plugins/WacBaseAppPlugin/modules/wacCommon/templates/_baseInlineTableA.php</url>
