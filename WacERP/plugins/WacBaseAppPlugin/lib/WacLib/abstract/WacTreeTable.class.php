@@ -194,19 +194,29 @@ abstract class WacTreeTable extends WacCommonTable
      */
     public function moveNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
 
-        $this->updateTreeBeforeRemove($node, 1);
         $this->disableNode($node, 1);
+        $this->updateTreeBeforeRemove($node, 1);
         $this->updateTreeAfterRemove($node, 1);
-
         $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
 
+        // to fix jstree wrong position bug when move the node under the same parent
+
+        $position = $params["position"];
+        if(($position>0) && ($targetParentNode->getId()==$node->getParentId())){
+            $maxPosition = $this->getMaxPositionOfSameParent($targetParentNode);
+            if($maxPosition < $position){
+                $position = $maxPosition;
+            }
+        }
+        echo "fffff: ".$node->getId().":".$node->getPosition().":".$maxPosition.":".$position;
+        $node->setPosition($position);
         $node->setParentId($targetParentNode->getId());
-        $node->setPosition($params["position"]);
         $node->save();
         
         $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
-        $this->updateTreeBeforeCreate($targetParentNode, $params["position"], $nodesNum, 1);        
-        $this->reindexNode($node, $targetParentNode, 0, $params);
+        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
+        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+        $this->reindexNode($node, $targetParentNode, $position, 0, $params);
         $this->updateTreeAfterInsert($node, 1);
         $this->enableNode($node, "0");
         
@@ -216,13 +226,13 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * reindexNode
      */
-    public function reindexNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $isAvail=-1, $params=array()){
+    public function reindexNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $position=0, $isAvail=-1, $params=array()){
         $customFilterStr    = $this->getCustomFilter(true);
-        $prevNode           = $this->getPrevNode($targetParentNode, $params["position"]);
-        $nodeLevel          = ($params["position"] == 0) ? $prevNode->getLevel() + 1 : $prevNode->getLevel();
+        $prevNode           = $this->getPrevNode($targetParentNode, $position);
+        $nodeLevel          = ($position == 0) ? $prevNode->getLevel() + 1 : $prevNode->getLevel();
 //        $nodeLeftNumber     = $prevNode->getLeftNumber() + 1;
 //        $nodeRightNumber    = $prevNode->getRightNumber() + 1;
-        $nodeIncreaseNumber = ($params["position"] == 0) ? $prevNode->getLeftNumber() + 1 : $prevNode->getRightNumber() + 1;
+        $nodeIncreaseNumber = ($position == 0) ? $prevNode->getLeftNumber() + 1 : $prevNode->getRightNumber() + 1;
         $oriNodeLeftNumber  = $node->getLeftNumber();
         $oriNodeLevel       = $node->getLevel();
 
@@ -269,6 +279,25 @@ abstract class WacTreeTable extends WacCommonTable
             else{
                 return $parent;
             }
+        }
+    }
+
+    /*
+     * return max position under a same parent
+     */
+    public function getMaxPositionOfSameParent($parent){
+        $objQuery = $this->createQuery('t1')
+                    ->select("max(position) as max_position")
+                    ->where("parent_id=".$parent->getId());
+//                    ->orderBy("position desc");
+
+        $dataResult = $objQuery->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+        if($dataResult){
+//            print_r($dataResult);
+            return $dataResult["max_position"];
+        }
+        else{
+            return 0;
         }
     }
 
