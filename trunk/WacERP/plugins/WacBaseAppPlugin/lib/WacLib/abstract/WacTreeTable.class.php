@@ -217,7 +217,7 @@ abstract class WacTreeTable extends WacCommonTable
         $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
         $this->reindexNode($node, $targetParentNode, $position, 0, $params);
         $this->updateTreeAfterInsert($node, 1);
-        $this->enableNode($node, "0");
+        $this->enableNode($node, 0);
         
         return $node;
     }
@@ -229,45 +229,34 @@ abstract class WacTreeTable extends WacCommonTable
     public function copyNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
         // to fix jstree wrong position bug when move the node under the same parent
         $position = $params["position"];
+        $copyNodeRoot = null;
         
-        $nodes = $this->getChildren($node, ture, false, -1, 1);
+        $nodes = $this->getChildren($node, true, false, -1, 1);
         if($nodes->count(0) > 0){
             $i = 0;
+            $parentId = $targetParentNode->getId();
             foreach($nodes as $node){
                 $newNode = $node->copy(false);
-                $newNode->setIsAvail(0);
-                if($i == 0){
-                    $newNode->setParentId($targetParentNode->getId());
+                $newNode->setParentId($parentId);
+                $newNode->setIsAvail(0);                
+                if($i==0){
+                    $copyNodeRoot = $newNode;
                     $newNode->setPosition($position);
                 }
-                else{
-                    
-                }
-
                 $newNode->save();
+                $parentId = $newNode->getId();
                 $i++;
             }
         }
 
+        $nodesNum = ($copyNodeRoot->getRightNumber() - $copyNodeRoot->getLeftNumber() + 1) / 2;
+        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
+        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+        $this->reindexNode($copyNodeRoot, $targetParentNode, $position, 0, $params);
+        $this->updateTreeAfterInsert($copyNodeRoot, 1);
+        $this->enableNode($copyNodeRoot, 0);
 
-        
-//        $this->disableNode($node, 1);
-//        $this->updateTreeBeforeRemove($node, 1);
-//        $this->updateTreeAfterRemove($node, 1);
-//        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-//
-//        $node->setPosition($position);
-//        $node->setParentId($targetParentNode->getId());
-//        $node->save();
-//
-//        $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
-//        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
-//        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-//        $this->reindexNode($node, $targetParentNode, $position, 0, $params);
-//        $this->updateTreeAfterInsert($node, 1);
-//        $this->enableNode($node, "0");
-
-        return $newNode;
+        return $copyNodeRoot;
     }
 
     /*
