@@ -128,6 +128,30 @@ abstract class WacTreeActions extends WacCommonActions {
     }
 
     /*
+     * _copyNode
+     * @return result array
+     */
+
+    protected function _copyNode(sfWebRequest $request) {
+        $this->forward404Unless($request->hasParameter('id'));
+        $this->forward404Unless($request->hasParameter('target_parent_id'));
+
+        $jsTreeDataHelper = JsTreeDataHelper::getInstance();
+        $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
+        $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
+
+        if ($node) {
+            $params = $request->getParameterHolder()->getAll();
+            $jsTreeDataHelper->copyNode($node, $targetParentNode, $this->mainModuleTable, $params);
+            return $jsTreeDataHelper->getSuccDatum($node->getId());
+        } else {
+            throw new sfException("Wac Error: require valid node id in the tree!");
+        }
+
+        return $jsTreeDataHelper->getErrDatum();
+    }
+
+    /*
      * _mapData
      *
      * canbe override by children method, to know which data should be update/insert, apply for different module/tables
@@ -180,7 +204,12 @@ abstract class WacTreeActions extends WacCommonActions {
      */
 
     public function executeMoveNode(sfWebRequest $request) {
-        return OutputHelper::getInstance()->output($this->_moveNode($request), $this);
+        if($request->hasParameter("copy") && $request->getParameter("copy")=="1"){
+            return OutputHelper::getInstance()->output($this->_copyNode($request), $this);
+        }
+        else{
+            return OutputHelper::getInstance()->output($this->_moveNode($request), $this);
+        }
     }
 
 }

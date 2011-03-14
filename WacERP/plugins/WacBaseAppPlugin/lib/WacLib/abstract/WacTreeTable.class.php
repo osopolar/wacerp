@@ -193,22 +193,21 @@ abstract class WacTreeTable extends WacCommonTable
      * @return node
      */
     public function moveNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
-
-        $this->disableNode($node, 1);
-        $this->updateTreeBeforeRemove($node, 1);
-        $this->updateTreeAfterRemove($node, 1);
-        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-
         // to fix jstree wrong position bug when move the node under the same parent
-
         $position = $params["position"];
         if(($position>0) && ($targetParentNode->getId()==$node->getParentId())){
             $maxPosition = $this->getMaxPositionOfSameParent($targetParentNode);
             if($maxPosition < $position){
                 $position = $maxPosition;
             }
+//            echo "fffff: ".$node->getId().":".$node->getPosition().":".$maxPosition.":".$position;
         }
-        echo "fffff: ".$node->getId().":".$node->getPosition().":".$maxPosition.":".$position;
+
+        $this->disableNode($node, 1);
+        $this->updateTreeBeforeRemove($node, 1);
+        $this->updateTreeAfterRemove($node, 1);
+        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+
         $node->setPosition($position);
         $node->setParentId($targetParentNode->getId());
         $node->save();
@@ -221,6 +220,54 @@ abstract class WacTreeTable extends WacCommonTable
         $this->enableNode($node, "0");
         
         return $node;
+    }
+
+    /*
+     * copyNode
+     * @return node
+     */
+    public function copyNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
+        // to fix jstree wrong position bug when move the node under the same parent
+        $position = $params["position"];
+        
+        $nodes = $this->getChildren($node, ture, false, -1, 1);
+        if($nodes->count(0) > 0){
+            $i = 0;
+            foreach($nodes as $node){
+                $newNode = $node->copy(false);
+                $newNode->setIsAvail(0);
+                if($i == 0){
+                    $newNode->setParentId($targetParentNode->getId());
+                    $newNode->setPosition($position);
+                }
+                else{
+                    
+                }
+
+                $newNode->save();
+                $i++;
+            }
+        }
+
+
+        
+//        $this->disableNode($node, 1);
+//        $this->updateTreeBeforeRemove($node, 1);
+//        $this->updateTreeAfterRemove($node, 1);
+//        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+//
+//        $node->setPosition($position);
+//        $node->setParentId($targetParentNode->getId());
+//        $node->save();
+//
+//        $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
+//        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
+//        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+//        $this->reindexNode($node, $targetParentNode, $position, 0, $params);
+//        $this->updateTreeAfterInsert($node, 1);
+//        $this->enableNode($node, "0");
+
+        return $newNode;
     }
 
     /*
@@ -289,7 +336,6 @@ abstract class WacTreeTable extends WacCommonTable
         $objQuery = $this->createQuery('t1')
                     ->select("max(position) as max_position")
                     ->where("parent_id=".$parent->getId());
-//                    ->orderBy("position desc");
 
         $dataResult = $objQuery->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
         if($dataResult){

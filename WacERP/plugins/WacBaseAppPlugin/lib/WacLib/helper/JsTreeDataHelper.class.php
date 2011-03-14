@@ -109,6 +109,15 @@ class JsTreeDataHelper {
     }
 
     /*
+     * copyNode
+     * @return new node object
+     */
+    public function copyNode($node, $targetParentNode, $srcTable, $params=array())
+    {
+        return $srcTable->copyNode($node, $targetParentNode, $params);
+    }
+
+    /*
      * removeNode
      * @return new node object
      */
