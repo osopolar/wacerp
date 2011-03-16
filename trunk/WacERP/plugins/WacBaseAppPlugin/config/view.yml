@@ -25,6 +25,10 @@ default:
 
 #    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.1/ui.jqgrid.css
     ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
+
+    jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/jquery.ui.plupload.css
+    plupload.queue.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/plupload.queue.css
+
     validationEngine: /WacBaseAppPlugin/css/jquery/plugins/formValidator/validationEngine.jquery.css
     wac.main: /WacBaseAppPlugin/css/wac/main.css
     wac.layout: /WacBaseAppPlugin/css/wac/layout.css
@@ -38,7 +42,9 @@ default:
 #    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
 #    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
 
-    wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars
+    google.gear: /WacBaseAppPlugin/js/google/gears_init.js
+
+    wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars, from wacConfiguration module
 
 #    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-1.8.8.custom.min.js     # jquery-ui
 #    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-i18n.js     # jquery-ui-i18n
@@ -57,6 +63,9 @@ default:
     jquery.validationEngine.i18n: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh
 
     jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc2/jquery.jstree.js    # jquery.jstree
+
+    jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.min.js    # jquery.plupload
+    jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.min.js    # jquery.ui.plupload
 
 #    - /WacBaseAppPlugin/js/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
     jquery.printElement: /WacBaseAppPlugin/js/jquery/plugins/printElement/jquery.printElement.min.js    # jquery.printElement
