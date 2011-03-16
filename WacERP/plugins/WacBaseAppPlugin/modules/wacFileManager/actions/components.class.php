@@ -9,4 +9,9 @@ class wacCommonComponents extends WacComponent
     {
          parent::execute($request);
     }
+
+    public function executeFileUploadWidget($request)
+    {
+         parent::execute($request);
+    }
 }

@@ -37,6 +37,9 @@ class WacComponentList
     //// module tree
     public static $moduleTree                 = "moduleTree";
 
+    //// module upload form
+    public static $moduleUploadForm           = "moduleUploadForm";
+
     //// buttons bar for the module
     public static $moduleButtonBar            = "moduleButtonBar";
 
@@ -46,9 +49,10 @@ class WacComponentList
     //// module list
     public static $moduleIndexListWidget      = "moduleIndexListWidget";
 
-    //// module list
+    //// module file manager 
     public static $fileManagerWidget          = "fileManagerWidget";
 
-    
+    //// module file upload widget
+    public static $fileUploadWidget           = "fileUploadWidget";
 
 }
