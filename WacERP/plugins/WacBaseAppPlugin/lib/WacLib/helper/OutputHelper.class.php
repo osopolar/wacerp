@@ -58,6 +58,9 @@ class OutputHelper
                 case WacDataFormatType::$txt:
                     return $this->outputTextFormat($resultSet, $action, $params);
                     break;
+                case WacDataFormatType::$jsonRPC:
+                    return $this->outputJsonRPCFormat($resultSet, $action, $params);
+                    break;
                 case WacDataFormatType::$pureText:
                     return $this->outputPureTextFormat($resultSet, $action, $params);
                     break;
@@ -226,6 +229,18 @@ class OutputHelper
         }
         $this->_response->setContentType('application/javascript; charset=utf-8');
         return $action->renderText($output);
+    }
+
+    /*
+     * return JsCommon format data structure
+     * @params
+     * array $node - node info,
+     */
+    public function outputJsonRPCFormat($resultSet, sfAction $action, $params=array())
+    {
+        $this->setNoCacheHeader($action, false);
+        $this->_response->setContentType('text/html; charset=utf-8');
+        return $action->renderText(json_encode($resultSet));
     }
 
     /*

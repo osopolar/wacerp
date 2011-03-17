@@ -27,7 +27,7 @@ default:
     ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
 
     jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/jquery.ui.plupload.css
-    plupload.queue.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/plupload.queue.css
+#    plupload.queue.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/plupload.queue.css
 
     validationEngine: /WacBaseAppPlugin/css/jquery/plugins/formValidator/validationEngine.jquery.css
     wac.main: /WacBaseAppPlugin/css/wac/main.css
@@ -42,7 +42,7 @@ default:
 #    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
 #    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
 
-    google.gear: /WacBaseAppPlugin/js/google/gears_init.js
+#    google.gear: /WacBaseAppPlugin/js/google/gears_init.js
 
     wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars, from wacConfiguration module
 

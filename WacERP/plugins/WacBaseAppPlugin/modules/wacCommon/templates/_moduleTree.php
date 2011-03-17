@@ -17,7 +17,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
 ?>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, true); ?>
-<div id="<?php echo $moduleTreeId; ?>" class="wacTreeFrame"></div>
+<div id="<?php echo $moduleTreeId; ?>" class="wacFrame"></div>
 
 <script type="text/javascript">
     //<![CDATA[
