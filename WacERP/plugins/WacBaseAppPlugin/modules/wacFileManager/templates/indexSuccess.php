@@ -4,7 +4,7 @@
  */
 
   echo WacWidgetHelper::getInstance()->getWidget(
-        WacModule::getInstance()->getName("wacCommon"), // be invoked module name
+        WacModule::getInstance()->getName("wacFileManager"), // be invoked module name
         WacComponentList::$fileManagerWidget, // be invoked widget name
         array(
             'contextInfo' => $contextInfo, // current module context info
