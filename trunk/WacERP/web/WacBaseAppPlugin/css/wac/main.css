@@ -154,7 +154,7 @@
 	padding-left:20px;
 }
 
-.wacTreeFrame{ width:auto; height:400px; overflow:auto; border:1px solid gray; }
+.wacFrame{ width:auto; height:400px; overflow:auto; border:1px solid gray; }
 
 .wacPortletColumn { width: 250px; float: left; padding-bottom: 25px; }
 .wacPortlet { margin: 0 1em 1em 0; width: 230px; }

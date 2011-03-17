@@ -20,4 +20,5 @@ class WacDataFormatType
     public static $htmlEntityView  = "htmlEntityView";  // show a entity view
     public static $pureText        = "pureText";
     public static $pureTextJs      = "pureText.js";
+    public static $jsonRPC    = "jsonRPC";
 }
