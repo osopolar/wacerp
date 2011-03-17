@@ -1,7 +1,7 @@
 <?php
 
 /**
- * manage the app layout
+ * provides common components
  */
 class wacCommonComponents extends WacComponent
 {
@@ -30,4 +30,5 @@ class wacCommonComponents extends WacComponent
                 );
     }
 
+    
 }

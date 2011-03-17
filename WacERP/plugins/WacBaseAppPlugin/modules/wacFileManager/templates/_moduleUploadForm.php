@@ -6,6 +6,6 @@
  *
  */
 
-//include_partial(WacModule::getInstance()->getName("wacCommon")."/".WacComponentList::$moduleUploadForm, array('contextInfo'=>$contextInfo, 'invokeParams'=>$invokeParams));
+include_partial(WacModule::getInstance()->getName("wacCommon")."/".WacComponentList::$moduleUploadForm, array('contextInfo'=>$contextInfo, 'invokeParams'=>$invokeParams));
 
 ?>
