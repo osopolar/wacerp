@@ -3,7 +3,7 @@
 /**
  * manage the app layout
  */
-class wacCommonComponents extends WacComponent
+class wacFileManagerComponents extends WacComponent
 {
     public function executeFileManagerWidget($request)
     {
@@ -14,4 +14,5 @@ class wacCommonComponents extends WacComponent
     {
          parent::execute($request);
     }
+
 }
