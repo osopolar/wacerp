@@ -23,7 +23,18 @@ class wacFileManagerActions extends WacTreeActions {
         $jsonRpcUploadHelper = JsonRpcUploadHelper::getInstance();
         $jsonRpcData = JsonRpcData::getInstance();
 
-        $resultSet = $jsonRpcData->getErrMsg("101");
+//        $resultSet = $jsonRpcData->getErrMsg("101");
+
+        $resultSet = $jsonRpcData->getSuccMsg();
+        try{
+            $jsonRpcUploadHelper->process($request);
+        }
+        catch(WacAppException $e){
+            $resultSet = $jsonRpcData->getErrMsg($e->getCode());
+        }
+        catch(sfException $e){
+            throw new sfException("Wac Error: sth wrong when upload '!");
+        }
         
 
         return OutputHelper::getInstance()->output($resultSet, $this);

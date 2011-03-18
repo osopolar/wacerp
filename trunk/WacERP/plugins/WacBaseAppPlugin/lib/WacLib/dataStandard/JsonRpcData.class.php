@@ -40,6 +40,14 @@ class JsonRpcData extends WacCommonData
                 )
         );
     }
+
+    public function getSuccMsg(){
+        return array(
+            "jsonrpc" => self::$version,
+            "result"  => null,
+            "id"      => "id"
+        );
+    }
     
     
 }
