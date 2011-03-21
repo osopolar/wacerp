@@ -12,9 +12,11 @@ class JsonRpcData extends WacCommonData
     public static $version = "2.0";
 
     public $_params = array(
+        '100'  => array('id'=>"100", 'code'=>100, 'caption'=>"Failed to open temp directory."),
         '101'  => array('id'=>"101", 'code'=>101, 'caption'=>"Failed to open input stream."),
         '102'  => array('id'=>"102", 'code'=>102, 'caption'=>"Failed to open output stream."),
         '103'  => array('id'=>"103", 'code'=>103, 'caption'=>"Failed to move uploaded file."),
+        '104'  => array('id'=>"104", 'code'=>104, 'caption'=>"Filename is too short to create caching folders!"),
     );
 
     public static function getInstance()

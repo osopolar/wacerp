@@ -74,7 +74,7 @@ class WacModule extends WacCommonData
 
           'wacI18n'                          => array('id'=>"58",'group'=>'1', 'name'=>"wacI18n", 'caption'=>"多语言服务"),
           'wacPrint'                         => array('id'=>"59",'group'=>'1', 'name'=>"wacPrint", 'caption'=>"打印服务"),
-          'wacFileManager'                   => array('id'=>"60",'group'=>'1', 'name'=>"wacFileManager", 'caption'=>"打印服务"),
+          'wacFileManager'                   => array('id'=>"60",'group'=>'1', 'name'=>"wacFileManager", 'caption'=>"文件上传"),
           'wacTest'                          => array('id'=>"61",'group'=>'1', 'name'=>"wacTest", 'caption'=>"测试模块"),
     );
 

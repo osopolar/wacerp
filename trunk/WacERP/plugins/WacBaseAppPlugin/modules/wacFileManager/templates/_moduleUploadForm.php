@@ -12,7 +12,7 @@ $moduleName = $contextInfo['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
 $modulePrefixName = $contextInfo['moduleName'] . $invokeParams['attachInfo']['name'];
 $moduleFormId = WacModuleHelper::getFormId($moduleName, $moduleAttachName);
-$moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
+$moduleCaption = WacModule::getInstance()->getCaption($moduleName);
 //print_r($contextInfo);
 ?>
 
@@ -45,11 +45,12 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
             $(function() {
                 $(moduleUploaderId).plupload({
                     // General settings
+//                    runtimes : 'html4',
                     runtimes : 'flash,html5,browserplus,silverlight,gears,html4',
                     url : moduleUrl + 'upload?dataFormat=<?php echo WacDataFormatType::$jsonRPC?>',
                     max_file_size : '1000mb',
                     max_file_count: 20, // user can add no more then 20 files at a time
-                    chunk_size : '1mb',
+                    chunk_size : '2mb',
                     unique_names : true,
                     multiple_queues : true,
 
