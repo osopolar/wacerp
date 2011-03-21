@@ -36,7 +36,6 @@ class wacFileManagerActions extends WacTreeActions {
             throw new sfException("Wac Error: sth wrong when upload '!");
         }
         
-
         return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
