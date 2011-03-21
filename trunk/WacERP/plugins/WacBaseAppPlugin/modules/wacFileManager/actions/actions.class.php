@@ -27,6 +27,9 @@ class wacFileManagerActions extends WacTreeActions {
 
         $resultSet = $jsonRpcData->getSuccMsg();
         try{
+            // register a listener when upload finish
+            sfContext::getInstance()->getEventDispatcher()->connect(sfConfig::get("app_wac_events_file_upload_finish"), array($this, "doAfterUpload"));
+            
             $jsonRpcUploadHelper->process($request);
         }
         catch(WacAppException $e){
@@ -37,6 +40,11 @@ class wacFileManagerActions extends WacTreeActions {
         }
         
         return OutputHelper::getInstance()->output($resultSet, $this);
+    }
+
+    public function doAfterUpload(sfEvent $e){
+        $this->getLogger()->log("doAfterUpload");
+        $this->getLogger()->log(print_r($e->getParameters(), true));
     }
 
 

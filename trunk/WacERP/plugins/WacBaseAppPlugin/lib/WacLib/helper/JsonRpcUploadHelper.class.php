@@ -99,7 +99,6 @@ class JsonRpcUploadHelper {
         if($this->_config["cachingPolicy"]){
 //            $test = $this->_config["wacUploadDir"].$this->setupCachingPath($this->_fileName);
             $this->_config["targetDir"] = $this->_config["wacUploadDir"].$this->setupCachingPath($this->_fileName);
-            sfContext::getInstance()->getLogger()->log("bbbbbbb: {$this->_config["targetDir"]} : ");
         }
 
         // Make sure the fileName is unique but only if chunking is disabled
@@ -116,7 +115,7 @@ class JsonRpcUploadHelper {
         }
 
 //        sfContext::getInstance()->getLogger()->log(print_r($_FILES, true));
-        sfContext::getInstance()->getLogger()->log("{$this->_config["targetDir"]} : {$this->_chunk} : {$this->_chunks} : {$this->_fileName} : {$this->_fileFirstName} : {$this->_fileNameExt}");
+//        sfContext::getInstance()->getLogger()->log("{$this->_config["targetDir"]} : {$this->_chunk} : {$this->_chunks} : {$this->_fileName} : {$this->_fileFirstName} : {$this->_fileNameExt}");
 
         if ($this->_config["cleanupTargetDir"]) {
             // Remove old temp files
@@ -137,7 +136,6 @@ class JsonRpcUploadHelper {
 
 
         $contentType = $request->getContentType();
-
         // Handle non multipart uploads older WebKit versions didn't support multipart in HTML5
         if (strpos($contentType, "multipart") !== false) {
             try {
@@ -197,6 +195,16 @@ class JsonRpcUploadHelper {
                 if(isset($out) && is_resource($out)){fclose($out);}
                 throw new WacAppException("Failed to open output stream.", "102");
             }
+        }
+
+        // at the end chunk, dispatch a upload finish event
+        if($this->_chunks == ($this->_chunk + 1)){
+            $parameters = array(
+                "config"   => $this->_config,
+                "fileName" => $this->_fileName,
+                "file"     => $_FILES['file']["name"]
+            );
+            sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, sfConfig::get("app_wac_events_file_upload_finish"), $parameters));
         }
 
     }
