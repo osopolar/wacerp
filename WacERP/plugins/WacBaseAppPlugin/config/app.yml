@@ -23,4 +23,5 @@ all:
     data_print: _data_print
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form
+    file_upload_finish: _file_upload_finish_evt
 
