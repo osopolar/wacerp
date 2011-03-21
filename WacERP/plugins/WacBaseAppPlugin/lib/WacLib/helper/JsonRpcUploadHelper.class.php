@@ -174,7 +174,8 @@ class JsonRpcUploadHelper {
                 @unlink($_FILES['file']['tmp_name']);
                 throw $e;
             }
-        } else {
+        }
+        else {
             // Open temp file
             $out = fopen($this->_config["targetDir"] . $this->_fileName, $this->_chunk == 0 ? "wb" : "ab");
             if ($out) {
