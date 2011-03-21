@@ -9,6 +9,7 @@ all:
     legal_website: http://WWW.WebAppClub.COM
     images_path: /WacBaseAppPlugin/images/
     js_path: /WacBaseAppPlugin/js/
+    upload_path: /wac_uploads/
     data_export_format:
       xml: xml
       json: json
