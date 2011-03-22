@@ -55,4 +55,7 @@ class WacComponentList
     //// module file upload widget
     public static $fileUploadWidget           = "fileUploadWidget";
 
+    //// module category manager
+    public static $categoryManagerWidget      = "categoryManagerWidget";
+
 }

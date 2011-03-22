@@ -74,8 +74,9 @@ class WacModule extends WacCommonData
 
           'wacI18n'                          => array('id'=>"58",'group'=>'1', 'name'=>"wacI18n", 'caption'=>"多语言服务"),
           'wacPrint'                         => array('id'=>"59",'group'=>'1', 'name'=>"wacPrint", 'caption'=>"打印服务"),
-          'wacFileManager'                   => array('id'=>"60",'group'=>'1', 'name'=>"wacFileManager", 'caption'=>"文件上传"),
-          'wacTest'                          => array('id'=>"61",'group'=>'1', 'name'=>"wacTest", 'caption'=>"测试模块"),
+          'wacFileManager'                   => array('id'=>"60",'group'=>'1', 'name'=>"wacFileManager", 'caption'=>"文件管理器"),
+          'wacCategory'                      => array('id'=>"61",'group'=>'1', 'name'=>"wacCategory", 'caption'=>"分类管理"),
+          'wacTest'                          => array('id'=>"62",'group'=>'1', 'name'=>"wacTest", 'caption'=>"测试模块"),
     );
 
     public static function getInstance()

@@ -46,6 +46,7 @@ all:
       - wacSystemLog
       - wacSystemParameter
       - wacFileManager
+      - wacCategory
     
     # Form security secret (CSRF protection)
 #    csrf_secret:            148e77f5b46de42f4caf4dd2c4ad25449ae4f0bb

@@ -80,6 +80,7 @@ class WacTable {
     public static $wacCurrencyRatio = "WacCurrencyRatio";
 
     public static $wacFileManager = "WacFile";
+    public static $wacCategory = "WacCategory";
 
 
     /*
