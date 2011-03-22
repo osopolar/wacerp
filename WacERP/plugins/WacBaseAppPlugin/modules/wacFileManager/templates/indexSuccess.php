@@ -10,7 +10,8 @@
             'contextInfo' => $contextInfo, // current module context info
             'enableWidgets' => array(// enable sub widgets
 //                WacComponentList::$moduleToolBar,
-                WacComponentList::$moduleTree
+                WacComponentList::$moduleTree,
+                WacComponentList::$moduleUploadForm
             )
         )
 );

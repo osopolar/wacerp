@@ -23,6 +23,19 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTree, $enableWidgets)
     ));
 }
 
+if (WacWidgetHelper::enableWidget(WacComponentList::$moduleUploadForm, $enableWidgets)) {
+    include_component(WacModule::getInstance()->getName("wacFileManager"), WacComponentList::$moduleUploadForm,
+            array(
+                'invokeParams' => array(
+                    'contextInfo' => $contextInfo,
+                    'attachInfo'  => $attachInfo,
+                    'config'      => array(
+                        "isHidden" => true
+                    )
+                )
+    ));
+}
+
 echo "</div>\n\n";
 OutputHelper::getInstance()->writeNote("{$widgetName}, end");
 ?>
