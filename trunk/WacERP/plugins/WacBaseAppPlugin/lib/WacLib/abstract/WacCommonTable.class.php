@@ -147,7 +147,7 @@ abstract class WacCommonTable extends Doctrine_Table
         {
             $conditions = array();
             foreach($attributes as $key=>$v){
-                $conditions[] = "t1.{$key} = :{$key}";
+                $conditions[] = "t1.{$key} = '{$v}'";
             }
             $where = implode(" and ", $conditions);
         }

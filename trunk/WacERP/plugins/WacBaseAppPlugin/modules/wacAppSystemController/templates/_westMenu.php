@@ -28,14 +28,14 @@ $menuStr.="<row><cell>21001</cell><cell>系统工具</cell><cell></cell><cell>0<
 $menuStr.="<row><cell>21002</cell><cell>工作日志</cell><cell>wacSystemLog/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
 $menuStr.="<row><cell>21003</cell><cell>文件管理</cell><cell>wacFileManager/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
 
-$menuStr.="<row><cell>22001</cell><cell>运行参数设置</cell><cell></cell><cell>0</cell><cell>22001</cell><cell>23000</cell><cell>false</cell><cell>false</cell></row>";
+$menuStr.="<row><cell>22001</cell><cell>业务参数设置</cell><cell></cell><cell>0</cell><cell>22001</cell><cell>23000</cell><cell>false</cell><cell>false</cell></row>";
 //$menuStr.="<row><cell>22002</cell><cell>工厂</cell><cell>factory/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22003</cell><cell>工厂类型</cell><cell>factoryType/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22004</cell><cell>工厂参数</cell><cell>factoryParameter/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22005</cell><cell>仓库</cell><cell>storehouse/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22006</cell><cell>仓库参数</cell><cell>storehouseParameter/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
-$menuStr.="<row><cell>22007</cell><cell>货物名录</cell><cell>wacGoods/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
-$menuStr.="<row><cell>22008</cell><cell>货物分类</cell><cell>wacGoodsCategory/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
+//$menuStr.="<row><cell>22007</cell><cell>货物名录</cell><cell>wacGoods/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
+$menuStr.="<row><cell>22008</cell><cell>分类</cell><cell>wacCategory/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22009</cell><cell>浆次缸号</cell><cell>jar/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22010</cell><cell>封样缸号</cell><cell>sampleJar/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 //$menuStr.="<row><cell>22011</cell><cell>颜色</cell><cell>color/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";

@@ -14,7 +14,7 @@ abstract class PluginsfGuardPermissionTable extends WacCommonTable
      * judge the attribute is existed or not
      * @return boolean
     */
-    public function isExistedAttribute($attribute, $val, $exceptId=0) {
+    public function isExistedAttribute($attribute, $val, $exceptId=0, $igroneStatus=true) {
         if($exceptId==0) {
             $objQuery = $this->createQuery('t1')
                     ->select("count(*) as total")
