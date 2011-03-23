@@ -12,108 +12,129 @@ $moduleName = $contextInfo['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
 $modulePrefixName = $contextInfo['moduleName'] . $invokeParams['attachInfo']['name'];
 $moduleCaption = WacModule::getInstance()->getCaption($moduleName);
-$moduleFormDialogId = WacModuleHelper::getFormDialogId($moduleName, $moduleAttachName);
-$moduleFormId = WacModuleHelper::getFormId($moduleName, $moduleAttachName);
+$moduleFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $moduleAttachName);
+$moduleFormName = WacModuleHelper::getFormId($moduleName, $moduleAttachName);
 $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams['config']['isHidden']) ? "display: none;" : "display: inline;";
 //print_r($contextInfo);
 ?>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormId, true); ?>
-<div id="<?php echo $moduleFormDialogId; ?>" style="<?php echo $cfgDialogDisplay;?>">
-    <form name="<?php echo $moduleFormId; ?>" id="<?php echo $moduleFormId; ?>" method="post" action="">
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormName, true); ?>
+<div id="<?php echo $moduleFormDialogName; ?>" style="<?php echo $cfgDialogDisplay;?>">
+    <form name="<?php echo $moduleFormName; ?>" id="<?php echo $moduleFormName; ?>" method="post" action="">
         <div id="<?php echo $modulePrefixName; ?>_uploader">
             <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
         </div>
     </form>
-
-    <script type="text/javascript">
-        //<![CDATA[
-        $("#<?php echo $moduleFormDialogId; ?>").ready(function(){
-            var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
-
-            var moduleName       = <?php echo "'{$moduleName}'" ?>;
-            var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-            var modulePrefixId   = '#' + modulePrefixName;
-            var moduleUploaderId = modulePrefixId + "_uploader";
-            var moduleFormDialogId = <?php echo "'{$moduleFormDialogId}'" ?>;
-            var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-            var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
-
-
-            init();
-            bindEvents();
-
-            function init(){
-                // Convert divs to queue widgets when the DOM is ready
-                $(function() {
-                    $(moduleUploaderId).plupload({
-                        // General settings
-                        //                    runtimes : 'html4',
-                        runtimes : 'flash,html5,browserplus,silverlight,gears,html4',
-                        url : moduleUrl + 'upload?dataFormat=<?php echo WacDataFormatType::$jsonRPC ?>',
-                        max_file_size : '1000mb',
-                        max_file_count: 20, // user can add no more then 20 files at a time
-                        chunk_size : '2mb',
-                        unique_names : true,
-                        multiple_queues : true,
-
-                        // Resize images on clientside if we can
-                        resize : {width : 320, height : 240, quality : 90},
-
-                        // Rename files by clicking on their titles
-                        rename: true,
-
-                        // Sort files
-                        sortable: true,
-
-                        // Specify what files to browse for
-                        filters : [
-                            {title : "Image files", extensions : "jpg,gif,png"},
-                            {title : "Zip files", extensions : "zip,avi"}
-                        ],
-
-                        // Flash settings
-                        flash_swf_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.flash.swf',
-
-                        // Silverlight settings
-                        silverlight_xap_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.silverlight.xap'
-                    });
-
-                    // Client side form validation
-                    $('form').submit(function(e) {
-                        var uploader = $(moduleUploaderId).plupload('getUploader');
-
-                        // Validate number of uploaded files
-                        if (uploader.total.uploaded == 0) {
-                            // Files in queue upload them first
-                            if (uploader.files.length > 0) {
-                                // When all files are uploaded submit form
-                                uploader.bind('UploadProgress', function() {
-                                    if (uploader.total.uploaded == uploader.files.length)
-                                        $('form').submit();
-                                });
-
-                                uploader.start();
-                            } else
-                                alert('You must at least upload one file.');
-
-                            e.preventDefault();
-                        }
-                    });
-
-                });
-
-            };  // init end
-
-            function bindEvents()
-            {
-                $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
-                    Wac.log(data);
-                });
-            };  //bindEvnts end
-
-        })
-        //]]>
-    </script>
 </div>
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormId, false); ?>
+<script type="text/javascript">
+    //<![CDATA[
+    $("#<?php echo $moduleFormDialogName; ?>").ready(function(){
+        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+
+        var moduleName       = <?php echo "'{$moduleName}'" ?>;
+        var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
+        var modulePrefixId   = '#' + modulePrefixName;
+        var moduleUploaderId = modulePrefixId + "_uploader";
+        var moduleFormDialogName = <?php echo "'{$moduleFormDialogName}'" ?>;
+        var moduleFormDialogId = '#' + moduleFormDialogName;
+        var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
+        var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
+
+        var moduleUploader;   // uploader obj, created when initUploadForm
+        var parentId = 0;     // parentId, redefine when open the dialog
+
+        function init(){
+            initUploadForm();
+            initDialog();
+            bindEvents();
+        };  // init end
+
+        function initUploadForm(){
+//                $(function() {
+            // Convert divs to queue widgets when the DOM is ready
+               $(moduleUploaderId).plupload({
+                    // General settings
+//                    runtimes : 'html5',
+                    runtimes : 'flash,html4,html5,browserplus,silverlight,gears',
+                    url : moduleUrl + 'upload',
+                    max_file_size : '1000mb',
+                    max_file_count: 20, // user can add no more then 20 files at a time
+                    chunk_size : '2mb',
+                    unique_names : true,
+                    multiple_queues : true,
+                    multipart_params: {dataFormat: '<?php echo WacDataFormatType::$jsonRPC ?>'},
+
+                    // Resize images on clientside if we can
+                    resize : {width : 320, height : 240, quality : 90},
+
+                    // Rename files by clicking on their titles
+                    rename: true,
+
+                    // Sort files
+                    sortable: true,
+
+                    // Specify what files to browse for
+                    filters : [
+                        {title : "Image files", extensions : "jpg,gif,png"},
+                        {title : "Zip files", extensions : "zip,avi"}
+                    ],
+
+                    // Flash settings
+                    flash_swf_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.flash.swf',
+
+                    // Silverlight settings
+                    silverlight_xap_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.silverlight.xap'
+                });
+
+                moduleUploader = $(moduleUploaderId).plupload('getUploader');
+
+        };  // initUploadForm end
+
+        function initDialog(){
+            $(moduleFormDialogId).dialog({
+                bgiframe: true,
+                modal: true,
+                width: 860,
+                height: 400,
+                autoOpen: false,
+                buttons: {},
+                zIndex: 100
+            });
+        };
+
+        function bindEvents()
+        {
+            moduleUploader.bind('BeforeUpload', function(up, files) {
+                $.extend(up.settings.multipart_params, { id : parentId });
+                Wac.log(up.settings.multipart_params);
+            });
+
+            $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
+//                    Wac.log(data);
+                $(moduleFormDialogId).dialog('open');
+                moduleUploader.refresh();
+                parentId = data.id;
+            });
+
+            // fix dialog div didnt remove bug, remove it by this way
+            var uiPanelId = WacEntity.module.getUiPanelId(moduleName);
+            $("#wacAppSystemController").unbind('tabsremove');
+            $("#wacAppSystemController").bind('tabsremove', function(event, ui) {
+                //            Wac.log("ui.panel.id:" + ui.panel.id);
+                if(ui.panel.id == uiPanelId)
+                {
+                    //                Wac.log("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']");
+                    //                Wac.log(ui.panel.id + " 1:" + $("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']").length);
+                    $("div[aria-labelledby='ui-dialog-title-"+ moduleFormDialogName +"']").remove();  // remove dialog div
+                    $("div[class='"+ moduleName +"_nameformError']").remove();  //remove error msg div
+                }
+            });
+        };  //bindEvnts end
+
+        init();
+
+    })
+    //]]>
+</script>
+
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormName, false); ?>
