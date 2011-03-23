@@ -25,12 +25,26 @@ class wacConfigurationActions extends WacCommonActions
       $str = "";
       $frontendConfigs = array();
       $frontendConfigs["wac_setting"] = $this->getRequireVars(array("wac_setting"));
-      $frontendConfigs["wac_events"] = $this->getRequireVars(array("wac_events"));
+      $frontendConfigs["wac_events"]  = $this->getRequireVars(array("wac_events"));
+      $frontendConfigs["wac_modules"] = $this->getRequireModules();
 
 //      $str = print_r($frontendConfigs, true);
       $str = $this->getPartial("jsFrontendEnvSetting", array("frontendConfigs"=>$frontendConfigs));
 
       return OutputHelper::getInstance()->output($str, $this, array("isCache"=>true));
+  }
+
+  private function getRequireModules(){
+      $modules = array();
+      $params = WacModule::getInstance()->getParams();
+      if(count($params)>0){
+          foreach($params as $k => $arr){
+              if($arr["uiPanelId"] != "0"){
+                  $modules[$k] = $arr;
+              }
+          }
+      }
+      return $modules;
   }
 
   private function getRequireVars($requiredKeys){

@@ -29,6 +29,14 @@ abstract class WacCommonData
         return $tmpArr;
     }
 
+    public function getParams(){
+        return $this->_params;
+    }
+
+    public function setParams($v){
+        return $this->_params = $v;
+    }
+
     /*
      * get attribute
      */
