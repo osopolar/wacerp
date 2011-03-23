@@ -23,6 +23,7 @@ var Wac = {
 
     init: function(){
 //        this.log("wac app init: ");
+        this.setupModuleData();
         this.setupI18nData();
 //        this.showBrowserInfo();
     },
@@ -57,6 +58,15 @@ var Wac = {
             }
         });
     },
+
+    setupModuleData: function(){
+        if((WacEntity.module !== undefined) && (WacAppConfig.module !== undefined )){
+            WacEntity.module.list = WacAppConfig.module;
+        }
+//        Wac.log("WacEntity.module.list:");
+//        Wac.log(WacEntity);
+    },
+
     log: function(msg, enable){
         enable = (enable === undefined) ? true : enable;
         if(this.debug){
@@ -86,5 +96,7 @@ var Wac = {
     }    
 }
 
-// invoke init method to initiate wac app
-Wac.init();
+$(document).ready(function(){
+    // invoke init method to initiate wac app
+    Wac.init();
+})

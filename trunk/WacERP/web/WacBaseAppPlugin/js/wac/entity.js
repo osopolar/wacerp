@@ -31,15 +31,16 @@ var WacEntity = {
  */
 function WacModule(){
     var _self = this;
-    var _tag = "t";
-    this._list = {
-        wacGuardUser : {uiPanelId: _tag+"23002", moduleName:"wacGuardUser"},
-        wacGuardGroup : {uiPanelId: _tag+"23003", moduleName:"wacGuardGroup"},
-        wacGuardPermission : {uiPanelId: _tag+"23004", moduleName:"wacGuardPermission"}
-    }
+//    var _tag = "t";
+//    this._list = {
+//        wacGuardUser : {uiPanelId: _tag+"23002", moduleName:"wacGuardUser"},
+//        wacGuardGroup : {uiPanelId: _tag+"23003", moduleName:"wacGuardGroup"},
+//        wacGuardPermission : {uiPanelId: _tag+"23004", moduleName:"wacGuardPermission"}
+//    }
+    this.list = null;
 
     this.getUiPanelId = function(name){
-        return _self._list[name].uiPanelId;
+        return _self.list[name].uiPanelId;
     }
 }
 
