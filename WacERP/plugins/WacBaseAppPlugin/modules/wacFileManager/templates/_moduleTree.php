@@ -152,12 +152,15 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             "icon" : wacImagesPath + "js_icons/file.png",
                             "label" : "<?php echo __("Create File");?>",
                             "action" : function (obj) {
-                                var params = {
-                                    "id" : obj.attr("id").replace("node_",""),
-                                    "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
-                                }
-                                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, params);
-
+//                                Wac.log($(obj).attr("rel"));
+                                $.vakata.context.hide();
+                                if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
+                                    var params = {
+                                        "id" : obj.attr("id").replace("node_",""),
+                                        "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
+                                    }
+                                    $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, params);
+                                }                                
 //                                this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>" } });
                             }
                         },

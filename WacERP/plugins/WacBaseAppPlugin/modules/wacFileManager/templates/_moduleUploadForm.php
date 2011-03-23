@@ -26,6 +26,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
         </div>
     </form>
 </div>
+
 <script type="text/javascript">
     //<![CDATA[
     $("#<?php echo $moduleFormDialogName; ?>").ready(function(){
@@ -110,9 +111,16 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
             });
 
             $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
-//                    Wac.log(data);
+//                Wac.log(data);
+//                Wac.log("length: " + $(moduleUploader.files).length);
+
                 $(moduleFormDialogId).dialog('open');
+//                $.each(moduleUploader.files, function(i, file) {
+//                    moduleUploader.removeFile(file);
+//                });
+
                 moduleUploader.refresh();
+
                 parentId = data.id;
             });
 
@@ -120,13 +128,10 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
             var uiPanelId = WacEntity.module.getUiPanelId(moduleName);
             $("#wacAppSystemController").unbind('tabsremove');
             $("#wacAppSystemController").bind('tabsremove', function(event, ui) {
-                //            Wac.log("ui.panel.id:" + ui.panel.id);
+//               Wac.log("ui.panel.id:" + ui.panel.id + " : " + uiPanelId);
                 if(ui.panel.id == uiPanelId)
                 {
-                    //                Wac.log("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']");
-                    //                Wac.log(ui.panel.id + " 1:" + $("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']").length);
-                    $("div[aria-labelledby='ui-dialog-title-"+ moduleFormDialogName +"']").remove();  // remove dialog div
-                    $("div[class='"+ moduleName +"_nameformError']").remove();  //remove error msg div
+                    $(moduleFormDialogId).remove();  //remove dialog form
                 }
             });
         };  //bindEvnts end
