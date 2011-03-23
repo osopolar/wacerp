@@ -31,7 +31,6 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
         var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
         var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
 
-
         init();
         bindEvents();
 
