@@ -55,26 +55,37 @@ abstract class WacTreeTable extends WacCommonTable
      * @return node
      */
     public function createNode($parent, $params=array(), $isAvail=-1){
-        
-        $this->updateTreeBeforeCreate($parent, $params["position"],1, $isAvail);
+        $conn = $this->getConnection();
+        $conn->beginTransaction();
+        try
+        {
+            $this->_updateTreeBeforeCreate($parent, $params["position"],1, $isAvail);
 
-        $newNode = $this->create($params);
-        $newNode->setParentId($parent->getId());
-        $newNode->setLeftNumber($parent->getRightNumber());
-        $newNode->setRightNumber($parent->getRightNumber()+1);
-        $newNode->setLevel($parent->getLevel()+1);
-        $newNode->save();
+            $newNode = $this->create($params);
+            $newNode->setParentId($parent->getId());
+            $newNode->setLeftNumber($parent->getRightNumber());
+            $newNode->setRightNumber($parent->getRightNumber()+1);
+            $newNode->setLevel($parent->getLevel()+1);
+            $newNode->save();
 
-        $this->updateTreeAfterCreate($newNode, $isAvail);
+            $this->updateTreeAfterCreate($newNode, $isAvail);
 
-        return $newNode;
+            $conn->commit();
+            
+            return $newNode;
+        }
+        catch(Exception $e)
+        {
+            $conn->rollBack();
+            throw $e;
+        }
     }
 
     /*
      * updateNodes before create a node
      * $nodesNum = nodes number
      */
-    public function updateTreeBeforeCreate($parent, $position=0, $nodesNum=1, $isAvail=-1){
+    protected function _updateTreeBeforeCreate($parent, $position=0, $nodesNum=1, $isAvail=-1){
         $customFilterStr = $this->getCustomFilter(true);
         $increaseNum = $nodesNum * 2;
 
@@ -155,7 +166,7 @@ abstract class WacTreeTable extends WacCommonTable
     /*
      * updateNodes after create a node
      */
-    public function updateTreeAfterInsert($node, $isAvail=-1){
+    protected function _updateTreeAfterInsert($node, $isAvail=-1){
         //update position
         $customFilterStr = $this->getCustomFilter(true);
         $objQuery = $this->createQuery()
@@ -193,33 +204,44 @@ abstract class WacTreeTable extends WacCommonTable
      * @return node
      */
     public function moveNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
-        // to fix jstree wrong position bug when move the node under the same parent
-        $position = $params["position"];
-        if(($position>0) && ($targetParentNode->getId()==$node->getParentId())){
-            $maxPosition = $this->getMaxPositionOfSameParent($targetParentNode);
-            if($maxPosition < $position){
-                $position = $maxPosition;
+        $conn = $this->getConnection();
+        $conn->beginTransaction();
+        try
+        {
+            // to fix jstree wrong position bug when move the node under the same parent
+            $position = $params["position"];
+            if (($position > 0) && ($targetParentNode->getId() == $node->getParentId())) {
+                $maxPosition = $this->getMaxPositionOfSameParent($targetParentNode);
+                if ($maxPosition < $position) {
+                    $position = $maxPosition;
+                }
             }
-//            echo "fffff: ".$node->getId().":".$node->getPosition().":".$maxPosition.":".$position;
+
+            $this->disableNode($node, 1);
+            $this->_updateTreeBeforeRemove($node, 1);
+            $this->_updateTreeAfterRemove($node, 1);
+            $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+
+            $node->setPosition($position);
+            $node->setParentId($targetParentNode->getId());
+            $node->save();
+
+            $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
+            $this->_updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
+            $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+            $this->_reindexNode($node, $targetParentNode, $position, 0, $params);
+            $this->_updateTreeAfterInsert($node, 1);
+            $this->enableNode($node, 0);
+
+            $conn->commit();
+
+            return $node;
         }
-
-        $this->disableNode($node, 1);
-        $this->updateTreeBeforeRemove($node, 1);
-        $this->updateTreeAfterRemove($node, 1);
-        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-
-        $node->setPosition($position);
-        $node->setParentId($targetParentNode->getId());
-        $node->save();
-        
-        $nodesNum = ($node->getRightNumber() - $node->getLeftNumber() + 1) / 2;
-        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
-        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-        $this->reindexNode($node, $targetParentNode, $position, 0, $params);
-        $this->updateTreeAfterInsert($node, 1);
-        $this->enableNode($node, 0);
-        
-        return $node;
+        catch(Exception $e)
+        {
+            $conn->rollBack();
+            throw $e;
+        }
     }
 
     /*
@@ -227,42 +249,56 @@ abstract class WacTreeTable extends WacCommonTable
      * @return node
      */
     public function copyNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $params=array()){
-        // to fix jstree wrong position bug when move the node under the same parent
-        $position = $params["position"];
-        $copyNodeRoot = null;
-        
-        $nodes = $this->getChildren($node, true, false, -1, 1);
-        if($nodes->count(0) > 0){
-            $i = 0;
-            $parentId = $targetParentNode->getId();
-            foreach($nodes as $node){
-                $newNode = $node->copy(false);
-                $newNode->setParentId($parentId);
-                $newNode->setIsAvail(0);                
-                if($i==0){
-                    $copyNodeRoot = $newNode;
-                    $newNode->setPosition($position);
+        $conn = $this->getConnection();
+        $conn->beginTransaction();
+        try
+        {
+            // to fix jstree wrong position bug when move the node under the same parent
+            $position = $params["position"];
+            $copyNodeRoot = null;
+
+            $nodes = $this->getChildren($node, true, false, -1, 1);
+            if ($nodes->count(0) > 0) {
+                $i = 0;
+                $parentId = $targetParentNode->getId();
+                foreach ($nodes as $node) {
+                    $newNode = $node->copy(false);
+                    $newNode->setParentId($parentId);
+                    $newNode->setIsAvail(0);
+                    if ($i == 0) {
+                        $copyNodeRoot = $newNode;
+                        $newNode->setPosition($position);
+                    }
+                    $newNode->save();
+                    $parentId = $newNode->getId();
+                    $i++;
                 }
-                $newNode->save();
-                $parentId = $newNode->getId();
-                $i++;
             }
+
+            $nodesNum = ($copyNodeRoot->getRightNumber() - $copyNodeRoot->getLeftNumber() + 1) / 2;
+            $this->_updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
+            $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
+            $this->_reindexNode($copyNodeRoot, $targetParentNode, $position, 0, $params);
+            $this->_updateTreeAfterInsert($copyNodeRoot, 1);
+            $this->enableNode($copyNodeRoot, 0);
+
+            $conn->commit();
+
+            return $copyNodeRoot;
+        } catch (Exception $e) {
+            $conn->rollBack();
+            throw $e;
         }
-
-        $nodesNum = ($copyNodeRoot->getRightNumber() - $copyNodeRoot->getLeftNumber() + 1) / 2;
-        $this->updateTreeBeforeCreate($targetParentNode, $position, $nodesNum, 1);
-        $targetParentNode->refresh();  // reflesh current data, it was effect by previous operation
-        $this->reindexNode($copyNodeRoot, $targetParentNode, $position, 0, $params);
-        $this->updateTreeAfterInsert($copyNodeRoot, 1);
-        $this->enableNode($copyNodeRoot, 0);
-
-        return $copyNodeRoot;
     }
 
     /*
-     * reindexNode
+     * _reindexNode
+     * reindex tree's right/left number according to the new position
+     * $node - insert node
+     * $targetParentNode - new parent node
+     * $position
      */
-    public function reindexNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $position=0, $isAvail=-1, $params=array()){
+    protected function _reindexNode(Doctrine_Record $node, Doctrine_Record $targetParentNode, $position=0, $isAvail=-1, $params=array()){
         $customFilterStr    = $this->getCustomFilter(true);
         $prevNode           = $this->getPrevNode($targetParentNode, $position);
         $nodeLevel          = ($position == 0) ? $prevNode->getLevel() + 1 : $prevNode->getLevel();
@@ -367,35 +403,47 @@ abstract class WacTreeTable extends WacCommonTable
 
     /*
      * removeNode
-     * @return node
+     * @return boolean result
      */
     public function removeNode($node, $params=array(), $isAvail=-1){
-        $children = $this->getChildren($node, true);
-
-        $succFlag = true;
-        if($children->count()>0){
-            foreach($children as $child){
-                if(!$child->delete()){
-                    $succFlag = false;
-                    break;
+        $conn = $this->getConnection();
+        $conn->beginTransaction();
+        try
+        {
+            $children = $this->getChildren($node, true);
+            $succFlag = true;
+            if ($children->count() > 0) {
+                foreach ($children as $child) {
+                    if (!$child->delete()) {
+                        $succFlag = false;
+                        break;
+                    }
                 }
             }
-        }        
 
-        if($succFlag){
-            $this->updateTreeBeforeRemove($node, $isAvail);
-            $succFlag = $node->delete();
-            $this->updateTreeAfterRemove($node, $isAvail);
+            if ($succFlag) {
+                $this->_updateTreeBeforeRemove($node, $isAvail);
+                $succFlag = $node->delete();
+                $this->_updateTreeAfterRemove($node, $isAvail);
+            }
+
+            $conn->commit();
+
+            return $succFlag;
+        }
+        catch(Exception $e)
+        {
+            $conn->rollBack();
+            throw $e;
         }
 
-        return $succFlag;
     }
 
     /*
      * updateNodes before remove a node
      * $isAvail - can be -1, "1", "0"
      */
-    public function updateTreeBeforeRemove($node, $isAvail=-1){
+    protected function _updateTreeBeforeRemove($node, $isAvail=-1){
         $customFilterStr = $this->getCustomFilter(true);
         $minusNumber = $node->getRightNumber() - $node->getLeftNumber() + 1;
 
@@ -435,7 +483,7 @@ abstract class WacTreeTable extends WacCommonTable
      * updateNodes after remove a node
      * $isAvail - can be -1, "1", "0"
      */
-    public function updateTreeAfterRemove($node, $isAvail=-1){
+    protected function _updateTreeAfterRemove($node, $isAvail=-1){
         //update position
         $customFilterStr = $this->getCustomFilter(true);
         $objQuery = $this->createQuery()

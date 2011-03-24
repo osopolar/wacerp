@@ -390,24 +390,24 @@ abstract class WacCommonActions extends sfActions {
    *  apply different dataFormater according to request params "data_format"
    *  return id=>name hash as select html format
     */
-    public function executeGetIdNameHashInFormat(sfWebRequest $request) {
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            sfConfig::set('sf_web_debug', false);
-        }
-
-        $resultSet = array();
-
-        $params = $this->getHashList("id", "name", 1, sfConfig::get("maxHashItems"));
-        switch($request->getParameter("data_format")) {
-            case StaticWacDataFormatType::$jsonFlexbox:
-                $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params);
-                break;
-            default:
-                break;
-        }
-
-        return OutputHelper::getInstance()->output($resultSet, $this);
-    }
+//    public function executeGetIdNameHashInFormat(sfWebRequest $request) {
+//        if ($this->getRequest()->isXmlHttpRequest()) {
+//            sfConfig::set('sf_web_debug', false);
+//        }
+//
+//        $resultSet = array();
+//
+//        $params = $this->getHashList("id", "name", 1, sfConfig::get("maxHashItems"));
+//        switch($request->getParameter("data_format")) {
+//            case StaticWacDataFormatType::$jsonFlexbox:
+//                $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params);
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        return OutputHelper::getInstance()->output($resultSet, $this);
+//    }
 
     /*
    *  apply different dataFormater according to request params "data_format"

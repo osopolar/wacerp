@@ -253,4 +253,5 @@ abstract class WacCommonTable extends Doctrine_Table
         return $matches["key"];
     }
 
+
 }

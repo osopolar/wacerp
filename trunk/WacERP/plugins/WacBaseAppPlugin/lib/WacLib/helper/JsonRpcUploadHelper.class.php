@@ -40,7 +40,8 @@ class JsonRpcUploadHelper {
             "targetDir"     => sfConfig::get("sf_upload_dir") . sfConfig::get("app_wac_setting_upload_path"),  // default same as wac upload
             "cachingPolicy" => true, // use caching policy to avoid too many files in a folder
             "cleanupTargetDir" => false, // Remove old files or not, work with maxFileAge
-            "maxFileAge" => 3600, // expired file seconds
+            "cachingPath"   => "",
+            "maxFileAge"    => 3600, // expired file seconds
         );
 
         $this->setupConfig($default);
@@ -63,23 +64,26 @@ class JsonRpcUploadHelper {
      * @return caching path, looks like "q/c/" etc.
      */
     public function setupCachingPath($fileName, $startCharNum=5, $cachingLayer=2){
-        $path = "";
+        $this->_config["cachingPath"] = "";
         $dir = $this->_config["wacUploadDir"];
         
         if(strlen($fileName) > ($startCharNum + $cachingLayer)){
             for($i=0;$i<$cachingLayer;$i++){
                 $dirChar = substr($fileName, ($startCharNum+$i), 1);
-                $dir .= DIRECTORY_SEPARATOR.$dirChar;
+//                $dir .= DIRECTORY_SEPARATOR.$dirChar;
+                $dir .= "/{$dirChar}";
                 if (!file_exists($dir)) {
                     @mkdir($dir);
                 }
-                $path .= $dirChar.DIRECTORY_SEPARATOR;
+//                $this->_config["cachingPath"] .= $dirChar.DIRECTORY_SEPARATOR;
+                $this->_config["cachingPath"] .= "{$dirChar}/";
             }
         }
         else{
             throw new WacAppException("Filename is too short to create caching folders!", "104");
         }
-        return $path;
+        
+        return $this->_config["cachingPath"];
     }
 
     public function process(sfWebRequest $request) {

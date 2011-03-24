@@ -157,7 +157,7 @@ abstract class WacTreeActions extends WacCommonActions {
      * canbe override by children method, to know which data should be update/insert, apply for different module/tables
      */
 
-    protected function _mapData($request) {
+    protected function _mapData(sfWebRequest $request) {
         $reqParams = $request->getParameterHolder()->getAll();
         $params = array();
         $params["user_id"] = $this->getUser()->getGuardUser()->getId();
