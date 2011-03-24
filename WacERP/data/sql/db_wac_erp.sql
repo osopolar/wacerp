@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-03-22 11:10:33
+Date: 2011-03-24 18:12:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,7 +115,7 @@ CREATE TABLE `sf_guard_user` (
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-03-22 01:56:32', '2009-12-19 08:12:50', '2011-03-22 01:56:32'), ('2', 'user1', 'sha1', 'c345a581068c0e84a409593ff2298c39', '0bd1714316e66cc94baf6a3ed92de38f290c0698', '1', '0', '2010-04-16 03:37:36', '2010-03-16 03:51:00', '2010-04-16 03:37:36'), ('3', 'user3d', 'sha1', 'c7a425f5b1257a058200d77d4a587b1a', 'e63e8320cc2bec3447f4b67d78916debdd8fd289', '0', '0', '2010-04-16 03:37:54', '2010-03-18 07:52:28', '2010-10-04 16:11:23'), ('4', 'user4', 'sha1', '405d75945172940fce6a4c655ab0cb61', '6e781805e294cb10fb4686fa0a5b371f98a8cd7e', '1', '0', null, '2010-10-04 16:17:34', '2010-10-04 16:17:34'), ('5', 'user52', 'sha1', 'b005d2da40d0cc9e391e4d683ad10e31', '562ea2d60ad031c5caa4f5e960156b7c62ff5e8b', '1', '0', null, '2011-02-25 08:39:05', '2011-02-28 09:45:51');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-03-24 07:02:08', '2009-12-19 08:12:50', '2011-03-24 07:02:08'), ('2', 'user1', 'sha1', 'c345a581068c0e84a409593ff2298c39', '0bd1714316e66cc94baf6a3ed92de38f290c0698', '1', '0', '2010-04-16 03:37:36', '2010-03-16 03:51:00', '2010-04-16 03:37:36'), ('3', 'user3d', 'sha1', 'c7a425f5b1257a058200d77d4a587b1a', 'e63e8320cc2bec3447f4b67d78916debdd8fd289', '0', '0', '2010-04-16 03:37:54', '2010-03-18 07:52:28', '2010-10-04 16:11:23'), ('4', 'user4', 'sha1', '405d75945172940fce6a4c655ab0cb61', '6e781805e294cb10fb4686fa0a5b371f98a8cd7e', '1', '0', null, '2010-10-04 16:17:34', '2010-10-04 16:17:34'), ('5', 'user52', 'sha1', 'b005d2da40d0cc9e391e4d683ad10e31', '562ea2d60ad031c5caa4f5e960156b7c62ff5e8b', '1', '0', null, '2011-02-25 08:39:05', '2011-02-28 09:45:51');
 
 -- ----------------------------
 -- Table structure for `sf_guard_user_group`
@@ -191,12 +191,12 @@ CREATE TABLE `wac_category` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_category
 -- ----------------------------
-INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '4', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-03-22 03:05:38', '0000-00-00 00:00:00'), ('2', '1', '0', '2', '3', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-03-22 03:04:27', '2011-03-22 03:04:51');
+INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '4', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-03-24 02:42:38', '0000-00-00 00:00:00'), ('2', '1', '0', '2', '3', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-03-24 02:42:35', '2011-03-22 03:04:51');
 
 -- ----------------------------
 -- Table structure for `wac_country`
@@ -300,12 +300,14 @@ CREATE TABLE `wac_file` (
   `left_number` bigint(20) unsigned NOT NULL DEFAULT '0',
   `right_number` bigint(20) unsigned NOT NULL DEFAULT '0',
   `level` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `code` varchar(255) DEFAULT NULL,
-  `path` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT '0',
+  `code` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `file_type` varchar(255) DEFAULT NULL,
+  `size` int(10) unsigned DEFAULT '0',
   `memo` text,
   `pr_int1` int(11) DEFAULT '0',
   `pr_int2` int(11) DEFAULT '0',
@@ -324,12 +326,12 @@ CREATE TABLE `wac_file` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_file
 -- ----------------------------
-INSERT INTO `wac_file` VALUES ('1', '0', '0', '1', '32', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-03-22 03:07:50', '0000-00-00 00:00:00'), ('2', '1', '0', '2', '7', '1', null, null, '1', null, 'A:', 'root', null, '0', '0', null, null, '50', '1', '2011-03-09 10:56:10', '2011-03-04 08:02:04'), ('3', '1', '1', '8', '25', '1', null, null, '1', null, 'B:', 'root', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-04 10:28:32'), ('4', '1', '2', '26', '31', '1', null, null, '1', null, 'C:', 'root', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '0000-00-00 00:00:00'), ('11', '2', '0', '3', '6', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-09 10:56:10', '2011-03-09 10:54:39'), ('12', '3', '0', '9', '24', '2', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-09 10:55:06'), ('13', '4', '0', '27', '30', '2', null, null, '1', null, 'C1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-09 10:55:56'), ('14', '12', '1', '20', '21', '3', null, null, '1', null, 'B11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-09 10:56:22'), ('15', '11', '0', '4', '5', '3', null, null, '1', null, 'A11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-09 10:56:34', '2011-03-09 10:56:34'), ('16', '12', '0', '10', '19', '3', null, null, '1', null, 'C11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:31', '2011-03-17 08:54:55'), ('23', '12', '2', '22', '23', '3', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-14 06:36:01'), ('24', '13', '0', '28', '29', '3', null, null, '1', null, 'B11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:30', '2011-03-16 08:47:13'), ('25', '16', '0', '11', '18', '4', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:31', '2011-03-17 08:54:55'), ('26', '25', '0', '12', '13', '5', null, null, '1', null, 'B11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:31', '2011-03-17 08:54:55'), ('27', '26', '1', '16', '19', '5', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:31', '2011-03-17 08:54:55'), ('28', '27', '0', '15', '16', '6', null, null, '1', null, 'B11', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-17 08:54:31', '2011-03-17 08:54:55');
+INSERT INTO `wac_file` VALUES ('1', '0', '0', '1', '8', '0', 'root', '1', 'ROOT', 'ROOT', 'ROOT', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-24 09:01:18', '0000-00-00 00:00:00'), ('2', '1', '0', '2', '3', '1', 'root', '1', null, null, 'A:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-24 09:01:24', '2011-03-04 08:02:04'), ('3', '1', '1', '4', '5', '1', 'root', '1', null, null, 'B:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-24 09:01:27', '2011-03-04 10:28:32'), ('4', '1', '2', '6', '7', '1', 'root', '1', null, null, 'C:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-24 09:01:36', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for `wac_sysmsg`

@@ -46,18 +46,19 @@ abstract class WacTreeActions extends WacCommonActions {
 
     /*
      * _getCreateNode
+     * $properties - node's create properties
      * @return result array
      */
 
-    protected function _createNode(sfWebRequest $request) {
+    protected function _createNode(sfWebRequest $request, $params=array()) {
         $this->forward404Unless($request->hasParameter('id'));
 
         $jsTreeDataHelper = JsTreeDataHelper::getInstance();
         $parent = $this->mainModuleTable->findOneById($request->getParameter("id"));
 
         if ($parent) {
-            $params = $this->_mapData($request);
-            $newNode = $jsTreeDataHelper->createNode($parent, $this->mainModuleTable, $params);
+            $_params = $this->_mapData($request, $params);
+            $newNode = $jsTreeDataHelper->createNode($parent, $this->mainModuleTable, $_params);
             return $jsTreeDataHelper->getSuccDatum($newNode->getId());
         } else {
             throw new sfException("Wac Error: require valid parent id in the tree!");
@@ -78,8 +79,8 @@ abstract class WacTreeActions extends WacCommonActions {
         $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
 
         if ($node) {
-            $params = $this->_mapData($request);
-            $jsTreeDataHelper->editNode($node, $this->mainModuleTable, $params);
+            $_params = $this->_mapData($request);
+            $jsTreeDataHelper->editNode($node, $this->mainModuleTable, $_params);
             return $jsTreeDataHelper->getSuccDatum($node->getId());
         } else {
             throw new sfException("Wac Error: require valid node id in the tree!");
@@ -102,8 +103,8 @@ abstract class WacTreeActions extends WacCommonActions {
         $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
 
         if ($node) {
-            $params = $request->getParameterHolder()->getAll();
-            $jsTreeDataHelper->moveNode($node, $targetParentNode, $this->mainModuleTable, $params);
+            $_params = $request->getParameterHolder()->getAll();
+            $jsTreeDataHelper->moveNode($node, $targetParentNode, $this->mainModuleTable, $_params);
             return $jsTreeDataHelper->getSuccDatum($node->getId());
         } else {
             throw new sfException("Wac Error: require valid node id in the tree!");
@@ -141,8 +142,8 @@ abstract class WacTreeActions extends WacCommonActions {
         $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
 
         if ($node) {
-            $params = $request->getParameterHolder()->getAll();
-            $jsTreeDataHelper->copyNode($node, $targetParentNode, $this->mainModuleTable, $params);
+            $_params = $request->getParameterHolder()->getAll();
+            $jsTreeDataHelper->copyNode($node, $targetParentNode, $this->mainModuleTable, $_params);
             return $jsTreeDataHelper->getSuccDatum($node->getId());
         } else {
             throw new sfException("Wac Error: require valid node id in the tree!");
@@ -157,14 +158,27 @@ abstract class WacTreeActions extends WacCommonActions {
      * canbe override by children method, to know which data should be update/insert, apply for different module/tables
      */
 
-    protected function _mapData(sfWebRequest $request) {
+    protected function _mapData(sfWebRequest $request, $params=array()) {
         $reqParams = $request->getParameterHolder()->getAll();
-        $params = array();
-        $params["user_id"] = $this->getUser()->getGuardUser()->getId();
-        if(isset($reqParams["position"])) {$params["position"] = $reqParams["position"];}
-        if(isset($reqParams["type"]))     {$params["type"] = $reqParams["type"];}
-        if(isset($reqParams["caption"]))  {$params["caption"] = $reqParams["caption"];}
-        return $params;
+        $_params = array_merge(array(), $params);
+        $_params["user_id"] = $this->getUser()->getGuardUser()->getId();
+        if(isset($reqParams["position"])) {
+            $_params["position"] = $reqParams["position"];
+        }
+        
+        if(isset($reqParams["type"])) {
+            $_params["type"] = $reqParams["type"];
+        }
+        else{
+            $_params["type"] = JsTreeDataHelper::$typeLeaf;
+        }
+
+        if(isset($reqParams["caption"])){
+            $_params["caption"]  = $reqParams["caption"];
+        }
+        
+//        $this->getLogger()->log(print_r($_params, true));
+        return $_params;
     }
 
     /*

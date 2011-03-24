@@ -14,6 +14,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @property integer $right_number
  * @property integer $level
  * @property integer $user_id
+ * @property integer $size
  * @property integer $pr_int1
  * @property integer $pr_int2
  * @property integer $priority
@@ -24,6 +25,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @property string $code
  * @property string $name
  * @property string $caption
+ * @property string $file_type
  * @property string $path
  * @property string $memo
  * @property string $pr_str1
@@ -39,6 +41,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @method integer             getRightNumber()  Returns the current record's "right_number" value
  * @method integer             getLevel()        Returns the current record's "level" value
  * @method integer             getUserId()       Returns the current record's "user_id" value
+ * @method integer             getSize()         Returns the current record's "size" value
  * @method integer             getPrInt1()       Returns the current record's "pr_int1" value
  * @method integer             getPrInt2()       Returns the current record's "pr_int2" value
  * @method integer             getPriority()     Returns the current record's "priority" value
@@ -49,6 +52,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @method string              getCode()         Returns the current record's "code" value
  * @method string              getName()         Returns the current record's "name" value
  * @method string              getCaption()      Returns the current record's "caption" value
+ * @method string              getFileType()     Returns the current record's "file_type" value
  * @method string              getPath()         Returns the current record's "path" value
  * @method string              getMemo()         Returns the current record's "memo" value
  * @method string              getPrStr1()       Returns the current record's "pr_str1" value
@@ -63,6 +67,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @method WacFile             setRightNumber()  Sets the current record's "right_number" value
  * @method WacFile             setLevel()        Sets the current record's "level" value
  * @method WacFile             setUserId()       Sets the current record's "user_id" value
+ * @method WacFile             setSize()         Sets the current record's "size" value
  * @method WacFile             setPrInt1()       Sets the current record's "pr_int1" value
  * @method WacFile             setPrInt2()       Sets the current record's "pr_int2" value
  * @method WacFile             setPriority()     Sets the current record's "priority" value
@@ -73,6 +78,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @method WacFile             setCode()         Sets the current record's "code" value
  * @method WacFile             setName()         Sets the current record's "name" value
  * @method WacFile             setCaption()      Sets the current record's "caption" value
+ * @method WacFile             setFileType()     Sets the current record's "file_type" value
  * @method WacFile             setPath()         Sets the current record's "path" value
  * @method WacFile             setMemo()         Sets the current record's "memo" value
  * @method WacFile             setPrStr1()       Sets the current record's "pr_str1" value
@@ -133,6 +139,11 @@ abstract class BaseWacFile extends sfDoctrineRecord
              'notnull' => true,
              'length' => 8,
              ));
+        $this->hasColumn('size', 'integer', 4, array(
+             'type' => 'integer',
+             'default' => '0',
+             'length' => 4,
+             ));
         $this->hasColumn('pr_int1', 'integer', 4, array(
              'type' => 'integer',
              'default' => '0',
@@ -178,6 +189,10 @@ abstract class BaseWacFile extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('caption', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('file_type', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));

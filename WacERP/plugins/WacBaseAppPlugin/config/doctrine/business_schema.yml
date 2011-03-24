@@ -32,6 +32,9 @@ WacFile:
       type: integer(8)
       default: '0'
       notnull: true
+    size:
+      type: integer(4)
+      default: '0'
     pr_int1:
       type: integer(4)
       default: '0'
@@ -56,6 +59,7 @@ WacFile:
     code: string(255)
     name: string(255)
     caption: string(255)
+    file_type: string(255)
     path: string(255)
     memo: string()
     pr_str1: string(255)
