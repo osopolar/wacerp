@@ -46,13 +46,47 @@ class wacFileManagerActions extends WacTreeActions {
      * be trigger by event app_wac_events_file_upload_finish, 
      */
     public function doAfterUpload(sfEvent $e){
-        $this->getLogger()->log("doAfterUpload" . print_r($e->getParameters(), true));
+//        $this->getLogger()->log("doAfterUpload: " . print_r($e->getParameters(), true));
+        /*
+         * $e->getParameters() return an array looks like:
+         * Array
+            (
+                [config] => Array
+            (
+                [wacUploadDir] => D:\WebAppChina\WacERP\trunk\WacERP\web\uploads/wac_uploads/
+                [targetDir] => D:\WebAppChina\WacERP\trunk\WacERP\web\uploads/wac_uploads/d/4/
+                [cachingPolicy] => 1
+                [cleanupTargetDir] =>
+                [cachingPath] => d/4/
+                [maxFileAge] => 3600
+            )
+
+            [fileInfo] => Array
+                (
+                    [name] => aports.zip
+                    [type] => application/zip
+                    [tmp_name] => D:\xampp\tmp\php360.tmp
+                    [error] => 0
+                    [size] => 118066
+                )
+
+            [actualFileName] => p15rjd4gik19cd16a01mfc1n6e1j426.zip
+            )
+         *
+         */
+        $this->_createNode($this->getRequest(), $e->getParameters());
     }
 
-    protected function _mapData(sfWebRequest $request){
-        $params = parent::_mapData($request);
-        if(isset($reqParams["type"]))     {$params["type"] = $reqParams["type"];}
-        return $params;
+    protected function _mapData(sfWebRequest $request, $params=array()){
+        $_params = array(
+            "name" => $params["actualFileName"],
+            "path" => $params["config"]["cachingPath"],
+            "caption"   => $params["fileInfo"]["name"],
+            "file_type" => $params["fileInfo"]["type"],
+            "size"      => $params["fileInfo"]["size"]
+        );
+        
+        return parent::_mapData($request, $_params);
     }
 
 

@@ -54,15 +54,25 @@ abstract class WacTreeTable extends WacCommonTable
      * createNode
      * @return node
      */
-    public function createNode($parent, $params=array(), $isAvail=-1){
+    public function createNode($parent, $params=array(), $isAvail=-1)
+    {
         $conn = $this->getConnection();
         $conn->beginTransaction();
         try
         {
-            $this->_updateTreeBeforeCreate($parent, $params["position"],1, $isAvail);
+            $position = 0;
+            if(isset($params["position"])){
+                $position = $params["position"];
+            }
+            elseif($parent->getLeftNumber() < ($parent->getRightNumber()-1)){
+                $position = $this->getMaxPositionOfSameParent($parent) + 1;
+            }
+            
+            $this->_updateTreeBeforeCreate($parent, $position, 1, $isAvail);
 
             $newNode = $this->create($params);
             $newNode->setParentId($parent->getId());
+            $newNode->setPosition($position);
             $newNode->setLeftNumber($parent->getRightNumber());
             $newNode->setRightNumber($parent->getRightNumber()+1);
             $newNode->setLevel($parent->getLevel()+1);

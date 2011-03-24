@@ -42,7 +42,6 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
         var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
 
         var moduleUploader;   // uploader obj, created when initUploadForm
-        var parentId = 0;     // parentId, redefine when open the dialog
 
         function init(){
             initUploadForm();
@@ -106,22 +105,19 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
         function bindEvents()
         {
             moduleUploader.bind('BeforeUpload', function(up, files) {
-                $.extend(up.settings.multipart_params, { id : parentId });
-//                Wac.log(up.settings.multipart_params);
+                Wac.log(up.settings.multipart_params);
             });
 
             $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
 //                Wac.log(data);
 //                Wac.log("length: " + $(moduleUploader.files).length);
 
-                $(moduleFormDialogId).dialog('open');
 //                $.each(moduleUploader.files, function(i, file) {
 //                    moduleUploader.removeFile(file);
 //                });
 
-                moduleUploader.refresh();
-
-                parentId = data.id;
+                $.extend(moduleUploader.settings.multipart_params, { id : data.id });
+                $(moduleFormDialogId).dialog('open');
             });
 
             // fix dialog div didnt remove bug, remove it by this way

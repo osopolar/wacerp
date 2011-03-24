@@ -205,8 +205,8 @@ class JsonRpcUploadHelper {
         if($this->_chunks == ($this->_chunk + 1)){
             $parameters = array(
                 "config"   => $this->_config,
-                "fileName" => $this->_fileName,
-                "file"     => $_FILES['file']["name"]
+                "fileInfo" => $_FILES['file'],
+                "actualFileName" => $this->_fileName
             );
             sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, sfConfig::get("app_wac_events_file_upload_finish"), $parameters));
         }
