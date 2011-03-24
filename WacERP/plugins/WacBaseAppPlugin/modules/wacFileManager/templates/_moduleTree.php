@@ -31,10 +31,12 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
         var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
         var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
 
-        init();
-        bindEvents();
-
         function init(){
+            initTree();
+            bindEvents();
+        };  // init end
+
+        function initTree(){
             $(moduleTreeId)
             .jstree({
                 // the list of plugins to include
@@ -293,7 +295,15 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
             });
         };  // init end
 
-        function bindEvents(){};  //bindEvnts end
+        function bindEvents(){
+            $(document).hear(moduleTreeId, modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, function ($self, data) {  // listenerid, event name, callback
+                Wac.log("upload complete: ");
+                Wac.log(data);
+            });
+
+        };  //bindEvnts end
+
+        init();
 
     })
     //]]>
