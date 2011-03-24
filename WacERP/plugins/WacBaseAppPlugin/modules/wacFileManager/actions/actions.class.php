@@ -42,9 +42,17 @@ class wacFileManagerActions extends WacTreeActions {
         return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
+    /*
+     * be trigger by event app_wac_events_file_upload_finish, 
+     */
     public function doAfterUpload(sfEvent $e){
-        $this->getLogger()->log("doAfterUpload");
-        $this->getLogger()->log(print_r($e->getParameters(), true));
+        $this->getLogger()->log("doAfterUpload" . print_r($e->getParameters(), true));
+    }
+
+    protected function _mapData(sfWebRequest $request){
+        $params = parent::_mapData($request);
+        if(isset($reqParams["type"]))     {$params["type"] = $reqParams["type"];}
+        return $params;
     }
 
 

@@ -107,7 +107,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
         {
             moduleUploader.bind('BeforeUpload', function(up, files) {
                 $.extend(up.settings.multipart_params, { id : parentId });
-                Wac.log(up.settings.multipart_params);
+//                Wac.log(up.settings.multipart_params);
             });
 
             $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
