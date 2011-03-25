@@ -24,6 +24,5 @@ all:
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form
     show_file_upload_form: _show_file_upload_form
-    file_upload_finish: _file_upload_finish_evt
     file_upload_complete: _file_upload_complete_evt
 
