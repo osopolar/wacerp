@@ -104,21 +104,22 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
 
         function bindEvents()
         {
+            moduleUploader.unbindAll();
             moduleUploader.bind('BeforeUpload', function(up, files) {
                 Wac.log("BeforeUpload");
                 Wac.log(up.settings.multipart_params);
             });
-
+//
             moduleUploader.bind('UploadFile', function(up, files) {
                 Wac.log("UploadFile");
                 Wac.log(up.settings.multipart_params);
             });
 
-            moduleUploader.bind('UploadComplete', function(up, files) {
-                Wac.log("UploadComplete");
-                Wac.log(up.settings.multipart_params);
-//                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
-            });
+//            moduleUploader.bind('UploadComplete', function(up, files) {
+//                Wac.log("UploadComplete");
+//                Wac.log(up.settings.multipart_params);
+////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
+//            });
 
             $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
 //                Wac.log(data);
