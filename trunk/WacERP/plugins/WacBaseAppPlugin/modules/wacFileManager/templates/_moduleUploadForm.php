@@ -54,7 +54,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
             // Convert divs to queue widgets when the DOM is ready
                $(moduleUploaderId).plupload({
                     // General settings
-//                    runtimes : 'html5',
+//                    runtimes : 'flash',
                     runtimes : 'flash,html4,html5,browserplus,silverlight,gears',
                     url : moduleUrl + 'upload',
                     max_file_size : '1000mb',
@@ -62,7 +62,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
                     chunk_size : '2mb',
                     unique_names : true,
                     multiple_queues : true,
-                    multipart_params: {dataFormat: '<?php echo WacDataFormatType::$jsonRPC ?>'},
+                    multipart_params: {dataFormat: '<?php echo WacDataFormatType::$jsonRPC; ?>', type: '<?php echo JsTreeDataHelper::$typeLeaf; ?>'},
 
                     // Resize images on clientside if we can
                     resize : {width : 320, height : 240, quality : 90},
@@ -104,33 +104,31 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
 
         function bindEvents()
         {
-            moduleUploader.unbindAll();
-            moduleUploader.bind('BeforeUpload', function(up, files) {
-                Wac.log("BeforeUpload");
-                Wac.log(up.settings.multipart_params);
-            });
-//
-            moduleUploader.bind('UploadFile', function(up, files) {
-                Wac.log("UploadFile");
-                Wac.log(up.settings.multipart_params);
-            });
+//            moduleUploader.bind('UploadFile', function(up, file) {
+//                Wac.log("UploadFile");
+//                Wac.log("length: " + $(moduleUploader.files).length);
+//                Wac.log(up.settings.multipart_params);
+//            });
 
-//            moduleUploader.bind('UploadComplete', function(up, files) {
+//            moduleUploader.bind('UploadComplete', function(/up, files) {
 //                Wac.log("UploadComplete");
 //                Wac.log(up.settings.multipart_params);
 ////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
 //            });
 
             $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
-//                Wac.log(data);
-//                Wac.log("length: " + $(moduleUploader.files).length);
-
-//                $.each(moduleUploader.files, function(i, file) {
-//                    moduleUploader.removeFile(file);
-//                });
-
                 $.extend(moduleUploader.settings.multipart_params, { id : data.id });
+//                Wac.log($(moduleUploader.files).length);
+//                if($(moduleUploader.files).length > 0){
+//                    $(moduleUploader.files).each(function(i, file){
+//                        moduleUploader.removeFile(file);
+//                    })
+//                }
                 $(moduleFormDialogId).dialog('open');
+            });
+
+            $( moduleFormDialogId).bind( "dialogclose", function(event, ui) {
+                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
             });
 
             // fix dialog div didnt remove bug, remove it by this way

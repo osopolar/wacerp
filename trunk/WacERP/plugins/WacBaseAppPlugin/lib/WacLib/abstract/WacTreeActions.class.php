@@ -123,10 +123,17 @@ abstract class WacTreeActions extends WacCommonActions {
 
         $jsTreeDataHelper = JsTreeDataHelper::getInstance();
         $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
-        $succFlag = $jsTreeDataHelper->removeNode($node, $this->mainModuleTable);
 
+        $this->doBeforeNodeRemove($request);
+        $succFlag = $jsTreeDataHelper->removeNode($node, $this->mainModuleTable);
+        
         return $succFlag ? $jsTreeDataHelper->getSuccDatum() : $jsTreeDataHelper->getErrDatum();
     }
+
+    /*
+     * canbe override by children class
+     */
+    public function doBeforeNodeRemove(sfWebRequest $request) {}
 
     /*
      * _copyNode
@@ -169,10 +176,7 @@ abstract class WacTreeActions extends WacCommonActions {
         if(isset($reqParams["type"])) {
             $_params["type"] = $reqParams["type"];
         }
-        else{
-            $_params["type"] = JsTreeDataHelper::$typeLeaf;
-        }
-
+        
         if(isset($reqParams["caption"])){
             $_params["caption"]  = $reqParams["caption"];
         }

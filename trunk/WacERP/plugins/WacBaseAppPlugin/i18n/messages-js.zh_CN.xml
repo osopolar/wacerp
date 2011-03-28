@@ -61,6 +61,22 @@
         <source>Please select one item at least!</source>
         <target>请至少选择一项!</target>
       </trans-unit>
+      <trans-unit>
+        <source>Delete confirm</source>
+        <target>决定删掉它吗?</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Confirm Tips</source>
+        <target>确认提示窗</target>
+      </trans-unit>
+      <trans-unit>
+        <source>ConfirmBtnYes</source>
+        <target>确定</target>
+      </trans-unit>
+      <trans-unit>
+        <source>ConfirmBtnNo</source>
+        <target>取消</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -143,6 +143,42 @@
                     }
                 });
             },
+            showConfirm: function(msg, title)
+            {
+                if(title != undefined)
+                {
+                    $("body").append("<div id='wacConfirmDialog' title='" + title + "'><p>" + msg +"</p></div>");
+                }
+                else
+                {
+                    $("body").append("<div id='wacConfirmDialog' title='"+ $.i18n.prop('Confirm Tips') +"'><p>" + msg +"</p></div>");
+                }
+
+                $("#wacConfirmDialog").dialog({
+                    bgiframe: true,
+                    modal: true,
+                    width: 400,
+                    zIndex: 100,
+                    buttons: [
+                    {
+                        text: $.i18n.prop('ConfirmBtnYes'),
+                        click: function() { 
+                            $(this).dialog("close");
+                            $.shout(WacAppConfig.event.app_wac_events_op_confirm_yes, {});
+                            $("#wacConfirmDialog").remove();
+                        }
+                    },
+                    {
+                        text: $.i18n.prop('ConfirmBtnNo'),
+                        click: function() { 
+                            $(this).dialog("close");
+                            $.shout(WacAppConfig.event.app_wac_events_op_confirm_no, {});
+                            $("#wacConfirmDialog").remove();
+                        }
+                    }
+                ]
+                });
+            },
             isEmpty: function(str){
                 return (str == null) || (str.length == 0);
             },
