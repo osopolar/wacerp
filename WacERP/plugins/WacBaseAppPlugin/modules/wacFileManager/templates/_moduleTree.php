@@ -172,7 +172,11 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                         },
                         "remove" : {
                             "icon" : wacImagesPath + "js_icons/delete.png",
-                            "label" : "<?php echo __("Delete");?>"
+                            "label" : "<?php echo __("Delete");?>",
+                            "action" : function (obj) {
+                                $(document).wacPage().showConfirm($.i18n.prop('Delete confirm'));
+//                                this.remove(obj);
+                            }
                         },
                         "ccp" : {
                             "icon" : wacImagesPath + "js_icons/They-reply-technosorcery-icon.png",
@@ -297,8 +301,11 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
 
         function bindEvents(){
             $(document).hear(moduleTreeId, modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, function ($self, data) {  // listenerid, event name, callback
-                Wac.log("upload complete: ");
-                Wac.log(data);
+                var node = $("li#"+data.id);
+                $(moduleTreeId).jstree("open_node", node);
+                $(moduleTreeId).jstree("refresh", node);
+//                Wac.log("upload complete: ");
+//                Wac.log(data);
             });
 
         };  //bindEvnts end

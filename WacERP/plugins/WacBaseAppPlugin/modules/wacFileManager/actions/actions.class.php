@@ -78,13 +78,17 @@ class wacFileManagerActions extends WacTreeActions {
     }
 
     protected function _mapData(sfWebRequest $request, $params=array()){
-        $_params = array(
-            "name" => $params["actualFileName"],
-            "path" => $params["config"]["cachingPath"],
-            "caption"   => $params["fileInfo"]["name"],
-            "file_type" => $params["fileInfo"]["type"],
-            "size"      => $params["fileInfo"]["size"]
-        );
+        $_params = array();
+        if($request->hasParameter("type") && $request->getParameter("type")==JsTreeDataHelper::$typeLeaf){
+            $_params = array(
+                "name" => $params["actualFileName"],
+                "path" => $params["config"]["cachingPath"],
+                "caption"   => $params["fileInfo"]["name"],
+                "file_type" => $params["fileInfo"]["type"],
+                "size"      => $params["fileInfo"]["size"]
+            );
+        }
+
         
         return parent::_mapData($request, $_params);
     }

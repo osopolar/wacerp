@@ -12,5 +12,28 @@
  */
 abstract class PluginWacFile extends BaseWacFile
 {
+    public function isLeaf(){
+        return ($this->getType() == JsTreeDataHelper::$typeLeaf);
+    }
+
+    public function getFileFullPath(){
+        $path = "";
+        if($this->isLeaf()){
+            $path = sfConfig::get("sf_upload_dir") . sfConfig::get("app_wac_setting_upload_path").$this->getPath().$this->getName();
+        }
+        return $path;
+    }
+
+    /*
+     * here, execute delete all itself relationships
+     */
+    public function preDelete($event)
+    {
+        $filename = $this->getFileFullPath();
+        if(file_exists($filename)){
+            @unlink($filename);
+        }
+
+    }
 
 }
