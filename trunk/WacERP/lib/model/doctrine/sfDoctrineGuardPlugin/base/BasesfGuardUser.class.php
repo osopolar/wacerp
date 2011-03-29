@@ -18,9 +18,6 @@
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
- * @property Doctrine_Collection $WacFile
- * @property Doctrine_Collection $WacCategory
- * @property Doctrine_Collection $WacSystemLog
  * 
  * @method integer             getId()                    Returns the current record's "id" value
  * @method string              getUsername()              Returns the current record's "username" value
@@ -35,9 +32,6 @@
  * @method Doctrine_Collection getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey  getRememberKeys()          Returns the current record's "RememberKeys" value
- * @method Doctrine_Collection getWacFile()               Returns the current record's "WacFile" collection
- * @method Doctrine_Collection getWacCategory()           Returns the current record's "WacCategory" collection
- * @method Doctrine_Collection getWacSystemLog()          Returns the current record's "WacSystemLog" collection
  * @method sfGuardUser         setId()                    Sets the current record's "id" value
  * @method sfGuardUser         setUsername()              Sets the current record's "username" value
  * @method sfGuardUser         setAlgorithm()             Sets the current record's "algorithm" value
@@ -51,9 +45,6 @@
  * @method sfGuardUser         setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser         setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser         setRememberKeys()          Sets the current record's "RememberKeys" value
- * @method sfGuardUser         setWacFile()               Sets the current record's "WacFile" collection
- * @method sfGuardUser         setWacCategory()           Sets the current record's "WacCategory" collection
- * @method sfGuardUser         setWacSystemLog()          Sets the current record's "WacSystemLog" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -134,18 +125,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasOne('sfGuardRememberKey as RememberKeys', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('WacFile', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('WacCategory', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('WacSystemLog', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

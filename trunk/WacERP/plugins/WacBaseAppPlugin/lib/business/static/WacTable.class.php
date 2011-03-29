@@ -66,9 +66,13 @@ class WacTable {
 //    public static $wacProductionOrderEstimateGoodsItem = "WacProductionOrderEstimateGoodsItem";
 //    public static $wacSampleJar = "WacSampleJar";
 //    public static $wacWrapper = "WacWrapper";
-    public static $wacGuardUser = "sfGuarduser";
-    public static $wacGuardGroup = "sfGuardGroup";
-    public static $wacGuardPermission = "sfGuardPermission";
+
+//    public static $wacGuardUser = "sfGuarduser";
+//    public static $wacGuardGroup = "sfGuardGroup";
+//    public static $wacGuardPermission = "sfGuardPermission";
+    public static $wacGuardUser       = "WacUser";
+    public static $wacGuardGroup      = "WacUserGroup";
+    public static $wacGuardPermission = "WacGuardPermission";
 
 //    public static $wacGoods = "WacGoods";
 //    public static $wacDispatchOrder = "WacDispatchOrder";

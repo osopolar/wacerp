@@ -134,7 +134,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                 // the UI plugin - it handles selecting/deselecting/hovering nodes
                 "ui" : {
                     // this makes the node with ID node_4 selected onload
-                    "initially_select" : [ "node_2" ]
+                    "initially_select" : [ "node_1" ]
                 },
 
                 // contextmenu

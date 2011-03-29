@@ -174,8 +174,12 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             "icon" : wacImagesPath + "js_icons/delete.png",
                             "label" : "<?php echo __("Delete");?>",
                             "action" : function (obj) {
-                                $(document).wacPage().showConfirm($.i18n.prop('Delete confirm'));
-//                                this.remove(obj);
+                                var $self = this;
+                                $(document).wacPage().showConfirm(
+                                    $.i18n.prop('Delete confirm'),
+                                    function(){$self.remove(obj);},
+                                    function(){}
+                                );
                             }
                         },
                         "ccp" : {

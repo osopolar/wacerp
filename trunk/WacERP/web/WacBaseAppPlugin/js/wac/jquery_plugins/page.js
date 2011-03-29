@@ -143,7 +143,7 @@
                     }
                 });
             },
-            showConfirm: function(msg, title)
+            showConfirm: function(msg, okCallback, cancelCallback, title)
             {
                 if(title != undefined)
                 {
@@ -164,7 +164,7 @@
                         text: $.i18n.prop('ConfirmBtnYes'),
                         click: function() { 
                             $(this).dialog("close");
-                            $.shout(WacAppConfig.event.app_wac_events_op_confirm_yes, {});
+                            if(okCallback!==undefined){okCallback();}
                             $("#wacConfirmDialog").remove();
                         }
                     },
@@ -172,7 +172,7 @@
                         text: $.i18n.prop('ConfirmBtnNo'),
                         click: function() { 
                             $(this).dialog("close");
-                            $.shout(WacAppConfig.event.app_wac_events_op_confirm_no, {});
+                            if(okCallback!==undefined){cancelCallback();}
                             $("#wacConfirmDialog").remove();
                         }
                     }

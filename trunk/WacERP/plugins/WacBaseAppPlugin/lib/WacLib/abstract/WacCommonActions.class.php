@@ -498,8 +498,15 @@ abstract class WacCommonActions extends sfActions {
         return $resultSet;
     }
 
+    public function getWacUser(){
+        if(!$this->getContext()->has("wacUser")){
+            $this->getContext()->set("wacUser", (object) $this->getUser() );
+        }
+        return $this->getContext()->get("wacUser");
+    }
+
     /*
-   * this method can be override
+     * this method can be override
     */
     public function afterAdd(sfWebRequest $request, $targetObj=null) {
         // log the operation
