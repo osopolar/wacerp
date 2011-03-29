@@ -198,7 +198,7 @@ WacSystemLog:
     pr_str2: string(255)
   relations:
     user:
-      class: sfGuardUser
+      class: WacUser
       local: user_id
       foreign: id
       type: one
@@ -493,3 +493,18 @@ WacWorkflowItem:
       local: workflow_id
       foreign: id
       type: one
+
+WacUser:
+  inheritance:
+    extends: sfGuardUser
+    type: simple
+
+WacUserGroup:
+  inheritance:
+    extends: sfGuardGroup
+    type: simple
+
+WacGuardPermission:
+  inheritance:
+    extends: sfGuardPermission
+    type: simple

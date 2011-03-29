@@ -28,7 +28,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacCategory', 'wac_db_connection
  * @property string $memo
  * @property string $pr_str1
  * @property string $pr_str2
- * @property sfGuardUser $user
+ * @property WacUser $user
  * @property WacCategory $parent
  * @property Doctrine_Collection $WacCategory
  * 
@@ -53,7 +53,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacCategory', 'wac_db_connection
  * @method string              getMemo()         Returns the current record's "memo" value
  * @method string              getPrStr1()       Returns the current record's "pr_str1" value
  * @method string              getPrStr2()       Returns the current record's "pr_str2" value
- * @method sfGuardUser         getUser()         Returns the current record's "user" value
+ * @method WacUser             getUser()         Returns the current record's "user" value
  * @method WacCategory         getParent()       Returns the current record's "parent" value
  * @method Doctrine_Collection getWacCategory()  Returns the current record's "WacCategory" collection
  * @method WacCategory         setId()           Sets the current record's "id" value
@@ -202,7 +202,7 @@ abstract class BaseWacCategory extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('sfGuardUser as user', array(
+        $this->hasOne('WacUser as user', array(
              'local' => 'user_id',
              'foreign' => 'id'));
 
