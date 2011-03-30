@@ -70,8 +70,8 @@ class WacTable {
 //    public static $wacGuardUser = "sfGuarduser";
 //    public static $wacGuardGroup = "sfGuardGroup";
 //    public static $wacGuardPermission = "sfGuardPermission";
-    public static $wacGuardUser       = "WacUser";
-    public static $wacGuardGroup      = "WacUserGroup";
+    public static $wacGuardUser       = "WacGuardUser";
+    public static $wacGuardGroup      = "WacGuardGroup";
     public static $wacGuardPermission = "WacGuardPermission";
 
 //    public static $wacGoods = "WacGoods";

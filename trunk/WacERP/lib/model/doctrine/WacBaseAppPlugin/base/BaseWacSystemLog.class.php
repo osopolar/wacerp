@@ -19,7 +19,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacSystemLog', 'wac_db_connectio
  * @property string $content
  * @property string $pr_str1
  * @property string $pr_str2
- * @property WacUser $user
+ * @property WacGuardUser $user
  * 
  * @method integer      getId()         Returns the current record's "id" value
  * @method integer      getType()       Returns the current record's "type" value
@@ -33,7 +33,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacSystemLog', 'wac_db_connectio
  * @method string       getContent()    Returns the current record's "content" value
  * @method string       getPrStr1()     Returns the current record's "pr_str1" value
  * @method string       getPrStr2()     Returns the current record's "pr_str2" value
- * @method WacUser      getUser()       Returns the current record's "user" value
+ * @method WacGuardUser getUser()       Returns the current record's "user" value
  * @method WacSystemLog setId()         Sets the current record's "id" value
  * @method WacSystemLog setType()       Sets the current record's "type" value
  * @method WacSystemLog setPrInt1()     Sets the current record's "pr_int1" value
@@ -123,7 +123,7 @@ abstract class BaseWacSystemLog extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('WacUser as user', array(
+        $this->hasOne('WacGuardUser as user', array(
              'local' => 'user_id',
              'foreign' => 'id'));
 
