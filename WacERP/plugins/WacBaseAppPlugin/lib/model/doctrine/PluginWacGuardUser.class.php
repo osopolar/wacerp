@@ -17,11 +17,6 @@ abstract class PluginWacGuardUser extends BaseWacGuardUser
     $_permissions = null,
     $_allPermissions = null;
 
-    public function getTest(){
-        return "testestsets";
-    }
-
-
     /**
      * Returns the string representation of the object.
      *
@@ -30,6 +25,38 @@ abstract class PluginWacGuardUser extends BaseWacGuardUser
     public function __toString() {
         return (string) $this->getUsername();
     }
+
+    /*
+     *  when create a new user, also init other related data entities
+     */
+    public function initRelatedInfo()
+    {
+        //create category root node of the user
+        Doctrine::getTable(WacTable::$wacCategory)->initUserRoot($this);
+        Doctrine::getTable(WacTable::$wacFile)->initUserRoot($this);
+    }
+
+    /*
+     * here, execute delete all itself relationships
+     */
+    public function preDelete($event)
+    {
+        $subItems = $this->getWacCategory();
+        if(count($subItems)>0){
+            foreach($subItems as $subItem){
+                $subItem->delete();
+            }
+        }
+
+        $subItems = $this->getWacFile();
+        if(count($subItems)>0){
+            foreach($subItems as $subItem){
+                $subItem->delete();
+            }
+        }
+
+    }
+    
 
     /**
      * Sets the user password.

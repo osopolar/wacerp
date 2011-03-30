@@ -78,6 +78,7 @@ class wacGuardUserActions extends WacCommonActions
               }
               
               $targetItem->save();
+              $targetItem->initRelatedInfo();  // init related data info
 
               $this->afterAdd($request, $targetItem);  //log
 

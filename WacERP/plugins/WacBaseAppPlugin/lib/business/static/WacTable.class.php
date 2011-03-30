@@ -3,6 +3,8 @@
  * Description of WacTable
  *
  * @author ben
+ *
+ * main module <-> table mapping
  */
 class WacTable {
 //    public static $wacAxis = "WacAxis";
@@ -93,6 +95,10 @@ class WacTable {
     public static function getTableName($str)
     {
         return strtolower(preg_replace('/([^\s])([A-Z])/', '\1_\2', $str));
+    }
+
+    public static function getTableByModule($module){
+        return self::$$module;
     }
 
 }

@@ -15,6 +15,7 @@ abstract class WacCommonActions extends sfActions {
     
     public $mainModuleTable = null;
     public $wacLogger = null;
+    public $wacGuardUser = null;
     public $i18n = null;
 
     /**
@@ -38,8 +39,9 @@ abstract class WacCommonActions extends sfActions {
 
         $this->contextInfo = $this->innerContextInfo;  //assign to tpl
 
-        $this->i18n = $this->getContext()->getI18N();
-        $this->wacLogger = WacLogger::getInstance();
+        $this->i18n         = $this->getContext()->getI18N();
+        $this->wacLogger    = WacLogger::getInstance();
+        $this->wacGuardUser = $this->getWacGuardUser();
 //        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
     }
 
@@ -498,7 +500,7 @@ abstract class WacCommonActions extends sfActions {
         return $resultSet;
     }
 
-    public function getGuardWacUser(){
+    public function getWacGuardUser(){
         if(!$this->getContext()->has("wacGuardUser")){
             $wacGuardUser = Doctrine::getTable(WacTable::$wacGuardUser)->findOneBy("id", $this->getUser()->getGuardUser()->getId());
             if($wacGuardUser){

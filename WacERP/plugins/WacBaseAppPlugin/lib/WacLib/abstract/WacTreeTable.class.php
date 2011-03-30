@@ -50,6 +50,59 @@ abstract class WacTreeTable extends WacCommonTable
         return $this->getAbstractList(array_merge_recursive($arrParam, $this->getCustomFilter()), 1, $limitRows, $isArr);
     }
 
+    public function initUserRoot($user)
+    {
+        $_params = array(
+            "user_id"      => $user->getId(),
+            "type"         => JsTreeDataHelper::$typeRoot,
+            "parent_id"    => 0,
+            "position"     => 0,
+            "left_number"  => 1,
+            "right_number" => 4,
+            "level"        => 0,
+            "code"         => "root_".$user->getId(),
+            "name"         => "root_".$user->getId(),
+            "caption"      => "Root",
+        );
+        $userRootNode = $this->create($_params);
+        $userRootNode->save();
+        $userRootNode->refresh();
+
+        $_params = array(
+            "user_id"      => $user->getId(),
+            "type"         => JsTreeDataHelper::$typeBranch,
+            "parent_id"    => $userRootNode->getId(),
+            "position"     => 0,
+            "left_number"  => 2,
+            "right_number" => 3,
+            "level"        => 1,
+            "code"         => "branch_".$user->getId()."_1",
+            "name"         => "branch_".$user->getId()."_1",
+            "caption"      => "My Branch 1",
+        );
+        $userFirstBranchNode = $this->create($_params);
+        $userFirstBranchNode->save();
+
+        $userRootNode->free();
+        $userFirstBranchNode->free();
+    }
+
+    public function getUserRootNode(WacGuardUser $user=null)
+    {
+        if(is_null($user)){
+            $user = sfContext::getInstance()->get("wacGuardUser");
+        }
+        
+        $objQuery = $this->createQuery('t1')
+                    ->select("*")
+                    ->where("parent_id=?", 0)
+                    ->andWhere("user_id=?", $user->getId());
+       $node = $objQuery->fetchOne();
+
+       $objQuery->free();
+       return $node;
+    }
+
     /*
      * createNode
      * @return node

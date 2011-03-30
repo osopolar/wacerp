@@ -13,6 +13,8 @@ $moduleAttachName = $invokeParams['attachInfo']['name'];
 $modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
 $moduleTreeId = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
 $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
+
+$rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
 
@@ -56,7 +58,7 @@ $moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
                             // the result is fed to the AJAX request `data` option
                             return {
                                 "dataFormat" : "json",
-                                "id" : n.attr ? n.attr("id").replace("node_","") : 1
+                                "id" : n.attr ? n.attr("id").replace("node_","") : <?php echo $rootNode->getId();?>
                             };
                         }
                     }

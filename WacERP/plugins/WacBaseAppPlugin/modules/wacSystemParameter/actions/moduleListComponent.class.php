@@ -21,7 +21,7 @@ class moduleListComponent extends WacModuleListComponent
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"code", "label"=>$i18n->__("Coding"), "index"=>"code", "editable"=>"true", "editrules"=>"{required:true}", "align"=>"left", "width"=>"250"));
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"type", "label"=>$i18n->__("Data Type"), "index"=>"type", "editable"=>"true", "width"=>"200", "edittype"=>"select","editoptions"=> $editOptions));
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"value", "label"=>$i18n->__("Value"), "index"=>"value", "editable"=>"true", "sortable"=>"false", "width"=>"150"));
-        $listCols[] = $jqGridDataHelper->getCol(array("name"=>"created_at", "label"=>$i18n->__("Field Create Time"), "index"=>"created_at", "sorttype"=>"date",  "datefmt"=>"Y-m-d",  "width"=>"150"));
+        $listCols[] = $jqGridDataHelper->getCol(array("name"=>"created_at", "label"=>$i18n->__("Create Time"), "index"=>"created_at", "sorttype"=>"date",  "datefmt"=>"Y-m-d",  "width"=>"150"));
         $listCols[] = $jqGridDataHelper->getCol(array("name"=>"is_avail", "label"=>$i18n->__("Is avail"), "index"=>"is_avail", "editable"=>"true", "edittype"=>"checkbox", "formatter"=>"WacEntity.jqGridFormatter.availFormatter", "unformat"=>"WacEntity.jqGridFormatter.availUnformatter", "editoptions"=>"{value:\"1:0\", defaultValue:\"1\"}", "width"=>"60"));
         return $listCols;
     }
