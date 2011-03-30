@@ -30,7 +30,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @property string $memo
  * @property string $pr_str1
  * @property string $pr_str2
- * @property WacUser $user
+ * @property WacGuardUser $user
  * @property WacFile $parent
  * @property Doctrine_Collection $WacFile
  * 
@@ -57,7 +57,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacFile', 'wac_db_connection1');
  * @method string              getMemo()         Returns the current record's "memo" value
  * @method string              getPrStr1()       Returns the current record's "pr_str1" value
  * @method string              getPrStr2()       Returns the current record's "pr_str2" value
- * @method WacUser             getUser()         Returns the current record's "user" value
+ * @method WacGuardUser        getUser()         Returns the current record's "user" value
  * @method WacFile             getParent()       Returns the current record's "parent" value
  * @method Doctrine_Collection getWacFile()      Returns the current record's "WacFile" collection
  * @method WacFile             setId()           Sets the current record's "id" value
@@ -217,7 +217,7 @@ abstract class BaseWacFile extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('WacUser as user', array(
+        $this->hasOne('WacGuardUser as user', array(
              'local' => 'user_id',
              'foreign' => 'id'));
 

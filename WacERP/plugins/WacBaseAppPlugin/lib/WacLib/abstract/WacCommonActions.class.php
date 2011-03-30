@@ -498,11 +498,17 @@ abstract class WacCommonActions extends sfActions {
         return $resultSet;
     }
 
-    public function getWacUser(){
-        if(!$this->getContext()->has("wacUser")){
-            $this->getContext()->set("wacUser", (object) $this->getUser() );
+    public function getGuardWacUser(){
+        if(!$this->getContext()->has("wacGuardUser")){
+            $wacGuardUser = Doctrine::getTable(WacTable::$wacGuardUser)->findOneBy("id", $this->getUser()->getGuardUser()->getId());
+            if($wacGuardUser){
+                $this->getContext()->set("wacGuardUser", $wacGuardUser );
+            }
+            else{
+                throw new sfException("Wac Error: can not get wac user instance!");
+            }
         }
-        return $this->getContext()->get("wacUser");
+        return $this->getContext()->get("wacGuardUser");
     }
 
     /*
