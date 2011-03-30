@@ -16,4 +16,6 @@ class PluginWacCategoryTable extends WacTreeTable
     {
         return Doctrine_Core::getTable('PluginWacCategory');
     }
+
+    
 }
