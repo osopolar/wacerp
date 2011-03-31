@@ -33,7 +33,7 @@ abstract class PluginWacGuardUser extends BaseWacGuardUser
     {
         //create category root node of the user
         Doctrine::getTable(WacTable::$wacCategory)->initUserRoot($this);
-        Doctrine::getTable(WacTable::$wacFile)->initUserRoot($this);
+        Doctrine::getTable(WacTable::$wacFileManager)->initUserRoot($this);
     }
 
     /*
