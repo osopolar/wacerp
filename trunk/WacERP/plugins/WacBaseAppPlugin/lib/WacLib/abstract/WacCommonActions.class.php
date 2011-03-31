@@ -41,7 +41,9 @@ abstract class WacCommonActions extends sfActions {
 
         $this->i18n         = $this->getContext()->getI18N();
         $this->wacLogger    = WacLogger::getInstance();
-        $this->wacGuardUser = $this->getWacGuardUser();
+        if($this->getUser()->isAuthenticated()){
+            $this->wacGuardUser = $this->getWacGuardUser();
+        }
 //        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
     }
 

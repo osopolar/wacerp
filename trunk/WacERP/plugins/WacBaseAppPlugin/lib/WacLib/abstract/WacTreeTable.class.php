@@ -60,8 +60,8 @@ abstract class WacTreeTable extends WacCommonTable
             "left_number"  => 1,
             "right_number" => 4,
             "level"        => 0,
-            "code"         => "root_".$user->getId(),
-            "name"         => "root_".$user->getId(),
+            "code"         => "root_".$user->getId()."_0",
+            "name"         => "root_".$user->getId()."_0",
             "caption"      => "Root",
         );
         $userRootNode = $this->create($_params);
@@ -76,8 +76,8 @@ abstract class WacTreeTable extends WacCommonTable
             "left_number"  => 2,
             "right_number" => 3,
             "level"        => 1,
-            "code"         => "branch_".$user->getId()."_1",
-            "name"         => "branch_".$user->getId()."_1",
+            "code"         => "branch_".$user->getId()."_0",
+            "name"         => "branch_".$user->getId()."_0",
             "caption"      => "My Branch 1",
         );
         $userFirstBranchNode = $this->create($_params);
