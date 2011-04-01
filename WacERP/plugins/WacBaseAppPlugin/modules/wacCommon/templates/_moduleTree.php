@@ -8,11 +8,11 @@
  *
  */
 
-$moduleName = $invokeParams['contextInfo']['moduleName'];
+$moduleName = $contextInfo['moduleName'];
 $moduleAttachName = $invokeParams['attachInfo']['name'];
-$modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
-$moduleTreeId = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
-$moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
+$modulePrefixName = $contextInfo['moduleName'] . $moduleAttachName;
+$moduleTreeId     = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
+$moduleCaption    = WacModule::getInstance()->getCaption($moduleName) . __("List");
 
 $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
