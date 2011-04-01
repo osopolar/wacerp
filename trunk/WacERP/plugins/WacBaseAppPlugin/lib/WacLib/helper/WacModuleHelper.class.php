@@ -56,7 +56,7 @@ class WacModuleHelper
      */
     public static function getTreeId($module, $attachName="")
     {
-        return $module.$attachName."Tree";
+        return $module."Tree_".$attachName;
     }
 
     /*

@@ -6,8 +6,9 @@
  */
 
 $subItemModuleName = "";
-$attachInfo = array("name" => "");
+$attachInfo = array("name" => WacWidgetHelper::getInstance()->getUiAppName($contextInfo));
 $widgetName = WacModuleHelper::getWidgetId($contextInfo["moduleName"], $attachInfo);
+//$widgetName = WacWidgetHelper::getInstance()->getWidgetName($contextInfo["moduleName"], $attachInfo);
 
 OutputHelper::getInstance()->writeNote("{$widgetName}, begin");
 echo "<div id=\"{$widgetName}\">\n\n";

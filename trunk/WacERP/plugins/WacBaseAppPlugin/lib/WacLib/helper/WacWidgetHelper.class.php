@@ -52,6 +52,26 @@ class WacWidgetHelper {
         );
     }
 
+    public function getUiAppName($contextInfo=array())
+    {
+        $request = sfContext::getInstance()->getRequest();
+        if($request->hasParameter("uiApp")){
+            return $request->getParameter("uiApp");
+        }
+        elseif(count($contextInfo)>0){
+            return $contextInfo["moduleName"];
+        }
+        else{
+            return "wacAppController";
+        }
+    }
+
+    public function getWidgetName($filename, $attachInfo=array())
+    {
+        $widgetName = substr(basename($filename, ".php"), 1);
+        return $widgetName."_".$attachInfo["name"];
+    }
+
     /*
      * to judge if embedWidge should be include or not
      * @$embedWidget - current widget
