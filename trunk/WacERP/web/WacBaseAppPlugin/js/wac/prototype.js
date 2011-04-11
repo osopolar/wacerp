@@ -58,9 +58,9 @@ function WacFormPrototype()
         });
 
         // fix dialog div didnt remove bug, remove it by this way
-        $(children.appControllerId).unbind('tabsremove');
+//        $(children.appControllerId).unbind('tabsremove');
         $(children.appControllerId).bind('tabsremove', function(event, ui) {
-            Wac.log("ui.panel.id:" + ui.panel.id + ":" + children.uiPanelId);
+//            Wac.log("ui.panel.id:" + ui.panel.id + ":" + children.uiPanelId);
             if(ui.panel.id == children.uiPanelId)
             {
 //                Wac.log("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']");
