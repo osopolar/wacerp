@@ -22,13 +22,13 @@ function WacFormPrototype()
     this.bindEvents = function(children){
         Wac.log("WacFormPrototype bindEvents", debug);
 
-        $(document).hear(children.formId, children.moduleId + "_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
+        $(document).hear(children.formId, children.moduleGlobalName + "_show_add_form_evt", function ($self, data) {  // listenerid, event name, callback
             children.openMainForm(WacEntity.formInputMode.add);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
         });
 
-        $(document).hear(children.formId, children.moduleId + "_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
+        $(document).hear(children.formId, children.moduleGlobalName + "_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
             children.openMainForm(WacEntity.formInputMode.edit, data.id);
 //            Wac.log(data);
 //            Wac.log(jQuery._jq_shout.registry);
@@ -47,12 +47,12 @@ function WacFormPrototype()
             $.validationEngine.closePrompt(".formError", true);
         });
 
-        $(children.moduleId + "_btnSubmit").bind('click', function (e)
+        $("#btnSubmit_" + children.componentGlobalName).bind('click', function (e)
         {
             children.submitMainForm();
         });
 
-        $(children.moduleId + "_btnClose").bind('click', function (e)
+        $("#btnClose_" + children.componentGlobalName).bind('click', function (e)
         {
             $(children.formDialogId).dialog('close');
         });
@@ -60,13 +60,13 @@ function WacFormPrototype()
         // fix dialog div didnt remove bug, remove it by this way
         $(children.appControllerId).unbind('tabsremove');
         $(children.appControllerId).bind('tabsremove', function(event, ui) {
-//            Wac.log("ui.panel.id:" + ui.panel.id);
+            Wac.log("ui.panel.id:" + ui.panel.id + ":" + children.uiPanelId);
             if(ui.panel.id == children.uiPanelId)
             {
 //                Wac.log("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']");
 //                Wac.log(ui.panel.id + " 1:" + $("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']").length);
                 $("div[aria-labelledby='ui-dialog-title-"+ children.formDialogName +"']").remove();  // remove dialog div
-                $("div[class='"+ children.moduleName +"_nameformError']").remove();  //remove error msg div
+                $("div[class='"+ children.formDialogName +"_nameformError']").remove();  //remove error msg div
             }
         });
     };
@@ -152,7 +152,7 @@ function WacFormPrototype()
         }
         else
         {
-            children.modelEntity = $(children.moduleId +"List").getRowData(id);
+            children.modelEntity = $(children.listId).getRowData(id);
         }
 
         $(children.formDialogId).dialog('open');

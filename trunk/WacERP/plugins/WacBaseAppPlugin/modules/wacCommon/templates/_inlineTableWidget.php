@@ -24,6 +24,7 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$tableToolbar, $enableWidget
 //                    'attachInfo' => $attachInfo
 //                )
 //    ));
+    
     include_component($invokeParams["contextInfo"]["moduleName"], WacComponentList::$tableToolbar,
             array(
                 'invokeParams' => array(
@@ -33,20 +34,21 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$tableToolbar, $enableWidget
     ));
 }
 
-if (WacWidgetHelper::enableWidget(WacComponentList::$moduleList, $enableWidgets)) {
+if (WacWidgetHelper::enableWidget(WacComponentList::$baseInlineTableA, $enableWidgets)) {
     OutputHelper::getInstance()->writeNote("{$invokeParams["contextInfo"]["moduleName"]} ModuleList Component Included.");
 //    include_component(WacModule::getInstance()->getName("wacCommon"), WacComponentList::$embedWidget,
 //            array(
 //                'mode' => 'component',
-//                'widgetModule' => WacWidgetHelper::getModuleName($invokeParams["contextInfo"], WacComponentList::$moduleList),
-//                'widgetName' => WacComponentList::$moduleList,
+//                'widgetModule' => WacWidgetHelper::getModuleName($invokeParams["contextInfo"], WacComponentList::$baseInlineTableA),
+//                'widgetName' => WacComponentList::$baseInlineTableA,
 //                'invokeParams' => array(
 //                    'contextInfo' => $invokeParams["contextInfo"],
 //                    'subItemModuleName' => $subItemModuleName,
 //                    'attachInfo' => $attachInfo
 //                )
 //    ));
-    include_component($invokeParams["contextInfo"]["moduleName"], WacComponentList::$moduleList,
+
+    include_component($invokeParams["contextInfo"]["moduleName"], WacComponentList::$baseInlineTableA,
             array(
                 'invokeParams' => array(
                     'contextInfo' => $invokeParams["contextInfo"],
@@ -55,27 +57,6 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleList, $enableWidgets)
     ));
 }
 
-if (WacWidgetHelper::enableWidget(WacComponentList::$moduleForm, $enableWidgets)) {
-    OutputHelper::getInstance()->writeNote("{$invokeParams["contextInfo"]["moduleName"]} ModuleForm Component Included.");
-//    include_component(WacModule::getInstance()->getName("wacCommon"), WacComponentList::$embedWidget,
-//            array(
-//                'mode' => 'component',
-//                'widgetModule' => WacWidgetHelper::getModuleName($invokeParams["contextInfo"], WacComponentList::$moduleForm),
-//                'widgetName' => WacComponentList::$moduleForm,
-//                'invokeParams' => array(
-//                    'contextInfo' => $invokeParams["contextInfo"],
-//                    'attachInfo' => $attachInfo
-//                )
-//    ));
-    include_component($invokeParams["contextInfo"]["moduleName"], WacComponentList::$moduleForm,
-            array(
-                'invokeParams' => array(
-                    'contextInfo' => $invokeParams["contextInfo"],
-                    'attachInfo' => $attachInfo
-                )
-    ));
-}
-
-echo "\n\n</div>";
+echo "</div>\n";
 OutputHelper::getInstance()->writeNote("{$widgetName}, end");
 ?>

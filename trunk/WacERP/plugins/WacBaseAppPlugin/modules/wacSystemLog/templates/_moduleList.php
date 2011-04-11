@@ -7,5 +7,4 @@
  */
 
 include_partial(WacModule::getInstance()->getName("wacCommon")."/".WacComponentList::$baseInlineTableA, array('contextInfo'=>$contextInfo, 'invokeParams'=>$invokeParams));
-
 ?>

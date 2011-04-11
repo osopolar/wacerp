@@ -8,37 +8,37 @@
  *
  */
 
-$moduleName = $contextInfo['moduleName'];
-$moduleAttachName = $invokeParams['attachInfo']['name'];
-$modulePrefixName = $contextInfo['moduleName'] . $moduleAttachName;
-$moduleTreeId     = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
-$moduleCaption    = WacModule::getInstance()->getCaption($moduleName) . __("List");
+$moduleName          = $invokeParams['contextInfo']['moduleName'];
+$moduleGlobalName    = $moduleName.$invokeParams['attachInfo']['uiid'];
+$componentGlobalName = WacModuleHelper::getTreeId($moduleName, $invokeParams['attachInfo']);
+$componentGlobalId   = "#".$componentGlobalName;
+$componentCaption    = WacModule::getInstance()->getCaption($moduleName);
 
 $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, true); ?>
-<div id="<?php echo $moduleTreeId; ?>" class="wacFrame"></div>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalId, true); ?>
+<div id="<?php echo $componentGlobalName; ?>" class="wacFrame"></div>
 
 <script type="text/javascript">
     //<![CDATA[
-    $("#<?php echo $moduleTreeId; ?>").ready(function(){
+    $("<?php echo $componentGlobalId; ?>").ready(function(){
         var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
-        var moduleName       = <?php echo "'{$moduleName}'" ?>;
-        var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-        var modulePrefixId   = '#' + modulePrefixName;
-        var moduleTreeId     = '#' + <?php echo "'{$moduleTreeId}'" ?>;
-        var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-        var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleName          = <?php echo "'{$moduleName}'" ?>;
+        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
+        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
+        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
+        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
 
 
         init();
         bindEvents();
 
         function init(){
-            $(moduleTreeId)
+            $(componentGlobalId)
             .jstree({ 
                 // the list of plugins to include
                 "plugins" : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
@@ -293,4 +293,4 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
     //]]>
 </script>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, false); ?>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalId, false); ?>

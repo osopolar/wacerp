@@ -8,41 +8,43 @@
  *
  */
 
-$moduleName           = $invokeParams['contextInfo']['moduleName'];
-$moduleAttachName     = $invokeParams['attachInfo']['name'];
-$modulePrefixName     = $invokeParams['contextInfo']['moduleName'].$invokeParams['attachInfo']['name'];
-$moduleListingTableId = WacModuleHelper::getListingTableId($moduleName, $moduleAttachName);
-$moduleListId         = WacModuleHelper::getListId($moduleName, $moduleAttachName);
-$moduleListPagerId    = WacModuleHelper::getPagerId($moduleName, $moduleAttachName);
-$moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("List");
+$moduleName              = $invokeParams['contextInfo']['moduleName'];
+$moduleGlobalName        = $moduleName.$invokeParams['attachInfo']['uiid'];
+$componentGlobalName     = WacModuleHelper::getElementId($moduleName, $invokeParams['attachInfo'], "listTable");;
+$componentGlobalId       = "#".$componentGlobalName;
+$componentList           =  WacModuleHelper::getListId($moduleName, $invokeParams['attachInfo']);
+$componentListingTableId = WacModuleHelper::getListingTableId($moduleName, $invokeParams['attachInfo']);
+$componentListingTablePagerId = WacModuleHelper::getPagerId($moduleName, $invokeParams['attachInfo']);
+$componentCaption        = WacModule::getInstance()->getCaption($moduleName) . __("List");
 //print_r($contextInfo);
 ?>
 
-<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, begin");?>
-<div id="<?php echo $moduleListingTableId; ?>">
-    <table id="<?php echo $moduleListId; ?>"></table>
-    <div id="<?php echo $moduleListPagerId; ?>" ></div>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$componentList}, begin");?>
+<div id="<?php echo $componentList; ?>">
+    <table id="<?php echo $componentListingTableId; ?>"></table>
+    <div id="<?php echo $componentListingTablePagerId; ?>" ></div>
 
     <script type="text/javascript">
         //<![CDATA[
-        $("#<?php echo $moduleListingTableId; ?>").ready(function(){
-            var moduleName       = <?php echo "'{$moduleName}'" ?>;
-            var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-            var modulePrefixId   = '#' + modulePrefixName;
-            var moduleListId     = '#' + <?php echo "'{$moduleListId}'" ?>;
-            var moduleListPagerId= '#' + <?php echo "'{$moduleListPagerId}'" ?>;
-            var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-            var toolbarSearchField = <?php echo "'{$contextInfo["toolbarSearchField"]}'" ?>;
+        $("#<?php echo $componentList; ?>").ready(function(){
+            var moduleName           = <?php echo "'{$moduleName}'" ?>;
+            var moduleGlobalName     = <?php echo "'{$moduleGlobalName}'" ?>;
+            var componentGlobalName  = <?php echo "'{$componentGlobalName}'" ?>;
+            var componentGlobalId    = <?php echo "'{$componentGlobalId}'" ?>;
+            var componentListingTableId = '#' + <?php echo "'{$componentListingTableId}'" ?>;
+            var componentListingTablePagerId = '#' + <?php echo "'{$componentListingTablePagerId}'" ?>;
+            var componentCaption     = <?php echo "'{$componentCaption}'" ?>;
+            var toolbarSearchField   = <?php echo "'{$contextInfo["toolbarSearchField"]}'" ?>;
 
 
             //  define a callback object to handle the callback, optional for this table
-            <?php echo $modulePrefixName; ?>Callback = new WacJqGridCallback("<?php echo $modulePrefixName; ?>");
+            <?php echo $componentGlobalName; ?>Callback = new WacJqGridCallback("<?php echo $componentGlobalName; ?>");
 
             init();
             bindEvents();
 
             function init(){
-                $(moduleListId).jqGrid({
+                $(componentListingTableId).jqGrid({
                     datatype: WacEntity.extraParam.dataFormat,
                     url: WacAppConfig.baseUrl+"<?php echo $moduleName; ?>/getList",
                     editurl: WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/doOperation",
@@ -68,18 +70,27 @@ $moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("
                         sortorder: "desc",
                         multiselect: false,
                         viewrecords: true,
-                        pager: moduleListPagerId,
-                        caption:"<?php echo $moduleCaption; ?>",
+                        pager: componentListingTablePagerId,
+                        caption:"<?php echo $componentCaption; ?>",
                         height: '100%',
                         width: '100%',
 
                         gridComplete: function(){
-                            var ids = $(moduleListId).jqGrid('getDataIDs');
+                            var ids = $(componentListingTableId).jqGrid('getDataIDs');
                             var editUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/edit";
                             var delUrl = WacAppConfig.baseUrl + "<?php echo $moduleName; ?>/delete";
                             for(var i=0;i < ids.length;i++){
                                 var cl = ids[i];
-                                <?php echo WacModuleHelper::generateListBtns($moduleName, $invokeParams['subItemModuleName'], $moduleAttachName, $contextInfo["operatorBtns"], false); ?>
+                                <?php
+                                $params = array(
+                                    "moduleName"          => $moduleName,
+                                    "moduleGlobalName"    => $moduleGlobalName,
+                                    "subItemModuleName"   => "",
+                                    "componentGlobalName" => $componentGlobalName,
+                                    "attachInfo"          => $invokeParams['attachInfo']
+                                );
+                                echo WacModuleHelper::generateListBtns($params, $contextInfo["operatorBtns"], false);
+                                ?>
                             }
                         },
 
@@ -89,59 +100,59 @@ $moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("
 
                         loadComplete: function()
                         {
-                            //        Wac.log($.dump($(moduleListId).jqGrid('getGridParam', 'userData')));
+                            //        Wac.log($.dump($(componentListingTableId).jqGrid('getGridParam', 'userData')));
                             //        Wac.log("loadComplete");
                             $(this).trigger("tabsload");   // inform tabs event listener
                         }
                }); // grid end
 
-               $(moduleListId).jqGrid('navGrid',moduleListPagerId,
+               $(componentListingTableId).jqGrid('navGrid',componentListingTablePagerId,
                 {edit:false, add:false, del:false, search:true, refresh:true, view:false, position:"left"},
-                {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.edit},
-                {afterSubmit: <?php echo $modulePrefixName; ?>Callback.validate, afterComplete: <?php echo $modulePrefixName; ?>Callback.add},
-                {afterComplete: <?php echo $modulePrefixName; ?>Callback.del},
-                {afterComplete: <?php echo $modulePrefixName; ?>Callback.search},
-                {afterComplete: <?php echo $modulePrefixName; ?>Callback.view});
+                {afterSubmit: <?php echo $componentGlobalName; ?>Callback.validate, afterComplete: <?php echo $componentGlobalName; ?>Callback.edit},
+                {afterSubmit: <?php echo $componentGlobalName; ?>Callback.validate, afterComplete: <?php echo $componentGlobalName; ?>Callback.add},
+                {afterComplete: <?php echo $componentGlobalName; ?>Callback.del},
+                {afterComplete: <?php echo $componentGlobalName; ?>Callback.search},
+                {afterComplete: <?php echo $componentGlobalName; ?>Callback.view});
           };  // init end
          
         function bindEvents(){
             // listen search event
-            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(componentListingTableId, moduleGlobalName + WacAppConfig.event.app_wac_events_search_in_list, function ($self, data) {  // listenerid, event name, callback
                 var params = $.extend({dataFormat :WacEntity.extraParam.dataFormat}, data);
                 params.searchField = toolbarSearchField;  // this is a special case, for the name is code on table guardgroup
-                $(moduleListId).jqGrid('setGridParam',{postData:params});
-                $(moduleListId).trigger("reloadGrid");
+                $(componentListingTableId).jqGrid('setGridParam',{postData:params});
+                $(componentListingTableId).trigger("reloadGrid");
                 //                Wac.log(data);
             });
 
             // listen print event, throw out show print form event
-            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(componentListingTableId, moduleGlobalName + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
                 var params = {};
                 params.moduleName    = moduleName;
-                params.moduleCaption = moduleCaption;
+                params.componentCaption = componentCaption;
                 params.moduleAction  = "getList";
                 params.dataFormat    = "htmlTable";
 
-                params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
-                params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
-                params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
-                params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
-                params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                params[WacEntity.jqGridMetas.currentPage]  = $(componentListingTableId).jqGrid('getGridParam',"page");
+                params[WacEntity.jqGridMetas.totalPages]   = $(componentListingTableId).jqGrid('getGridParam',"lastpage");
+                params[WacEntity.jqGridMetas.rows]         = $(componentListingTableId).jqGrid('getGridParam',"rowNum");
+                params[WacEntity.jqGridMetas.sortName]     = $(componentListingTableId).jqGrid('getGridParam',"sortname");
+                params[WacEntity.jqGridMetas.sortOrder]    = $(componentListingTableId).jqGrid('getGridParam',"sortorder");
 
                 $.shout(WacAppConfig.event.app_wac_events_show_data_print_form,params);
             });
 
             // listen export event, throw out show export form event
-            $(document).hear(moduleListId, modulePrefixId + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(componentListingTableId, moduleGlobalName + WacAppConfig.event.app_wac_events_data_export, function ($self, data) {  // listenerid, event name, callback
                 var params = {};
                 params.moduleName = moduleName;
-                params.moduleCaption = moduleCaption;
+                params.componentCaption = componentCaption;
                 
-                params[WacEntity.jqGridMetas.currentPage]  = $(moduleListId).jqGrid('getGridParam',"page");
-                params[WacEntity.jqGridMetas.totalPages]   = $(moduleListId).jqGrid('getGridParam',"lastpage");
-                params[WacEntity.jqGridMetas.rows]         = $(moduleListId).jqGrid('getGridParam',"rowNum");
-                params[WacEntity.jqGridMetas.sortName]     = $(moduleListId).jqGrid('getGridParam',"sortname");
-                params[WacEntity.jqGridMetas.sortOrder]    = $(moduleListId).jqGrid('getGridParam',"sortorder");
+                params[WacEntity.jqGridMetas.currentPage]  = $(componentListingTableId).jqGrid('getGridParam',"page");
+                params[WacEntity.jqGridMetas.totalPages]   = $(componentListingTableId).jqGrid('getGridParam',"lastpage");
+                params[WacEntity.jqGridMetas.rows]         = $(componentListingTableId).jqGrid('getGridParam',"rowNum");
+                params[WacEntity.jqGridMetas.sortName]     = $(componentListingTableId).jqGrid('getGridParam',"sortname");
+                params[WacEntity.jqGridMetas.sortOrder]    = $(componentListingTableId).jqGrid('getGridParam',"sortorder");
                 $.shout(WacAppConfig.event.app_wac_events_show_data_export_form,params);
             });
         };  //bindEvnts end
@@ -150,4 +161,4 @@ $moduleCaption        = WacModule::getInstance()->getCaption($moduleName) . __("
    //]]>
 </script>
 </div>
-<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$moduleListingTableId}, end");?>
+<?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$componentList}, end");?>

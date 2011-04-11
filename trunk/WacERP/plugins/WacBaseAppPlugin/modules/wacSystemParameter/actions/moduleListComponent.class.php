@@ -5,7 +5,7 @@
 class moduleListComponent extends WacModuleListComponent
 {
     public function setupToolbarSearchField(){
-        return "username";
+        return "name";
     }
 
     // override parent method

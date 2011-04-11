@@ -11,16 +11,19 @@
 //            echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
 //            echo "</div>";
 
-            echo WacWidgetHelper::getInstance()->getWidget(
-                    WacModule::getInstance()->getName("wacCategory"), // be invoked module name
-                    WacComponentList::$categoryManagerWidget, // be invoked widget name
-                    array(
-                        'contextInfo' => $contextInfo, // current module context info
-                        'enableWidgets' => array(// enable sub widgets
-                            WacComponentList::$moduleTree
-                        )
-                    )
-            );
+//              include_component(WacModule::getInstance()->getName("wacCountry"), WacComponentList::$inlineTableWidget);
+              include_component(WacModule::getInstance()->getName("wacSystemParameter"), WacComponentList::$moduleIndexListWidget);
+
+//            echo WacWidgetHelper::getInstance()->getWidget(
+//                    WacModule::getInstance()->getName("wacCategory"), // be invoked module name
+//                    WacComponentList::$categoryManagerWidget, // be invoked widget name
+//                    array(
+//                        'contextInfo' => $contextInfo, // current module context info
+//                        'enableWidgets' => array(// enable sub widgets
+//                            WacComponentList::$moduleTree
+//                        )
+//                    )
+//            );
             ?>
         </div>
         <div class="footer">
