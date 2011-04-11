@@ -74,7 +74,8 @@ objAppSystemController = {
         // note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
         $(tabId + ' span.ui-icon-close').live('click', function() {
             var index = $('li', objAppSystemController.tab).index($(this).parent());
-            objAppSystemController.tab.tabs('remove', index);
+            objAppSystemController.tab.tabs('remove', index);            
+//            $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, {});
         });
     },
     initWestMenu: function(menuId){
