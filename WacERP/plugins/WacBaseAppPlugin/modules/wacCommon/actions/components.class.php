@@ -30,5 +30,25 @@ class wacCommonComponents extends WacComponent
                 );
     }
 
+    public function executeInlineTableWidget($request)
+    {
+        $this->execute($request);
+    }
+
+    public function executeModuleIndexListWidget($request)
+    {
+        $this->execute($request);
+    }
+
+    public function executeTableToolbar($request)
+    {
+        $this->execute($request);
+    }
+
+//    public function executeBaseInlineTableA($request)
+//    {
+//        $this->execute($request);
+//    }
+
     
 }

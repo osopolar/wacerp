@@ -11,6 +11,9 @@ class WacWidgetHelper {
 
     protected static $_instance;
 
+    public static $methodPartial   = "partial";
+    public static $methodComponent = "component";
+
     public static function getInstance() {
         $class = __CLASS__;
         if (is_null(self::$_instance)) {
@@ -37,6 +40,7 @@ class WacWidgetHelper {
      * @moduleName - module name
      * @widgetName - widget name
      * @params = array(
+      'method' => component / partial
       'contextInfo'   => $contextInfo,
       'enableWidgets' => array(                                       // enable sub widgets
       WacComponentList::$moduleToolBar,
@@ -46,30 +50,31 @@ class WacWidgetHelper {
      */
 
     public function getWidget($moduleName, $widgetName, $params=array()) {
-        return get_partial(
-                "{$moduleName}/{$widgetName}",
-                $params
-        );
-    }
-
-    public function getUiAppName($contextInfo=array())
-    {
-        $request = sfContext::getInstance()->getRequest();
-        if($request->hasParameter("uiApp")){
-            return $request->getParameter("uiApp");
-        }
-        elseif(count($contextInfo)>0){
-            return $contextInfo["moduleName"];
+        if(isset($params["method"]) && $params["method"] == WacWidgetHelper::$methodComponent){
+            return get_component($moduleName, $widgetName, $params);
         }
         else{
-            return "wacAppController";
+            return get_partial(
+                    "{$moduleName}/{$widgetName}",
+                    $params
+            );
         }
     }
 
-    public function getWidgetName($filename, $attachInfo=array())
+    public function getUiid($contextInfo=array())
+    {
+        $request = sfContext::getInstance()->getRequest();
+        if($request->hasParameter("uiid")){
+            return $request->getParameter("uiid");
+        }
+
+        return uniqid();
+    }
+
+    public function getWidgetName($filename, $module, $attachInfo=array())
     {
         $widgetName = substr(basename($filename, ".php"), 1);
-        return $widgetName."_".$attachInfo["name"];
+        return $widgetName."_".$module.$attachInfo["uiid"];
     }
 
     /*

@@ -18,7 +18,7 @@ $menuStr.="<page>1</page>";
 $menuStr.="<total>1</total>";
 $menuStr.="<records>1</records>";
 $menuStr.="<row><cell>20000</cell><cell>系统参数设置</cell><cell></cell><cell>0</cell><cell>20000</cell><cell>21000</cell><cell>false</cell><cell>false</cell></row>";
-$menuStr.="<row><cell>".$wacModule->getAttribute("wacCountry", "uiPanelId")."</cell><cell>国家</cell><cell>wacCountry/index?uiApp=".$contextInfo["moduleName"]."</cell><cell>1</cell><cell>20001</cell><cell>20002</cell><cell>true</cell><cell>true</cell></row>";
+$menuStr.="<row><cell>".$wacModule->getAttribute("wacCountry", "uiPanelId")."</cell><cell>国家</cell><cell>wacCountry/index</cell><cell>1</cell><cell>20001</cell><cell>20002</cell><cell>true</cell><cell>true</cell></row>";
 $menuStr.="<row><cell>".$wacModule->getAttribute("wacLanguage", "uiPanelId")."</cell><cell>语言</cell><cell>wacLanguage/index</cell><cell>1</cell><cell>20001</cell><cell>20002</cell><cell>true</cell><cell>true</cell></row>";
 $menuStr.="<row><cell>".$wacModule->getAttribute("wacSysmsg", "uiPanelId")."</cell><cell>系统信息</cell><cell>wacSysmsg/index</cell><cell>1</cell><cell>20001</cell><cell>20002</cell><cell>true</cell><cell>true</cell></row>";
 $menuStr.="<row><cell>".$wacModule->getAttribute("wacUnit", "uiPanelId")."</cell><cell>计量单位</cell><cell>wacUnit/index</cell><cell>1</cell><cell>20001</cell><cell>20002</cell><cell>true</cell><cell>true</cell></row>";
@@ -30,7 +30,7 @@ $menuStr.="<row><cell>".$wacModule->getAttribute("wacSystemLog", "uiPanelId")."<
 $menuStr.="<row><cell>".$wacModule->getAttribute("wacFileManager", "uiPanelId")."</cell><cell>文件管理</cell><cell>wacFileManager/index</cell><cell>1</cell><cell>21002</cell><cell>21003</cell><cell>true</cell><cell>true</cell></row>";
 
 $menuStr.="<row><cell>22001</cell><cell>业务参数设置</cell><cell></cell><cell>0</cell><cell>22001</cell><cell>23000</cell><cell>false</cell><cell>false</cell></row>";
-$menuStr.="<row><cell>".$wacModule->getAttribute("wacCategory", "uiPanelId")."</cell><cell>分类</cell><cell>wacCategory/index?uiApp=".$contextInfo["moduleName"]."</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
+$menuStr.="<row><cell>".$wacModule->getAttribute("wacCategory", "uiPanelId")."</cell><cell>分类</cell><cell>wacCategory/index</cell><cell>1</cell><cell>22002</cell><cell>22003</cell><cell>true</cell><cell>true</cell></row>";
 
 $menuStr.="<row><cell>23001</cell><cell>用户管理</cell><cell></cell><cell>0</cell><cell>23001</cell><cell>24000</cell><cell>false</cell><cell>false</cell></row>";
 $menuStr.="<row><cell>".$wacModule->getAttribute("wacGuardUser", "uiPanelId")."</cell><cell>用户管理列表</cell><cell>wacGuardUser/index</cell><cell>1</cell><cell>23002</cell><cell>23003</cell><cell>true</cell><cell>true</cell></row>";

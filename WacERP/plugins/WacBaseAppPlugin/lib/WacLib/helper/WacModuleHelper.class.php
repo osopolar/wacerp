@@ -40,79 +40,109 @@ class WacModuleHelper
      */
     public static function getWidgetId($module, $attachInfo=array())
     {
-        return isset($attachInfo["name"]) ? $module.$attachInfo["name"]."Widget" : $module."Widget";
+        return self::getElementId($module, $attachInfo, "widget");
+//        return isset($attachInfo["uiid"]) ? $module.$attachInfo["uiid"]."Widget" : $module."Widget";
     }
 
     /*
      * getComponentsId
      */
-    public static function getComponentsId($module, $attachName="")
+    public static function getComponentsId($module, $attachInfo=array())
     {
-        return $module.$attachName."Component";
+        return self::getElementId($module, $attachInfo, "component");
+//        return ($attachName=="") ? $module."Component" : $module.$attachName."Component";
     }
 
     /*
      * getTreeId
      */
-    public static function getTreeId($module, $attachName="")
+    public static function getTreeId($module, $attachInfo=array())
     {
-        return $module."Tree_".$attachName;
+        return self::getElementId($module, $attachInfo, "tree");
     }
 
     /*
+     * getModuleId
+     */
+    public static function getModuleGlobalName($module, $attachInfo=array())
+    {
+         return isset($attachInfo["uiid"]) ? $module."_".$attachInfo["uiid"] : $module;
+    }
+    
+    /*
      * getListingTableId
      */
-    public static function getListingTableId($module, $attachName="")
+    public static function getListingTableId($module, $attachInfo=array())
     {
-        return $module.$attachName."ListingTable";
+        return self::getElementId($module, $attachInfo, "listingTable");
+//        return isset($attachInfo["uiid"]) ? $module."ListingTable_".$attachInfo["uiid"] : $module."ListingTable";
     }
 
     /*
      * getFormDialogId
      */
-    public static function getFormDialogId($module, $attachName="")
+    public static function getFormDialogId($module, $attachInfo=array())
     {
-        return $module.$attachName."FormDialog";
+        return self::getElementId($module, $attachInfo, "formDialog");
+//        return isset($attachInfo["uiid"]) ? $module."FormDialog_".$attachInfo["uiid"] : $module."FormDialog";
     }
 
     /*
      * getFormId
      */
-    public static function getFormId($module, $attachName="")
+    public static function getFormId($module, $attachInfo=array())
     {
-        return $module.$attachName."Form";
+        return self::getElementId($module, $attachInfo, "form");
+//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
+    }
+
+    public static function getUploadFormId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "form");
+//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
+    }
+
+    /*
+     * getElementId
+     */
+    public static function getElementId($module, $attachInfo=array(), $element="")
+    {
+        return isset($attachInfo["uiid"]) ? $element."_".$module.$attachInfo["uiid"] : $element."_".$module;
     }
 
     /*
      * getSubFormDialogId
      */
-    public static function getSubFormDialogId($module, $attachName="")
+    public static function getSubFormDialogId($module, $attachInfo=array())
     {
-        return $module.$attachName."SubFormDialog";
+        return self::getElementId($module, $attachInfo, "subFormDialog");
+//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
     }
-
     /*
      * getSubFormId
      */
-    public static function getSubFormId($module, $attachName="")
+    public static function getSubFormId($module, $attachInfo=array())
     {
-        return $module.$attachName."SubForm";
+        return self::getElementId($module, $attachInfo, "subForm");
+//        return ($attachName=="") ? $module."SubForm" : $module.$attachName."SubForm";
     }
 
     /*
      * getPagerId
      */
-    public static function getPagerId($module, $attachName="")
+    public static function getPagerId($module, $attachInfo=array())
     {
-        return $module.$attachName."Pager";
+        return self::getElementId($module, $attachInfo, "pager");
+//        return ($attachName=="") ? $module."Pager" : $module.$attachName."Pager";
     }
 
     /*
      * getListId
      */
-    public static function getListId($module, $attachName="")
+    public static function getListId($module, $attachInfo=array())
     {
-        return $module.$attachName."List";
+        return self::getElementId($module, $attachInfo, "list");
+//        return ($attachName=="") ? $module."List" : $module.$attachName."List";
     }
 
     /*
@@ -208,12 +238,12 @@ class WacModuleHelper
      *  - action  (notes: if given action, event action will be replace by action)
      * )
      */
-    protected static function getBtnStr($module, $attachName="", $params=array())
+    protected static function getBtnStr($params)
     {
         $str = " {$params['tag']} = ";
         $str.= "\"<button ";
         // id
-        $str.= "id=\\\"{$module}{$attachName}_{$params['tag']}\" + cl +\"\\\" ";
+        $str.= "id=\\\"{$params['tag']}\" + cl +\"_{$params["componentGlobalName"]}\\\" ";
         // class
 //        $str.= "text=\\\"false\\\" icons=\\\"{primary: ui-icon-pencil}\\\" ";
         // action
@@ -222,7 +252,7 @@ class WacModuleHelper
             $str.= $params["action"]."\\\"";
         }
         elseif(isset($params["event"])){
-            $str.= "$.shout('#{$module}{$attachName}{$params["event"]}', {id: \" + cl +\" });\\\"";
+            $str.= "$.shout('{$params["moduleGlobalName"]}{$params["event"]}', {id: \" + cl +\" });\\\"";
         }
         $str.= " >";
         // label
@@ -232,33 +262,35 @@ class WacModuleHelper
         return $str;
     }
 
-    public static function generateListEditFormBtn($module, $attachName="")
+    public static function generateListEditFormBtn($params)
     {
-        $params = array(
+        $_params = array(
             "tag"=>"be", "label"=>__("JqGridBtnEdit"), "event"=>sfConfig::get("app_wac_events_show_edit_form")
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateListDelFormBtn
      */
-    public static function generateListDelFormBtn($module, $attachName="")
+    public static function generateListDelFormBtn($params)
     {
-        $params = array(
+        $_params = array(
             "tag"=>"de", "label"=>__("JqGridBtnDel"), 
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\""
+            "action"=>" $('#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});\\\""
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateListViewFormBtn
      */
-    public static function generateListViewFormBtn($module, $attachName="")
+    public static function generateListViewFormBtn($params)
     {
         $actionStr = "$.shout(WacAppConfig.event.app_wac_events_show_data_print_form, {";
-        $actionStr .= "moduleName:\'{$module}\',";
+        $actionStr .= "moduleName:\'{$params["moduleName"]}\',";
         $actionStr .= "moduleAction:\'view\',";
         $actionStr .= "moduleCaption:\'view\" + cl +\"\' ,";
         $actionStr .= "dataFormat:\'".WacDataFormatType::$htmlEntityView."\',";
@@ -268,106 +300,111 @@ class WacModuleHelper
         $actionStr .= JqGridDataHelper::$KEY_SEARCH_STRING.":\" + cl +\"";
         $actionStr .= "});";
 
-        $params = array(
+        $_params = array(
             "tag"=>"bv",
             "label"=>__("JqGridBtnPrint"),
             "action"=>$actionStr
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
-    public static function generateInlineListEditFormBtn($module, $attachName="")
+    public static function generateInlineListEditFormBtn($params)
     {
-        $modulePrefixName = $module.$attachName;
-        $params = array(
+        $_params = array(
             "tag"=>"be", "label"=>__("JqGridBtnEdit"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('editRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam);"
+            "action"=>" $('#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."').jqGrid('editRow', '\"+cl+\"', true, null, {$params["componentGlobalName"]}Callback.save, '\" + editUrl + \"', WacEntity.extraParam);"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
-    public static function generateInlineListSaveFormBtn($module, $attachName="")
+    public static function generateInlineListSaveFormBtn($params)
     {
-        $modulePrefixName = $module.$attachName;
-        $params = array(
+        $_params = array(
             "tag"=>"se", "label"=>__("JqGridBtnSave"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('saveRow', '\"+cl+\"', true, null, {$modulePrefixName}Callback.save, '\" + editUrl + \"', WacEntity.extraParam, null);"
+            "action"=>" $('#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."').jqGrid('saveRow', '\"+cl+\"', true, null, {$params["componentGlobalName"]}Callback.save, '\" + editUrl + \"', WacEntity.extraParam, null);"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
-    public static function generateInlineListCancelFormBtn($module, $attachName="")
+    public static function generateInlineListCancelFormBtn($params)
     {
-        $modulePrefixName = $module.$attachName;
-        $params = array(
+        $_params = array(
             "tag"=>"ce", "label"=>__("JqGridBtnCancel"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('restoreRow', '\"+cl+\"');"
+            "action"=>" $('#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."').jqGrid('restoreRow', '\"+cl+\"');"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
-    public static function generateInlineListDelFormBtn($module, $attachName="")
+    public static function generateInlineListDelFormBtn($params)
     {
-        $modulePrefixName = $module.$attachName;
-        $params = array(
+        $_params = array(
             "tag"=>"de", "label"=>__("JqGridBtnDel"),
-            "action"=>" $('#".WacModuleHelper::getListId($module, $attachName)."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});"
+            "action"=>" $('#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."').jqGrid('delGridRow', '\"+cl+\"', {url:'\" + delUrl + \"/dataFormat/json/', top: 200, left:500});"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateListAuditFormBtn
      */
-    public static function generateListAuditFormBtn($module, $attachName="")
+    public static function generateListAuditFormBtn($params)
     {
-        $params = array(
+        $_params = array(
             "tag"=>"ba", "label"=>__("JqGridBtnAudit"),
-            "action"=>" wacConfirmDialog({$module}{$attachName}AuditAction, '\" + cl +\"');"
+            "action"=>" wacConfirmDialog({$params["componentGlobalName"]}AuditAction, '\" + cl +\"');"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateListAddSubFormBtn
      */
-    public static function generateListAddSubFormBtn($module, $subModule, $attachName="")
+    public static function generateListAddSubFormBtn($params=array())
     {
-        $params = array(
+        $_params = array(
             "tag"=>"sa", "label"=>__("JqGridBtnAddSubItem"),
-            "action"=>" {$module}{$attachName}OpenModuleForm('".WacModuleHelper::getFormDialogId($module, $attachName)."', '{$module}{$attachName}', '".WacOperationType::$add."' , 0, '\" + cl +\"');"
+            "action"=>" {$params["componentGlobalName"]}OpenModuleForm('".WacModuleHelper::getFormDialogId($params["moduleName"], $params["attachInfo"])."', '{$params["componentGlobalName"]}', '".WacOperationType::$add."' , 0, '\" + cl +\"');"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateSubListEditFormBtn
      */
-    public static function generateSubListEditFormBtn($module, $attachName="")
+    public static function generateSubListEditFormBtn($params)
     {
-        $params = array(
+        $_params = array(
             "tag"=>"be", "label"=>__("JqGridBtnEdit"),
-            "action"=>"\"{$module}{$attachName}OpenModuleForm('{$module}{$attachName}FormDialog', '{$module}{$attachName}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n"
+            "action"=>"\"{$params["componentGlobalName"]}OpenModuleForm('{$params["componentGlobalName"]}FormDialog', '{$params["componentGlobalName"]}', '".WacOperationType::$edit."' , '\"+cl+\"', '\" + row_id +\"');\";\n"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateSubListDelFormBtn
      */
-    public static function generateSubListDelFormBtn($module, $attachName="")
+    public static function generateSubListDelFormBtn($params)
     {
-        $params = array(
+        $_params = array(
             "tag"=>"de", "label"=>__("JqGridBtnEdit"),
             "action"=>"$('#\" + subgrid_table_id + \"').jqGrid('delGridRow', '\"+cl+\"', {url:'\"+delUrl+\"'});\";\n"
         );
-        return self::getBtnStr($module, $attachName, $params);
+        $_params = array_merge_recursive($params, $_params);
+        return self::getBtnStr($_params);
     }
 
     /*
      * generateSubListBtns
      */
-    public static function generateSubListBtns($module, $subModule, $attachName="", $allowBtns=array("be", "de"))
+    public static function generateSubListBtns($module, $subModule, $attachInfo=array(), $allowBtns=array("be", "de"))
     {
         $str="";
         $str.="$(\"#\"+subgrid_table_id).jqGrid('setRowData',ids[i],{";
@@ -376,11 +413,11 @@ class WacModuleHelper
         $str.=self::getAllowBtns($allowBtns, '+', $module);
         $str.=" });\n\n";
 
-        $str.="var rowData = $(\"#".WacModuleHelper::getListId($module,$attachName)."\").jqGrid('getRowData',row_id);\n";
+        $str.="var rowData = $(\"#".WacModuleHelper::getListingTableId($module,$attachInfo)."\").jqGrid('getRowData',row_id);\n";
         $str.="if(rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
-        $str.= "\$(\"#{$subModule}{$attachName}_be\"+cl).attr('disabled','disabled');\n";
-        $str.= "\$(\"#{$subModule}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
+        $str.= "\$(\"#be\"+cl+\"_{$subModule}{$attachInfo["uiid"]}\").attr('disabled','disabled');\n";
+        $str.= "\$(\"#de\"+cl+\"_{$subModule}{$attachInfo["uiid"]}\").attr('disabled','disabled');\n";
         $str.= "}\n";
         return $str;
     }
@@ -417,40 +454,39 @@ class WacModuleHelper
 
     /*
      * generateListBtns
-     * @module - module name
-     * @subModule - submodule name
-     * @attachName - attach name
+     * $params - array(
+     *    "module", componentGlobalName"
+     * )
      * @allowBtns - the btns be asked to show, but also be filtered by user credentials
      * @isInline - for inline action table or not
-     * @params - spare
      */
-    public static function generateListBtns($module, $subModule, $attachName="", $allowBtns='all', $isInline=false, $params=array())
+    public static function generateListBtns($params=array(), $allowBtns='all', $isInline=false)
     {
         $str="";
 
         $btnArr = array();  // btn elements
-        $btnArr['bv'] = self::generateListViewFormBtn($module, $attachName);  /* bv: button view          */
+        $btnArr['bv'] = self::generateListViewFormBtn($params);  /* bv: button view          */
         if(!$isInline){
-            $btnArr['ba'] = self::generateListAuditFormBtn($module, $attachName); /* ba: button audit         */
-            $btnArr['sa'] = self::generateListAddSubFormBtn($module, $subModule, $attachName);          /* sa: button add subitems  */
-            $btnArr['be'] = self::generateListEditFormBtn($module, $attachName);  /* be: button edit          */
-            $btnArr['de'] = self::generateListDelFormBtn($module, $attachName);   /* de: button delete        */
+            $btnArr['ba'] = self::generateListAuditFormBtn($params); /* ba: button audit         */
+            $btnArr['sa'] = self::generateListAddSubFormBtn($params);          /* sa: button add subitems  */
+            $btnArr['be'] = self::generateListEditFormBtn($params);  /* be: button edit          */
+            $btnArr['de'] = self::generateListDelFormBtn($params);   /* de: button delete        */
         }
         else{
-            $btnArr['be'] = self::generateInlineListEditFormBtn($module, $attachName); /* ba: button edit         */
-            $btnArr['se'] = self::generateInlineListSaveFormBtn($module, $attachName);  /* be: button save          */
-            $btnArr['de'] = self::generateInlineListDelFormBtn($module, $attachName);   /* de: button delete        */
-            $btnArr['ce'] = self::generateInlineListCancelFormBtn($module, $attachName);  /* bv: button cancel          */
+            $btnArr['be'] = self::generateInlineListEditFormBtn($params); /* ba: button edit         */
+            $btnArr['se'] = self::generateInlineListSaveFormBtn($params);  /* be: button save          */
+            $btnArr['de'] = self::generateInlineListDelFormBtn($params);   /* de: button delete        */
+            $btnArr['ce'] = self::generateInlineListCancelFormBtn($params);  /* bv: button cancel          */
         }
 
         $btnInit = array();  // btn init actions
-        $btnInit['bv'] = "$(\"#{$module}{$attachName}_bv\"+cl).button({ text:false, icons: {primary: 'ui-icon-print'}});\n";
-        $btnInit['ba'] = "$(\"#{$module}{$attachName}_ba\"+cl).button({ text:false, icons: {primary: 'ui-icon-check'}});\n";
-        $btnInit['sa'] = "$(\"#{$module}{$attachName}_sa\"+cl).button({ text:false, icons: {primary: 'ui-icon-circle-plus'}});\n";
-        $btnInit['be'] = "$(\"#{$module}{$attachName}_be\"+cl).button({ text:false, icons: {primary: 'ui-icon-pencil'}});\n";
-        $btnInit['de'] = "$(\"#{$module}{$attachName}_de\"+cl).button({ text:false, icons: {primary: 'ui-icon-trash'}});\n";
-        $btnInit['ce'] = "$(\"#{$module}{$attachName}_ce\"+cl).button({ text:false, icons: {primary: 'ui-icon-cancel'}});\n";
-        $btnInit['se'] = "$(\"#{$module}{$attachName}_se\"+cl).button({ text:false, icons: {primary: 'ui-icon-disk'}});\n";
+        $btnInit['bv'] = "$(\"#bv\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-print'}});\n";
+        $btnInit['ba'] = "$(\"#ba\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-check'}});\n";
+        $btnInit['sa'] = "$(\"#sa\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-circle-plus'}});\n";
+        $btnInit['be'] = "$(\"#be\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-pencil'}});\n";
+        $btnInit['de'] = "$(\"#de\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-trash'}});\n";
+        $btnInit['ce'] = "$(\"#ce\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-cancel'}});\n";
+        $btnInit['se'] = "$(\"#se\"+cl+\"_{$params["componentGlobalName"]}\").button({ text:false, icons: {primary: 'ui-icon-disk'}});\n";
 
         if($allowBtns!='all'){
             foreach(self::$ctlBtns as $ctlBtnKey){
@@ -467,29 +503,29 @@ class WacModuleHelper
             }
         }
 
-        $str.= "$(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('setRowData',ids[i],{";
+        $str.= "$(\"#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."\").jqGrid('setRowData',ids[i],{";
         $str.= "act:";
-        $str.= "'<span id=\\\"{$module}{$attachName}_btnSet' + cl +'\\\">' + ";
-        $str.= self::getAllowBtns($allowBtns, '+', $module);
+        $str.= "'<span id=\\\"btnSet' + cl +'_{$params["componentGlobalName"]}' + '\\\">' + ";
+        $str.= self::getAllowBtns($allowBtns, '+', $params["moduleName"]);
         $str.= " + '</span>'";
         $str.= " });\n\n";
 
         // setup buttonset
-        $str.= "$(\"#{$module}{$attachName}_btnSet\"+cl).buttonset();\n";
+        $str.= "$(\"#btnSet\" + cl + \"_{$params["componentGlobalName"]}\").buttonset();\n";
         if(count($btnInit)>0){
             foreach($btnInit as $btnItem){
                 $str.=$btnItem;
             }
         }
 
-        $str.= "var rowData = $(\"#".WacModuleHelper::getListId($module, $attachName)."\").jqGrid('getRowData',cl);\n";
+        $str.= "var rowData = $(\"#".WacModuleHelper::getListingTableId($params["moduleName"], $params["attachInfo"])."\").jqGrid('getRowData',cl);\n";
 //        $str.= "wacDebugLog('".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited).":' + rowData['status']);\n";
         $str.= "if(rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$audited)." || rowData['status']==".WacEntityStatus::getInstance()->getId(WacEntityStatus::$finish).")";
         $str.= "{\n";
-        $str.= "\$(\"#{$module}{$attachName}_ba\"+cl).attr('disabled','disabled');\n";
-        $str.= "\$(\"#{$subModule}{$attachName}_sa\"+cl).attr('disabled','disabled');\n";
-        $str.= "\$(\"#{$module}{$attachName}_be\"+cl).attr('disabled','disabled');\n";
-        $str.= "\$(\"#{$module}{$attachName}_de\"+cl).attr('disabled','disabled');\n";
+        $str.= "\$(\"#ba\"+cl+\"_{$params["componentGlobalName"]}\").attr('disabled','disabled');\n";
+        $str.= "\$(\"#sa\"+cl+\"_{$params["subItemModuleName"]}{$params["attachInfo"]['uiid']}\").attr('disabled','disabled');\n";
+        $str.= "\$(\"#be\"+cl+\"_{$params["componentGlobalName"]}\").attr('disabled','disabled');\n";
+        $str.= "\$(\"#de\"+cl+\"_{$params["componentGlobalName"]}\").attr('disabled','disabled');\n";
         $str.= "}\n";
 
         return $str;

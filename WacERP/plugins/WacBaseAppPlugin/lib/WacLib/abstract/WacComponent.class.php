@@ -28,7 +28,7 @@ abstract class WacComponent extends sfComponent {
         $this->execute($request);
 //        $this->getResponse()->addJavaScript($this->getWacComponentJs(), 'last');  // layout
     }
-
+    
     public function executeLayout($request)
     {
         $this->execute($request);

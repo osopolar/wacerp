@@ -8,20 +8,23 @@
  *
  */
 
-$moduleName = $contextInfo['moduleName'];
-$moduleAttachName = $invokeParams['attachInfo']['name'];
-$modulePrefixName = $contextInfo['moduleName'] . $invokeParams['attachInfo']['name'];
-$moduleCaption = WacModule::getInstance()->getCaption($moduleName);
-$moduleFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $moduleAttachName);
-$moduleFormName = WacModuleHelper::getFormId($moduleName, $moduleAttachName);
-$cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams['config']['isHidden']) ? "display: none;" : "display: inline;";
+$moduleName              = $contextInfo['moduleName'];
+$moduleGlobalName        = $moduleName.$invokeParams['attachInfo']['uiid'];
+$componentGlobalName     = WacModuleHelper::getUploadFormId($moduleName, $invokeParams['attachInfo']);
+$componentGlobalId       = "#".$componentGlobalName;
+$componentCaption        = WacModule::getInstance()->getCaption($moduleName);
+$componentFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $invokeParams['attachInfo']);
+$componentFormName       = WacModuleHelper::getFormId($moduleName, $invokeParams['attachInfo']);
+$componentUploaderName   = WacModuleHelper::getElementId($moduleName, $invokeParams['attachInfo'], 'uploader');
+$componentUploaderId     = "#".$componentUploaderName;
+$cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invokeParams['config']['isHidden']) ? "display: none;" : "display: inline;";
 //print_r($contextInfo);
 ?>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormName, true); ?>
-<div id="<?php echo $moduleFormDialogName; ?>" style="<?php echo $cfgDialogDisplay;?>">
-    <form name="<?php echo $moduleFormName; ?>" id="<?php echo $moduleFormName; ?>" method="post" action="">
-        <div id="<?php echo $modulePrefixName; ?>_uploader">
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentFormName, true); ?>
+<div id="<?php echo $componentFormDialogName; ?>" style="<?php echo $cfgDialogDisplay;?>">
+    <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="">
+        <div id="<?php echo $componentUploaderName; ?>">
             <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
         </div>
     </form>
@@ -29,19 +32,19 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
 
 <script type="text/javascript">
     //<![CDATA[
-    $("#<?php echo $moduleFormDialogName; ?>").ready(function(){
-        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+    $("#<?php echo $componentFormDialogName; ?>").ready(function(){
+        var wacImagesPath       = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
-        var moduleName       = <?php echo "'{$moduleName}'" ?>;
-        var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-        var modulePrefixId   = '#' + modulePrefixName;
-        var moduleUploaderId = modulePrefixId + "_uploader";
-        var moduleFormDialogName = <?php echo "'{$moduleFormDialogName}'" ?>;
-        var moduleFormDialogId = '#' + moduleFormDialogName;
-        var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-        var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleName          = <?php echo "'{$moduleName}'" ?>;
+        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
+        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
+        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
+        var componentFormDialogId  = '#' + <?php echo "'{$componentFormDialogName}'" ?>;
+        var componentUploaderId = <?php echo "'{$componentUploaderId}'" ?>;
+        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
 
-        var moduleUploader;   // uploader obj, created when initUploadForm
+        var componentUploader;   // uploader obj, created when initUploadForm
 
         function init(){
             initUploadForm();
@@ -52,7 +55,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
         function initUploadForm(){
 //                $(function() {
             // Convert divs to queue widgets when the DOM is ready
-               $(moduleUploaderId).plupload({
+               $(componentUploaderId).plupload({
                     // General settings
 //                    runtimes : 'flash',
                     runtimes : 'flash,html4,html5,browserplus,silverlight,gears',
@@ -86,12 +89,12 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
                     silverlight_xap_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.silverlight.xap'
                 });
 
-                moduleUploader = $(moduleUploaderId).plupload('getUploader');
+                componentUploader = $(componentUploaderId).plupload('getUploader');
 
         };  // initUploadForm end
 
         function initDialog(){
-            $(moduleFormDialogId).dialog({
+            $(componentFormDialogId).dialog({
                 bgiframe: true,
                 modal: true,
                 width: 860,
@@ -104,31 +107,31 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
 
         function bindEvents()
         {
-//            moduleUploader.bind('UploadFile', function(up, file) {
+//            componentUploader.bind('UploadFile', function(up, file) {
 //                Wac.log("UploadFile");
-//                Wac.log("length: " + $(moduleUploader.files).length);
+//                Wac.log("length: " + $(componentUploader.files).length);
 //                Wac.log(up.settings.multipart_params);
 //            });
 
-//            moduleUploader.bind('UploadComplete', function(/up, files) {
+//            componentUploader.bind('UploadComplete', function(/up, files) {
 //                Wac.log("UploadComplete");
 //                Wac.log(up.settings.multipart_params);
-////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
+////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, componentUploader.settings.multipart_params);
 //            });
 
-            $(document).hear(moduleFormDialogId, modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
-                $.extend(moduleUploader.settings.multipart_params, { id : data.id });
-//                Wac.log($(moduleUploader.files).length);
-//                if($(moduleUploader.files).length > 0){
-//                    $(moduleUploader.files).each(function(i, file){
-//                        moduleUploader.removeFile(file);
+            $(document).hear(componentFormDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
+                $.extend(componentUploader.settings.multipart_params, { id : data.id });
+//                Wac.log($(componentUploader.files).length);
+//                if($(componentUploader.files).length > 0){
+//                    $(componentUploader.files).each(function(i, file){
+//                        componentUploader.removeFile(file);
 //                    })
 //                }
-                $(moduleFormDialogId).dialog('open');
+                $(componentFormDialogId).dialog('open');
             });
 
-            $( moduleFormDialogId).bind( "dialogclose", function(event, ui) {
-                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, moduleUploader.settings.multipart_params);
+            $( componentFormDialogId).bind( "dialogclose", function(event, ui) {
+                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_file_upload_complete, componentUploader.settings.multipart_params);
             });
 
             // fix dialog div didnt remove bug, remove it by this way
@@ -138,7 +141,7 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
 //               Wac.log("ui.panel.id:" + ui.panel.id + " : " + uiPanelId);
                 if(ui.panel.id == uiPanelId)
                 {
-                    $(moduleFormDialogId).remove();  //remove dialog form
+                    $(componentFormDialogId).remove();  //remove dialog form
                 }
             });
         };  //bindEvnts end
@@ -149,4 +152,4 @@ $cfgDialogDisplay = (isset($invokeParams['config']['isHidden']) && $invokeParams
     //]]>
 </script>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleFormName, false); ?>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentFormName, false); ?>

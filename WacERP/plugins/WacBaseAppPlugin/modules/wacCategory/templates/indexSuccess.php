@@ -7,9 +7,8 @@
         WacModule::getInstance()->getName("wacCategory"), // be invoked module name
         WacComponentList::$categoryManagerWidget, // be invoked widget name
         array(
-            'contextInfo' => $contextInfo, // current module context info
+            'method'        => WacWidgetHelper::$methodComponent,
             'enableWidgets' => array(// enable sub widgets
-//                WacComponentList::$moduleToolBar,
                 WacComponentList::$moduleTree
             )
         )

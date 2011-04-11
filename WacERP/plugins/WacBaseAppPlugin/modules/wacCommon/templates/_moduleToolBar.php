@@ -1,28 +1,25 @@
 <?php
-$modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
-$moduleName = $invokeParams['contextInfo']['moduleName'];
-$moduleAttachName = $invokeParams['attachInfo']['name'];
 
-OutputHelper::getInstance()->writeNote("{$modulePrefixName}-ToolBar, end");
-echo "<span id='{$modulePrefixName}_toolbar' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
+$moduleName          = $invokeParams['contextInfo']['moduleName'];
+$moduleGlobalName    = $moduleName.$invokeParams['attachInfo']['uiid'];
+$componentGlobalName = WacModuleHelper::getElementId($moduleName, $invokeParams['attachInfo'], "toolbar");
+$componentGlobalId   = "#".$componentGlobalName;
 
-echo "  <span><input name='code' id='{$modulePrefixName}_searchCode' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
+OutputHelper::getInstance()->writeNote("{$componentGlobalName}, end");
+echo "<span id='{$componentGlobalName}' class='ui-widget-header ui-corner-all' style='padding: 10px 4px;'>\n";
 
-echo "  <span id='{$modulePrefixName}_g1'>\n";
-echo "	  <button id='{$modulePrefixName}_btnSearch'>" . __("Search") . "</button>\n";
-if ($moduleAttachName != ucfirst(WacEntityStatus::$audited)) {
-    echo "  <button id='{$modulePrefixName}_btnAdd'>" . __("Add To") . "</button>\n";
+echo "  <span><input name='code' id='searchCode_{$componentGlobalName}' class='ui-corner-all wacInputboxSearch1' type='text' size='15' value='" . __("Search Code") . "' /></span>\n";
+
+echo "  <span id='g1_{$componentGlobalName}'>\n";
+echo "	  <button id='btnSearch_{$componentGlobalName}'>" . __("Search") . "</button>\n";
+if ($invokeParams['attachInfo']['uiid'] != ucfirst(WacEntityStatus::$audited)) {
+    echo "  <button id='btnAdd_{$componentGlobalName}'>" . __("Add To") . "</button>\n";
 }
 echo "  </span>\n";
 
-//echo "  <span id=\"{$modulePrefixName}_exportFormatBtns\">\n";
-//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt1\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt1\">Choice 1</label>\n";
-//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt2\" name=\"exportFormat\" checked=\"checked\" /><label for=\"{$modulePrefixName}_btnExportFmt2\">Choice 2</label>\n";
-//echo "	  <input type=\"radio\" id=\"{$modulePrefixName}_btnExportFmt3\" name=\"exportFormat\" /><label for=\"{$modulePrefixName}_btnExportFmt3\">Choice 3</label>\n";
-//echo "  </span>\n";
-echo "  <span id='{$modulePrefixName}_g2'>\n";
-echo "	  <button id='{$modulePrefixName}_btnExportSel'>" . __("Export Select") . "</button>\n";
-echo "	  <button id='{$modulePrefixName}_btnPrint'>" . __("Print") . "</button>\n";
+echo "  <span id='g2_{$componentGlobalName}'>\n";
+echo "	  <button id='btnExportSel_{$componentGlobalName}'>" . __("Export Select") . "</button>\n";
+echo "	  <button id='btnPrint_{$componentGlobalName}'>" . __("Print") . "</button>\n";
 echo "  </span>\n";
 
 echo "</span>\n";
@@ -33,12 +30,11 @@ echo "</span>\n";
 <hr class="wacFormRuler" style="width:98%;"/>
 
 <script type="text/javascript">
-    $(function(){
-        var moduleName = <?php echo "'{$moduleName}'" ?>;
-        var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-        var modulePrefixId= '#' + modulePrefixName;
-        var searchFieldId = modulePrefixId + '_searchCode';
-        var toolbarId = '#' + modulePrefixName + "_toolbar";
+    $("<?php echo $componentGlobalId; ?>").ready((function(){
+        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
+        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
+        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
+        var searchFieldId       = '#searchCode_' + componentGlobalName;
 
         init();
         bindEvents();
@@ -47,15 +43,15 @@ echo "</span>\n";
             $(searchFieldId).focus();
 
             // g1
-            $(modulePrefixId + '_btnSearch').button({text: true,icons: {primary: "ui-icon-search"}});
-            $(modulePrefixId + '_btnAdd').button({text: true,icons: {primary: "ui-icon-document"}});
-            $(modulePrefixId+'_g1').buttonset();
+            $('#btnSearch_' + componentGlobalName).button({text: true,icons: {primary: "ui-icon-search"}});
+            $('#btnAdd_' + componentGlobalName).button({text: true,icons: {primary: "ui-icon-document"}});
+            $('#g1_' + componentGlobalName).buttonset();
 
-            $(modulePrefixId + '_btnExportSel').button({text: false,icons: {primary: "ui-icon-arrowreturnthick-1-s"}});
-            $(modulePrefixId + '_btnPrint').button({text: false,icons: {primary: "ui-icon-print"}});
-            $(modulePrefixId+'_g2').buttonset();
+            $('#btnExportSel_' + componentGlobalName).button({text: false,icons: {primary: "ui-icon-arrowreturnthick-1-s"}});
+            $('#btnPrint_' + componentGlobalName).button({text: false,icons: {primary: "ui-icon-print"}});
+            $('#g2_' + componentGlobalName).buttonset();
 
-            //            $(modulePrefixId+'_exportFormatBtns').buttonset();
+            //            $(componentGlobalName+'_exportFormatBtns').buttonset();
 
         };
 
@@ -70,33 +66,33 @@ echo "</span>\n";
                 triggerSearch();
             });
 
-            $(modulePrefixId + '_btnSearch').bind("click", function(){
+            $('#btnSearch_' + componentGlobalName).bind("click", function(){
                 triggerSearch();
             });
 
-            $(modulePrefixId + '_btnAdd').bind("click", function(){
-                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_add_form, {});
+            $('#btnAdd_' + componentGlobalName).bind("click", function(){
+                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, {});
             });
 
-            $(modulePrefixId + '_btnPrint').bind("click", function(){
-                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_data_print, {});
+            $('#btnPrint_' + componentGlobalName).bind("click", function(){
+                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_data_print, {});
             });
             
-            $(modulePrefixId + '_btnExportSel').bind("click", function(){
-                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_data_export,{});
+            $('#btnExportSel_' + componentGlobalName).bind("click", function(){
+                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_data_export,{});
             });
         };
         
 
         function triggerSearch(){            
-            //            Wac.log($(searchFieldId).val());
-            $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_search_in_list,
+//            Wac.log(moduleGlobalName + WacAppConfig.event.app_wac_events_search_in_list + $(searchFieldId).val());
+            $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_search_in_list,
             {
                 searchField: "code",
                 searchString: $(searchFieldId).val(),
                 searchOper: "cn"     // it can be "eq,ne,lt,le,gt,ge,bw,ew,en,bn,in,cn,ni,nc"
             });
         };
-    });
+    }));
 </script>
-<?php OutputHelper::getInstance()->writeNote("{$modulePrefixName}-ToolBar, end");?>
+<?php OutputHelper::getInstance()->writeNote("{$componentGlobalName}, end");?>

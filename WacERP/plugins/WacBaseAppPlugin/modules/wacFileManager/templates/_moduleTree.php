@@ -8,30 +8,30 @@
  *
  */
 
-$moduleName = $invokeParams['contextInfo']['moduleName'];
-$moduleAttachName = $invokeParams['attachInfo']['name'];
-$modulePrefixName = $invokeParams['contextInfo']['moduleName'] . $invokeParams['attachInfo']['name'];
-$moduleTreeId = WacModuleHelper::getTreeId($moduleName, $moduleAttachName);
-$moduleCaption = WacModule::getInstance()->getCaption($moduleName) . __("List");
+$moduleName          = $contextInfo['moduleName'];
+$moduleGlobalName    = $moduleName.$invokeParams['attachInfo']['uiid'];
+$componentGlobalName = WacModuleHelper::getTreeId($moduleName, $invokeParams['attachInfo']);
+$componentGlobalId   = "#".$componentGlobalName;
+$componentCaption    = WacModule::getInstance()->getCaption($moduleName);
 
 $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, true); ?>
-<div id="<?php echo $moduleTreeId; ?>" class="wacFrame"></div>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalId, true); ?>
+<div id="<?php echo $componentGlobalName; ?>" class="wacFrame"></div>
 
 <script type="text/javascript">
     //<![CDATA[
-    $("#<?php echo $moduleTreeId; ?>").ready(function(){
-        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+    $("<?php echo $componentGlobalId; ?>").ready(function(){
+        var wacImagesPath       = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
-        var moduleName       = <?php echo "'{$moduleName}'" ?>;
-        var modulePrefixName = <?php echo "'{$modulePrefixName}'" ?>;
-        var modulePrefixId   = '#' + modulePrefixName;
-        var moduleTreeId     = '#' + <?php echo "'{$moduleTreeId}'" ?>;
-        var moduleCaption    = <?php echo "'{$moduleCaption}'" ?>;
-        var moduleUrl        = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleName          = <?php echo "'{$moduleName}'" ?>;
+        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
+        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
+        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
+        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
+        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
 
         function init(){
             initTree();
@@ -39,7 +39,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
         };  // init end
 
         function initTree(){
-            $(moduleTreeId)
+            $(componentGlobalId)
             .jstree({
                 // the list of plugins to include
                 "plugins" : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
@@ -163,7 +163,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                                         "id" : obj.attr("id").replace("node_",""),
                                         "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
                                     }
-                                    $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_show_file_upload_form, params);
+                                    $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_show_file_upload_form, params);
                                 }                                
 //                                this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>" } });
                             }
@@ -306,10 +306,10 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
         };  // init end
 
         function bindEvents(){
-            $(document).hear(moduleTreeId, modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(componentGlobalId, moduleGlobalName + WacAppConfig.event.app_wac_events_file_upload_complete, function ($self, data) {  // listenerid, event name, callback
                 var node = $("li#"+data.id);
-                $(moduleTreeId).jstree("open_node", node);
-                $(moduleTreeId).jstree("refresh", node);
+                $(componentGlobalId).jstree("open_node", node);
+                $(componentGlobalId).jstree("refresh", node);
 //                Wac.log("upload complete: ");
 //                Wac.log(data);
             });
@@ -322,4 +322,4 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
     //]]>
 </script>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $moduleTreeId, false); ?>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalId, false); ?>
