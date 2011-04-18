@@ -36,13 +36,13 @@ default:
     wac.layout: /WacBaseAppPlugin/css/wac/layout.css
 
   javascripts:
-    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery-1.4.2.min.js     # jquery
-    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
-    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
+#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery-1.4.2.min.js     # jquery
+#    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
+#    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
 
-#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
-#    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
-#    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
+    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
+    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
+    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
 
 #    google.gear: /WacBaseAppPlugin/js/google/gears_init.js
 
@@ -65,7 +65,8 @@ default:
     jquery.validationEngine: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine.js     # jquery.formValidator
     jquery.validationEngine.i18n: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh
 
-    jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc2/jquery.jstree.js    # jquery.jstree
+#    jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc2/jquery.jstree.js    # jquery.jstree
+    jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc3/jquery.jstree.js    # jquery.jstree
 
     jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload_1.4.3.2/plupload.full.js    # jquery.plupload
     jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload_1.4.3.2/jquery.ui.plupload.js    # jquery.ui.plupload
