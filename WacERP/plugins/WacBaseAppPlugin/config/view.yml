@@ -40,7 +40,8 @@ default:
 #    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
 #    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
 
-    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
+#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
+    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.2.min.js     # jquery
     jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
     jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
 
