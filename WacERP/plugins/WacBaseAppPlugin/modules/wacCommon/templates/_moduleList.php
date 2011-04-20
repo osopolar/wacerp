@@ -23,8 +23,9 @@ $componentCaption        = WacModule::getInstance()->getCaption($moduleName) . _
 <div id="<?php echo $componentList; ?>">
     <table id="<?php echo $componentListingTableId; ?>"></table>
     <div id="<?php echo $componentListingTablePagerId; ?>" ></div>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         //<![CDATA[
         $("#<?php echo $componentList; ?>").ready(function(){
             var moduleName           = <?php echo "'{$moduleName}'" ?>;
@@ -160,5 +161,5 @@ $componentCaption        = WacModule::getInstance()->getCaption($moduleName) . _
     })
    //]]>
 </script>
-</div>
+
 <?php OutputHelper::getInstance()->writeNote("{$moduleName}-{$componentList}, end");?>

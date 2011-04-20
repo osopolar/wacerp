@@ -56,7 +56,10 @@ default:
 
     jquery.shout: /WacBaseAppPlugin/js/jquery/plugins/jquery-shout/jquery.shout.js     # jquery-shout
     jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties.js  #jquery.i18n.properties
-    jquery.layout: /WacBaseAppPlugin/js/jquery/plugins/jquery.layout-1.3.0/jquery.layout-latest.js     # jquery.layout
+    
+#    jquery.layout: /WacBaseAppPlugin/js/jquery/plugins/jquery.layout-1.3.0/jquery.layout-latest.js     # jquery.layout
+    jquery.layout: /WacBaseAppPlugin/js/jquery/plugins/jquery.layout-1.3.0/jquery.layout.min.js     # jquery.layout
+
     jquery.blockUI: /WacBaseAppPlugin/js/jquery/plugins/blockUI/jquery.blockUI.js     # jquery.blockUI
     jquery.ui.panel: /WacBaseAppPlugin/js/jquery/plugins/ist-ui-panel/ui.panel.js     # jquery.ui.panel
 

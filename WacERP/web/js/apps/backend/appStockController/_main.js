@@ -44,8 +44,7 @@ objAppStockController = {
     },
     initLayout: function(){
         return this.layout.init();
-    }
-    ,
+    },
     hideLayout: function(){
         this.layout.hide();
     }
