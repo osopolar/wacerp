@@ -12,7 +12,7 @@
 //            echo "</div>";
 
 //              include_component(WacModule::getInstance()->getName("wacCountry"), WacComponentList::$inlineTableWidget);
-              include_component(WacModule::getInstance()->getName("wacSystemParameter"), WacComponentList::$moduleIndexListWidget);
+//              include_component(WacModule::getInstance()->getName("wacSystemParameter"), WacComponentList::$moduleIndexListWidget);
 
 //            echo WacWidgetHelper::getInstance()->getWidget(
 //                    WacModule::getInstance()->getName("wacCategory"), // be invoked module name

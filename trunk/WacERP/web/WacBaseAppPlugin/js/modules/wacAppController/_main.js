@@ -12,14 +12,6 @@
 var wacAppController;
 /***** variables declartion section, end *****/
 
-
-(function($){
-  $.wactest =$.fn.wactest = function() {
-     console.log("sth");
-
-  };
-})( jQuery );
-
 /***** init section, begin *****/
 $(document).ready(
     function() {
@@ -33,9 +25,9 @@ $(document).ready(
         wacAppController.bindEvents();
 
         /***     bind main controller events      ***/
-//        wacAppController.initDefaultApp("AppStockController");
+        wacAppController.initDefaultApp("AppStockController");
 //        wacAppController.initDefaultApp("WacAppTestController");
-        wacAppController.initDefaultApp("WacAppSystemController");
+//        wacAppController.initDefaultApp("WacAppSystemController");
 
 
 

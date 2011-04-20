@@ -338,4 +338,7 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
     font-size: 9pt;
 }
 
-
+/*   ist-ui-panel    */
+.wacNavPanel { margin: 0 0.5em 0.5em 0.5em; }
+                .centralPanel { margin-bottom: 1em; }
+                .fakeLink{ color:navy; cursor:pointer; }
