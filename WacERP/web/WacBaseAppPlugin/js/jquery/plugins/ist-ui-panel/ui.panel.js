@@ -396,8 +396,8 @@
             var o = this.options;
 
             el.bind({
-                'mouseover': function(){$(this).addClass(o.hoverClass);},
-                'mouseout': function(){$(this).removeClass(o.hoverClass);}
+                'mouseover': function(){$(this).parent().addClass(o.hoverClass);},
+                'mouseout': function(){$(this).parent().removeClass(o.hoverClass);}
                 });
         }
 

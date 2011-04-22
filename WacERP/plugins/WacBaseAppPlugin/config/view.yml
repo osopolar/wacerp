@@ -29,7 +29,6 @@ default:
     ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
 
     jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload_1.4.3.2/css/jquery.ui.plupload.css
-#    jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload/css/jquery.ui.plupload.css
 
     validationEngine: /WacBaseAppPlugin/css/jquery/plugins/formValidator/validationEngine.jquery.css
     wac.main: /WacBaseAppPlugin/css/wac/main.css
@@ -40,7 +39,6 @@ default:
 #    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
 #    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
 
-#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.min.js     # jquery
     jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.2.min.js     # jquery
     jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
     jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
@@ -61,7 +59,7 @@ default:
     jquery.layout: /WacBaseAppPlugin/js/jquery/plugins/jquery.layout-1.3.0/jquery.layout.min.js     # jquery.layout
 
     jquery.blockUI: /WacBaseAppPlugin/js/jquery/plugins/blockUI/jquery.blockUI.js     # jquery.blockUI
-    jquery.ui.panel: /WacBaseAppPlugin/js/jquery/plugins/ist-ui-panel/ui.panel.js     # jquery.ui.panel
+    jquery.ui.panel: /WacBaseAppPlugin/js/jquery/plugins/ist-ui-panel/ui.panel.min.js     # jquery.ui.panel
 
     jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
     jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/jquery.jqGrid.min.js     # jquery.jqGrid
