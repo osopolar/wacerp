@@ -11,10 +11,10 @@
 */
 .pane ,                /* outer pane class */
 .ui-layout-pane {    /* inner pane class */
-    background-color: #FFF;
-    border: 1px solid #777;
-    padding: 0;/* alignment & padding is on the inner-divs */
-    overflow: auto; /* will be auto-set to 'hidden' for any pane with a 'scrolling content div' */
+                     background-color: #FFF;
+                     border: 1px solid #777;
+                     padding: 0;/* alignment & padding is on the inner-divs */
+                     overflow: auto; /* will be auto-set to 'hidden' for any pane with a 'scrolling content div' */
 }
 li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 
@@ -29,11 +29,11 @@ li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 }
 .pane-north {
     border-bottom:    none;
-    }
-    .pane-north .content ,
-    .pane-south .content {
-        text-align: center;
-    }
+}
+.pane-north .layoutPaneContent ,
+.pane-south .layoutPaneContent {
+    text-align: center;
+}
 .pane-center {
     /* show off the inner-layout inside the outer-center-pane*/
     background-color: #F6F6F6;
@@ -41,7 +41,7 @@ li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 }
 
 /* inner divs inside Outer East/West panes */
-.header {
+.layoutPaneHeader {
     background: #80ade5 url(images/ui_layout/80ade5_40x100_textures_04_highlight_hard_100.png) 0 50% repeat-x;
     border-bottom: 1px solid #777;
     font-weight: bold;
@@ -49,20 +49,22 @@ li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
     padding: 2px 0 4px;
     position: relative;
     overflow: hidden;
+    font-size: 1em;
+    padding: 5px;
+    margin: 0;
 }
-.subhead ,
-.footer {
+.layoutPaneSubhead, .layoutPaneFooter {
     background: #d6d6d6 url(images/ui_layout/d6d6d6_40x100_textures_02_glass_80.png) 0 50% repeat-x;
     padding: 3px 10px;
     font-size: 0.85em;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    border-top: 1px solid #777;
 }
-.subhead { border-bottom: 1px solid #777; }
-.footer  { border-top: 1px solid #777; }
-#wacAppContainer .footer  { border-top: 1px solid #BBB; }
-.content {
+.layoutPaneSubhead { border-bottom: 1px solid #777; }
+#wacAppContainer .layoutPaneFooter  { border-top: 1px solid #BBB; }
+.layoutPaneContent {
     padding:    0px;
     position:    relative;
     overflow:    auto;
@@ -86,11 +88,11 @@ li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
 #wacAppContainer .ui-layout-content {
     padding: 10px;
 }
-#wacAppContainer .ui-layout-center h3 {
+/*#wacAppContainer .ui-layout-center h3 {
     font-size: 1em;
     padding: 5px;
     margin: 0;
-}
+}*/
 
 
 /*
@@ -192,53 +194,53 @@ ul.toolbar {
     text-align: left;
     background: #D6D6D6 url(images/ui_layout/d6d6d6_40x100_textures_02_glass_80.png) 0 50% repeat-x;
     border-top: 1px solid #BBB;
-    }
-    ul.toolbar li {
-        font-size: 0.9em;
-        margin: 0;
-        padding: 2px 7px;
-        float: left;
-        color: #000;
-        border: 1px solid transparent;
-        border-right-color: #BBB;
-        cursor: pointer;
-    }
-    ul.toolbar li:hover {
-        color: #005;
-        background: #EEE url(images/ui_layout/eeeeee_40x100_textures_02_glass_90.png) 0 50% repeat-x;
-        border-top-color: #BBB;
-        border-bottom-color: #BBB;
-    }
-    ul.toolbar li.first:hover {
-        border-left-color: #BBB;
-        }
-        ul.toolbar li span {
-            /* icons in toolbar */
-            width:             15px;
-            height:            15px;
-            margin-left:    -3px;
-            margin-right:    0.75ex;
-            vertical-align:    middle;
-            opacity:        0.6;
-            filter:            alpha(opacity=60);
-            display:        block;
-            display:        inline-block;
-        }
-        ul.toolbar li:hover span {
-            opacity: 1;
-            filter: alpha(opacity=100);
-        }
-        li.button-toggle-north span    ,
-        li.button-open-south span    { background: url(images/ui_layout/go-up-on.gif) no-repeat center; }
-        li.button-close-south span    { background: url(images/ui_layout/go-dn-on.gif) no-repeat center; }
-        li.button-pin-up span        { background: url(images/ui_layout/pin-up-on.gif) no-repeat center; }
-        li.button-pin-down span        { background: url(images/ui_layout/pin-dn-on.gif) no-repeat center; }
+}
+ul.toolbar li {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 2px 7px;
+    float: left;
+    color: #000;
+    border: 1px solid transparent;
+    border-right-color: #BBB;
+    cursor: pointer;
+}
+ul.toolbar li:hover {
+    color: #005;
+    background: #EEE url(images/ui_layout/eeeeee_40x100_textures_02_glass_90.png) 0 50% repeat-x;
+    border-top-color: #BBB;
+    border-bottom-color: #BBB;
+}
+ul.toolbar li.first:hover {
+    border-left-color: #BBB;
+}
+ul.toolbar li span {
+    /* icons in toolbar */
+    width:15px;
+    height:15px;
+    margin-left:-3px;
+    margin-right:0.75ex;
+    vertical-align:middle;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+    display:block;
+    display:inline-block;
+}
+ul.toolbar li:hover span {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+li.button-toggle-north span    ,
+li.button-open-south span    { background: url(images/ui_layout/go-up-on.gif) no-repeat center; }
+li.button-close-south span    { background: url(images/ui_layout/go-dn-on.gif) no-repeat center; }
+li.button-pin-up span        { background: url(images/ui_layout/pin-up-on.gif) no-repeat center; }
+li.button-pin-down span        { background: url(images/ui_layout/pin-dn-on.gif) no-repeat center; }
 
 /*
  *    extJS-STYLE TOGGLE & PIN BUTTONS
  *
  *    these 'extra buttons' are INSIDE the east/west panes
- */
+*/
 
 /* CUSTOM pin/close buttons */
 span.button-pin ,
@@ -268,13 +270,6 @@ span.button-close-west:hover    { background: url(images/ui_layout/go-lt-on.gif)
 span.button-close-east            { background: url(images/ui_layout/go-rt-off.gif) no-repeat center; }
 span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)  no-repeat center; }
 
-/* STANDARD toggler-buttons - when the east/west panes are 'closed' */
-/*.toggler-west-closed        { background: url(images/ui_layout/go-rt-off.gif) no-repeat center; }
-.toggler-west-closed:hover    { background: url(images/ui_layout/go-rt-on.gif)  no-repeat center; }
-.toggler-east-closed        { background: url(images/ui_layout/go-lt-off.gif) no-repeat center; }
-.toggler-east-closed:hover    { background: url(images/ui_layout/go-lt-on.gif)  no-repeat center; }*/
-
-
 /*
 *    INNER LAYOUT RESIZERS & TOGGLERS
 *
@@ -289,7 +284,7 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
 
 #wacAppContainer .ui-layout-resizer-north ,
 #wacAppContainer .ui-layout-resizer-south        { border-left:  1px solid #BBB !important;
-                                              border-right: 1px solid #BBB !important; }
+                                                   border-right: 1px solid #BBB !important; }
 #wacAppContainer .ui-layout-resizer-north-closed{ border-top:   1px solid #BBB !important; }
 #wacAppContainer .ui-layout-resizer-south-closed{ border-bottom:1px solid #BBB !important; }
 #wacAppContainer .ui-layout-resizer-west-closed    { border-left:  1px solid #BBB !important; }
@@ -321,19 +316,23 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
     display: block !important;
 }
 
-/*   jqgrid css    */
-.ui-jqgrid-sortable{
-    font-size: 9pt;
-}
+/*   jqgrid improve css    */
+.ui-jqgrid-sortable{font-size: 9pt;}
+.ui-jqgrid-btable{font-size: 9pt;}
+.ui-jqgrid-title {font-size: 11pt;}
 
-.ui-jqgrid-btable{
-    font-size: 9pt;
+/*   ist-ui-panel    */
+.wacNavPanel { margin: 0 0.5em 0.5em 0.5em; }
+.wacPanelContainer{
+    margin:0; padding:0;
+    font-size: 10px;
+    font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 }
-
-.ui-jqgrid-title {
-    font-size: 11pt;
+.wacPanelCenter{
+    padding:1em;
+    padding-top:0;
+    overflow:hidden;
 }
-
-#jqgh_menu{
-    font-size: 9pt;
-}
+.wacPanelDesktop { background-color:#eee; padding:1.5em; padding-bottom:3em; color:#444; }
+.wacPanelLeft{float: left;}
+.wacPanelRight{float: right;}

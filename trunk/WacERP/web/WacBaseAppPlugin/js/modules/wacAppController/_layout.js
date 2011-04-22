@@ -29,7 +29,7 @@ var options = {
             ,
             buttonClass:            "button"    // default = 'ui-layout-button'
             ,
-            contentSelector:        ".content"    // inner div to auto-size so only it scrolls, not the entire pane!
+            contentSelector:        ".layoutPaneContent"    // inner div to auto-size so only it scrolls, not the entire pane!
             ,
             contentIgnoreSelector:  "span"        // 'paneSelector' for content to 'ignore' when measuring room for content
             ,

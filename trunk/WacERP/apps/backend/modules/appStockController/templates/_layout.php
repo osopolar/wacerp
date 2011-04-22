@@ -1,6 +1,6 @@
 <div id="<?php echo $contextInfo["moduleName"]; ?>" style="display: none; height: 100%">
     <div class="ui-layout-center" id="<?php echo $contextInfo["moduleName"]; ?>Center">
-        <h3 class="header">
+        <h3 class="layoutPaneHeader">
             <?php
             echo $contextInfo["moduleName"];
             ?>
@@ -14,7 +14,7 @@
 //            echo "</div>"
             ?>
         </div>
-        <div class="footer"></div>
+        <div class="layoutPaneFooter"></div>
     </div>
 
     <div class="ui-layout-north">
@@ -30,7 +30,7 @@
         - South
     </div>
     <div class="ui-layout-west">
-        <div class="header">a2</div>
+        <div class="layoutPaneHeader">a2</div>
         <?php
         echo $contextInfo["moduleName"];
         ?>

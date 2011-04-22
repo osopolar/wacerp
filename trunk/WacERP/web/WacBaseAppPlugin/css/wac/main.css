@@ -167,9 +167,3 @@
 .wacTable{padding:5px;border:solid 1px #000;}
 .wacTableTitle{padding: 2px; min-width: 25px; border-bottom: 1px solid rgb(0, 0, 0); background-color: rgb(139, 164, 209); color: rgb(255, 255, 255);}
 .wacTableField{font-size: 11pt; border-bottom: 1px solid rgb(0, 0, 0); background-color: rgb(255, 255, 255);}
-
-
-/*   ist-ui-panel    */
-.wacNavPanel { margin: 0 0.5em 0.5em 0.5em; }
-.centralPanel { margin-bottom: 1em; }
-.fakeLink{ color:navy; cursor:pointer; }

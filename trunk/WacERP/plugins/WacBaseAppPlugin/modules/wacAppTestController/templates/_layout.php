@@ -1,11 +1,11 @@
 <div id="<?php echo $contextInfo["moduleName"]; ?>" style="display: none; height: 100%">
     <div class="ui-layout-center" id="<?php echo $contextInfo["moduleName"]; ?>Center">
-        <h3 class="header">
+        <h3 class="layoutPaneHeader">
             <?php
             echo $contextInfo["moduleName"];
             ?>
             - Center</h3>
-        <div class="content">
+        <div class="layoutPaneContent">
             <?php
 //            echo "<div id=\"{$contextInfo["moduleName"]}Label\">";
 //            echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
@@ -26,23 +26,23 @@
 //            );
             ?>
         </div>
-        <div class="footer">
+        <div class="layoutPaneFooter">
             Center - Footer
         </div>
     </div>
 
     <div class="ui-layout-north">
-        <div class="content">
+        <div class="layoutPaneContent">
         <?php
         echo $contextInfo["moduleName"];
         ?>
         - North
         </div>
-        <div class="footer">North - Footer</div>
+        <div class="layoutPaneFooter">North - Footer</div>
     </div>
     
     <div class="ui-layout-south">
-        <div class="content">
+        <div class="layoutPaneContent">
         <?php
         echo $contextInfo["moduleName"];
         ?>
@@ -51,26 +51,26 @@
     </div>
 
     <div class="ui-layout-west">
-        <div class="header">West Header</div>
-        <div class="subhead">East Sub Header</div>
-        <div class="content">
+        <div class="layoutPaneHeader">West Header</div>
+        <div class="layoutPaneSubhead">East Sub Header</div>
+        <div class="layoutPaneContent">
             <?php
         echo $contextInfo["moduleName"];
         ?>
         - West
         </div>
-       <div class="footer">West - Footer</div>
+       <div class="layoutPaneFooter">West - Footer</div>
     </div>
 
     <div class="ui-layout-east">
-        <div class="header">East Header</div>
-        <div class="subhead">East Sub Header</div>
-        <div class="content">
+        <div class="layoutPaneHeader">East Header</div>
+        <div class="layoutPaneSubhead">East Sub Header</div>
+        <div class="layoutPaneContent">
         <?php
         echo $contextInfo["moduleName"];
         ?>
         - East
         </div>
-        <div class="footer">East - Footer</div>
+        <div class="layoutPaneFooter">East - Footer</div>
     </div>
 </div>

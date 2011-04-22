@@ -1,28 +1,28 @@
 <div id="<?php echo $contextInfo["moduleName"]; ?>" style="display: none; height: 100%">
     <div class="ui-layout-center ui-helper-reset ui-widget-content" id="<?php echo $contextInfo["moduleName"]; ?>Center">
-        <h3 class="ui-widget-header ui-corner-top ui-helper-clearfix">
+        <h3 class="ui-widget-header ui-corner-top ui-helper-clearfix layoutPaneHeader">
             <?php
             echo $contextInfo["moduleName"];
             ?>
             - Center</h3>
-        <div class="content">
+        <div class="layoutPaneContent">
             <div id="<?php echo $contextInfo["moduleName"]; ?>Tabs" style="font-size:12px; overflow:auto;">
                     <ul></ul>
             </div>
         </div>
-        <div class="footer">
+        <div class="layoutPaneFooter">
             Center - Footer
         </div>
     </div>
 
     <div class="ui-layout-north">
-        <div class="content">
+        <div class="layoutPaneContent">
         <?php
         echo $contextInfo["moduleName"];
         ?>
         - North
         </div>
-        <div class="footer">North - Footer</div>
+        <div class="layoutPaneFooter">North - Footer</div>
     </div>
 
     <div class="ui-layout-south">
@@ -32,20 +32,20 @@
     </div>
 
     <div class="ui-layout-west">
-        <div class="content">
+        <div class="layoutPaneContent">
             <table id="<?php echo $contextInfo["moduleName"];?>Menu"></table>
         </div>
     </div>
 
     <div class="ui-layout-east">
-        <div class="header">East Header</div>
-        <div class="subhead">East Sub Header</div>
-        <div class="content">
+        <div class="layoutPaneHeader">East Header</div>
+        <div class="layoutPaneSubhead">East Sub Header</div>
+        <div class="layoutPaneContent">
         <?php
         echo $contextInfo["moduleName"];
         ?>
         - East
         </div>
-        <div class="footer">East - Footer</div>
+        <div class="layoutPaneFooter">East - Footer</div>
     </div>
 </div>

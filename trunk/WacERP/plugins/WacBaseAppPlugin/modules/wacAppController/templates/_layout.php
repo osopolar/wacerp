@@ -1,26 +1,26 @@
 <div class="ui-layout-west">
-    <div class="header">a1</div>
-    <div class="subhead"></div>
-    <div class="content"></div>
-    <div class="footer"></div>
+    <div class="layoutPaneHeader">a1</div>
+    <div class="layoutPaneSubhead"></div>
+    <div class="layoutPaneContent"></div>
+    <div class="layoutPaneFooter"></div>
 
 </div>
 
 <div class="ui-layout-east">
-    <div class="header"></div>
-    <div class="subhead"></div>
-    <div class="content"></div>
-    <div class="footer"></div>
+    <div class="layoutPaneHeader"></div>
+    <div class="layoutPaneSubhead"></div>
+    <div class="layoutPaneContent"></div>
+    <div class="layoutPaneFooter"></div>
 </div>
 
 <div class="ui-layout-north">
-    <div class="header">
+    <div class="layoutPaneHeader">
         <?php
             echo $contextInfo["moduleName"];
         ?>
         - North
     </div>
-    <div class="content">
+    <div class="layoutPaneContent">
         <?php
             echo $contextInfo["moduleName"];
         ?>
@@ -36,10 +36,10 @@
 
 
 <div class="ui-layout-south">
-    <div class="header"></div>
-    <div class="subhead"></div>
-    <div class="content"></div>
-    <div class="footer"></div>
+    <div class="layoutPaneHeader"></div>
+    <div class="layoutPaneSubhead"></div>
+    <div class="layoutPaneContent"></div>
+    <div class="layoutPaneFooter"></div>
 </div>
 
 
