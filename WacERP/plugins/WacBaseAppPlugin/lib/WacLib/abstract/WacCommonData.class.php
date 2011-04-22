@@ -13,6 +13,12 @@ abstract class WacCommonData
 //        'inactive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inactive", 'caption'=>"Status Inactive"),
 //    );
 
+    // to know the key in range or not
+    public function inRange($key)
+    {
+        return in_array($key, array_keys($this->_params));
+    }
+
     /*
      * get by group
      */
