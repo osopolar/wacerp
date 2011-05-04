@@ -9,10 +9,13 @@
 				<Model ID="{24DED88D-EE02-4262-870F-DFC99E86FC6B}" Name="ObjectOrientedModel_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="ObjectOrientedModel_1.oom"/>
 			</Folder>
 		</Folder>
-		<Folder Name="Database"/>
+		<Folder Expanded="Yes" Name="Database">
+			<Model Expanded="Yes" ID="{DAB1DA8E-BDA9-4DA1-A213-64F55CEEFD3C}" Name="PhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_1.pdm"/>
+			<Model Expanded="Yes" ID="{1A79BB87-CAC2-4DD2-993E-19123602D1D0}" Name="PhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="/WebAppChina/WacStorehouse/trunk/doc/design/PhysicalDataModel_1.pdm"/>
+		</Folder>
 		<Folder Name="UserCase"/>
 		<Folder Expanded="Yes" Name="UI Component">
-			<Model ID="{CB7BDA7C-F3FE-4DE8-BC09-03BB6D0ADBA4}" Name="UI Component Structure Diagram" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="UI_Component_Structure_Diagram.oom"/>
+			<Model ID="{CB7BDA7C-F3FE-4DE8-BC09-03BB6D0ADBA4}" Loaded="No" Name="UI Component Structure Diagram" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="UI_Component_Structure_Diagram.oom"/>
 		</Folder>
 	</Local>
 	<BrowserModule Name="Repository"/>
