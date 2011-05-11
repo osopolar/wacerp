@@ -9,7 +9,7 @@
 				<Model Expanded="Yes" ID="{24DED88D-EE02-4262-870F-DFC99E86FC6B}" Name="ObjectOrientedModel_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="ObjectOrientedModel_1.oom"/>
 			</Folder>
 		</Folder>
-		<Folder Expanded="Yes" Name="Database" Selected="Yes">
+		<Folder Expanded="Yes" Name="Database">
 			<Model Expanded="Yes" ID="{DAB1DA8E-BDA9-4DA1-A213-64F55CEEFD3C}" Name="PhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_1.pdm"/>
 		</Folder>
 		<Folder Name="UserCase"/>
