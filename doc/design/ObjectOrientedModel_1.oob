@@ -2485,8 +2485,8 @@ Multiplicity 0 Arial,8,N</a:FontList>
 <o:GeneralizationSymbol Id="o34">
 <a:CreationDate>1304935368</a:CreationDate>
 <a:ModificationDate>1304935368</a:ModificationDate>
-<a:Rect>((-6370,20371), (0,27746))</a:Rect>
-<a:ListOfPoints>((-6370,20371),(0,27746))</a:ListOfPoints>
+<a:Rect>((-6236,20371), (0,27746))</a:Rect>
+<a:ListOfPoints>((-6236,20371),(0,27746))</a:ListOfPoints>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>16711680</a:LineColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2731,7 +2731,7 @@ InterfaceMethod 0 Arial,8,N</a:FontList>
 <o:ClassSymbol Id="o35">
 <a:CreationDate>1280399472</a:CreationDate>
 <a:ModificationDate>1304935333</a:ModificationDate>
-<a:Rect>((-12104,16801), (196,20922))</a:Rect>
+<a:Rect>((-10116,16801), (-1792,20922))</a:Rect>
 <a:LineColor>16711680</a:LineColor>
 <a:FillColor>12648384</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -3014,11 +3014,11 @@ ClassMethod 0 Arial,8,N</a:FontList>
 </o:Class>
 <o:Class Id="o61">
 <a:ObjectID>5566F295-D160-408B-83D2-240D1230C938</a:ObjectID>
-<a:Name>StorehouseMaterialDeliveryOrder</a:Name>
-<a:Code>StorehouseMaterialDeliveryOrder</a:Code>
+<a:Name>MaterialDeliveryOrder</a:Name>
+<a:Code>MaterialDeliveryOrder</a:Code>
 <a:CreationDate>1280399472</a:CreationDate>
 <a:Creator>ben</a:Creator>
-<a:ModificationDate>1305023635</a:ModificationDate>
+<a:ModificationDate>1305025243</a:ModificationDate>
 <a:Modifier>ben</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 </o:Class>
