@@ -3,7 +3,7 @@
 /* Created on:     5/11/2011 6:48:07 PM                         */
 /*==============================================================*/
 
-
+/*
 drop index Index_1 on wac_customer;
 
 drop index Index_2 on wac_customer;
@@ -207,7 +207,7 @@ drop table if exists wac_storehouse_parameter;
 drop table if exists wac_storehouse_quickstat;
 
 drop table if exists wac_storeroom;
-
+*/
 /*==============================================================*/
 /* Table: wac_customer                                          */
 /*==============================================================*/
