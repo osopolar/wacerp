@@ -1,7 +1,7 @@
 <div id="container" class="wacPanelContainer">
     <div id="lLeft" class="wacPanelLeft">
         <div id="panelLeft_1" class="wacNavPanel">
-            <h3>Left panel #1</h3>
+            <h3>测试 Left panel #1</h3>
             <div>
 		Panel's initial options:
                 <ul>

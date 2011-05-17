@@ -1,7 +1,7 @@
 WacCustomer:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_customer
   columns:
     id:
@@ -78,10 +78,19 @@ WacCustomer:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Addresses:
+      class: WacCustomerAddress
+      local: id
+      foreign: customer_id
+      type: many
+      foreignType: one
+      foreignAlias: Customer
+      
 WacCustomerAddress:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_customer_address
   columns:
     id:
@@ -177,7 +186,7 @@ WacCustomerAddress:
 WacMaterial:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material
   columns:
     id:
@@ -277,10 +286,17 @@ WacMaterial:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Categories:
+      class: WacMaterialCategory
+      local: material_id
+      foreign: category_id
+      refClass: WacMaterialCategoryLink
+      
 WacMaterialDeliveryOrder:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_delivery_order
   columns:
     id:
@@ -418,10 +434,45 @@ WacMaterialDeliveryOrder:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    User:
+      class: WacGuardUser
+      local: user_id
+      foreign: id
+      type: one
+    SrcStorehouse:
+      class: WacStorehouse
+      local: src_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialDeliveryOrder
+    SrcStoreroom:
+      class: WacStoreroom
+      local: src_storeroom_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialDeliveryOrder
+    DstStorehouse:
+      class: WacStorehouse
+      local: dst_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialDeliveryOrder
+    DstStoreroom:
+      class: WacStoreroom
+      local: dst_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialDeliveryOrder
+
 WacMaterialDeliveryOrderItem:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_delivery_order_item
   columns:
     id:
@@ -529,10 +580,23 @@ WacMaterialDeliveryOrderItem:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Order:
+      class: WacMaterialDeliveryOrder
+      local: order_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: Items
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
 WacMaterialLang:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_lang
   columns:
     id:
@@ -623,10 +687,16 @@ WacMaterialLang:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Language:
+      class: WacLanguage
+      local: id
+      foreign: lang_id
+      type: one
 WacMaterialPurchaseOrder:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_purchase_order
   columns:
     id:
@@ -732,10 +802,16 @@ WacMaterialPurchaseOrder:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    User:
+      class: WacGuardUser
+      local: user_id
+      foreign: id
+      type: one
 WacMaterialPurchaseOrderItem:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_purchase_order_item
   columns:
     id:
@@ -843,10 +919,23 @@ WacMaterialPurchaseOrderItem:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Order:
+      class: WacMaterialPurchaseOrder
+      local: order_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: Items
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
 WacMaterialSaleOrder:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_sale_order
   columns:
     id:
@@ -976,10 +1065,35 @@ WacMaterialSaleOrder:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    User:
+      class: WacGuardUser
+      local: user_id
+      foreign: id
+      type: one
+    Cusotmer:
+      class: WacCustomer
+      local: customer_id
+      foreign: id
+      type: one
+    SrcStorehouse:
+      class: WacStorehouse
+      local: src_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialSaleOrder
+    SrcStoreroom:
+      class: WacStoreroom
+      local: src_storeroom_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialSaleOrder
 WacMaterialSaleOrderItem:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_sale_order_item
   columns:
     id:
@@ -1087,10 +1201,24 @@ WacMaterialSaleOrderItem:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Order:
+      class: WacMaterialSaleOrder
+      local: order_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: Items
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
+
 WacMaterialShippingOrder:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_shipping_order
   columns:
     id:
@@ -1236,10 +1364,45 @@ WacMaterialShippingOrder:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    User:
+      class: WacGuardUser
+      local: user_id
+      foreign: id
+      type: one
+    Cusotmer:
+      class: WacCustomer
+      local: customer_id
+      foreign: id
+      type: one
+    CusotmerAddress:
+      class: WacCusotmerAddress
+      local: customer_address_id
+      foreign: id
+      type: one
+    SrcStorehouse:
+      class: WacStorehouse
+      local: src_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialShippingOrder
+    SrcStoreroom:
+      class: WacStoreroom
+      local: src_storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialShippingOrder
+    ShippingMethod:
+      class: WacShippingMethod
+      local: shipping_method_id
+      foreign: id
+      type: one
 WacMaterialShippingOrderItem:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_material_shipping_order_item
   columns:
     id:
@@ -1347,10 +1510,23 @@ WacMaterialShippingOrderItem:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Order:
+      class: WacMaterialShippingOrder
+      local: order_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: Items
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
 WacOrderState:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_order_state
   columns:
     id:
@@ -1452,10 +1628,49 @@ WacOrderState:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Changer:
+      class: WacGuardUser
+      local: changer_id
+      foreign: id
+      type: one
+
+WacMaterialDeliveryOrderState:
+  package: Storehouse.
+  inheritance:
+    extends: WacOrderState
+    type: column_aggregation
+    keyField: order_type
+    keyValue: 1
+
+WacMaterialPurchaseOrderState:
+  package: Storehouse.
+  inheritance:
+    extends: WacOrderState
+    type: column_aggregation
+    keyField: order_type
+    keyValue: 2
+
+WacMaterialSaleOrderState:
+  package: Storehouse.
+  inheritance:
+    extends: WacOrderState
+    type: column_aggregation
+    keyField: order_type
+    keyValue: 3
+
+WacMaterialShippingOrderState:
+  package: Storehouse.
+  inheritance:
+    extends: WacOrderState
+    type: column_aggregation
+    keyField: order_type
+    keyValue: 4
+
 WacShippingMethod:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_shipping_method
   columns:
     id:
@@ -1542,7 +1757,7 @@ WacShippingMethod:
 WacStorehouse:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storehouse
   columns:
     id:
@@ -1694,7 +1909,7 @@ WacStorehouse:
 WacStorehouseMaterialBizItem:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storehouse_material_biz_item
   columns:
     id:
@@ -1830,10 +2045,23 @@ WacStorehouseMaterialBizItem:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Storehouse:
+      class: WacStorehouse
+      local: storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialBizItems
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
 WacStorehouseMaterialQuantity:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storehouse_material_quantity
   columns:
     id:
@@ -1941,10 +2169,30 @@ WacStorehouseMaterialQuantity:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Storehouse:
+      class: WacStorehouse
+      local: storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialQuantity
+    Storeroom:
+      class: WacStoreroom
+      local: storeroom_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: MaterialQuantity
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
 WacStorehouseParameter:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storehouse_parameter
   columns:
     id:
@@ -2036,10 +2284,18 @@ WacStorehouseParameter:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Storehouse:
+      class: WacStorehouse
+      local: storehouse_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: Params
 WacStorehouseQuickstat:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storehouse_quickstat
   columns:
     id:
@@ -2147,10 +2403,22 @@ WacStorehouseQuickstat:
       default: '0000-00-00 00:00:00'
       notnull: true
       autoincrement: false
+  relations:
+    Storehouse:
+      class: WacStorehouse
+      local: storehouse_id
+      foreign: id
+      type: one
+    Material:
+      class: WacMaterial
+      local: material_id
+      foreign: id
+      type: one
+
 WacStoreroom:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs:      [Timestampable]
+  actAs: [Timestampable]
   tableName: wac_storeroom
   columns:
     id:
@@ -2211,6 +2479,170 @@ WacStoreroom:
       primary: false
       notnull: false
       autoincrement: false
+    pr_int1:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    pr_int2:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    pr_str1:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pr_str2:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    priority:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '50'
+      notnull: false
+      autoincrement: false
+    is_avail:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0000-00-00 00:00:00'
+      notnull: true
+      autoincrement: false
+  relations:
+    Storehouse:
+      class: WacStorehouse
+      local: storehouse_id
+      foreign: id
+      type: one
+WacMaterialCategory:
+  connection: wac_db_connection1
+  package: Storehouse.
+  actAs: [Timestampable]
+  tableName: wac_material_category
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    parent_id:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    position:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    left_number:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    right_number:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    level:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    user_id:
+      type: integer(8)
+      default: '0'
+      notnull: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    type: string(255)
+    code: string(255)
+    name: string(255)
+    caption: string(255)
+    path: string(255)
+    memo: string()
+    pr_str1: string(255)
+    pr_str2: string(255)
+  relations:
+    User:
+      class: WacGuardUser
+      local: user_id
+      foreign: id
+      type: one
+    Parent:
+      class: WacMaterialCategory
+      local: parent_id
+      foreign: id
+      type: one
+    Materials:
+      class: WacMaterial
+      local: category_id
+      foreign: material_id
+      refClass: WacMaterialCategoryLink
+
+WacMaterialCategoryLink:
+  connection: wac_db_connection1
+  package: Storehouse.
+  actAs: [Timestampable]
+  tableName: wac_material_cateogry_link
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    material_id:
+      type: integer(8)
+      primary: true
+    category_id:
+      type: integer(8)
+      primary: true
     pr_int1:
       type: integer(4)
       fixed: false

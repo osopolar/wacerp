@@ -21,6 +21,9 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialQuantity', 
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacStorehouse $Storehouse
+ * @property WacStoreroom $Storeroom
+ * @property WacMaterial $Material
  * 
  * @method integer                       getId()            Returns the current record's "id" value
  * @method integer                       getStorehouseId()  Returns the current record's "storehouse_id" value
@@ -36,6 +39,9 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialQuantity', 
  * @method integer                       getIsAvail()       Returns the current record's "is_avail" value
  * @method timestamp                     getCreatedAt()     Returns the current record's "created_at" value
  * @method timestamp                     getUpdatedAt()     Returns the current record's "updated_at" value
+ * @method WacStorehouse                 getStorehouse()    Returns the current record's "Storehouse" value
+ * @method WacStoreroom                  getStoreroom()     Returns the current record's "Storeroom" value
+ * @method WacMaterial                   getMaterial()      Returns the current record's "Material" value
  * @method WacStorehouseMaterialQuantity setId()            Sets the current record's "id" value
  * @method WacStorehouseMaterialQuantity setStorehouseId()  Sets the current record's "storehouse_id" value
  * @method WacStorehouseMaterialQuantity setStoreroomId()   Sets the current record's "storeroom_id" value
@@ -50,6 +56,9 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialQuantity', 
  * @method WacStorehouseMaterialQuantity setIsAvail()       Sets the current record's "is_avail" value
  * @method WacStorehouseMaterialQuantity setCreatedAt()     Sets the current record's "created_at" value
  * @method WacStorehouseMaterialQuantity setUpdatedAt()     Sets the current record's "updated_at" value
+ * @method WacStorehouseMaterialQuantity setStorehouse()    Sets the current record's "Storehouse" value
+ * @method WacStorehouseMaterialQuantity setStoreroom()     Sets the current record's "Storeroom" value
+ * @method WacStorehouseMaterialQuantity setMaterial()      Sets the current record's "Material" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -199,6 +208,18 @@ abstract class BaseWacStorehouseMaterialQuantity extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacStorehouse as Storehouse', array(
+             'local' => 'storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacStoreroom as Storeroom', array(
+             'local' => 'storeroom_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacMaterial as Material', array(
+             'local' => 'material_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

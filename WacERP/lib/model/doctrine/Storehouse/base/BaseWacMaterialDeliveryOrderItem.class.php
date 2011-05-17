@@ -21,6 +21,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialDeliveryOrderItem', '
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacMaterialDeliveryOrder $Order
+ * @property WacMaterial $Material
  * 
  * @method integer                      getId()            Returns the current record's "id" value
  * @method integer                      getOrderId()       Returns the current record's "order_id" value
@@ -36,6 +38,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialDeliveryOrderItem', '
  * @method integer                      getIsAvail()       Returns the current record's "is_avail" value
  * @method timestamp                    getCreatedAt()     Returns the current record's "created_at" value
  * @method timestamp                    getUpdatedAt()     Returns the current record's "updated_at" value
+ * @method WacMaterialDeliveryOrder     getOrder()         Returns the current record's "Order" value
+ * @method WacMaterial                  getMaterial()      Returns the current record's "Material" value
  * @method WacMaterialDeliveryOrderItem setId()            Sets the current record's "id" value
  * @method WacMaterialDeliveryOrderItem setOrderId()       Sets the current record's "order_id" value
  * @method WacMaterialDeliveryOrderItem setMaterialId()    Sets the current record's "material_id" value
@@ -50,6 +54,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialDeliveryOrderItem', '
  * @method WacMaterialDeliveryOrderItem setIsAvail()       Sets the current record's "is_avail" value
  * @method WacMaterialDeliveryOrderItem setCreatedAt()     Sets the current record's "created_at" value
  * @method WacMaterialDeliveryOrderItem setUpdatedAt()     Sets the current record's "updated_at" value
+ * @method WacMaterialDeliveryOrderItem setOrder()         Sets the current record's "Order" value
+ * @method WacMaterialDeliveryOrderItem setMaterial()      Sets the current record's "Material" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -199,6 +205,14 @@ abstract class BaseWacMaterialDeliveryOrderItem extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacMaterialDeliveryOrder as Order', array(
+             'local' => 'order_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacMaterial as Material', array(
+             'local' => 'material_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

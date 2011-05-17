@@ -1,5 +1,5 @@
 <div class="ui-layout-west">
-    <div class="layoutPaneHeader">a1</div>
+    <div class="layoutPaneHeader"></div>
     <div class="layoutPaneSubhead"></div>
     <div class="layoutPaneContent"></div>
     <div class="layoutPaneFooter"></div>

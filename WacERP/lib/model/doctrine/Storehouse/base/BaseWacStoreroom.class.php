@@ -23,39 +23,54 @@ Doctrine_Manager::getInstance()->bindComponent('WacStoreroom', 'wac_db_connectio
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacStorehouse $Storehouse
+ * @property Doctrine_Collection $MaterialDeliveryOrder
+ * @property Doctrine_Collection $MaterialSaleOrder
+ * @property Doctrine_Collection $MaterialShippingOrder
+ * @property Doctrine_Collection $MaterialQuantity
  * 
- * @method integer      getId()                  Returns the current record's "id" value
- * @method integer      getStorehouseId()        Returns the current record's "storehouse_id" value
- * @method string       getName()                Returns the current record's "name" value
- * @method string       getCode()                Returns the current record's "code" value
- * @method float        getAreaSize()            Returns the current record's "area_size" value
- * @method string       getAreaSizeUnitCode()    Returns the current record's "area_size_unit_code" value
- * @method float        getCapacity()            Returns the current record's "capacity" value
- * @method string       getCapacityUnitCode()    Returns the current record's "capacity_unit_code" value
- * @method integer      getPrInt1()              Returns the current record's "pr_int1" value
- * @method integer      getPrInt2()              Returns the current record's "pr_int2" value
- * @method string       getPrStr1()              Returns the current record's "pr_str1" value
- * @method string       getPrStr2()              Returns the current record's "pr_str2" value
- * @method integer      getPriority()            Returns the current record's "priority" value
- * @method integer      getIsAvail()             Returns the current record's "is_avail" value
- * @method timestamp    getCreatedAt()           Returns the current record's "created_at" value
- * @method timestamp    getUpdatedAt()           Returns the current record's "updated_at" value
- * @method WacStoreroom setId()                  Sets the current record's "id" value
- * @method WacStoreroom setStorehouseId()        Sets the current record's "storehouse_id" value
- * @method WacStoreroom setName()                Sets the current record's "name" value
- * @method WacStoreroom setCode()                Sets the current record's "code" value
- * @method WacStoreroom setAreaSize()            Sets the current record's "area_size" value
- * @method WacStoreroom setAreaSizeUnitCode()    Sets the current record's "area_size_unit_code" value
- * @method WacStoreroom setCapacity()            Sets the current record's "capacity" value
- * @method WacStoreroom setCapacityUnitCode()    Sets the current record's "capacity_unit_code" value
- * @method WacStoreroom setPrInt1()              Sets the current record's "pr_int1" value
- * @method WacStoreroom setPrInt2()              Sets the current record's "pr_int2" value
- * @method WacStoreroom setPrStr1()              Sets the current record's "pr_str1" value
- * @method WacStoreroom setPrStr2()              Sets the current record's "pr_str2" value
- * @method WacStoreroom setPriority()            Sets the current record's "priority" value
- * @method WacStoreroom setIsAvail()             Sets the current record's "is_avail" value
- * @method WacStoreroom setCreatedAt()           Sets the current record's "created_at" value
- * @method WacStoreroom setUpdatedAt()           Sets the current record's "updated_at" value
+ * @method integer             getId()                    Returns the current record's "id" value
+ * @method integer             getStorehouseId()          Returns the current record's "storehouse_id" value
+ * @method string              getName()                  Returns the current record's "name" value
+ * @method string              getCode()                  Returns the current record's "code" value
+ * @method float               getAreaSize()              Returns the current record's "area_size" value
+ * @method string              getAreaSizeUnitCode()      Returns the current record's "area_size_unit_code" value
+ * @method float               getCapacity()              Returns the current record's "capacity" value
+ * @method string              getCapacityUnitCode()      Returns the current record's "capacity_unit_code" value
+ * @method integer             getPrInt1()                Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()                Returns the current record's "pr_int2" value
+ * @method string              getPrStr1()                Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()                Returns the current record's "pr_str2" value
+ * @method integer             getPriority()              Returns the current record's "priority" value
+ * @method integer             getIsAvail()               Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()             Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()             Returns the current record's "updated_at" value
+ * @method WacStorehouse       getStorehouse()            Returns the current record's "Storehouse" value
+ * @method Doctrine_Collection getMaterialDeliveryOrder() Returns the current record's "MaterialDeliveryOrder" collection
+ * @method Doctrine_Collection getMaterialSaleOrder()     Returns the current record's "MaterialSaleOrder" collection
+ * @method Doctrine_Collection getMaterialShippingOrder() Returns the current record's "MaterialShippingOrder" collection
+ * @method Doctrine_Collection getMaterialQuantity()      Returns the current record's "MaterialQuantity" collection
+ * @method WacStoreroom        setId()                    Sets the current record's "id" value
+ * @method WacStoreroom        setStorehouseId()          Sets the current record's "storehouse_id" value
+ * @method WacStoreroom        setName()                  Sets the current record's "name" value
+ * @method WacStoreroom        setCode()                  Sets the current record's "code" value
+ * @method WacStoreroom        setAreaSize()              Sets the current record's "area_size" value
+ * @method WacStoreroom        setAreaSizeUnitCode()      Sets the current record's "area_size_unit_code" value
+ * @method WacStoreroom        setCapacity()              Sets the current record's "capacity" value
+ * @method WacStoreroom        setCapacityUnitCode()      Sets the current record's "capacity_unit_code" value
+ * @method WacStoreroom        setPrInt1()                Sets the current record's "pr_int1" value
+ * @method WacStoreroom        setPrInt2()                Sets the current record's "pr_int2" value
+ * @method WacStoreroom        setPrStr1()                Sets the current record's "pr_str1" value
+ * @method WacStoreroom        setPrStr2()                Sets the current record's "pr_str2" value
+ * @method WacStoreroom        setPriority()              Sets the current record's "priority" value
+ * @method WacStoreroom        setIsAvail()               Sets the current record's "is_avail" value
+ * @method WacStoreroom        setCreatedAt()             Sets the current record's "created_at" value
+ * @method WacStoreroom        setUpdatedAt()             Sets the current record's "updated_at" value
+ * @method WacStoreroom        setStorehouse()            Sets the current record's "Storehouse" value
+ * @method WacStoreroom        setMaterialDeliveryOrder() Sets the current record's "MaterialDeliveryOrder" collection
+ * @method WacStoreroom        setMaterialSaleOrder()     Sets the current record's "MaterialSaleOrder" collection
+ * @method WacStoreroom        setMaterialShippingOrder() Sets the current record's "MaterialShippingOrder" collection
+ * @method WacStoreroom        setMaterialQuantity()      Sets the current record's "MaterialQuantity" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -223,6 +238,26 @@ abstract class BaseWacStoreroom extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacStorehouse as Storehouse', array(
+             'local' => 'storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('WacMaterialDeliveryOrder as MaterialDeliveryOrder', array(
+             'local' => 'id',
+             'foreign' => 'src_storeroom_id'));
+
+        $this->hasMany('WacMaterialSaleOrder as MaterialSaleOrder', array(
+             'local' => 'id',
+             'foreign' => 'src_storeroom_id'));
+
+        $this->hasMany('WacMaterialShippingOrder as MaterialShippingOrder', array(
+             'local' => 'id',
+             'foreign' => 'src_storehouse_id'));
+
+        $this->hasMany('WacStorehouseMaterialQuantity as MaterialQuantity', array(
+             'local' => 'id',
+             'foreign' => 'storeroom_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

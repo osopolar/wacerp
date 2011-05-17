@@ -24,6 +24,11 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialSaleOrder', 'wac_db_c
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacGuardUser $User
+ * @property WacCustomer $Cusotmer
+ * @property WacStorehouse $SrcStorehouse
+ * @property WacStoreroom $SrcStoreroom
+ * @property Doctrine_Collection $Items
  * 
  * @method integer              getId()                Returns the current record's "id" value
  * @method string               getName()              Returns the current record's "name" value
@@ -42,6 +47,11 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialSaleOrder', 'wac_db_c
  * @method integer              getIsAvail()           Returns the current record's "is_avail" value
  * @method timestamp            getCreatedAt()         Returns the current record's "created_at" value
  * @method timestamp            getUpdatedAt()         Returns the current record's "updated_at" value
+ * @method WacGuardUser         getUser()              Returns the current record's "User" value
+ * @method WacCustomer          getCusotmer()          Returns the current record's "Cusotmer" value
+ * @method WacStorehouse        getSrcStorehouse()     Returns the current record's "SrcStorehouse" value
+ * @method WacStoreroom         getSrcStoreroom()      Returns the current record's "SrcStoreroom" value
+ * @method Doctrine_Collection  getItems()             Returns the current record's "Items" collection
  * @method WacMaterialSaleOrder setId()                Sets the current record's "id" value
  * @method WacMaterialSaleOrder setName()              Sets the current record's "name" value
  * @method WacMaterialSaleOrder setCode()              Sets the current record's "code" value
@@ -59,6 +69,11 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialSaleOrder', 'wac_db_c
  * @method WacMaterialSaleOrder setIsAvail()           Sets the current record's "is_avail" value
  * @method WacMaterialSaleOrder setCreatedAt()         Sets the current record's "created_at" value
  * @method WacMaterialSaleOrder setUpdatedAt()         Sets the current record's "updated_at" value
+ * @method WacMaterialSaleOrder setUser()              Sets the current record's "User" value
+ * @method WacMaterialSaleOrder setCusotmer()          Sets the current record's "Cusotmer" value
+ * @method WacMaterialSaleOrder setSrcStorehouse()     Sets the current record's "SrcStorehouse" value
+ * @method WacMaterialSaleOrder setSrcStoreroom()      Sets the current record's "SrcStoreroom" value
+ * @method WacMaterialSaleOrder setItems()             Sets the current record's "Items" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -236,6 +251,26 @@ abstract class BaseWacMaterialSaleOrder extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacCustomer as Cusotmer', array(
+             'local' => 'customer_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacStorehouse as SrcStorehouse', array(
+             'local' => 'src_storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacStoreroom as SrcStoreroom', array(
+             'local' => 'src_storeroom_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('WacMaterialSaleOrderItem as Items', array(
+             'local' => 'id',
+             'foreign' => 'order_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

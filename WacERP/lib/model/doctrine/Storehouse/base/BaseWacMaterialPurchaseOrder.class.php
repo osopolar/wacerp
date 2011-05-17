@@ -21,6 +21,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialPurchaseOrder', 'wac_
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacGuardUser $User
+ * @property Doctrine_Collection $Items
  * 
  * @method integer                  getId()          Returns the current record's "id" value
  * @method string                   getName()        Returns the current record's "name" value
@@ -36,6 +38,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialPurchaseOrder', 'wac_
  * @method integer                  getIsAvail()     Returns the current record's "is_avail" value
  * @method timestamp                getCreatedAt()   Returns the current record's "created_at" value
  * @method timestamp                getUpdatedAt()   Returns the current record's "updated_at" value
+ * @method WacGuardUser             getUser()        Returns the current record's "User" value
+ * @method Doctrine_Collection      getItems()       Returns the current record's "Items" collection
  * @method WacMaterialPurchaseOrder setId()          Sets the current record's "id" value
  * @method WacMaterialPurchaseOrder setName()        Sets the current record's "name" value
  * @method WacMaterialPurchaseOrder setCode()        Sets the current record's "code" value
@@ -50,6 +54,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialPurchaseOrder', 'wac_
  * @method WacMaterialPurchaseOrder setIsAvail()     Sets the current record's "is_avail" value
  * @method WacMaterialPurchaseOrder setCreatedAt()   Sets the current record's "created_at" value
  * @method WacMaterialPurchaseOrder setUpdatedAt()   Sets the current record's "updated_at" value
+ * @method WacMaterialPurchaseOrder setUser()        Sets the current record's "User" value
+ * @method WacMaterialPurchaseOrder setItems()       Sets the current record's "Items" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -197,6 +203,14 @@ abstract class BaseWacMaterialPurchaseOrder extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('WacMaterialPurchaseOrderItem as Items', array(
+             'local' => 'id',
+             'foreign' => 'order_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

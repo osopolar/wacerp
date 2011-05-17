@@ -19,6 +19,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialLang', 'wac_db_connec
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacLanguage $Language
  * 
  * @method integer         getId()         Returns the current record's "id" value
  * @method integer         getLangId()     Returns the current record's "lang_id" value
@@ -32,6 +33,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialLang', 'wac_db_connec
  * @method integer         getIsAvail()    Returns the current record's "is_avail" value
  * @method timestamp       getCreatedAt()  Returns the current record's "created_at" value
  * @method timestamp       getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method WacLanguage     getLanguage()   Returns the current record's "Language" value
  * @method WacMaterialLang setId()         Sets the current record's "id" value
  * @method WacMaterialLang setLangId()     Sets the current record's "lang_id" value
  * @method WacMaterialLang setName()       Sets the current record's "name" value
@@ -44,6 +46,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialLang', 'wac_db_connec
  * @method WacMaterialLang setIsAvail()    Sets the current record's "is_avail" value
  * @method WacMaterialLang setCreatedAt()  Sets the current record's "created_at" value
  * @method WacMaterialLang setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacMaterialLang setLanguage()   Sets the current record's "Language" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -172,6 +175,10 @@ abstract class BaseWacMaterialLang extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacLanguage as Language', array(
+             'local' => 'id',
+             'foreign' => 'lang_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

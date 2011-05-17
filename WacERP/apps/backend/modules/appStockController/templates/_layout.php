@@ -7,7 +7,8 @@
             - Center</h3>
         <div class="ui-layout-content">
             <?php
-            include_component(WacModule::getInstance()->getName("wacTest"), "panelTest");
+//            include_component(WacModule::getInstance()->getName("wacTest"), "panelTest");
+            include_component($contextInfo["moduleName"], "dashboard");
 
 //            echo "<div id=\"{$contextInfo["moduleName"]}Label\">";
 //            echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
@@ -30,7 +31,7 @@
         - South
     </div>
     <div class="ui-layout-west">
-        <div class="layoutPaneHeader">a2</div>
+        <div class="layoutPaneHeader"></div>
         <?php
         echo $contextInfo["moduleName"];
         ?>

@@ -19,6 +19,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseParameter', 'wac_db
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacStorehouse $Storehouse
  * 
  * @method integer                getId()            Returns the current record's "id" value
  * @method integer                getStorehouseId()  Returns the current record's "storehouse_id" value
@@ -32,6 +33,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseParameter', 'wac_db
  * @method integer                getIsAvail()       Returns the current record's "is_avail" value
  * @method timestamp              getCreatedAt()     Returns the current record's "created_at" value
  * @method timestamp              getUpdatedAt()     Returns the current record's "updated_at" value
+ * @method WacStorehouse          getStorehouse()    Returns the current record's "Storehouse" value
  * @method WacStorehouseParameter setId()            Sets the current record's "id" value
  * @method WacStorehouseParameter setStorehouseId()  Sets the current record's "storehouse_id" value
  * @method WacStorehouseParameter setCode()          Sets the current record's "code" value
@@ -44,6 +46,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseParameter', 'wac_db
  * @method WacStorehouseParameter setIsAvail()       Sets the current record's "is_avail" value
  * @method WacStorehouseParameter setCreatedAt()     Sets the current record's "created_at" value
  * @method WacStorehouseParameter setUpdatedAt()     Sets the current record's "updated_at" value
+ * @method WacStorehouseParameter setStorehouse()    Sets the current record's "Storehouse" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -173,6 +176,10 @@ abstract class BaseWacStorehouseParameter extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacStorehouse as Storehouse', array(
+             'local' => 'storehouse_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);
