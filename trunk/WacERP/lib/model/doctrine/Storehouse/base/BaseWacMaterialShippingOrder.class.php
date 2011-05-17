@@ -26,6 +26,12 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacGuardUser $User
+ * @property WacCustomer $Cusotmer
+ * @property WacStorehouse $SrcStorehouse
+ * @property WacStoreroom $SrcStoreroom
+ * @property WacShippingMethod $ShippingMethod
+ * @property Doctrine_Collection $Items
  * 
  * @method integer                  getId()                  Returns the current record's "id" value
  * @method string                   getName()                Returns the current record's "name" value
@@ -46,6 +52,12 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @method integer                  getIsAvail()             Returns the current record's "is_avail" value
  * @method timestamp                getCreatedAt()           Returns the current record's "created_at" value
  * @method timestamp                getUpdatedAt()           Returns the current record's "updated_at" value
+ * @method WacGuardUser             getUser()                Returns the current record's "User" value
+ * @method WacCustomer              getCusotmer()            Returns the current record's "Cusotmer" value
+ * @method WacStorehouse            getSrcStorehouse()       Returns the current record's "SrcStorehouse" value
+ * @method WacStoreroom             getSrcStoreroom()        Returns the current record's "SrcStoreroom" value
+ * @method WacShippingMethod        getShippingMethod()      Returns the current record's "ShippingMethod" value
+ * @method Doctrine_Collection      getItems()               Returns the current record's "Items" collection
  * @method WacMaterialShippingOrder setId()                  Sets the current record's "id" value
  * @method WacMaterialShippingOrder setName()                Sets the current record's "name" value
  * @method WacMaterialShippingOrder setCode()                Sets the current record's "code" value
@@ -65,6 +77,12 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @method WacMaterialShippingOrder setIsAvail()             Sets the current record's "is_avail" value
  * @method WacMaterialShippingOrder setCreatedAt()           Sets the current record's "created_at" value
  * @method WacMaterialShippingOrder setUpdatedAt()           Sets the current record's "updated_at" value
+ * @method WacMaterialShippingOrder setUser()                Sets the current record's "User" value
+ * @method WacMaterialShippingOrder setCusotmer()            Sets the current record's "Cusotmer" value
+ * @method WacMaterialShippingOrder setSrcStorehouse()       Sets the current record's "SrcStorehouse" value
+ * @method WacMaterialShippingOrder setSrcStoreroom()        Sets the current record's "SrcStoreroom" value
+ * @method WacMaterialShippingOrder setShippingMethod()      Sets the current record's "ShippingMethod" value
+ * @method WacMaterialShippingOrder setItems()               Sets the current record's "Items" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -262,6 +280,30 @@ abstract class BaseWacMaterialShippingOrder extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacGuardUser as User', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacCustomer as Cusotmer', array(
+             'local' => 'customer_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacStorehouse as SrcStorehouse', array(
+             'local' => 'src_storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacStoreroom as SrcStoreroom', array(
+             'local' => 'src_storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacShippingMethod as ShippingMethod', array(
+             'local' => 'shipping_method_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('WacMaterialShippingOrderItem as Items', array(
+             'local' => 'id',
+             'foreign' => 'order_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

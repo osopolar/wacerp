@@ -92,8 +92,7 @@ wacAppController = {
     },
     initLayout: function(opts){
         return this.layout.init();  // return UI LAYOUT
-    }
-    ,
+    },
     hideLayout: function(){
         this.layout.hide();
     }

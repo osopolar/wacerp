@@ -25,6 +25,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialBizItem', '
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacStorehouse $Storehouse
+ * @property WacMaterial $Material
  * 
  * @method integer                      getId()            Returns the current record's "id" value
  * @method integer                      getStorehouseId()  Returns the current record's "storehouse_id" value
@@ -44,6 +46,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialBizItem', '
  * @method integer                      getIsAvail()       Returns the current record's "is_avail" value
  * @method timestamp                    getCreatedAt()     Returns the current record's "created_at" value
  * @method timestamp                    getUpdatedAt()     Returns the current record's "updated_at" value
+ * @method WacStorehouse                getStorehouse()    Returns the current record's "Storehouse" value
+ * @method WacMaterial                  getMaterial()      Returns the current record's "Material" value
  * @method WacStorehouseMaterialBizItem setId()            Sets the current record's "id" value
  * @method WacStorehouseMaterialBizItem setStorehouseId()  Sets the current record's "storehouse_id" value
  * @method WacStorehouseMaterialBizItem setMaterialId()    Sets the current record's "material_id" value
@@ -62,6 +66,8 @@ Doctrine_Manager::getInstance()->bindComponent('WacStorehouseMaterialBizItem', '
  * @method WacStorehouseMaterialBizItem setIsAvail()       Sets the current record's "is_avail" value
  * @method WacStorehouseMaterialBizItem setCreatedAt()     Sets the current record's "created_at" value
  * @method WacStorehouseMaterialBizItem setUpdatedAt()     Sets the current record's "updated_at" value
+ * @method WacStorehouseMaterialBizItem setStorehouse()    Sets the current record's "Storehouse" value
+ * @method WacStorehouseMaterialBizItem setMaterial()      Sets the current record's "Material" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -247,6 +253,14 @@ abstract class BaseWacStorehouseMaterialBizItem extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacStorehouse as Storehouse', array(
+             'local' => 'storehouse_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('WacMaterial as Material', array(
+             'local' => 'material_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

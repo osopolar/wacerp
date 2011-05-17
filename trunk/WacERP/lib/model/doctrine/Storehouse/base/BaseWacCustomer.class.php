@@ -17,27 +17,36 @@ Doctrine_Manager::getInstance()->bindComponent('WacCustomer', 'wac_db_connection
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property Doctrine_Collection $Addresses
+ * @property Doctrine_Collection $WacMaterialSaleOrder
+ * @property Doctrine_Collection $WacMaterialShippingOrder
  * 
- * @method integer     getId()         Returns the current record's "id" value
- * @method string      getName()       Returns the current record's "name" value
- * @method integer     getPrInt1()     Returns the current record's "pr_int1" value
- * @method integer     getPrInt2()     Returns the current record's "pr_int2" value
- * @method string      getPrStr1()     Returns the current record's "pr_str1" value
- * @method string      getPrStr2()     Returns the current record's "pr_str2" value
- * @method integer     getPriority()   Returns the current record's "priority" value
- * @method integer     getIsAvail()    Returns the current record's "is_avail" value
- * @method timestamp   getCreatedAt()  Returns the current record's "created_at" value
- * @method timestamp   getUpdatedAt()  Returns the current record's "updated_at" value
- * @method WacCustomer setId()         Sets the current record's "id" value
- * @method WacCustomer setName()       Sets the current record's "name" value
- * @method WacCustomer setPrInt1()     Sets the current record's "pr_int1" value
- * @method WacCustomer setPrInt2()     Sets the current record's "pr_int2" value
- * @method WacCustomer setPrStr1()     Sets the current record's "pr_str1" value
- * @method WacCustomer setPrStr2()     Sets the current record's "pr_str2" value
- * @method WacCustomer setPriority()   Sets the current record's "priority" value
- * @method WacCustomer setIsAvail()    Sets the current record's "is_avail" value
- * @method WacCustomer setCreatedAt()  Sets the current record's "created_at" value
- * @method WacCustomer setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method integer             getId()                       Returns the current record's "id" value
+ * @method string              getName()                     Returns the current record's "name" value
+ * @method integer             getPrInt1()                   Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()                   Returns the current record's "pr_int2" value
+ * @method string              getPrStr1()                   Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()                   Returns the current record's "pr_str2" value
+ * @method integer             getPriority()                 Returns the current record's "priority" value
+ * @method integer             getIsAvail()                  Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()                Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()                Returns the current record's "updated_at" value
+ * @method Doctrine_Collection getAddresses()                Returns the current record's "Addresses" collection
+ * @method Doctrine_Collection getWacMaterialSaleOrder()     Returns the current record's "WacMaterialSaleOrder" collection
+ * @method Doctrine_Collection getWacMaterialShippingOrder() Returns the current record's "WacMaterialShippingOrder" collection
+ * @method WacCustomer         setId()                       Sets the current record's "id" value
+ * @method WacCustomer         setName()                     Sets the current record's "name" value
+ * @method WacCustomer         setPrInt1()                   Sets the current record's "pr_int1" value
+ * @method WacCustomer         setPrInt2()                   Sets the current record's "pr_int2" value
+ * @method WacCustomer         setPrStr1()                   Sets the current record's "pr_str1" value
+ * @method WacCustomer         setPrStr2()                   Sets the current record's "pr_str2" value
+ * @method WacCustomer         setPriority()                 Sets the current record's "priority" value
+ * @method WacCustomer         setIsAvail()                  Sets the current record's "is_avail" value
+ * @method WacCustomer         setCreatedAt()                Sets the current record's "created_at" value
+ * @method WacCustomer         setUpdatedAt()                Sets the current record's "updated_at" value
+ * @method WacCustomer         setAddresses()                Sets the current record's "Addresses" collection
+ * @method WacCustomer         setWacMaterialSaleOrder()     Sets the current record's "WacMaterialSaleOrder" collection
+ * @method WacCustomer         setWacMaterialShippingOrder() Sets the current record's "WacMaterialShippingOrder" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -148,6 +157,18 @@ abstract class BaseWacCustomer extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('WacCustomerAddress as Addresses', array(
+             'local' => 'id',
+             'foreign' => 'customer_id'));
+
+        $this->hasMany('WacMaterialSaleOrder', array(
+             'local' => 'id',
+             'foreign' => 'customer_id'));
+
+        $this->hasMany('WacMaterialShippingOrder', array(
+             'local' => 'id',
+             'foreign' => 'customer_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

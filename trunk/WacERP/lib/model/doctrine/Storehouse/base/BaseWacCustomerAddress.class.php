@@ -19,6 +19,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacCustomerAddress', 'wac_db_con
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacCustomer $Customer
  * 
  * @method integer            getId()          Returns the current record's "id" value
  * @method integer            getCustomerId()  Returns the current record's "customer_id" value
@@ -32,6 +33,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacCustomerAddress', 'wac_db_con
  * @method integer            getIsAvail()     Returns the current record's "is_avail" value
  * @method timestamp          getCreatedAt()   Returns the current record's "created_at" value
  * @method timestamp          getUpdatedAt()   Returns the current record's "updated_at" value
+ * @method WacCustomer        getCustomer()    Returns the current record's "Customer" value
  * @method WacCustomerAddress setId()          Sets the current record's "id" value
  * @method WacCustomerAddress setCustomerId()  Sets the current record's "customer_id" value
  * @method WacCustomerAddress setName()        Sets the current record's "name" value
@@ -44,6 +46,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacCustomerAddress', 'wac_db_con
  * @method WacCustomerAddress setIsAvail()     Sets the current record's "is_avail" value
  * @method WacCustomerAddress setCreatedAt()   Sets the current record's "created_at" value
  * @method WacCustomerAddress setUpdatedAt()   Sets the current record's "updated_at" value
+ * @method WacCustomerAddress setCustomer()    Sets the current record's "Customer" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -174,6 +177,10 @@ abstract class BaseWacCustomerAddress extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacCustomer as Customer', array(
+             'local' => 'customer_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

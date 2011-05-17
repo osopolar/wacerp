@@ -6,15 +6,15 @@
 	<Local Expanded="Yes">
 		<Folder Expanded="Yes" Name="Biz Objects">
 			<Folder Expanded="Yes" Name="BizOrders">
-				<Model Expanded="Yes" ID="{24DED88D-EE02-4262-870F-DFC99E86FC6B}" Name="ObjectOrientedModel_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="ObjectOrientedModel_1.oom"/>
+				<Model Expanded="Yes" ID="{24DED88D-EE02-4262-870F-DFC99E86FC6B}" Loaded="No" Name="ObjectOrientedModel_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="ObjectOrientedModel_1.oom"/>
 			</Folder>
 		</Folder>
 		<Folder Expanded="Yes" Name="Database">
-			<Model Expanded="Yes" ID="{DAB1DA8E-BDA9-4DA1-A213-64F55CEEFD3C}" Name="PhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_1.pdm"/>
+			<Model Expanded="Yes" ID="{DAB1DA8E-BDA9-4DA1-A213-64F55CEEFD3C}" Loaded="No" Name="PhysicalDataModel_1" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_1.pdm"/>
 		</Folder>
 		<Folder Name="UserCase"/>
 		<Folder Expanded="Yes" Name="UI Component">
-			<Model ID="{CB7BDA7C-F3FE-4DE8-BC09-03BB6D0ADBA4}" Loaded="No" Name="UI Component Structure Diagram" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="UI_Component_Structure_Diagram.oom"/>
+			<Model Expanded="Yes" ID="{CB7BDA7C-F3FE-4DE8-BC09-03BB6D0ADBA4}" Name="UI Component Structure Diagram" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="UI_Component_Structure_Diagram.oom"/>
 		</Folder>
 	</Local>
 	<BrowserModule Name="Repository"/>

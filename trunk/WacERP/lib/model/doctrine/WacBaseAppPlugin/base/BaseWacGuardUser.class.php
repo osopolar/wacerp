@@ -8,13 +8,31 @@
  * @property Doctrine_Collection $WacFile
  * @property Doctrine_Collection $WacCategory
  * @property Doctrine_Collection $WacSystemLog
+ * @property Doctrine_Collection $WacMaterialDeliveryOrder
+ * @property Doctrine_Collection $WacMaterialPurchaseOrder
+ * @property Doctrine_Collection $WacMaterialSaleOrder
+ * @property Doctrine_Collection $WacMaterialShippingOrder
+ * @property Doctrine_Collection $WacOrderState
+ * @property Doctrine_Collection $WacMaterialCategory
  * 
- * @method Doctrine_Collection getWacFile()      Returns the current record's "WacFile" collection
- * @method Doctrine_Collection getWacCategory()  Returns the current record's "WacCategory" collection
- * @method Doctrine_Collection getWacSystemLog() Returns the current record's "WacSystemLog" collection
- * @method WacGuardUser        setWacFile()      Sets the current record's "WacFile" collection
- * @method WacGuardUser        setWacCategory()  Sets the current record's "WacCategory" collection
- * @method WacGuardUser        setWacSystemLog() Sets the current record's "WacSystemLog" collection
+ * @method Doctrine_Collection getWacFile()                  Returns the current record's "WacFile" collection
+ * @method Doctrine_Collection getWacCategory()              Returns the current record's "WacCategory" collection
+ * @method Doctrine_Collection getWacSystemLog()             Returns the current record's "WacSystemLog" collection
+ * @method Doctrine_Collection getWacMaterialDeliveryOrder() Returns the current record's "WacMaterialDeliveryOrder" collection
+ * @method Doctrine_Collection getWacMaterialPurchaseOrder() Returns the current record's "WacMaterialPurchaseOrder" collection
+ * @method Doctrine_Collection getWacMaterialSaleOrder()     Returns the current record's "WacMaterialSaleOrder" collection
+ * @method Doctrine_Collection getWacMaterialShippingOrder() Returns the current record's "WacMaterialShippingOrder" collection
+ * @method Doctrine_Collection getWacOrderState()            Returns the current record's "WacOrderState" collection
+ * @method Doctrine_Collection getWacMaterialCategory()      Returns the current record's "WacMaterialCategory" collection
+ * @method WacGuardUser        setWacFile()                  Sets the current record's "WacFile" collection
+ * @method WacGuardUser        setWacCategory()              Sets the current record's "WacCategory" collection
+ * @method WacGuardUser        setWacSystemLog()             Sets the current record's "WacSystemLog" collection
+ * @method WacGuardUser        setWacMaterialDeliveryOrder() Sets the current record's "WacMaterialDeliveryOrder" collection
+ * @method WacGuardUser        setWacMaterialPurchaseOrder() Sets the current record's "WacMaterialPurchaseOrder" collection
+ * @method WacGuardUser        setWacMaterialSaleOrder()     Sets the current record's "WacMaterialSaleOrder" collection
+ * @method WacGuardUser        setWacMaterialShippingOrder() Sets the current record's "WacMaterialShippingOrder" collection
+ * @method WacGuardUser        setWacOrderState()            Sets the current record's "WacOrderState" collection
+ * @method WacGuardUser        setWacMaterialCategory()      Sets the current record's "WacMaterialCategory" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -35,6 +53,30 @@ abstract class BaseWacGuardUser extends sfGuardUser
              'foreign' => 'user_id'));
 
         $this->hasMany('WacSystemLog', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WacMaterialDeliveryOrder', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WacMaterialPurchaseOrder', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WacMaterialSaleOrder', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WacMaterialShippingOrder', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WacOrderState', array(
+             'local' => 'id',
+             'foreign' => 'changer_id'));
+
+        $this->hasMany('WacMaterialCategory', array(
              'local' => 'id',
              'foreign' => 'user_id'));
     }

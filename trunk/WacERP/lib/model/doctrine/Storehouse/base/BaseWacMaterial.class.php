@@ -20,33 +20,57 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterial', 'wac_db_connection
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property Doctrine_Collection $Categories
+ * @property Doctrine_Collection $WacMaterialDeliveryOrderItem
+ * @property Doctrine_Collection $WacMaterialPurchaseOrderItem
+ * @property Doctrine_Collection $WacMaterialSaleOrderItem
+ * @property Doctrine_Collection $WacMaterialShippingOrderItem
+ * @property Doctrine_Collection $WacStorehouseMaterialBizItem
+ * @property Doctrine_Collection $WacStorehouseMaterialQuantity
+ * @property Doctrine_Collection $WacStorehouseQuickstat
  * 
- * @method integer     getId()         Returns the current record's "id" value
- * @method string      getName()       Returns the current record's "name" value
- * @method string      getSku()        Returns the current record's "sku" value
- * @method integer     getBrandId()    Returns the current record's "brand_id" value
- * @method integer     getModelId()    Returns the current record's "model_id" value
- * @method integer     getPrInt1()     Returns the current record's "pr_int1" value
- * @method integer     getPrInt2()     Returns the current record's "pr_int2" value
- * @method string      getPrStr1()     Returns the current record's "pr_str1" value
- * @method string      getPrStr2()     Returns the current record's "pr_str2" value
- * @method integer     getPriority()   Returns the current record's "priority" value
- * @method integer     getIsAvail()    Returns the current record's "is_avail" value
- * @method timestamp   getCreatedAt()  Returns the current record's "created_at" value
- * @method timestamp   getUpdatedAt()  Returns the current record's "updated_at" value
- * @method WacMaterial setId()         Sets the current record's "id" value
- * @method WacMaterial setName()       Sets the current record's "name" value
- * @method WacMaterial setSku()        Sets the current record's "sku" value
- * @method WacMaterial setBrandId()    Sets the current record's "brand_id" value
- * @method WacMaterial setModelId()    Sets the current record's "model_id" value
- * @method WacMaterial setPrInt1()     Sets the current record's "pr_int1" value
- * @method WacMaterial setPrInt2()     Sets the current record's "pr_int2" value
- * @method WacMaterial setPrStr1()     Sets the current record's "pr_str1" value
- * @method WacMaterial setPrStr2()     Sets the current record's "pr_str2" value
- * @method WacMaterial setPriority()   Sets the current record's "priority" value
- * @method WacMaterial setIsAvail()    Sets the current record's "is_avail" value
- * @method WacMaterial setCreatedAt()  Sets the current record's "created_at" value
- * @method WacMaterial setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method integer             getId()                            Returns the current record's "id" value
+ * @method string              getName()                          Returns the current record's "name" value
+ * @method string              getSku()                           Returns the current record's "sku" value
+ * @method integer             getBrandId()                       Returns the current record's "brand_id" value
+ * @method integer             getModelId()                       Returns the current record's "model_id" value
+ * @method integer             getPrInt1()                        Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()                        Returns the current record's "pr_int2" value
+ * @method string              getPrStr1()                        Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()                        Returns the current record's "pr_str2" value
+ * @method integer             getPriority()                      Returns the current record's "priority" value
+ * @method integer             getIsAvail()                       Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()                     Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()                     Returns the current record's "updated_at" value
+ * @method Doctrine_Collection getCategories()                    Returns the current record's "Categories" collection
+ * @method Doctrine_Collection getWacMaterialDeliveryOrderItem()  Returns the current record's "WacMaterialDeliveryOrderItem" collection
+ * @method Doctrine_Collection getWacMaterialPurchaseOrderItem()  Returns the current record's "WacMaterialPurchaseOrderItem" collection
+ * @method Doctrine_Collection getWacMaterialSaleOrderItem()      Returns the current record's "WacMaterialSaleOrderItem" collection
+ * @method Doctrine_Collection getWacMaterialShippingOrderItem()  Returns the current record's "WacMaterialShippingOrderItem" collection
+ * @method Doctrine_Collection getWacStorehouseMaterialBizItem()  Returns the current record's "WacStorehouseMaterialBizItem" collection
+ * @method Doctrine_Collection getWacStorehouseMaterialQuantity() Returns the current record's "WacStorehouseMaterialQuantity" collection
+ * @method Doctrine_Collection getWacStorehouseQuickstat()        Returns the current record's "WacStorehouseQuickstat" collection
+ * @method WacMaterial         setId()                            Sets the current record's "id" value
+ * @method WacMaterial         setName()                          Sets the current record's "name" value
+ * @method WacMaterial         setSku()                           Sets the current record's "sku" value
+ * @method WacMaterial         setBrandId()                       Sets the current record's "brand_id" value
+ * @method WacMaterial         setModelId()                       Sets the current record's "model_id" value
+ * @method WacMaterial         setPrInt1()                        Sets the current record's "pr_int1" value
+ * @method WacMaterial         setPrInt2()                        Sets the current record's "pr_int2" value
+ * @method WacMaterial         setPrStr1()                        Sets the current record's "pr_str1" value
+ * @method WacMaterial         setPrStr2()                        Sets the current record's "pr_str2" value
+ * @method WacMaterial         setPriority()                      Sets the current record's "priority" value
+ * @method WacMaterial         setIsAvail()                       Sets the current record's "is_avail" value
+ * @method WacMaterial         setCreatedAt()                     Sets the current record's "created_at" value
+ * @method WacMaterial         setUpdatedAt()                     Sets the current record's "updated_at" value
+ * @method WacMaterial         setCategories()                    Sets the current record's "Categories" collection
+ * @method WacMaterial         setWacMaterialDeliveryOrderItem()  Sets the current record's "WacMaterialDeliveryOrderItem" collection
+ * @method WacMaterial         setWacMaterialPurchaseOrderItem()  Sets the current record's "WacMaterialPurchaseOrderItem" collection
+ * @method WacMaterial         setWacMaterialSaleOrderItem()      Sets the current record's "WacMaterialSaleOrderItem" collection
+ * @method WacMaterial         setWacMaterialShippingOrderItem()  Sets the current record's "WacMaterialShippingOrderItem" collection
+ * @method WacMaterial         setWacStorehouseMaterialBizItem()  Sets the current record's "WacStorehouseMaterialBizItem" collection
+ * @method WacMaterial         setWacStorehouseMaterialQuantity() Sets the current record's "WacStorehouseMaterialQuantity" collection
+ * @method WacMaterial         setWacStorehouseQuickstat()        Sets the current record's "WacStorehouseQuickstat" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -186,6 +210,39 @@ abstract class BaseWacMaterial extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('WacMaterialCategory as Categories', array(
+             'refClass' => 'WacMaterialCategoryLink',
+             'local' => 'material_id',
+             'foreign' => 'category_id'));
+
+        $this->hasMany('WacMaterialDeliveryOrderItem', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacMaterialPurchaseOrderItem', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacMaterialSaleOrderItem', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacMaterialShippingOrderItem', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacStorehouseMaterialBizItem', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacStorehouseMaterialQuantity', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
+        $this->hasMany('WacStorehouseQuickstat', array(
+             'local' => 'id',
+             'foreign' => 'material_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

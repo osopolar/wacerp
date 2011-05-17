@@ -68,7 +68,7 @@ var options = {
             initClosed:             true
         },
         center: {
-            paneSelector: "#appStockControllerCenter",             // sample: use an ID to select pane instead of a class
+            paneSelector: "#appStockControllerCenter",  // sample: use an ID to select pane instead of a class
             onresize:     "",    // resize INNER LAYOUT when center pane resizes
             minWidth:     200,
             minHeight:    200

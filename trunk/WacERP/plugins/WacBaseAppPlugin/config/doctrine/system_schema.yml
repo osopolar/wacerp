@@ -494,6 +494,42 @@ WacWorkflowItem:
       foreign: id
       type: one
 
+WacLanguage:
+  connection: wac_db_connection1
+  actAs:      [Timestampable]
+  tableName: wac_language
+  #package: wacBaseAppPlugin.system.
+  columns:
+    id:
+      type: integer(8)
+      primary: true
+      autoincrement: true
+    pr_int1:
+      type: integer(4)
+      default: '0'
+    pr_int2:
+      type: integer(4)
+      default: '0'
+    priority:
+      type: integer(4)
+      default: '50'
+    is_avail:
+      type: integer(1)
+      default: '1'
+      notnull: true
+    created_at:
+      type: timestamp(25)
+      notnull: true
+    updated_at:
+      type: timestamp(25)
+      default: '0000-00-00 00:00:00'
+      notnull: true
+    name: string(255)
+    code: string(255)
+    memo: string()
+    pr_str1: string(255)
+    pr_str2: string(255)
+
 WacGuardUser:
   inheritance:
     extends: sfGuardUser

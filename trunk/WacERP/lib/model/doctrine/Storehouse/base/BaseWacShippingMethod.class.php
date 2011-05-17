@@ -18,29 +18,32 @@ Doctrine_Manager::getInstance()->bindComponent('WacShippingMethod', 'wac_db_conn
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property Doctrine_Collection $WacMaterialShippingOrder
  * 
- * @method integer           getId()         Returns the current record's "id" value
- * @method string            getCode()       Returns the current record's "code" value
- * @method string            getName()       Returns the current record's "name" value
- * @method integer           getPrInt1()     Returns the current record's "pr_int1" value
- * @method integer           getPrInt2()     Returns the current record's "pr_int2" value
- * @method string            getPrStr1()     Returns the current record's "pr_str1" value
- * @method string            getPrStr2()     Returns the current record's "pr_str2" value
- * @method integer           getPriority()   Returns the current record's "priority" value
- * @method integer           getIsAvail()    Returns the current record's "is_avail" value
- * @method timestamp         getCreatedAt()  Returns the current record's "created_at" value
- * @method timestamp         getUpdatedAt()  Returns the current record's "updated_at" value
- * @method WacShippingMethod setId()         Sets the current record's "id" value
- * @method WacShippingMethod setCode()       Sets the current record's "code" value
- * @method WacShippingMethod setName()       Sets the current record's "name" value
- * @method WacShippingMethod setPrInt1()     Sets the current record's "pr_int1" value
- * @method WacShippingMethod setPrInt2()     Sets the current record's "pr_int2" value
- * @method WacShippingMethod setPrStr1()     Sets the current record's "pr_str1" value
- * @method WacShippingMethod setPrStr2()     Sets the current record's "pr_str2" value
- * @method WacShippingMethod setPriority()   Sets the current record's "priority" value
- * @method WacShippingMethod setIsAvail()    Sets the current record's "is_avail" value
- * @method WacShippingMethod setCreatedAt()  Sets the current record's "created_at" value
- * @method WacShippingMethod setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method integer             getId()                       Returns the current record's "id" value
+ * @method string              getCode()                     Returns the current record's "code" value
+ * @method string              getName()                     Returns the current record's "name" value
+ * @method integer             getPrInt1()                   Returns the current record's "pr_int1" value
+ * @method integer             getPrInt2()                   Returns the current record's "pr_int2" value
+ * @method string              getPrStr1()                   Returns the current record's "pr_str1" value
+ * @method string              getPrStr2()                   Returns the current record's "pr_str2" value
+ * @method integer             getPriority()                 Returns the current record's "priority" value
+ * @method integer             getIsAvail()                  Returns the current record's "is_avail" value
+ * @method timestamp           getCreatedAt()                Returns the current record's "created_at" value
+ * @method timestamp           getUpdatedAt()                Returns the current record's "updated_at" value
+ * @method Doctrine_Collection getWacMaterialShippingOrder() Returns the current record's "WacMaterialShippingOrder" collection
+ * @method WacShippingMethod   setId()                       Sets the current record's "id" value
+ * @method WacShippingMethod   setCode()                     Sets the current record's "code" value
+ * @method WacShippingMethod   setName()                     Sets the current record's "name" value
+ * @method WacShippingMethod   setPrInt1()                   Sets the current record's "pr_int1" value
+ * @method WacShippingMethod   setPrInt2()                   Sets the current record's "pr_int2" value
+ * @method WacShippingMethod   setPrStr1()                   Sets the current record's "pr_str1" value
+ * @method WacShippingMethod   setPrStr2()                   Sets the current record's "pr_str2" value
+ * @method WacShippingMethod   setPriority()                 Sets the current record's "priority" value
+ * @method WacShippingMethod   setIsAvail()                  Sets the current record's "is_avail" value
+ * @method WacShippingMethod   setCreatedAt()                Sets the current record's "created_at" value
+ * @method WacShippingMethod   setUpdatedAt()                Sets the current record's "updated_at" value
+ * @method WacShippingMethod   setWacMaterialShippingOrder() Sets the current record's "WacMaterialShippingOrder" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -160,6 +163,10 @@ abstract class BaseWacShippingMethod extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('WacMaterialShippingOrder', array(
+             'local' => 'id',
+             'foreign' => 'shipping_method_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);

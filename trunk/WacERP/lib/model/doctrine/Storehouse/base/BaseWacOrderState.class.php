@@ -20,6 +20,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacOrderState', 'wac_db_connecti
  * @property integer $is_avail
  * @property timestamp $created_at
  * @property timestamp $updated_at
+ * @property WacGuardUser $Changer
  * 
  * @method integer       getId()         Returns the current record's "id" value
  * @method integer       getOrderId()    Returns the current record's "order_id" value
@@ -34,6 +35,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacOrderState', 'wac_db_connecti
  * @method integer       getIsAvail()    Returns the current record's "is_avail" value
  * @method timestamp     getCreatedAt()  Returns the current record's "created_at" value
  * @method timestamp     getUpdatedAt()  Returns the current record's "updated_at" value
+ * @method WacGuardUser  getChanger()    Returns the current record's "Changer" value
  * @method WacOrderState setId()         Sets the current record's "id" value
  * @method WacOrderState setOrderId()    Sets the current record's "order_id" value
  * @method WacOrderState setOrderType()  Sets the current record's "order_type" value
@@ -47,6 +49,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacOrderState', 'wac_db_connecti
  * @method WacOrderState setIsAvail()    Sets the current record's "is_avail" value
  * @method WacOrderState setCreatedAt()  Sets the current record's "created_at" value
  * @method WacOrderState setUpdatedAt()  Sets the current record's "updated_at" value
+ * @method WacOrderState setChanger()    Sets the current record's "Changer" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -183,11 +186,34 @@ abstract class BaseWacOrderState extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 25,
              ));
+
+        $this->setSubClasses(array(
+             'WacMaterialDeliveryOrderState' => 
+             array(
+              'order_type' => 1,
+             ),
+             'WacMaterialPurchaseOrderState' => 
+             array(
+              'order_type' => 2,
+             ),
+             'WacMaterialSaleOrderState' => 
+             array(
+              'order_type' => 3,
+             ),
+             'WacMaterialShippingOrderState' => 
+             array(
+              'order_type' => 4,
+             ),
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('WacGuardUser as Changer', array(
+             'local' => 'changer_id',
+             'foreign' => 'id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));
         $this->actAs($timestampable0);
