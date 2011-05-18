@@ -223,6 +223,54 @@ function WacFormPrototype()
     };
 }
 
+/*
+ *  declare a panel-prototype model class
+ */
+function WacPanelPrototype()
+{
+    var _self = this;
+//    var debug = true;
+    var debug = false;
+
+    this.init = function(children){
+        children.initLayout();
+        children.initData();
+        children.bindEvents();
+    };
+
+    this.bindEvents = function(children){
+        Wac.log("WacPanelPrototype bindEvents", debug);
+
+    };
+
+    this.initLayout = function(children){
+        Wac.log("WacPanelPrototype initLayout", debug);
+
+        $(children.componentGlobalId).panel({
+            collapseType:'slide-left',
+            trueVerticalText:true,
+            vHeight:'150px',
+            width:'280px'
+        });
+    };
+
+    this.initData = function(children){
+        Wac.log("WacPanelPrototype initData", debug);
+        $(document).wacPage().showBlockUILoading(children.panelId);
+        _self.initDataCallBack(children, {});
+    };
+
+    this.initDataCallBack = function(children, jsonData){
+        Wac.log("WacPanelPrototype initDataCallBack", debug);
+        $(document).wacPage().hideBlockUI(children.panelId);
+    };
+
+    this.setupDefaults = function(children, defaultValueObj){
+        Wac.log("WacPanelPrototype setupDefaults", debug);
+    };
+
+}
+
 
 /*
  *  declare WacLayout model class

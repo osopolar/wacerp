@@ -9,10 +9,6 @@
             <?php
 //            include_component(WacModule::getInstance()->getName("wacTest"), "panelTest");
             include_component($contextInfo["moduleName"], "dashboard");
-
-//            echo "<div id=\"{$contextInfo["moduleName"]}Label\">";
-//            echo $contextInfo["moduleName"]."/".$contextInfo["componentName"];
-//            echo "</div>"
             ?>
         </div>
         <div class="layoutPaneFooter"></div>

@@ -41,7 +41,6 @@ class WacModuleHelper
     public static function getWidgetId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "widget");
-//        return isset($attachInfo["uiid"]) ? $module.$attachInfo["uiid"]."Widget" : $module."Widget";
     }
 
     /*
@@ -50,7 +49,6 @@ class WacModuleHelper
     public static function getComponentsId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "component");
-//        return ($attachName=="") ? $module."Component" : $module.$attachName."Component";
     }
 
     /*
@@ -75,7 +73,6 @@ class WacModuleHelper
     public static function getListingTableId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "listingTable");
-//        return isset($attachInfo["uiid"]) ? $module."ListingTable_".$attachInfo["uiid"] : $module."ListingTable";
     }
 
     /*
@@ -84,7 +81,14 @@ class WacModuleHelper
     public static function getFormDialogId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "formDialog");
-//        return isset($attachInfo["uiid"]) ? $module."FormDialog_".$attachInfo["uiid"] : $module."FormDialog";
+    }
+
+    /*
+     * getPanelId
+     */
+    public static function getNavPanelId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "navPanel");
     }
 
     /*
@@ -93,13 +97,11 @@ class WacModuleHelper
     public static function getFormId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "form");
-//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
     }
 
     public static function getUploadFormId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "form");
-//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
     }
 
     /*
@@ -116,7 +118,6 @@ class WacModuleHelper
     public static function getSubFormDialogId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "subFormDialog");
-//        return isset($attachInfo["uiid"]) ? $module."Form_".$attachInfo["uiid"] : $module."Form";
     }
     /*
      * getSubFormId
@@ -124,7 +125,6 @@ class WacModuleHelper
     public static function getSubFormId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "subForm");
-//        return ($attachName=="") ? $module."SubForm" : $module.$attachName."SubForm";
     }
 
     /*
@@ -133,7 +133,6 @@ class WacModuleHelper
     public static function getPagerId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "pager");
-//        return ($attachName=="") ? $module."Pager" : $module.$attachName."Pager";
     }
 
     /*
@@ -142,7 +141,6 @@ class WacModuleHelper
     public static function getListId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "list");
-//        return ($attachName=="") ? $module."List" : $module.$attachName."List";
     }
 
     /*
