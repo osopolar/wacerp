@@ -2,7 +2,12 @@
 
     <script>
         $(function() {
-            $( "#myselectable" ).selectable();
+            $("#myselectable").selectable();
+
+            $("#myselectable").bind( "selectableselected", function(e, ui) {
+                Wac.log(e);
+//                Wac.log(e.currentTarget + " : " + e.target + " : " + $(e).attr("innerhtml") + " : " + $(e).val());
+            });
         });
     </script>
 
