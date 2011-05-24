@@ -94,6 +94,14 @@ class WacModuleHelper
     /*
      * getPanelId
      */
+    public static function getDashboardId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "dashboard");
+    }
+
+    /*
+     * getPanelId
+     */
     public static function getPanelId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "panel");
