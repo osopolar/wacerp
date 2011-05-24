@@ -8,7 +8,7 @@
         <div class="ui-layout-content">
             <?php
 //            include_component(WacModule::getInstance()->getName("wacTest"), "panelTest");
-            include_component($contextInfo["moduleName"], "dashboard");
+            include_component($contextInfo["moduleName"], "desktop");
             ?>
         </div>
         <div class="layoutPaneFooter"></div>
