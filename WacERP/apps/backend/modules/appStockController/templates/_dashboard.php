@@ -1,11 +1,20 @@
-<div id="container" class="wacPanelContainer">
-    <div id="lLeft" class="wacPanelLeft">
+<?php
+$attachInfo = array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo));
+$moduleName           = $contextInfo['moduleName'];
+$moduleGlobalName     = $moduleName.$attachInfo['uiid'];
+$componentGlobalName  = WacModuleHelper::getPanelId($moduleName, $attachInfo);
+$componentGlobalId    = "#".$componentGlobalName;
+?>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
+
+<div id="container_<?php echo $componentGlobalName;?>" class="wacPanelContainer">
+    <div id="lLeft_<?php echo $componentGlobalName;?>" class="wacPanelLeft">
         <?php
             include_component("wacStorehouse", "navPanel");
         ?>
     </div>
 
-    <div id="lRight" class="wacPanelRight">
+    <div id="lRight_<?php echo $componentGlobalName;?>" class="wacPanelRight">
         <div id="infoNotificationPanel" class="wacNavPanel">
             <h3>Right panel #1</h3>
             <div>
@@ -24,8 +33,8 @@
             </div>
         </div>
     </div>
-    <div id="lCenter" class="wacPanelCenter">
-        <div id="desktop" class="wacPanelDesktop">
+    <div id="lCenter_<?php echo $componentGlobalName;?>" class="wacPanelCenter">
+        <div id="desktop_<?php echo $componentGlobalName;?>" class="wacPanelDesktop">
             <p>
                 <b>Feel free to examine html of this page.</b>
             </p>
@@ -45,3 +54,4 @@
     }
 );
 </script>
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, false); ?>

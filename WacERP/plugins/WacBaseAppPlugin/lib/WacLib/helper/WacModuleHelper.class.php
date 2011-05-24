@@ -84,11 +84,19 @@ class WacModuleHelper
     }
 
     /*
-     * getPanelId
+     * getNavPanelId
      */
     public static function getNavPanelId($module, $attachInfo=array())
     {
         return self::getElementId($module, $attachInfo, "navPanel");
+    }
+
+    /*
+     * getPanelId
+     */
+    public static function getPanelId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "panel");
     }
 
     /*
