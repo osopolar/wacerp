@@ -2,12 +2,12 @@
 $attachInfo = array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo));
 $moduleName           = $contextInfo['moduleName'];
 $moduleGlobalName     = $moduleName.$attachInfo['uiid'];
-$componentGlobalName  = WacModuleHelper::getPanelId($moduleName, $attachInfo);
+$componentGlobalName  = WacModuleHelper::getDashboardId($moduleName, $attachInfo);
 $componentGlobalId    = "#".$componentGlobalName;
 ?>
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
 
-<div id="container_<?php echo $componentGlobalName;?>" class="wacPanelContainer">
+<div id="<?php echo $componentGlobalName;?>" class="wacPanelContainer">
     <div id="lLeft_<?php echo $componentGlobalName;?>" class="wacPanelLeft">
         <?php
             include_component("wacStorehouse", "navPanel");
@@ -44,6 +44,8 @@ $componentGlobalId    = "#".$componentGlobalName;
 
 <script type="text/javascript">
     $(document).ready(function(){
+        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+        
         $('#infoNotificationPanel').panel({
             collapseType:'slide-right',
             collapsed:true,
@@ -51,7 +53,48 @@ $componentGlobalId    = "#".$componentGlobalName;
             vHeight:'160px',
             width:'200px'
         });
+    });
+
+    function <?php echo ucfirst($componentGlobalName); ?>(){
+        var _self           = this;
+        var debug = true;
+//        this.prototype      = null;
+
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
+        this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
+        this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.panelId = "#content_" + <?php echo "'{$componentGlobalName}'" ?>;
+
+        this.init = function(){
+//            _self.prototype.init(_self);
+            this.initLayout();
+            this.initData();
+            this.bindEvents();
+        };
+
+        this.initLayout = function(){
+//            _self.prototype.initLayout(_self);
+        };
+
+        this.bindEvents = function(){
+//            _self.prototype.bindEvents(_self);
+            $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
+                Wac.log(data);
+//                Wac.log(jQuery._jq_shout.registry);
+            });
+        };
+
+        this.initData = function(){
+//            _self.prototype.initData(_self);
+        };
+
+        this.initDataCallBack = function(jsonData){
+//            _self.prototype.initDataCallBack(_self, jsonData);
+        };
+
+        this.init();  // init method
     }
-);
+
 </script>
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, false); ?>

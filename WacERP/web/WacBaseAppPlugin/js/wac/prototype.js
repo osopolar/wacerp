@@ -239,8 +239,10 @@ function WacNavPanelPrototype()
     };
 
     this.bindEvents = function(children){
+        $('#btnAdd_' + children.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_add_form, {moduleName: children.moduleName});
+            });
         Wac.log("WacNavPanelPrototype bindEvents", debug);
-
     };
 
     this.initLayout = function(children){
