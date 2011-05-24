@@ -92,7 +92,15 @@ class WacModuleHelper
     }
 
     /*
-     * getPanelId
+     * getDesktopId
+     */
+    public static function getDesktopId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "desktop");
+    }
+
+    /*
+     * getDashboardId
      */
     public static function getDashboardId($module, $attachInfo=array())
     {

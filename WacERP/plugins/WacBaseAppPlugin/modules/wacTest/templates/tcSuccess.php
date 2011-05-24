@@ -2,7 +2,7 @@
     <div id="lLeft" class="wacPanelLeft">
         <?php
 //            include_component("wacStorehouse", "navPanel");
-            include_component("appStockController", "dashboard");
+            include_component("appStockController", "desktop");
         ?>
     </div>
 </div>

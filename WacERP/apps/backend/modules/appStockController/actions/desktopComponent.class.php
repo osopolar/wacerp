@@ -2,7 +2,7 @@
 /**
  * manage the form
  */
-class dashboardComponent extends WacComponent
+class desktopComponent extends WacComponent
 {
     public function execute($request)
     {

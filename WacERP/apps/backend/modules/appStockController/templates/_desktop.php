@@ -81,6 +81,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 //            _self.prototype.bindEvents(_self);
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
                 Wac.log(data);
+                _self.showAddFormPanel();
 //                Wac.log(jQuery._jq_shout.registry);
             });
         };
@@ -92,6 +93,12 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.initDataCallBack = function(jsonData){
 //            _self.prototype.initDataCallBack(_self, jsonData);
         };
+
+        this.showAddFormPanel = function(){
+//            if(){
+//
+//            }
+        }
 
         this.init();  // init method
     }
