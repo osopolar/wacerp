@@ -36,4 +36,11 @@ class wacTestActions extends WacCommonActions {
 //        $this->setLayout("layout");
     }
 
+    /*
+     * test component
+     */
+    public function executeTc(sfWebRequest $request) {
+        
+    }
+
 }

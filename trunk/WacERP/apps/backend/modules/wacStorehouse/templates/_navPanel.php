@@ -10,7 +10,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 
 <div id="<?php echo $componentGlobalName;?>" class="wacNavPanel">
     <h3>Storehouse</h3>
-    <div>
+    <div id="content_<?php echo $componentGlobalName;?>">
 	Panel's initial options:
         <ol id="list_<?php echo $componentGlobalName; ?>" class="selectable">
             <li class="ui-state-default">1</li>
@@ -42,17 +42,20 @@ $componentGlobalId    = "#".$componentGlobalName;
 
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self           = this;
-        this.prototype      = new WacPanelPrototype();  // extends WacPanelPrototype
+        this.prototype      = new WacNavPanelPrototype();  // extends WacPanelPrototype
 
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
         this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
         this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.panelId = "#content_" + <?php echo "'{$componentGlobalName}'" ?>;
 
         this.init = function(){
             _self.prototype.init(_self);
         };
 
         this.initLayout = function(){
-            $( "#list_" + _self.componentGlobalName).selectable();
+            $("#list_" + _self.componentGlobalName).selectable();
             $('#btnAdd_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-plusthick"}});
             $('#btnDel_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-minusthick"}});
             _self.prototype.initLayout(_self);
@@ -68,8 +71,6 @@ $componentGlobalId    = "#".$componentGlobalName;
 
         this.initDataCallBack = function(jsonData){
             _self.prototype.initDataCallBack(_self, jsonData);
-
-            //   Wac.log($(document).wacTool().dumpObj(jsonData));
         };
 
         this.init();  // init method

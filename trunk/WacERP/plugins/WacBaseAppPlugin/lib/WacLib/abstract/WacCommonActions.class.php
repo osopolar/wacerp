@@ -32,10 +32,7 @@ abstract class WacCommonActions extends sfActions {
         $this->innerContextInfo["wacActionJs"]  ='/WacBaseAppPlugin/js/modules/'.$this->innerContextInfo["moduleName"].'/'.$this->innerContextInfo["actionName"].'.js';
         $this->innerContextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
 
-        $moduleName = $this->innerContextInfo["moduleName"];
-        if(isset(WacTable::$$moduleName)) {
-            $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
-        }
+        $this->setupMainModuleTable();
 
         $this->contextInfo = $this->innerContextInfo;  //assign to tpl
 
@@ -45,6 +42,16 @@ abstract class WacCommonActions extends sfActions {
             $this->wacGuardUser = $this->getWacGuardUser();
         }
 //        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
+    }
+
+    /*
+     * setup main module table
+     */
+    public function setupMainModuleTable(){
+        $moduleName = $this->getModuleName();
+        if(isset(WacTable::$$moduleName)) {
+            $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
+        }
     }
 
     /*

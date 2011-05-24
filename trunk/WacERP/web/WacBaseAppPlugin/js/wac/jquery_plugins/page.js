@@ -49,6 +49,13 @@
                     }
                 });
             },
+            showBlockUILoader: function(opts){
+                var settings = $.extend({}, opts || {});
+                $.blockUI.defaults.css = {};
+                $(settings.id).block({
+                        message: '<img src="/WacBaseAppPlugin/images/js_icons/loader.gif" alt="' + opts.msg +'">'
+                    });
+            },
             showBlockUILoading: function(id, msg)
             {
                 if(msg === undefined){
@@ -64,6 +71,17 @@
                 else
                 {
                     $(id).block({
+                        css: {
+                            padding:        0,
+                            margin:         0,
+                            width:          '60%',
+                            top:            '100%',
+                            left:           '100%',
+                            textAlign:      'center',
+                            color:          '#000',
+                            border:         '0px solid #aaa',
+                            cursor:         'wait'
+                        },
                         message: '<h3><img src="/WacBaseAppPlugin/images/js_icons/throbber.gif" alt="' + msg +'"> ' + msg +'</h3>'
                     });
                 }
@@ -73,34 +91,28 @@
                 var loaderStr = "<div class=\"wacLoader\"><div align=\"center\"><b>"+ msg +"</b></div>";
                 loaderStr += "<div align=\"center\"><img border=\"0\" alt=\"Loading...\" src=\"/WacBaseAppPlugin/images/js_icons/loader.gif\"></div></div>";
 
-                if(id === undefined)
-                {
+                if(id === undefined){
                     $("body").append(loaderStr);
                 }
-                else
-                {
+                else{
                     $(id).append(loaderStr);
                 }
             },
             hideBlockUI: function(id)
             {
-                if(id === undefined)
-                {
+                if(id === undefined){
                     $.unblockUI();
                 }
-                else
-                {
+                else{
                     $(id).unblock();
                 }
             },
             showTips: function(msg, title)
             {
-                if(title != undefined)
-                {
+                if(title != undefined){
                     $("body").append("<div id='wacTipsDialog' title='" + title + "'><p>" + msg +"</p></div>");
                 }
-                else
-                {
+                else{
                     $("body").append("<div id='wacTipsDialog' title='"+ $.i18n.prop('Tips') +"'><p>" + msg +"</p></div>");
                 }
 
@@ -119,12 +131,10 @@
             },
             showConfirm: function(msg, okCallback, cancelCallback, title)
             {
-                if(title != undefined)
-                {
+                if(title != undefined){
                     $("body").append("<div id='wacConfirmDialog' title='" + title + "'><p>" + msg +"</p></div>");
                 }
-                else
-                {
+                else{
                     $("body").append("<div id='wacConfirmDialog' title='"+ $.i18n.prop('Confirm Tips') +"'><p>" + msg +"</p></div>");
                 }
 

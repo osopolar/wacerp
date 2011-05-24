@@ -226,11 +226,11 @@ function WacFormPrototype()
 /*
  *  declare a panel-prototype model class
  */
-function WacPanelPrototype()
+function WacNavPanelPrototype()
 {
     var _self = this;
-//    var debug = true;
-    var debug = false;
+    var debug = true;
+//    var debug = false;
 
     this.init = function(children){
         children.initLayout();
@@ -239,12 +239,12 @@ function WacPanelPrototype()
     };
 
     this.bindEvents = function(children){
-        Wac.log("WacPanelPrototype bindEvents", debug);
+        Wac.log("WacNavPanelPrototype bindEvents", debug);
 
     };
 
     this.initLayout = function(children){
-        Wac.log("WacPanelPrototype initLayout", debug);
+        Wac.log("WacNavPanelPrototype initLayout", debug);
 
         $(children.componentGlobalId).panel({
             collapseType:'slide-left',
@@ -255,18 +255,34 @@ function WacPanelPrototype()
     };
 
     this.initData = function(children){
-        Wac.log("WacPanelPrototype initData", debug);
-        $(document).wacPage().showBlockUILoading(children.panelId);
-        _self.initDataCallBack(children, {});
+        Wac.log("WacNavPanelPrototype initData", debug);
+        $(document).wacPage().showBlockUILoader({id:children.panelId, msg:$.i18n.prop('data loading...')});
+
+        var params ={dataFormat :'json'};
+
+        $.ajax({
+            url: WacAppConfig.baseUrl + children.moduleName + "/getList",
+            global: true,
+            type: "GET",
+            data: params,
+            dataType: "json",
+            success: function(jsonData){
+                children.initDataCallBack(jsonData);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            }
+        });
     };
 
     this.initDataCallBack = function(children, jsonData){
-        Wac.log("WacPanelPrototype initDataCallBack", debug);
+        Wac.log("WacNavPanelPrototype initDataCallBack", debug);
         $(document).wacPage().hideBlockUI(children.panelId);
+//            Wac.log($(document).wacTool().dumpObj(jsonData));
     };
 
     this.setupDefaults = function(children, defaultValueObj){
-        Wac.log("WacPanelPrototype setupDefaults", debug);
+        Wac.log("WacNavPanelPrototype setupDefaults", debug);
     };
 
 }
