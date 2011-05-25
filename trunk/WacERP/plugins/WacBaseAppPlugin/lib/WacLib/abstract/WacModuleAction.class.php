@@ -17,4 +17,16 @@ abstract class WacModuleAction extends WacCommonActions {
     public function setupMainModuleTable(){
         $this->mainModuleTable = Doctrine::getTable(ucfirst($this->getModuleName()));
     }
+    
+    public function executeGetForm(sfWebRequest $request) {
+        $str = $this->getComponent($this->contextInfo["moduleName"], WacComponentList::$moduleForm,
+                        array(
+                            'invokeParams' => array(
+                                'contextInfo' => $this->contextInfo,
+                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($this->contextInfo))
+                        ))
+                );
+
+        return OutputHelper::getInstance()->output($str, $this, array("isCache" => false));
+    }
 }

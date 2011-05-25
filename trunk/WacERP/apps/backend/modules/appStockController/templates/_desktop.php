@@ -2,7 +2,7 @@
 $attachInfo = array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo));
 $moduleName           = $contextInfo['moduleName'];
 $moduleGlobalName     = $moduleName.$attachInfo['uiid'];
-$componentGlobalName  = WacModuleHelper::getDashboardId($moduleName, $attachInfo);
+$componentGlobalName  = WacModuleHelper::getDesktopId($moduleName, $attachInfo);
 $componentGlobalId    = "#".$componentGlobalName;
 ?>
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
@@ -34,7 +34,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         </div>
     </div>
     <div id="lCenter_<?php echo $componentGlobalName;?>" class="wacPanelCenter">
-        <div id="desktop_<?php echo $componentGlobalName;?>" class="wacPanelDesktop">
+        <div id="content_<?php echo $componentGlobalName;?>" class="wacPanelDesktop">
             <p>
                 <b>Feel free to examine html of this page.</b>
             </p>
@@ -64,7 +64,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
         this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
         this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
-        this.panelId = "#content_" + <?php echo "'{$componentGlobalName}'" ?>;
+        this.contentId = "#content_" + <?php echo "'{$componentGlobalName}'" ?>;
 
         this.init = function(){
 //            _self.prototype.init(_self);
@@ -81,7 +81,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 //            _self.prototype.bindEvents(_self);
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
                 Wac.log(data);
-                _self.showAddFormPanel();
+                _self.loadAddFormPanel(data);
 //                Wac.log(jQuery._jq_shout.registry);
             });
         };
@@ -94,10 +94,17 @@ $componentGlobalId    = "#".$componentGlobalName;
 //            _self.prototype.initDataCallBack(_self, jsonData);
         };
 
-        this.showAddFormPanel = function(){
-//            if(){
-//
-//            }
+        this.loadAddFormPanel = function(data){
+            var formId = "#" + data.moduleName + "AddFormPanel";
+            if($(formId).length > 0){
+                $(formId).panel('enable');
+            }
+            else{
+                $(_self.contentId).load(
+                      WacAppConfig.baseUrl + data.moduleName + "/getForm",
+                      {dataFormat: "html"}
+                  );
+            }
         }
 
         this.init();  // init method

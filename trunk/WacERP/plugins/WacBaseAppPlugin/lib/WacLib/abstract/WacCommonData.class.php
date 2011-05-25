@@ -48,7 +48,7 @@ abstract class WacCommonData
      */
     public function getAttribute($key, $attribute)
     {
-        return $this->_params[$key][$attribute];
+        return (isset($this->_params[$key][$attribute])) ? $this->_params[$key][$attribute] : "";
     }
 
     /*
@@ -99,6 +99,9 @@ abstract class WacCommonData
         $row = $this->getRowById($id);
         if($row != false){
             return $row[$attribute];
+        }
+        else{
+            return "";
         }
     }
 
