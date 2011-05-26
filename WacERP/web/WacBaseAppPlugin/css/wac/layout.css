@@ -333,7 +333,7 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
     padding-top:0;
     overflow:hidden;
 }
-.wacPanelDesktop { background-color:#eee; padding:1.5em; padding-bottom:3em; color:#444; }
+.wacPanelDesktop { background-color:#eee; padding:1.5em; padding-bottom:3em; color:#444; height:670px;}
 .wacPanelLeft{float: left;}
 .wacPanelRight{float: right;}
 

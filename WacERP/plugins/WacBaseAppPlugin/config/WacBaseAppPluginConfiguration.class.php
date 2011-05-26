@@ -24,5 +24,6 @@ class WacBaseAppPluginConfiguration extends sfPluginConfiguration
   public function initialize()
   {
       sfConfig::set("app_wac_plugin_dir", $this->getRootDir());
+      sfConfig::set("app_wac_plugin_module_common_actions_dir", sfConfig::get("app_wac_plugin_dir")."/modules/wacCommon/actions");
   }
 }

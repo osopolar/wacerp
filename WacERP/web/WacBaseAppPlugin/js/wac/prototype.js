@@ -286,6 +286,112 @@ function WacNavPanelPrototype()
     this.setupDefaults = function(children, defaultValueObj){
         Wac.log("WacNavPanelPrototype setupDefaults", debug);
     };
+}
+
+/*
+ *  declare a PanelForm-prototype model class
+ */
+function WacPanelFormPrototype()
+{
+    var _self = this;
+    var debug = true;
+//    var debug = false;
+
+    this.init = function(children){
+        children.initLayout();
+        children.initData();
+        children.bindEvents();
+    };
+
+    this.bindEvents = function(children){
+        $('#btnSave_' + children.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_add_form, {moduleName: children.moduleName});
+            });
+        Wac.log("WacPanelFormPrototype bindEvents", debug);
+    };
+
+    this.initLayout = function(children){
+        Wac.log("WacPanelFormPrototype initLayout", debug);
+
+        $(children.componentGlobalId).panel({
+            draggable:true,
+            width:'100%'
+        });
+    };
+
+    this.initData = function(children){
+        Wac.log("WacPanelFormPrototype initData", debug);
+//        $(document).wacPage().showBlockUILoader({id:children.panelId, msg:$.i18n.prop('data loading...')});
+
+//        var params ={dataFormat :'json'};
+//
+//        $.ajax({
+//            url: WacAppConfig.baseUrl + children.moduleName + "/getList",
+//            global: true,
+//            type: "GET",
+//            data: params,
+//            dataType: "json",
+//            success: function(jsonData){
+//                children.initDataCallBack(jsonData);
+//            },
+//            error: function(XMLHttpRequest, textStatus, errorThrown){
+//                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+//            }
+//        });
+    };
+
+    this.initDataCallBack = function(children, jsonData){
+        Wac.log("WacPanelFormPrototype initDataCallBack", debug);
+        $(document).wacPage().hideBlockUI(children.formId);
+//            Wac.log($(document).wacTool().dumpObj(jsonData));
+    };
+
+    this.setupDefaults = function(children, defaultValueObj){
+        Wac.log("WacPanelFormPrototype setupDefaults", debug);
+    };
+
+    this.saveForm = function(children){
+        Wac.log("WacPanelFormPrototype submitMainForm", debug);
+
+        if(!children.validateMainForm()){
+            return;
+        }
+
+        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
+
+        var extraParams = "dataFormat=json";
+        var submitUrl;
+
+        if(children.inputMode == WacEntity.formInputMode.add){
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/add";
+        }
+        else{
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/edit";
+        }
+
+
+        $.ajax({
+            url: submitUrl,
+            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+            global: true,
+            type: "GET",
+            data: $(children.formId).serialize() + "&" + extraParams,
+            dataType: "json",
+            success: function(jsonData){
+                children.saveFormCallBack(jsonData);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            }
+        });
+    };
+
+    this.saveFormCallBack = function(children, jsonData){
+        Wac.log("WacPanelFormPrototype saveFormCallBack", debug);
+
+        $(document).wacPage().showTips(jsonData.info.message);
+        $(document).wacPage().hideBlockUI(children.formId);
+    };
 
 }
 

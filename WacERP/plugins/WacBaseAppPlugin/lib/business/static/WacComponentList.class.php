@@ -37,6 +37,9 @@ class WacComponentList
     //// module form
     public static $moduleForm                 = "moduleForm";
 
+    //// module panel form, add/edit form in a panel
+    public static $modulePanelForm            = "modulePanelForm";
+
     //// module tree
     public static $moduleTree                 = "moduleTree";
 
