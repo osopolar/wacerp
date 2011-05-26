@@ -84,6 +84,14 @@ class WacModuleHelper
     }
 
     /*
+     * getFormPanelId
+     */
+    public static function getFormPanelId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "formPanel");
+    }
+
+    /*
      * getNavPanelId
      */
     public static function getNavPanelId($module, $attachInfo=array())
