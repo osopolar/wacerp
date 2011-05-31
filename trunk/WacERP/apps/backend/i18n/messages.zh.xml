@@ -33,7 +33,6 @@
         <source>The username and/or password is invalid.</source>
         <target>用户名或密码错误!</target>
       </trans-unit>
-
     </body>
   </file>
 </xliff>

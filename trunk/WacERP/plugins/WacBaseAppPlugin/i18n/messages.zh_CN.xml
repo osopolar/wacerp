@@ -26,6 +26,10 @@
         <target>名称</target>
       </trans-unit>
       <trans-unit>
+        <source>Code</source>
+        <target>编码</target>
+      </trans-unit>
+      <trans-unit>
         <source>Coding</source>
         <target>编码</target>
       </trans-unit>
@@ -252,6 +256,10 @@
       <trans-unit>
         <source>Paste</source>
         <target>粘贴</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save</source>
+        <target>保存</target>
       </trans-unit>
     </body>
   </file>
