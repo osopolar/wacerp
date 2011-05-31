@@ -10,7 +10,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
 <div id="<?php echo $componentGlobalName; ?>" title="<?php echo WacModule::getInstance()->getCaption($moduleName); ?>" class="ui-widget centralPanel" >
-    <h3>Central panel #2</h3>
+    <h3><?php echo __("Module Name"); ?></h3>
     <div>
         <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="" class="wacFormA">
             <div class="wacFormFirstCol">
@@ -53,13 +53,10 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
             </div>
             <div class="wacFormClear"></div>
-            <div class="wacFormBottom" align="center">
-
-                <hr class="wacFormRuler" style="width:700px; float:inherit;" />
-
+            <div class="wacFormBottom" align="right">
+                <hr class="wacFormRuler" style="width:100%; float:inherit;" />
                 <div class="wacFormClear"></div>
-                <br/>
-                <input name="btnSave" id="btnSubmit_<?php echo $componentGlobalName ?>" class="ui-button ui-state-default ui-corner-all wacCursor" type="button" value="<?php echo __("Submit"); ?>"/>
+                <input name="btnSave" id="btnSubmit_<?php echo $componentGlobalName ?>" class="ui-button ui-state-default ui-corner-all wacCursor" type="button" value="<?php echo __("Save"); ?>"/>
             </div>
 
             <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0">

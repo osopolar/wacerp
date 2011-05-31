@@ -1757,7 +1757,10 @@ WacShippingMethod:
 WacStorehouse:
   connection: wac_db_connection1
   package: Storehouse.
-  actAs: [Timestampable]
+  actAs:
+    Timestampable: ~
+    I18n:
+      fields: [name]
   tableName: wac_storehouse
   columns:
     id:
