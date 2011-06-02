@@ -73,8 +73,7 @@
     float:left; 
     width: 100%;
     height: 255px;
-    overflow: auto;
-    
+    overflow: auto;    
 }
 
 .wacFormThirdCol{
@@ -94,6 +93,7 @@
     width:80px;
     float:left;
     padding:1px;
+    font-size: 9pt;
 }
 
 .wacFormItemRightSmall{
@@ -101,10 +101,16 @@
     float:left;
     padding:1px;
     min-height:24px;
+    font-size: 9pt;
 }
 
 .wacFormBottom{
    visibility: visible; display: block; top: auto; bottom: 0px; 
+}
+
+.wacPanelFormRow{
+    background-color:none;
+    display:block;
 }
 
 .wacSignin { width:295px; font-family: Verdana; font-size: 9pt; font-style: normal; color: #4A3E3E; margin:250px auto; }

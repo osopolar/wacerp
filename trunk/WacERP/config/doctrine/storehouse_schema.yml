@@ -593,106 +593,7 @@ WacMaterialDeliveryOrderItem:
       local: material_id
       foreign: id
       type: one
-WacMaterialLang:
-  connection: wac_db_connection1
-  package: Storehouse.
-  actAs: [Timestampable]
-  tableName: wac_material_lang
-  columns:
-    id:
-      type: integer(8)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    lang_id:
-      type: integer(8)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    name:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    value:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    pr_int1:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: false
-      autoincrement: false
-    pr_int2:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0'
-      notnull: false
-      autoincrement: false
-    pr_str1:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    pr_str2:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: false
-      autoincrement: false
-    priority:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '50'
-      notnull: false
-      autoincrement: false
-    is_avail:
-      type: integer(1)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '1'
-      notnull: true
-      autoincrement: false
-    created_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      notnull: true
-      autoincrement: false
-    updated_at:
-      type: timestamp(25)
-      fixed: false
-      unsigned: false
-      primary: false
-      default: '0000-00-00 00:00:00'
-      notnull: true
-      autoincrement: false
-  relations:
-    Language:
-      class: WacLanguage
-      local: id
-      foreign: lang_id
-      type: one
+
 WacMaterialPurchaseOrder:
   connection: wac_db_connection1
   package: Storehouse.
@@ -1759,8 +1660,9 @@ WacStorehouse:
   package: Storehouse.
   actAs:
     Timestampable: ~
-    I18n:
-      fields: [name]
+#    I18n:
+#      className: %CLASS%I18n
+#      fields: [name]
   tableName: wac_storehouse
   columns:
     id:

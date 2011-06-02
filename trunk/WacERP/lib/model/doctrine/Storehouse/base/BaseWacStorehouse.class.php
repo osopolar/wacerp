@@ -326,8 +326,7 @@ abstract class BaseWacStorehouse extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'storehouse_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable(array(
-             ));
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
     }
 }

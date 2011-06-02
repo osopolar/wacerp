@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
 <xliff version="1.0">
-  <file original="global" source-language="en" datatype="plaintext">
+  <file original="global" source-language="en_US" datatype="plaintext">
     <header />
     <body>
-      <!-- Actions -->
       <trans-unit>
         <source>Module Name</source>
         <target>仓库111</target>

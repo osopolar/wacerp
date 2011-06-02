@@ -29,8 +29,8 @@ $componentGlobalId    = "#".$componentGlobalName;
         <div class="wacFormClear"></div>
         <hr style="width:100%; float:inherit;" class="wacFormRuler">
         <div align="right">
-            <button id="btnAdd_<?php echo $componentGlobalName; ?>">add</button>
-            <button id="btnDel_<?php echo $componentGlobalName; ?>">del</button>
+            <button id="btnAdd_<?php echo $componentGlobalName; ?>"><?php echo __("add")?></button>
+            <button id="btnDel_<?php echo $componentGlobalName; ?>"><?php echo __("del")?></button>
         </div>
     </div>
 </div>

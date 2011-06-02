@@ -1,8 +1,8 @@
 <?php 
-use_helper('I18N');
+//use_helper('I18N');
 
 use_stylesheet('common/wac/main.css');
-use_stylesheet('apps/backend/sfGuardAuth/signin.css');
+use_stylesheet(WacAssetHelper::getInstance()->getI18nCssDir().'apps/backend/sfGuardAuth/signin.css');
 ?>
 <div>
     <?php if (!empty($form)) { ?>
@@ -17,7 +17,7 @@ use_stylesheet('apps/backend/sfGuardAuth/signin.css');
             <div id="cap-top"></div>
             <div id="cap-body">
                 <div id="branding" align="center">
-                    <img id="imgLogo" src="/images/apps/backend/singin/login_logo.png" style="border-width:0px;height:60px;width:316px;" />
+                    <?php echo image_tag(WacAssetHelper::getInstance()->getI18nImageDir().'apps/backend/sfGuardAuth/login_logo.png', array('style' => 'border-width:0px;height:60px;width:316px;', 'id' => 'imgLogo')); ?>
                 </div>
                 <div id="panelLogin">
 
@@ -35,7 +35,7 @@ use_stylesheet('apps/backend/sfGuardAuth/signin.css');
                     </div>
 
                     <div class="submit clearfix">
-                        <input value="<?php echo __('Login'); ?>" type="image" src="/images/apps/backend/singin/button-login.png" alt="Login" name="btnLogin" id="btnLogin" />
+                        <input value="<?php echo __('Login'); ?>" type="image" src="<?php echo WacAssetHelper::getInstance()->getI18nImageDir().'apps/backend/sfGuardAuth/button-login.png'; ?>" alt="Login" name="btnLogin" id="btnLogin" />
                     </div>
 
                 </div>
