@@ -10,6 +10,7 @@ all:
     images_path: /WacBaseAppPlugin/images/
     js_path: /WacBaseAppPlugin/js/
     upload_path: /wac_uploads/
+    theme: base
     data_export_format:
       xml: xml
       json: json

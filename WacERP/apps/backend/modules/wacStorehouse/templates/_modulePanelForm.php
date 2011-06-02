@@ -15,25 +15,25 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
         <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="" class="wacFormA">
             <div class="wacFormFirstCol">
                 <div class="wacFormContentA">
-                    <div class="wacFormRow">
-                        <div class="wacFormItemLeft "><?php echo __("Name"); ?></div>
-                        <div class="wacFormItemRight">
+                    <div class="wacPanelFormRow">
+                        <div class="wacFormItemLeftSmall "><?php echo __("Name"); ?></div>
+                        <div class="wacFormItemRightSmall">
                             <input name="name" id="name_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
                         </div>
                         <div class="wacFormClear"></div>
                     </div>
-                    <div class="wacFormRow">
-                        <div class="wacFormItemLeft"><?php echo __("Code"); ?></div>
-                        <div class="wacFormItemRight">
+                    <div class="wacPanelFormRow">
+                        <div class="wacFormItemLeftSmall"><?php echo __("Code"); ?></div>
+                        <div class="wacFormItemRightSmall">
                             <input name="code" id="code_<?php echo $componentGlobalName; ?>" maxlength="20" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
                         </div>
                         <div class="wacFormClear"></div>
                     </div>
-                    <div class="wacFormRow">
-                        <div class="wacFormItemLeft">
+                    <div class="wacPanelFormRow">
+                        <div class="wacFormItemLeftSmall">
                             <label for="is_avail_<?php echo $componentGlobalName; ?>"><?php echo __("Status Active"); ?></label>
                         </div>
-                        <div class="wacFormItemRight">
+                        <div class="wacFormItemRightSmall">
                             <input name="is_avail" id="is_avail_<?php echo $componentGlobalName; ?>" checked="true" value="1" type="checkbox" class="ui-widget-content ui-corner-all" />
                         </div>
                         <div class="wacFormClear"></div>
@@ -44,7 +44,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             </div>
             <div class="wacFormSecondCol">
                 <div class="wacFormContentA">
-                    <div class="wacFormRow">
+                    <div class="wacPanelFormRow">
 
                         <div class="wacFormClear"></div>
                     </div>
