@@ -73,9 +73,9 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
    <div class="wacFormClear"></div>
    <br/>
-   <input name="btnSubmit" id="btnSubmit_<?php echo $componentGlobalName ?>" class="ui-button ui-state-default ui-corner-all wacCursor" type="button" value="<?php echo __("Submit");?>"/>
+   <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save");?>"/>
       &nbsp;&nbsp;
-      <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" class="ui-button ui-state-default ui-corner-all wacCursor" type="button" value="<?php echo __("Close");?>"/>
+      <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Close");?>"/>
     </div>
 
     <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0">

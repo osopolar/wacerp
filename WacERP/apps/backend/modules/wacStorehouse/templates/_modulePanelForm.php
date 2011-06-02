@@ -56,7 +56,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             <div class="wacFormBottom" align="right">
                 <hr class="wacFormRuler" style="width:100%; float:inherit;" />
                 <div class="wacFormClear"></div>
-                <input name="btnSave" id="btnSubmit_<?php echo $componentGlobalName ?>" class="ui-button ui-state-default ui-corner-all wacCursor" type="button" value="<?php echo __("Save"); ?>"/>
+                <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
             </div>
 
             <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0">
