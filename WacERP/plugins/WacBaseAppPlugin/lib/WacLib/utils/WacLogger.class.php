@@ -44,28 +44,28 @@ class WacLogger extends WacCommonData
     public function logOperation($operation, $params=array())
     {
         $logMsg = "";
-        $msgPatternObj = null;
+        $content = null;
         switch($operation)
         {
             case WacOperationType::$add:
-                $msgPatternObj = $this->msgTable->findOneByCode("sys_log_add");
+                $content = $this->msgTable->getContentByCode("sys_log_add");
                 break;
             case WacOperationType::$read:
                 break;
             case WacOperationType::$edit:
-                $msgPatternObj = $this->msgTable->findOneByCode("sys_log_edit");
+                $content = $this->msgTable->getContentByCode("sys_log_edit");
                 break;
             case WacOperationType::$del:
-                $msgPatternObj = $this->msgTable->findOneByCode("sys_log_delete");
+                $content = $this->msgTable->getContentByCode("sys_log_delete");
                 break;
             case WacOperationType::$audit:
-                $msgPatternObj = $this->msgTable->findOneByCode("sys_log_audit");
+                $content = $this->msgTable->getContentByCode("sys_log_audit");
                 break;
             default:
                 break;
         }
 
-        $logMsg = sprintf($msgPatternObj->getContent(), $params['userName'], $params['target'], $params['targetId']);
+        $logMsg = sprintf($content, $params['userName'], $params['target'], $params['targetId']);
         $logObj = $this->loggerTable->create();
         $logObj->setUserId($params['userId']);
         $logObj->setType($params['type']);

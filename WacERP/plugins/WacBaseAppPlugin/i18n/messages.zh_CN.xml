@@ -261,6 +261,14 @@
         <source>Save</source>
         <target>保存</target>
       </trans-unit>
+      <trans-unit>
+        <source>Content</source>
+        <target>内容</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Culture</source>
+        <target>区域语言</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -8,7 +8,7 @@ abstract class WacCommonTable extends Doctrine_Table
 
     /*
 	 * Return a list which can be visible on the website
-	 * @param $arrParams an parameter array for extension
+	 * @param $arrParams an parameter array for extension,  eg. $arrParams = ['andWhere'][] = "code='{$code}'";
 	 * @page - page number
          * @maxPerPage - max rows per page
 	 * @return an array
@@ -39,6 +39,20 @@ abstract class WacCommonTable extends Doctrine_Table
     }
 
     /*
+     * quickly fetch an attribute of one record by some conditions
+     */
+    public function fetchAttribute($attribute, $conditions)
+    {
+        $objQuery = $this->createQuery('t1')
+            ->select("t1.{$attribute}");
+
+        QueryHelper::processOption($objQuery, $conditions);
+        $dataResult = $objQuery->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+        $objQuery->free();
+        return $dataResult[$attribute];
+    }
+
+    /*
      * $arrParams - can contains array('andWhere'=>'sth', 'orderBy'=>'sth')
      * return a list
      */
@@ -49,6 +63,7 @@ abstract class WacCommonTable extends Doctrine_Table
 
     /*
      * return a common list
+     *  eg. $arrParams = ['andWhere'][] = "code='{$code}'";
      */
     public function getCommonList($page=1, $maxPerPage=20, $isArr=true, $params=array())
     {

@@ -62,7 +62,7 @@ $componentCaption    = WacModule::getInstance()->getCaption($moduleName) . __("L
                           {name:'act', width:180, sortable:false, align:"center"}
                       ],
                       jsonReader : WacEntity.jsonReader,
-                      rowNum:10,
+                      rowNum:<?php echo $contextInfo["rowNum"];?>,
                       rowList:[5,10,20,30,40,50],
                       sortname: 'id',
                       sortorder: "desc",
@@ -136,6 +136,7 @@ $componentCaption    = WacModule::getInstance()->getCaption($moduleName) . __("L
 //                    Wac.log(data);
                 });
 
+                // listen print event, throw out show print form event
                 $(document).hear(listingTableId, moduleGlobalName + WacAppConfig.event.app_wac_events_data_print, function ($self, data) {  // listenerid, event name, callback
                     var params = {};
                     params.moduleName = moduleName;

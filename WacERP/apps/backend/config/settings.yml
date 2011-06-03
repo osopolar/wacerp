@@ -44,6 +44,7 @@ all:
       - wacGuardPermission
       - wacCountry
       - wacPrint
+      - wacSysmsg
       - wacSystemLog
       - wacSystemParameter
       - wacFileManager
