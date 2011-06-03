@@ -15,6 +15,9 @@ all:
       xml: xml
       json: json
       csv: csv
+    support_cultures:
+      en_US: English
+      zh_CN: 中文
     
   wac_events:
 #    op_confirm_yes: _confirm_yes_evt

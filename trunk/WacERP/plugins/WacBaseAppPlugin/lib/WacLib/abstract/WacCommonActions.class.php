@@ -275,12 +275,14 @@ abstract class WacCommonActions extends sfActions {
 
         $id = ($reqParams['id']!=JqGridDataHelper::$KEY_EMPTY) ? $reqParams['id'] : 0;
         if($this->mainModuleTable->isExistedCode($reqParams['code'], $id)) {
-            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['code']), WacErrorCode::$duplicatedName);
+//            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['code']), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
             return $result;
         }
 
         if($this->mainModuleTable->isExistedName($reqParams['name'], $id)) {
-            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
+//            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_name", array($reqParams['name'])), WacErrorCode::$duplicatedName);
             return $result;
         }
         return $result;

@@ -17,12 +17,20 @@ class PluginWacSysmsgTable extends WacCommonTable
         return Doctrine_Core::getTable('PluginWacSysmsg');
     }
 
+    public function getErrContent($code, $params=array()){
+        $content = $this->getContentByCode($code);
+        return vsprintf($content, $params);
+    }
+
     /*
      * return value
      */
-    public function getContentByCode($cv)
+    public function getContentByCode($code)
     {
-        $resultArr = $this->findOneBy('code', $cv, Doctrine::HYDRATE_ARRAY);
-        return nl2br($resultArr['content']);
+        $conditions = array();
+        $conditions['andWhere'][] = "culture_code='".sfContext::getInstance()->getUser()->getCulture()."'";
+        $conditions['andWhere'][] = "code='{$code}'";
+        
+        return $this->fetchAttribute("content", $conditions);
     }
 }

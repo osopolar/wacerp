@@ -33,7 +33,28 @@ class WacAssetHelper {
         }
         return $this->_i18nCssDir;
     }
-    
+
+    /*
+     * serialize an array
+     */
+    public function serializeArray($items, $spliter=':', $pairSpliter=';', $isI18N=false) {
+        if(is_array($items) && count($items)>0){
+            $tmpArr = array();
+            if (!$isI18N) {
+                foreach ($items as $k => $v) {
+                    $tmpArr[] = $k . $spliter . $v;
+                }
+                return implode($pairSpliter, $tmpArr);
+            } else {
+                $i18n = sfContext::getInstance()->getI18N();
+                foreach ($items as $k => $v) {
+                    $tmpArr[] = $k . $spliter . $i18n->__($v);
+                }
+                return implode($pairSpliter, $tmpArr);
+            }
+        }
+        return "";
+    }
 
 }
 

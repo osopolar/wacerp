@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-05-11 18:35:42
+Date: 2011-06-03 17:21:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ INSERT INTO `sf_guard_group` VALUES ('11', 't3', 't3', '2010-12-30 08:48:56', '2
 INSERT INTO `sf_guard_group` VALUES ('12', 't4', 't4', '2010-12-30 08:55:05', '2010-12-30 08:55:05');
 INSERT INTO `sf_guard_group` VALUES ('14', 't5', 't5', '2011-01-04 10:30:06', '2011-01-04 10:30:06');
 INSERT INTO `sf_guard_group` VALUES ('15', 't6', 't6', '2011-02-25 08:40:12', '2011-02-25 08:40:12');
-INSERT INTO `sf_guard_group` VALUES ('16', 't7', 't7', '2011-03-29 10:26:23', '2011-03-30 03:40:28');
+INSERT INTO `sf_guard_group` VALUES ('16', 't7', 't711', '2011-03-29 10:26:23', '2011-06-03 08:36:28');
 
 -- ----------------------------
 -- Table structure for `sf_guard_group_permission`
@@ -211,7 +211,7 @@ CREATE TABLE `sf_guard_user` (
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-05-11 09:52:32', '2009-12-19 08:12:50', '2011-05-11 09:52:33');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-03 06:34:22', '2009-12-19 08:12:50', '2011-06-03 06:34:22');
 INSERT INTO `sf_guard_user` VALUES ('17', 'user1', 'sha1', 'e83ecdefb483cd2db998fd0daa0c5d87', 'bafb2f103d52d727ba3eb8c5d9532c871d04e455', '1', '0', '2011-03-31 04:01:35', '2011-03-31 02:40:56', '2011-03-31 04:01:35');
 
 -- ----------------------------
@@ -233,8 +233,9 @@ CREATE TABLE `sf_guard_user_group` (
 -- Records of sf_guard_user_group
 -- ----------------------------
 INSERT INTO `sf_guard_user_group` VALUES ('1', '1', '2009-12-19 08:12:50', '2009-12-19 08:12:50');
-INSERT INTO `sf_guard_user_group` VALUES ('17', '2', '2011-03-31 02:40:56', '2011-03-31 02:40:56');
-INSERT INTO `sf_guard_user_group` VALUES ('17', '4', '2011-03-31 02:40:56', '2011-03-31 02:40:56');
+INSERT INTO `sf_guard_user_group` VALUES ('17', '10', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
+INSERT INTO `sf_guard_user_group` VALUES ('17', '11', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
+INSERT INTO `sf_guard_user_group` VALUES ('17', '12', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
 
 -- ----------------------------
 -- Table structure for `sf_guard_user_permission`
@@ -401,6 +402,60 @@ CREATE TABLE `wac_currency_ratio` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `wac_customer`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_customer`;
+CREATE TABLE `wac_customer` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`name`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_customer_address`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_customer_address`;
+CREATE TABLE `wac_customer_address` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `customer_id` bigint(20) DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `is_default` smallint(6) DEFAULT '0',
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`customer_id`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_customer_address
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `wac_file`
 -- ----------------------------
 DROP TABLE IF EXISTS `wac_file`;
@@ -465,14 +520,16 @@ INSERT INTO `wac_file` VALUES ('77', '53', '1', '24', '25', '3', 'leaf', '1', nu
 INSERT INTO `wac_file` VALUES ('78', '53', '2', '24', '29', '3', 'leaf', '1', null, 'p15tmmapvh1eth7kdsvn1k6n1hie4.zip', 'Bat_To_Exe_Converter.zip', 'm/a/', 'application/zip', '102081', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-19 10:54:26');
 
 -- ----------------------------
--- Table structure for `wac_sysmsg`
+-- Table structure for `wac_language`
 -- ----------------------------
-DROP TABLE IF EXISTS `wac_sysmsg`;
-CREATE TABLE `wac_sysmsg` (
+DROP TABLE IF EXISTS `wac_language`;
+CREATE TABLE `wac_language` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `content` text,
+  `culture_code` varchar(255) DEFAULT NULL,
+  `is_default` tinyint(4) DEFAULT '0',
+  `memo` varchar(255) DEFAULT NULL,
   `pr_int1` int(11) DEFAULT '0',
   `pr_int2` int(11) DEFAULT '0',
   `pr_str1` varchar(255) DEFAULT NULL,
@@ -485,47 +542,674 @@ CREATE TABLE `wac_sysmsg` (
   KEY `Index_1` (`code`),
   KEY `Index_2` (`priority`),
   KEY `Index_3` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_language
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material`;
+CREATE TABLE `wac_material` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `sku` varchar(255) DEFAULT NULL,
+  `brand_id` bigint(20) DEFAULT '0',
+  `model_id` bigint(20) DEFAULT '0',
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`sku`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_category`;
+CREATE TABLE `wac_material_category` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `parent_id` bigint(20) DEFAULT '0',
+  `position` int(11) DEFAULT '0',
+  `left_number` bigint(20) DEFAULT '0',
+  `right_number` bigint(20) DEFAULT '0',
+  `level` int(11) DEFAULT '0',
+  `code` varchar(255) NOT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `caption` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `memo` text,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `AK_Key_2` (`code`),
+  KEY `Index_1` (`parent_id`),
+  KEY `Index_2` (`position`),
+  KEY `Index_3` (`left_number`),
+  KEY `Index_4` (`right_number`),
+  KEY `Index_5` (`level`),
+  KEY `Index_6` (`code`),
+  KEY `Index_7` (`user_id`),
+  KEY `Index_8` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_category_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_category_link`;
+CREATE TABLE `wac_material_category_link` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `material_id` bigint(20) DEFAULT '0',
+  `category_id` bigint(20) DEFAULT '0',
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`material_id`),
+  KEY `Index_2` (`category_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_category_link
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_delivery_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_delivery_order`;
+CREATE TABLE `wac_material_delivery_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `src_storehouse_id` bigint(20) DEFAULT '0',
+  `src_storeroom_id` bigint(20) DEFAULT '0',
+  `dst_storehouse_id` bigint(20) DEFAULT '0',
+  `dst_storeroom_id` bigint(20) DEFAULT '0',
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `biz_date` datetime DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`user_id`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_delivery_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_delivery_order_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_delivery_order_item`;
+CREATE TABLE `wac_material_delivery_order_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT '0',
+  `material_id` bigint(20) DEFAULT '0',
+  `qty` float DEFAULT '0',
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(10,0) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`material_id`),
+  KEY `Index_2` (`order_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_delivery_order_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_purchase_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_purchase_order`;
+CREATE TABLE `wac_material_purchase_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `biz_date` datetime DEFAULT NULL,
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`user_id`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_purchase_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_purchase_order_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_purchase_order_item`;
+CREATE TABLE `wac_material_purchase_order_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT '0',
+  `material_id` bigint(20) DEFAULT '0',
+  `qty` float DEFAULT '0',
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(10,0) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`material_id`),
+  KEY `Index_2` (`order_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_purchase_order_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_sale_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_sale_order`;
+CREATE TABLE `wac_material_sale_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `src_storehouse_id` bigint(20) DEFAULT '0',
+  `src_storeroom_id` bigint(20) DEFAULT '0',
+  `customer_id` bigint(20) DEFAULT '0',
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `biz_date` datetime DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`user_id`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_sale_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_sale_order_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_sale_order_item`;
+CREATE TABLE `wac_material_sale_order_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT '0',
+  `material_id` bigint(20) DEFAULT '0',
+  `qty` float DEFAULT '0',
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(10,0) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`material_id`),
+  KEY `Index_2` (`order_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_sale_order_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_shipping_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_shipping_order`;
+CREATE TABLE `wac_material_shipping_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `src_storehouse_id` bigint(20) DEFAULT '0',
+  `src_storeroom_id` bigint(20) DEFAULT '0',
+  `customer_id` bigint(20) DEFAULT '0',
+  `customer_address_id` bigint(20) DEFAULT '0',
+  `shipping_method_id` bigint(20) DEFAULT '0',
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `biz_date` datetime DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`user_id`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_shipping_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_material_shipping_order_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_shipping_order_item`;
+CREATE TABLE `wac_material_shipping_order_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT '0',
+  `material_id` bigint(20) DEFAULT '0',
+  `qty` float DEFAULT '0',
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(10,0) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`material_id`),
+  KEY `Index_2` (`order_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_shipping_order_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_order_state`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_order_state`;
+CREATE TABLE `wac_order_state` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT '0',
+  `order_type` smallint(6) DEFAULT '0',
+  `state` smallint(6) DEFAULT '0',
+  `changer_id` bigint(20) DEFAULT '0',
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`order_type`),
+  KEY `Index_2` (`order_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_order_state
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_shipping_method`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_shipping_method`;
+CREATE TABLE `wac_shipping_method` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`name`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_shipping_method
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storehouse`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storehouse`;
+CREATE TABLE `wac_storehouse` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `area_size` float NOT NULL DEFAULT '0',
+  `area_size_unit_code` varchar(255) DEFAULT NULL,
+  `capacity` float NOT NULL DEFAULT '0',
+  `capacity_unit_code` varchar(255) DEFAULT NULL,
+  `postalcode` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `contact_man` varchar(255) DEFAULT NULL,
+  `tel1` varchar(255) DEFAULT NULL,
+  `tel2` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`code`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storehouse
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storehouse_material_biz_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storehouse_material_biz_item`;
+CREATE TABLE `wac_storehouse_material_biz_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `storehouse_id` bigint(20) NOT NULL DEFAULT '0',
+  `material_id` bigint(20) DEFAULT '0',
+  `order_type` smallint(6) DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT '0',
+  `qty` float DEFAULT NULL,
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `unit_price` decimal(10,0) DEFAULT NULL,
+  `unit_cost` decimal(10,0) DEFAULT NULL,
+  `trade_date` datetime DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`storehouse_id`),
+  KEY `Index_2` (`material_id`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`order_type`,`order_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storehouse_material_biz_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storehouse_material_quantity`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storehouse_material_quantity`;
+CREATE TABLE `wac_storehouse_material_quantity` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `storehouse_id` bigint(20) NOT NULL DEFAULT '0',
+  `storeroom_id` bigint(20) DEFAULT '0',
+  `material_id` bigint(20) DEFAULT NULL,
+  `qty` float DEFAULT '0',
+  `qty_unit_code` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`storehouse_id`,`material_id`),
+  KEY `Index_2` (`qty`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`),
+  KEY `Index_5` (`storehouse_id`,`storeroom_id`,`material_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storehouse_material_quantity
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storehouse_parameter`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storehouse_parameter`;
+CREATE TABLE `wac_storehouse_parameter` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `storehouse_id` bigint(20) NOT NULL DEFAULT '0',
+  `code` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`code`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storehouse_parameter
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storehouse_quickstat`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storehouse_quickstat`;
+CREATE TABLE `wac_storehouse_quickstat` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type` smallint(6) DEFAULT '0',
+  `storehouse_id` bigint(20) NOT NULL DEFAULT '0',
+  `material_id` bigint(20) DEFAULT NULL,
+  `qty` float DEFAULT '0',
+  `stat_date` datetime DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`storehouse_id`,`material_id`),
+  KEY `Index_2` (`qty`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storehouse_quickstat
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_storeroom`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_storeroom`;
+CREATE TABLE `wac_storeroom` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `storehouse_id` bigint(20) DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `area_size` float NOT NULL DEFAULT '0',
+  `area_size_unit_code` varchar(255) DEFAULT NULL,
+  `capacity` float NOT NULL DEFAULT '0',
+  `capacity_unit_code` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`code`),
+  KEY `Index_2` (`updated_at`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`),
+  KEY `Index_5` (`storehouse_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_storeroom
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_sysmsg`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_sysmsg`;
+CREATE TABLE `wac_sysmsg` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `culture_code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` text,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_2` (`priority`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_1` (`code`,`culture_code`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_sysmsg
 -- ----------------------------
-INSERT INTO `wac_sysmsg` VALUES ('1', 'sys_add_succ', '', '添加成功!', '0', '0', null, null, '50', '1', '2010-02-04 23:06:28', '2010-02-04 23:06:28');
-INSERT INTO `wac_sysmsg` VALUES ('2', 'sys_edit_succ', '', '修改成功!', '0', '0', null, null, '50', '1', '2010-02-05 01:30:38', '2010-02-05 01:30:38');
-INSERT INTO `wac_sysmsg` VALUES ('3', 'sys_del_succ', '', '删除成功!', '0', '0', null, null, '50', '1', '2010-02-05 01:30:57', '2010-02-05 01:30:57');
-INSERT INTO `wac_sysmsg` VALUES ('4', 'sys_err_goods_category_not_existed', '', '错误, 不存在的货物品种!', '0', '0', null, null, '50', '1', '2010-02-09 03:22:26', '2010-02-08 19:22:26');
-INSERT INTO `wac_sysmsg` VALUES ('5', 'sys_err_invalid_production_order', '', '错误, 请输入有效生产单!', '0', '0', null, null, '50', '1', '2010-03-14 03:11:13', '2010-02-08 19:22:11');
-INSERT INTO `wac_sysmsg` VALUES ('6', 'sys_err_invalid_factory', '', '错误, 请输入有效工厂!', '0', '0', null, null, '50', '1', '2010-02-09 03:22:19', '2010-02-08 19:22:19');
-INSERT INTO `wac_sysmsg` VALUES ('7', 'sys_err_invalid_cotton_order', '', '错误, 请输入有效棉纱单!', '0', '0', null, null, '50', '1', '2010-02-16 23:21:55', '2010-02-16 23:21:55');
-INSERT INTO `wac_sysmsg` VALUES ('8', 'sys_err_invalid_dye_order', '', '错误, 请输入有效浆染单!', '0', '0', null, null, '50', '1', '2010-02-16 23:22:19', '2010-02-16 23:22:19');
-INSERT INTO `wac_sysmsg` VALUES ('9', 'sys_err_invalid_weave_order', '', '错误, 请输入有效织造单!', '0', '0', null, null, '50', '1', '2010-02-16 23:22:40', '2010-02-16 23:22:40');
-INSERT INTO `wac_sysmsg` VALUES ('10', 'sys_err_invalid_clean_up_form', '', '错误, 请输入有效后整单!', '0', '0', null, null, '50', '1', '2010-06-09 10:24:35', '2010-02-16 23:23:16');
-INSERT INTO `wac_sysmsg` VALUES ('11', 'sys_err_invalid_final_order', '', '错误, 请输入有效成品单!', '0', '0', null, null, '50', '1', '2010-02-16 23:24:50', '2010-02-16 23:24:50');
-INSERT INTO `wac_sysmsg` VALUES ('12', 'sys_err_invalid_goods_category', '', '错误, 请输入有效货物品种!', '0', '0', null, null, '50', '1', '2010-02-17 00:07:48', '2010-02-17 00:07:48');
-INSERT INTO `wac_sysmsg` VALUES ('13', 'sys_log_add', '', '%s 添加了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2010-02-17 10:04:16', '2010-02-17 02:04:16');
-INSERT INTO `wac_sysmsg` VALUES ('14', 'sys_log_edit', '', '%s 编辑了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2010-02-17 10:04:18', '2010-02-17 02:04:18');
-INSERT INTO `wac_sysmsg` VALUES ('15', 'sys_log_delete', '', '%s 删除了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2010-02-17 10:04:00', '2010-02-17 02:04:00');
-INSERT INTO `wac_sysmsg` VALUES ('16', 'sys_err_invalid_supplier', '', '错误, 请输入有效供应厂商!', '0', '0', null, null, '50', '1', '2010-02-20 02:36:45', '2010-02-20 02:36:45');
-INSERT INTO `wac_sysmsg` VALUES ('17', 'sys_err_invalid_color', null, '错误, 请输入有效颜色!', '0', '0', null, null, '50', '1', '2010-02-22 10:33:40', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('18', 'sys_err_invalid_jar', null, '错误, 请输入有效缸号!', '0', '0', null, null, '50', '1', '2010-02-22 10:34:00', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('19', 'sys_err_invalid_axis', null, '错误, 请输入有效轴号!', '0', '0', null, null, '50', '1', '2010-02-22 10:34:53', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('20', 'sys_err_invalid_cotton_goods_category', null, '错误, 请输入有效棉纱品种!', '0', '0', null, null, '50', '1', '2010-02-23 02:20:35', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('21', 'sys_audit_succ', '', '审核操作完成!', '0', '0', null, null, '50', '1', '2010-02-23 18:24:22', '2010-02-23 18:24:22');
-INSERT INTO `wac_sysmsg` VALUES ('22', 'sys_err_invaild_audit_status', '', '错误, 审核操作无效! \r\n请检查本单是否已审核?', '0', '0', null, null, '50', '1', '2010-02-25 08:42:50', '2010-02-23 18:26:46');
-INSERT INTO `wac_sysmsg` VALUES ('23', 'sys_err_invaild_audit_zero_item', '', '错误, 审核操作无效! \r\n请检查本单是否存在输入子项?', '0', '0', null, null, '50', '1', '2010-02-25 08:42:54', '2010-02-24 19:41:12');
-INSERT INTO `wac_sysmsg` VALUES ('24', 'sys_err_invalid_spinner', null, '错误, 请输入有效纺织机号!', '0', '0', null, null, '50', '1', '2010-02-26 04:19:30', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('25', 'sys_invalid_user_authenticate', '', '错误, 无效的用户验证!', '0', '0', null, null, '50', '1', '2010-03-03 19:48:22', '2010-03-03 19:48:22');
-INSERT INTO `wac_sysmsg` VALUES ('26', 'sys_err_invalid_customer_order', '', '错误, 请输入有效订单!', '0', '0', null, null, '50', '1', '2010-03-13 19:12:01', '2010-03-13 19:12:01');
-INSERT INTO `wac_sysmsg` VALUES ('27', 'sys_err_invalid_customer', '', '错误, 请输入有效客户!', '0', '0', null, null, '50', '1', '2010-04-07 06:51:15', '2010-04-06 22:51:15');
-INSERT INTO `wac_sysmsg` VALUES ('28', 'sys_err_sample_jar_not_existed', null, '错误, 请输入有效封样缸号!', '0', '0', null, null, '50', '1', '2010-03-25 03:34:57', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('29', 'sys_err_invalid_storehouse', '', '错误, 请输入有效仓库!', '0', '0', null, null, '50', '1', '2010-04-07 06:51:06', '2010-04-06 22:51:06');
-INSERT INTO `wac_sysmsg` VALUES ('30', 'sys_err_goods_number_insufficient_in_factory', null, '错误, \'%s\' 存量不足!  [现有数量%s,消耗数量%s]', '0', '0', null, null, '50', '1', '2010-04-08 08:48:12', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('31', 'sys_log_audit', null, '%s 审核了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2010-04-07 08:46:44', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('32', 'sys_err_predefined_class_delete', null, '错误, 此分类为系统预定义的必须项,禁止删除!', '0', '0', null, null, '50', '1', '2010-05-18 06:36:38', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('33', 'sys_err_predefined_class_edit', null, '错误, 此分类为系统预定义的必须项,编码禁止更改!', '0', '0', null, null, '50', '1', '2010-05-18 07:22:42', '0000-00-00 00:00:00');
-INSERT INTO `wac_sysmsg` VALUES ('34', 'sys_err_invaild_target', '', '错误, 请输入有效目的地!', '0', '0', null, null, '50', '1', '2010-06-22 14:39:41', '2010-06-22 14:39:41');
-INSERT INTO `wac_sysmsg` VALUES ('35', 'sys_err_invalid_dispatch_order', '', '错误, 请输入有效出仓单!', '0', '0', null, null, '50', '1', '2010-08-19 09:28:33', '2010-08-19 09:28:33');
-INSERT INTO `wac_sysmsg` VALUES ('36', 'sys_err_dispatch_order_qc_only_once', '', '错误, 此出货单已存在QC记录, 请复查以往QC单!', '0', '0', null, null, '50', '1', '2010-09-01 03:10:10', '2010-09-01 03:08:26');
+INSERT INTO `wac_sysmsg` VALUES ('1', 'sys_add_succ', 'zh_CN', '', '添加成功!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-04 23:06:28');
+INSERT INTO `wac_sysmsg` VALUES ('2', 'sys_edit_succ', 'zh_CN', '', '修改成功!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-05 01:30:38');
+INSERT INTO `wac_sysmsg` VALUES ('3', 'sys_del_succ', 'zh_CN', '', '删除成功!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-05 01:30:57');
+INSERT INTO `wac_sysmsg` VALUES ('4', 'sys_err_duplicated_code', 'zh_CN', '', '错误, 已存在相同的编码(%s)!', '0', '0', null, null, '50', '1', '2011-06-03 09:09:22', '2011-06-03 09:09:46');
+INSERT INTO `wac_sysmsg` VALUES ('5', 'sys_err_duplicated_name', 'zh_CN', '', '错误, 已存在相同的名称(%s)!', '0', '0', null, null, '50', '1', '2011-06-03 09:09:10', '2011-06-03 09:09:34');
+INSERT INTO `wac_sysmsg` VALUES ('6', 'sys_err_invalid_factory', 'zh_CN', '', '错误, 请输入有效工厂!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-08 19:22:19');
+INSERT INTO `wac_sysmsg` VALUES ('7', 'sys_err_invalid_cotton_order', 'zh_CN', '', '错误, 请输入有效棉纱单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:21:55');
+INSERT INTO `wac_sysmsg` VALUES ('8', 'sys_err_invalid_dye_order', 'zh_CN', '', '错误, 请输入有效浆染单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:22:19');
+INSERT INTO `wac_sysmsg` VALUES ('9', 'sys_err_invalid_weave_order', 'zh_CN', '', '错误, 请输入有效织造单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:22:40');
+INSERT INTO `wac_sysmsg` VALUES ('10', 'sys_err_invalid_clean_up_form', 'zh_CN', '', '错误, 请输入有效后整单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:23:16');
+INSERT INTO `wac_sysmsg` VALUES ('11', 'sys_err_invalid_final_order', 'zh_CN', '', '错误, 请输入有效成品单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:24:50');
+INSERT INTO `wac_sysmsg` VALUES ('12', 'sys_err_invalid_goods_category', 'zh_CN', '', '错误, 请输入有效货物品种!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-17 00:07:48');
+INSERT INTO `wac_sysmsg` VALUES ('13', 'sys_log_add', 'zh_CN', '', '%s 添加了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-17 02:04:16');
+INSERT INTO `wac_sysmsg` VALUES ('14', 'sys_log_edit', 'zh_CN', '', '%s 编辑了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-17 02:04:18');
+INSERT INTO `wac_sysmsg` VALUES ('15', 'sys_log_delete', 'zh_CN', '', '%s 删除了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-17 02:04:00');
+INSERT INTO `wac_sysmsg` VALUES ('16', 'sys_err_invalid_supplier', 'zh_CN', '', '错误, 请输入有效供应厂商!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-20 02:36:45');
+INSERT INTO `wac_sysmsg` VALUES ('17', 'sys_err_invalid_color', 'zh_CN', null, '错误, 请输入有效颜色!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('18', 'sys_err_invalid_jar', 'zh_CN', null, '错误, 请输入有效缸号!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('19', 'sys_err_invalid_axis', 'zh_CN', null, '错误, 请输入有效轴号!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('20', 'sys_err_invalid_cotton_goods_category', 'zh_CN', null, '错误, 请输入有效棉纱品种!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('21', 'sys_audit_succ', 'zh_CN', '', '审核操作完成!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-23 18:24:22');
+INSERT INTO `wac_sysmsg` VALUES ('22', 'sys_err_invaild_audit_status', 'zh_CN', '', '错误, 审核操作无效! \r\n请检查本单是否已审核?', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-23 18:26:46');
+INSERT INTO `wac_sysmsg` VALUES ('23', 'sys_err_invaild_audit_zero_item', 'zh_CN', '', '错误, 审核操作无效! \r\n请检查本单是否存在输入子项?', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-24 19:41:12');
+INSERT INTO `wac_sysmsg` VALUES ('24', 'sys_err_invalid_spinner', 'zh_CN', null, '错误, 请输入有效纺织机号!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('25', 'sys_invalid_user_authenticate', 'zh_CN', '', '错误, 无效的用户验证!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-03-03 19:48:22');
+INSERT INTO `wac_sysmsg` VALUES ('26', 'sys_err_invalid_customer_order', 'zh_CN', '', '错误, 请输入有效订单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-03-13 19:12:01');
+INSERT INTO `wac_sysmsg` VALUES ('27', 'sys_err_invalid_customer', 'zh_CN', '', '错误, 请输入有效客户!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-04-06 22:51:15');
+INSERT INTO `wac_sysmsg` VALUES ('28', 'sys_err_sample_jar_not_existed', 'zh_CN', null, '错误, 请输入有效封样缸号!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('29', 'sys_err_invalid_storehouse', 'zh_CN', '', '错误, 请输入有效仓库!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-04-06 22:51:06');
+INSERT INTO `wac_sysmsg` VALUES ('30', 'sys_err_goods_number_insufficient_in_factory', 'zh_CN', null, '错误, \'%s\' 存量不足!  [现有数量%s,消耗数量%s]', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('31', 'sys_log_audit', 'zh_CN', null, '%s 审核了 %s, (id为 %s)', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('32', 'sys_err_predefined_class_delete', 'zh_CN', null, '错误, 此分类为系统预定义的必须项,禁止删除!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('33', 'sys_err_predefined_class_edit', 'zh_CN', null, '错误, 此分类为系统预定义的必须项,编码禁止更改!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '0000-00-00 00:00:00');
+INSERT INTO `wac_sysmsg` VALUES ('34', 'sys_err_invaild_target', 'zh_CN', '', '错误, 请输入有效目的地!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-06-22 14:39:41');
+INSERT INTO `wac_sysmsg` VALUES ('35', 'sys_err_invalid_dispatch_order', 'zh_CN', '', '错误, 请输入有效出仓单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-08-19 09:28:33');
+INSERT INTO `wac_sysmsg` VALUES ('36', 'sys_err_dispatch_order_qc_only_once', 'zh_CN', '', '错误, 此出货单已存在QC记录, 请复查以往QC单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-09-01 03:08:26');
+INSERT INTO `wac_sysmsg` VALUES ('40', 't1', 'zh_CN', null, 't11', '0', '0', null, null, '50', '1', '2011-06-03 08:03:43', '2011-06-03 08:03:43');
 
 -- ----------------------------
 -- Table structure for `wac_system_log`
@@ -548,7 +1232,7 @@ CREATE TABLE `wac_system_log` (
   KEY `Index_1` (`updated_at`),
   KEY `Index_2` (`created_at`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_system_log
@@ -757,6 +1441,33 @@ INSERT INTO `wac_system_log` VALUES ('201', '1', '2', 'admin 添加了 用户组
 INSERT INTO `wac_system_log` VALUES ('202', '1', '2', 'admin 编辑了 用户组管理, (id为 19)', '0', '0', null, null, '50', '1', '2011-04-11 07:46:13', '2011-04-11 07:46:13');
 INSERT INTO `wac_system_log` VALUES ('203', '1', '2', 'admin 删除了 用户组管理, (id为 19)', '0', '0', null, null, '50', '1', '2011-04-11 07:46:19', '2011-04-11 07:46:19');
 INSERT INTO `wac_system_log` VALUES ('204', '1', '2', 'admin 编辑了 权限管理, (id为 32)', '0', '0', null, null, '50', '1', '2011-04-11 07:55:10', '2011-04-11 07:55:10');
+INSERT INTO `wac_system_log` VALUES ('205', '1', '2', 'admin 编辑了 用户管理, (id为 17)', '0', '0', null, null, '50', '1', '2011-06-02 09:20:36', '2011-06-02 09:20:36');
+INSERT INTO `wac_system_log` VALUES ('206', '1', '2', 'admin 添加了 系统信息, (id为 37)', '0', '0', null, null, '50', '1', '2011-06-03 03:57:48', '2011-06-03 03:57:48');
+INSERT INTO `wac_system_log` VALUES ('207', '1', '2', 'admin 删除了 系统信息, (id为 37)', '0', '0', null, null, '50', '1', '2011-06-03 03:58:10', '2011-06-03 03:58:10');
+INSERT INTO `wac_system_log` VALUES ('208', '1', '2', 'admin 添加了 系统信息, (id为 38)', '0', '0', null, null, '50', '1', '2011-06-03 03:58:22', '2011-06-03 03:58:22');
+INSERT INTO `wac_system_log` VALUES ('209', '1', '2', 'admin 编辑了 系统信息, (id为 38)', '0', '0', null, null, '50', '1', '2011-06-03 03:58:34', '2011-06-03 03:58:34');
+INSERT INTO `wac_system_log` VALUES ('210', '1', '2', 'admin 删除了 系统信息, (id为 38)', '0', '0', null, null, '50', '1', '2011-06-03 03:58:39', '2011-06-03 03:58:39');
+INSERT INTO `wac_system_log` VALUES ('211', '1', '2', 'admin 添加了 系统信息, (id为 39)', '0', '0', null, null, '50', '1', '2011-06-03 06:34:23', '2011-06-03 06:34:23');
+INSERT INTO `wac_system_log` VALUES ('212', '1', '2', 'admin 删除了 系统信息, (id为 39)', '0', '0', null, null, '50', '1', '2011-06-03 07:00:31', '2011-06-03 07:00:31');
+INSERT INTO `wac_system_log` VALUES ('213', '1', '2', 'admin 编辑了 系统信息, (id为 36)', '0', '0', null, null, '50', '1', '2011-06-03 07:27:48', '2011-06-03 07:27:48');
+INSERT INTO `wac_system_log` VALUES ('214', '1', '2', 'admin 添加了 系统信息, (id为 40)', '0', '0', null, null, '50', '1', '2011-06-03 08:03:43', '2011-06-03 08:03:43');
+INSERT INTO `wac_system_log` VALUES ('215', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:36:28', '2011-06-03 08:36:28');
+INSERT INTO `wac_system_log` VALUES ('216', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:36:42', '2011-06-03 08:36:42');
+INSERT INTO `wac_system_log` VALUES ('217', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:37:14', '2011-06-03 08:37:14');
+INSERT INTO `wac_system_log` VALUES ('218', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:38:32', '2011-06-03 08:38:32');
+INSERT INTO `wac_system_log` VALUES ('219', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:44:50', '2011-06-03 08:44:50');
+INSERT INTO `wac_system_log` VALUES ('220', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:46:19', '2011-06-03 08:46:19');
+INSERT INTO `wac_system_log` VALUES ('221', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:48:04', '2011-06-03 08:48:04');
+INSERT INTO `wac_system_log` VALUES ('222', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:56:13', '2011-06-03 08:56:13');
+INSERT INTO `wac_system_log` VALUES ('223', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:58:00', '2011-06-03 08:58:00');
+INSERT INTO `wac_system_log` VALUES ('224', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:59:13', '2011-06-03 08:59:13');
+INSERT INTO `wac_system_log` VALUES ('225', '1', '2', 'admin 编辑了 用户组管理, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-03 08:59:49', '2011-06-03 08:59:49');
+INSERT INTO `wac_system_log` VALUES ('226', '1', '2', 'admin 编辑了 系统信息, (id为 4)', '0', '0', null, null, '50', '1', '2011-06-03 09:06:41', '2011-06-03 09:06:41');
+INSERT INTO `wac_system_log` VALUES ('227', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:08:08', '2011-06-03 09:08:08');
+INSERT INTO `wac_system_log` VALUES ('228', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:08:22', '2011-06-03 09:08:22');
+INSERT INTO `wac_system_log` VALUES ('229', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:15', '2011-06-03 09:09:15');
+INSERT INTO `wac_system_log` VALUES ('230', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:34', '2011-06-03 09:09:34');
+INSERT INTO `wac_system_log` VALUES ('231', '1', '2', 'admin 编辑了 系统信息, (id为 4)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:46', '2011-06-03 09:09:46');
 
 -- ----------------------------
 -- Table structure for `wac_system_parameter`

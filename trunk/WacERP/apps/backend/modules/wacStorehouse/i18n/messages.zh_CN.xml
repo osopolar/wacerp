@@ -6,11 +6,11 @@
     <body>
       <trans-unit>
         <source>Module Name</source>
-        <target>仓库111</target>
+        <target>仓库</target>
       </trans-unit>
       <trans-unit>
         <source>Code</source>
-        <target>编码222</target>
+        <target>编码</target>
       </trans-unit>
     </body>
   </file>

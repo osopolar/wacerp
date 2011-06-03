@@ -19,6 +19,7 @@ class PluginWacSystemLogTable extends WacCommonTable
 
     /*
      * return a custom list
+     *
      */
     public function getCustomList($arrParams, $page=1, $maxPerPage=20, $isArr=true)
     {

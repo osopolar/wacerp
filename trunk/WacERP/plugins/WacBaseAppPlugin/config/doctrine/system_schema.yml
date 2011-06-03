@@ -154,6 +154,7 @@ WacSysmsg:
       default: '0000-00-00 00:00:00'
       notnull: true
     code: string(255)
+    culture_code: string(255)
     name: string(255)
     content: string()
     pr_str1: string(255)
@@ -513,6 +514,10 @@ WacLanguage:
     priority:
       type: integer(4)
       default: '50'
+    is_default:
+      type: integer(1)
+      default: '1'
+      notnull: true
     is_avail:
       type: integer(1)
       default: '1'
@@ -526,6 +531,7 @@ WacLanguage:
       notnull: true
     name: string(255)
     code: string(255)
+    culture_code: string(255)
     memo: string()
     pr_str1: string(255)
     pr_str2: string(255)

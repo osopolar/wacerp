@@ -371,33 +371,33 @@ function WacPanelFormPrototype()
             return;
         }
 
-//        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
-//
-//        var extraParams = "dataFormat=json";
-//        var submitUrl;
-//
-//        if(children.inputMode == WacEntity.formInputMode.add){
-//            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/add";
-//        }
-//        else{
-//            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/edit";
-//        }
-//
-//
-//        $.ajax({
-//            url: submitUrl,
-//            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
-//            global: true,
-//            type: "GET",
-//            data: $(children.formId).serialize() + "&" + extraParams,
-//            dataType: "json",
-//            success: function(jsonData){
-//                children.saveFormCallBack(jsonData);
-//            },
-//            error: function(XMLHttpRequest, textStatus, errorThrown){
-//                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
-//            }
-//        });
+        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
+
+        var extraParams = "dataFormat=json";
+        var submitUrl;
+
+        if(children.inputMode == WacEntity.formInputMode.add){
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/add";
+        }
+        else{
+            submitUrl = WacAppConfig.baseUrl + children.moduleName + "/edit";
+        }
+
+
+        $.ajax({
+            url: submitUrl,
+            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+            global: true,
+            type: "GET",
+            data: $(children.formId).serialize() + "&" + extraParams,
+            dataType: "json",
+            success: function(jsonData){
+                children.saveFormCallBack(jsonData);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            }
+        });
     };
 
     this.saveFormCallBack = function(children, jsonData){

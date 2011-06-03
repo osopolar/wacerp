@@ -15,35 +15,38 @@ Doctrine_Manager::getInstance()->bindComponent('WacSysmsg', 'wac_db_connection1'
  * @property timestamp $created_at
  * @property timestamp $updated_at
  * @property string $code
+ * @property string $culture_code
  * @property string $name
  * @property string $content
  * @property string $pr_str1
  * @property string $pr_str2
  * 
- * @method integer   getId()         Returns the current record's "id" value
- * @method integer   getPrInt1()     Returns the current record's "pr_int1" value
- * @method integer   getPrInt2()     Returns the current record's "pr_int2" value
- * @method integer   getPriority()   Returns the current record's "priority" value
- * @method integer   getIsAvail()    Returns the current record's "is_avail" value
- * @method timestamp getCreatedAt()  Returns the current record's "created_at" value
- * @method timestamp getUpdatedAt()  Returns the current record's "updated_at" value
- * @method string    getCode()       Returns the current record's "code" value
- * @method string    getName()       Returns the current record's "name" value
- * @method string    getContent()    Returns the current record's "content" value
- * @method string    getPrStr1()     Returns the current record's "pr_str1" value
- * @method string    getPrStr2()     Returns the current record's "pr_str2" value
- * @method WacSysmsg setId()         Sets the current record's "id" value
- * @method WacSysmsg setPrInt1()     Sets the current record's "pr_int1" value
- * @method WacSysmsg setPrInt2()     Sets the current record's "pr_int2" value
- * @method WacSysmsg setPriority()   Sets the current record's "priority" value
- * @method WacSysmsg setIsAvail()    Sets the current record's "is_avail" value
- * @method WacSysmsg setCreatedAt()  Sets the current record's "created_at" value
- * @method WacSysmsg setUpdatedAt()  Sets the current record's "updated_at" value
- * @method WacSysmsg setCode()       Sets the current record's "code" value
- * @method WacSysmsg setName()       Sets the current record's "name" value
- * @method WacSysmsg setContent()    Sets the current record's "content" value
- * @method WacSysmsg setPrStr1()     Sets the current record's "pr_str1" value
- * @method WacSysmsg setPrStr2()     Sets the current record's "pr_str2" value
+ * @method integer   getId()           Returns the current record's "id" value
+ * @method integer   getPrInt1()       Returns the current record's "pr_int1" value
+ * @method integer   getPrInt2()       Returns the current record's "pr_int2" value
+ * @method integer   getPriority()     Returns the current record's "priority" value
+ * @method integer   getIsAvail()      Returns the current record's "is_avail" value
+ * @method timestamp getCreatedAt()    Returns the current record's "created_at" value
+ * @method timestamp getUpdatedAt()    Returns the current record's "updated_at" value
+ * @method string    getCode()         Returns the current record's "code" value
+ * @method string    getCultureCode()  Returns the current record's "culture_code" value
+ * @method string    getName()         Returns the current record's "name" value
+ * @method string    getContent()      Returns the current record's "content" value
+ * @method string    getPrStr1()       Returns the current record's "pr_str1" value
+ * @method string    getPrStr2()       Returns the current record's "pr_str2" value
+ * @method WacSysmsg setId()           Sets the current record's "id" value
+ * @method WacSysmsg setPrInt1()       Sets the current record's "pr_int1" value
+ * @method WacSysmsg setPrInt2()       Sets the current record's "pr_int2" value
+ * @method WacSysmsg setPriority()     Sets the current record's "priority" value
+ * @method WacSysmsg setIsAvail()      Sets the current record's "is_avail" value
+ * @method WacSysmsg setCreatedAt()    Sets the current record's "created_at" value
+ * @method WacSysmsg setUpdatedAt()    Sets the current record's "updated_at" value
+ * @method WacSysmsg setCode()         Sets the current record's "code" value
+ * @method WacSysmsg setCultureCode()  Sets the current record's "culture_code" value
+ * @method WacSysmsg setName()         Sets the current record's "name" value
+ * @method WacSysmsg setContent()      Sets the current record's "content" value
+ * @method WacSysmsg setPrStr1()       Sets the current record's "pr_str1" value
+ * @method WacSysmsg setPrStr2()       Sets the current record's "pr_str2" value
  * 
  * @package    WacERP
  * @subpackage model
@@ -94,6 +97,10 @@ abstract class BaseWacSysmsg extends sfDoctrineRecord
              'length' => 25,
              ));
         $this->hasColumn('code', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('culture_code', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));

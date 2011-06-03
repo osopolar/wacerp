@@ -11,7 +11,14 @@
 
 abstract class WacComponent extends sfComponent {
     protected $innerContextInfo = array();
-    
+    public $i18n = null;
+
+    public function initialize($context, $moduleName, $actionName) {
+        parent::initialize($context, $moduleName, $actionName);
+        $this->i18n = sfContext::getInstance()->getI18N();
+    }
+
+
     // define a info holder
     public function execute($request) {
         $this->innerContextInfo = array();
