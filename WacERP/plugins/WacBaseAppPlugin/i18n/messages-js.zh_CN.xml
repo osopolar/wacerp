@@ -77,6 +77,10 @@
         <source>ConfirmBtnNo</source>
         <target>取消</target>
       </trans-unit>
+      <trans-unit>
+        <source>No options available</source>
+        <target>无可用选项!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -9,22 +9,12 @@ $componentGlobalId    = "#".$componentGlobalName;
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
 
 <div id="<?php echo $componentGlobalName;?>" class="wacNavPanel">
-    <h3>Storehouse</h3>
+    <h3><?php echo __("Storehouse").__("List");?></h3>
     <div id="content_<?php echo $componentGlobalName;?>">
-	Panel's initial options:
         <ol id="list_<?php echo $componentGlobalName; ?>" class="selectable">
             <li class="ui-state-default">1</li>
             <li class="ui-state-default">2</li>
             <li class="ui-state-default">3</li>
-            <li class="ui-state-default">4</li>
-            <li class="ui-state-default">5</li>
-            <li class="ui-state-default">6</li>
-            <li class="ui-state-default">7</li>
-            <li class="ui-state-default">8</li>
-            <li class="ui-state-default">9</li>
-            <li class="ui-state-default">10</li>
-            <li class="ui-state-default">11</li>
-            <li class="ui-state-default">12</li>
         </ol>
         <div class="wacFormClear"></div>
         <hr style="width:100%; float:inherit;" class="wacFormRuler">
@@ -55,7 +45,6 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
-            $("#list_" + _self.componentGlobalName).selectable();
             $('#btnAdd_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-plusthick"}});
             $('#btnDel_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-minusthick"}});
             _self.prototype.initLayout(_self);
@@ -66,10 +55,44 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initData = function(){
+            $('#list_' + this.componentGlobalName).empty();
             _self.prototype.initData(_self);
         };
 
         this.initDataCallBack = function(jsonData){
+            if(jsonData.userdata.status == WacEntity.operationStatus.succss)
+            {
+                if(jsonData['items'].length>0){
+                    for(i=0;i<jsonData['items'].length;i++)
+                    {
+                        $('<li class="ui-state-default">' + jsonData['items'][i].name +'</li>').appendTo('#list_' + _self.componentGlobalName);
+                    }
+
+                    $("#list_" + _self.componentGlobalName).selectable({
+                        stop: function() {
+                            var result = [];
+                            $( ".ui-selected", this ).each(function() {
+                                var index = $("#list_"+_self.componentGlobalName+" li").index( this );
+                                result.push(index);
+                            });
+
+                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedIdx:result});
+                        }
+                    });
+
+//                    $("#list_" + _self.componentGlobalName).bind("selectablestop", function(event, ui){
+//                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName});
+//                    });
+                }
+                else{
+                    $('<li class="ui-state-default">' + $.i18n.prop('no options') +'</li>').appendTo('#list_' + _self.componentGlobalName);
+                }
+                
+            }
+            else
+            {
+                $(document).wacPage().showTips(jsonData.userdata.message);
+            }
             _self.prototype.initDataCallBack(_self, jsonData);
         };
 
