@@ -303,9 +303,10 @@ abstract class WacCommonActions extends sfActions {
     */
     public function executeAdd(sfWebRequest $request) {
         $inspectResult = $this->inspectDataValidation($request);
+        $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
         if($inspectResult['status'] == WacOperationStatus::$Error) {
-            $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
-            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult;
+            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult; // for compatibility JqGrid tips
+            $resultSet['info'] = $inspectResult;
         }
         else {
 
@@ -313,8 +314,12 @@ abstract class WacCommonActions extends sfActions {
             $reqParams       = $this->getRequest()->getParameterHolder()->getAll();
             $targetItem   = $this->mainModuleTable->create();
 
-            $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
-            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getSuccessDatum();
+            $succInfo = JsCommonData::getSuccessDatum(
+                            Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
+            );
+
+            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $succInfo;
+            $resultSet['info'] = $succInfo;
 
             if(count($reqParams)>0) {
                 foreach($reqParams as $key => $value) {

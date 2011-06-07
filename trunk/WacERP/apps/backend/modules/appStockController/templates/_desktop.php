@@ -80,10 +80,14 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.bindEvents = function(){
 //            _self.prototype.bindEvents(_self);
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
-                Wac.log(data);
                 _self.loadPanelForm(data);
-//                Wac.log(jQuery._jq_shout.registry);
             });
+
+            $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
+                Wac.log(data, debug);
+                _self.loadPanelForm(data);
+            });
+
         };
 
         this.initData = function(){
@@ -95,11 +99,9 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.loadPanelForm = function(data){
-            var formPanelId = "#formPanel_" + data.moduleName;
-            if($(formPanelId).length > 0){
-                $(formPanelId).panel('enable');
-            }
-            else{
+//            Wac.log(data, debug);
+//            Wac.log('div[id*="formPanel_'+ data.moduleName +'"]'+ " : " + $('div[id*="formPanel_'+ data.moduleName +'"]').length, debug);
+            if($('div[id*="formPanel_'+ data.moduleName +'"]').length == 0){
                 $(_self.contentId).load(
                       WacAppConfig.baseUrl + data.moduleName + "/getPanelForm",
                       {dataFormat: "html"}

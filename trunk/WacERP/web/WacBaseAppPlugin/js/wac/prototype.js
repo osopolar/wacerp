@@ -243,6 +243,10 @@ function WacNavPanelPrototype()
         $('#btnAdd_' + children.componentGlobalName).bind("click", function(){
                 $.shout(WacAppConfig.event.app_wac_events_show_add_form, {moduleName: children.moduleName});
             });
+
+        $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_data_saved, function ($self, data) {  // listenerid, event name, callback
+            children.initData();
+        });
         Wac.log("WacNavPanelPrototype bindEvents", debug);
     };
 
@@ -307,7 +311,6 @@ function WacPanelFormPrototype()
     this.bindEvents = function(children){
         $('#btnSave_' + children.componentGlobalName).bind("click", function(){
             children.saveForm();
-//                $.shout(WacAppConfig.event.app_wac_events_show_add_form, {moduleName: children.moduleName});
         });
         Wac.log("WacPanelFormPrototype bindEvents", debug);
     };
@@ -324,6 +327,8 @@ function WacPanelFormPrototype()
 
     this.initData = function(children){
         Wac.log("WacPanelFormPrototype initData", debug);
+
+        
 //        $(document).wacPage().showBlockUILoader({id:children.panelId, msg:$.i18n.prop('data loading...')});
 
 //        var params ={dataFormat :'json'};
@@ -402,7 +407,7 @@ function WacPanelFormPrototype()
 
     this.saveFormCallBack = function(children, jsonData){
         Wac.log("WacPanelFormPrototype saveFormCallBack", debug);
-
+        $.shout(children.moduleName + WacAppConfig.event.app_wac_events_data_saved, {moduleName: children.moduleName});
         $(document).wacPage().showTips(jsonData.info.message);
         $(document).wacPage().hideBlockUI(children.formId);
     };

@@ -18,7 +18,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                     <div class="wacPanelFormRow">
                         <div class="wacFormItemLeftSmall "><?php echo __("Name"); ?></div>
                         <div class="wacFormItemRightSmall">
-                            <input name="name" id="name_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                            <input name="name" id="name_<?php echo $componentGlobalName; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
                         </div>
                         <div class="wacFormClear"></div>
                     </div>
@@ -97,6 +97,11 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
         this.bindEvents = function(){
             _self.prototype.bindEvents(_self);
+
+//            $(document).hear(this.formId, _self.moduleName + WacAppConfig.event.app_wac_events_data_changed, function ($self, data) {  // listenerid, event name, callback
+//                Wac.log(data, debug);
+////                _self.loadPanelForm(data);
+//            });
         };
 
         this.initLayout = function(){
