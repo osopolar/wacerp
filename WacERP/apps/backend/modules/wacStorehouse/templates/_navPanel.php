@@ -73,16 +73,13 @@ $componentGlobalId    = "#".$componentGlobalName;
                             var result = [];
                             $( ".ui-selected", this ).each(function() {
                                 var index = $("#list_"+_self.componentGlobalName+" li").index( this );
-                                result.push(index);
+                                result.push(jsonData['items'][index]);
                             });
 
-                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedIdx:result});
+                            $("body").data(_self.moduleName + "/selectedItem", result[0]);
+                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedItems:result});
                         }
                     });
-
-//                    $("#list_" + _self.componentGlobalName).bind("selectablestop", function(event, ui){
-//                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName});
-//                    });
                 }
                 else{
                     $('<li class="ui-state-default">' + $.i18n.prop('no options') +'</li>').appendTo('#list_' + _self.componentGlobalName);

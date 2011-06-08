@@ -45,12 +45,9 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             <div class="wacFormSecondCol">
                 <div class="wacFormContentA">
                     <div class="wacPanelFormRow">
-
                         <div class="wacFormClear"></div>
                     </div>
-
                 </div>
-
             </div>
             <div class="wacFormClear"></div>
             <div class="wacFormBottom" align="right">
@@ -73,6 +70,8 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
         Wac.log("<?php echo $componentGlobalId; ?> ready");
 
         var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+        
+        
     });
 
 
@@ -97,11 +96,6 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
         this.bindEvents = function(){
             _self.prototype.bindEvents(_self);
-
-//            $(document).hear(this.formId, _self.moduleName + WacAppConfig.event.app_wac_events_data_changed, function ($self, data) {  // listenerid, event name, callback
-//                Wac.log(data, debug);
-////                _self.loadPanelForm(data);
-//            });
         };
 
         this.initLayout = function(){
