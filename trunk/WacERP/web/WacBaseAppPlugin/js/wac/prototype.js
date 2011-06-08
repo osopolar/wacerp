@@ -309,6 +309,26 @@ function WacPanelFormPrototype()
     };
 
     this.bindEvents = function(children){
+        $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
+            if(typeof data.moduleName !== "undefined" && data.moduleName==children.moduleName){
+//                children.modelEntity = {name:"", code:""};
+                $.each(children.modelEntity, function(key, value){
+                    children.modelEntity[key] = "";
+                });
+                $("body").data(data.moduleName + "/selectedItem", children.modelEntity);
+                children.initData();
+                children.inputMode = WacEntity.formInputMode.add;
+            }
+        });
+
+        $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
+            if(typeof data.moduleName !== "undefined" && data.moduleName==children.moduleName){
+                $("body").data(data.moduleName + "/selectedItem", data.selectedItems[0]);
+                children.initData();
+                children.inputMode = WacEntity.formInputMode.edit;
+            }
+        });
+
         $('#btnSave_' + children.componentGlobalName).bind("click", function(){
             children.saveForm();
         });
@@ -328,6 +348,18 @@ function WacPanelFormPrototype()
     this.initData = function(children){
         Wac.log("WacPanelFormPrototype initData", debug);
 
+        $(children.formId).link(children.modelEntity);
+
+        //            $(children.modelEntity).setField("name", "abcd");
+        //            $(children.modelEntity).setField("is_avail", "1");
+
+        if($("body").data(children.moduleName+"/selectedItem")){
+            $.each($("body").data(children.moduleName+"/selectedItem"), function(key, value){
+    //            Wac.log(key + " : "+ value, debug);
+                $(children.modelEntity).setField(key, value);
+            })
+        }
+        $(children.formId).unlink(children.modelEntity);
         
 //        $(document).wacPage().showBlockUILoader({id:children.panelId, msg:$.i18n.prop('data loading...')});
 
@@ -376,7 +408,7 @@ function WacPanelFormPrototype()
             return;
         }
 
-        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
+//        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
 
         var extraParams = "dataFormat=json";
         var submitUrl;
@@ -388,21 +420,23 @@ function WacPanelFormPrototype()
             submitUrl = WacAppConfig.baseUrl + children.moduleName + "/edit";
         }
 
+        Wac.log($(children.formId).serialize());
 
-        $.ajax({
-            url: submitUrl,
-            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
-            global: true,
-            type: "GET",
-            data: $(children.formId).serialize() + "&" + extraParams,
-            dataType: "json",
-            success: function(jsonData){
-                children.saveFormCallBack(jsonData);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
-            }
-        });
+
+//        $.ajax({
+//            url: submitUrl,
+//            //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+//            global: true,
+//            type: "GET",
+//            data: $(children.formId).serialize() + "&" + extraParams,
+//            dataType: "json",
+//            success: function(jsonData){
+//                children.saveFormCallBack(jsonData);
+//            },
+//            error: function(XMLHttpRequest, textStatus, errorThrown){
+//                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+//            }
+//        });
     };
 
     this.saveFormCallBack = function(children, jsonData){
