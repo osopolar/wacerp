@@ -37,6 +37,22 @@
         <source>Storehouse</source>
         <target>仓库</target>
       </trans-unit>
+      <trans-unit>
+        <source>Switch</source>
+        <target>切换</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Input Mode</source>
+        <target>输入模式</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Mode Create</source>
+        <target>新增</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Mode Edit</source>
+        <target>编辑</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

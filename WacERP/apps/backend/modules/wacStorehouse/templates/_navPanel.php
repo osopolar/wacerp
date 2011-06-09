@@ -19,8 +19,8 @@ $componentGlobalId    = "#".$componentGlobalName;
         <div class="wacFormClear"></div>
         <hr style="width:100%; float:inherit;" class="wacFormRuler">
         <div align="right">
-            <button id="btnAdd_<?php echo $componentGlobalName; ?>"><?php echo __("add")?></button>
-            <button id="btnDel_<?php echo $componentGlobalName; ?>"><?php echo __("del")?></button>
+            <button id="btnAdd_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnAdd")?></button>
+            <button id="btnDel_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnDel")?></button>
         </div>
     </div>
 </div>
@@ -39,6 +39,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
         this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
         this.panelId = "#content_" + <?php echo "'{$componentGlobalName}'" ?>;
+        this.selectedItems = [];
 
         this.init = function(){
             _self.prototype.init(_self);
@@ -70,14 +71,14 @@ $componentGlobalId    = "#".$componentGlobalName;
 
                     $("#list_" + _self.componentGlobalName).selectable({
                         stop: function() {
-                            var result = [];
+                            _self.selectedItems = [];
                             $( ".ui-selected", this ).each(function() {
                                 var index = $("#list_"+_self.componentGlobalName+" li").index( this );
-                                result.push(jsonData['items'][index]);
+                                _self.selectedItems.push(jsonData['items'][index]);
                             });
 
-                            $("body").data(_self.moduleName + "/selectedItem", result[0]);
-                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedItems:result});
+                            $("body").data(_self.moduleName + "/selectedItem", _self.selectedItems[0]);
+                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedItems: _self.selectedItems});
                         }
                     });
                 }
@@ -91,6 +92,14 @@ $componentGlobalId    = "#".$componentGlobalName;
                 $(document).wacPage().showTips(jsonData.userdata.message);
             }
             _self.prototype.initDataCallBack(_self, jsonData);
+        };
+
+        this.deleteData = function(){
+            _self.prototype.deleteData(_self);
+        };
+
+        this.deleteDataCallBack = function(){
+            _self.prototype.deleteDataCallBack(_self);
         };
 
         this.init();  // init method
