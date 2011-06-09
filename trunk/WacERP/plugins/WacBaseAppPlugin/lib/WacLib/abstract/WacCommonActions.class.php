@@ -299,6 +299,16 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
+     * return filtered array(), this method be used to process/filter request params
+     */
+    public function filterInput()
+    {
+        $reqParams = $this->getRequest()->getParameterHolder()->getAll();
+        $reqParams["is_avail"] = isset($reqParams["is_avail"]) ? 1 : 0;
+        return $reqParams;
+    }
+
+    /*
    * @return list data array
     */
     public function executeAdd(sfWebRequest $request) {
@@ -309,15 +319,13 @@ abstract class WacCommonActions extends sfActions {
             $resultSet['info'] = $inspectResult;
         }
         else {
-
             $exceptFields = array("id");
-            $reqParams       = $this->getRequest()->getParameterHolder()->getAll();
+            $reqParams    = $this->filterInput();
             $targetItem   = $this->mainModuleTable->create();
 
             $succInfo = JsCommonData::getSuccessDatum(
                             Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
             );
-
             $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $succInfo;
             $resultSet['info'] = $succInfo;
 
@@ -346,18 +354,22 @@ abstract class WacCommonActions extends sfActions {
         $this->forward404Unless($request->hasParameter('id'));
 
         $inspectResult = $this->inspectDataValidation($request);
+        $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
         if($inspectResult['status'] == WacOperationStatus::$Error) {
-            $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
-            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult;
+            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult; // for compatibility JqGrid tips
+            $resultSet['info'] = $inspectResult;
         }
         else {
 
             $exceptFields = array("id");
-            $reqParams = $this->getRequest()->getParameterHolder()->getAll();
-            $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
+            $reqParams    = $this->filterInput();
+            $targetItem   = $this->mainModuleTable->findOneById($request->getParameter('id'));
 
-            $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
-            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = JsCommonData::getSuccessDatum();
+            $succInfo = JsCommonData::getSuccessDatum(
+                            Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_edit_succ")
+            );
+            $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $succInfo;
+            $resultSet['info'] = $succInfo;
 
             if(count($reqParams)>0) {
                 foreach($reqParams as $key => $value) {
@@ -381,10 +393,13 @@ abstract class WacCommonActions extends sfActions {
         // forward to 404 if no id
         $this->forward404Unless($request->hasParameter('id'));
         
-//      $resultSet = $this->getRequest()->getParameterHolder()->getAll();
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
 
-        $ids = explode(',', $request->getParameter('id'));
+        $ids = $request->getParameter('id');
+        if(!is_array($ids)){
+            $ids = explode(',', $ids);
+        }
+        
         if(count($ids)>0) {
             foreach($ids as $id) {
                 $targetItem = $this->mainModuleTable->findOneById($id);
@@ -403,29 +418,6 @@ abstract class WacCommonActions extends sfActions {
 
         return OutputHelper::getInstance()->output($resultSet, $this);
     }
-
-    /*
-   *  apply different dataFormater according to request params "data_format"
-   *  return id=>name hash as select html format
-    */
-//    public function executeGetIdNameHashInFormat(sfWebRequest $request) {
-//        if ($this->getRequest()->isXmlHttpRequest()) {
-//            sfConfig::set('sf_web_debug', false);
-//        }
-//
-//        $resultSet = array();
-//
-//        $params = $this->getHashList("id", "name", 1, sfConfig::get("maxHashItems"));
-//        switch($request->getParameter("data_format")) {
-//            case StaticWacDataFormatType::$jsonFlexbox:
-//                $resultSet = JqFlexboxDataHelper::getInstance()->getCommonDatum($params);
-//                break;
-//            default:
-//                break;
-//        }
-//
-//        return OutputHelper::getInstance()->output($resultSet, $this);
-//    }
 
     /*
    *  apply different dataFormater according to request params "data_format"

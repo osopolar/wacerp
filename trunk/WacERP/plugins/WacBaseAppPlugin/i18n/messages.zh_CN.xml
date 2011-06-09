@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit>
         <source>Add To</source>
-        <target>添加</target>
+        <target>增加</target>
       </trans-unit>
       <trans-unit>
         <source>Search Code</source>
@@ -50,6 +50,10 @@
         <target>操作</target>
       </trans-unit>
       <trans-unit>
+        <source>JqGridBtnAdd</source>
+        <target>增加</target>
+      </trans-unit>
+      <trans-unit>
         <source>JqGridBtnEdit</source>
         <target>编辑</target>
       </trans-unit>
@@ -79,7 +83,7 @@
       </trans-unit>
       <trans-unit>
         <source>JqGridBtnAddSubItem</source>
-        <target>添加子项</target>
+        <target>增加子项</target>
       </trans-unit>
       <trans-unit>
         <source>Permission List</source>

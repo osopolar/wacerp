@@ -50,10 +50,17 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                 </div>
             </div>
             <div class="wacFormClear"></div>
-            <div class="wacFormBottom" align="right">
+            <div class="wacFormBottom">
                 <hr class="wacFormRuler" style="width:100%; float:inherit;" />
                 <div class="wacFormClear"></div>
-                <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+                <?php echo __("Switch").__("Input Mode") ?>:
+                <span id="btnInputMode_<?php echo $componentGlobalName ?>">
+                    <input type="radio" id="input_mode_add_<?php echo $componentGlobalName ?>" name="input_mode_<?php echo $componentGlobalName ?>" value="<?php echo WacOperationType::$add;?>" /><label for="input_mode_add_<?php echo $componentGlobalName ?>"><?php echo __("Mode Create") ?></label>
+                    <input type="radio" id="input_mode_edit_<?php echo $componentGlobalName ?>" name="input_mode_<?php echo $componentGlobalName ?>" value="<?php echo WacOperationType::$edit;?>" /><label for="input_mode_edit_<?php echo $componentGlobalName ?>"><?php echo __("Mode Edit") ?></label>
+                </span>
+                <span style="float:right">
+                    <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+                </span>
             </div>
 
             <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0">
@@ -108,6 +115,14 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
         this.initDataCallBack = function(jsonData){
             _self.prototype.initDataCallBack(_self, jsonData);
+        };
+
+        this.switchInputMode = function(mode){
+            _self.prototype.switchInputMode(_self, mode);
+        };
+
+        this.emptyForm = function(){
+            _self.prototype.emptyForm(_self);
         };
 
         this.setupDefaults = function(defaultValueObj){
