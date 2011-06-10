@@ -31,7 +31,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                     </div>
                     <div class="wacPanelFormRow">
                         <div class="wacFormItemLeftSmall">
-                            <label for="is_avail_<?php echo $componentGlobalName; ?>"><?php echo __("Status Active"); ?></label>
+                            <label for="is_avail_<?php echo $componentGlobalName; ?>"><?php echo __("Is avail"); ?></label>
                         </div>
                         <div class="wacFormItemRightSmall">
                             <input name="is_avail" id="is_avail_<?php echo $componentGlobalName; ?>" checked="true" value="1" type="checkbox" class="ui-widget-content ui-corner-all" />
@@ -54,12 +54,14 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                 <hr class="wacFormRuler" style="width:100%; float:inherit;" />
                 <div class="wacFormClear"></div>
                 <?php echo __("Switch").__("Input Mode") ?>:
-                <span id="btnInputMode_<?php echo $componentGlobalName ?>">
+                <span id="groupInputMode_<?php echo $componentGlobalName ?>">
                     <input type="radio" id="input_mode_add_<?php echo $componentGlobalName ?>" name="input_mode_<?php echo $componentGlobalName ?>" value="<?php echo WacOperationType::$add;?>" /><label for="input_mode_add_<?php echo $componentGlobalName ?>"><?php echo __("Mode Create") ?></label>
                     <input type="radio" id="input_mode_edit_<?php echo $componentGlobalName ?>" name="input_mode_<?php echo $componentGlobalName ?>" value="<?php echo WacOperationType::$edit;?>" /><label for="input_mode_edit_<?php echo $componentGlobalName ?>"><?php echo __("Mode Edit") ?></label>
                 </span>
-                <span style="float:right">
+                <span id="groupFunc_<?php echo $componentGlobalName ?>" style="float:right">
                     <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+                    <input name="btnDel" id="btnDel_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Delete"); ?>"/>
+                    <input name="btnPrint" id="btnPrint_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Print"); ?>"/>
                 </span>
             </div>
 

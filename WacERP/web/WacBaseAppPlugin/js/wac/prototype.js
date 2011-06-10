@@ -30,8 +30,6 @@ function WacFormPrototype()
 
         $(document).hear(children.formId, children.moduleGlobalName + "_show_edit_form_evt", function ($self, data) {  // listenerid, event name, callback
             children.openMainForm(WacEntity.formInputMode.edit, data.id);
-//            Wac.log(data);
-//            Wac.log(jQuery._jq_shout.registry);
         });
 
         // unbind all events related to the dialog form
@@ -264,6 +262,10 @@ function WacNavPanelPrototype()
         $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_data_saved, function ($self, data) {  // listenerid, event name, callback
             children.initData();
         });
+
+        $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_data_deleted, function ($self, data) {  // listenerid, event name, callback
+            children.deleteData();
+        });
     };
 
     this.initLayout = function(children){
@@ -356,12 +358,12 @@ function WacPanelFormPrototype()
     };
 
     this.bindEvents = function(children){
+        Wac.log("WacPanelFormPrototype bindEvents", debug);
         // show add form
         $(document).hear(children.componentGlobalId, children.moduleName + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
             Wac.log("hear:" + children.moduleName + WacAppConfig.event.app_wac_events_show_add_form, debug);
             if(typeof data.moduleName !== "undefined" && data.moduleName==children.moduleName){
                 _self.emptyForm(children);
-//                children.switchInputMode(WacEntity.formInputMode.add);
             }
         });
 
@@ -371,7 +373,6 @@ function WacPanelFormPrototype()
             if(typeof data.moduleName !== "undefined" && data.moduleName==children.moduleName){
                 $("body").data(data.moduleName + "/selectedItem", data.selectedItems[0]);
                 children.initData();
-//                children.switchInputMode(WacEntity.formInputMode.edit);
             }
         });
 
@@ -381,7 +382,6 @@ function WacPanelFormPrototype()
             $(data).each(function(){
                 if(this.id == children.modelEntity.id){
                     children.emptyForm();
-//                    children.switchInputMode(WacEntity.formInputMode.add);
                     return false;
                 }
                 return true;
@@ -389,13 +389,44 @@ function WacPanelFormPrototype()
         });
 
         $("input[name='input_mode_" + children.componentGlobalName + "']").bind("click", function(){
-            children.switchInputMode($(this).val());
+            if($("#id_"+children.componentGlobalName).val()!=0){
+                children.switchInputMode($(this).val());
+            }
+            else{
+                $(document).wacPage().showTips($.i18n.prop('Can not switch to edit mode since data not saved!'));
+                children.switchInputMode(WacEntity.formInputMode.add);
+            }
         });
 
         $('#btnSave_' + children.componentGlobalName).bind("click", function(){
             children.saveForm();
         });
-        Wac.log("WacPanelFormPrototype bindEvents", debug);
+
+        $('#btnPrint_' + children.componentGlobalName).bind("click", function(){
+            var params = {
+                moduleName: children.moduleName,
+                componentCaption: "view" + $("#id_"+children.componentGlobalName).val(),
+                moduleAction: "printView",
+                printTpl: "htmlEntityViewA",
+                dataFormat: "html",
+                _search: 'true',
+                searchField: 'id',
+                searchOper: 'eq',
+                searchString: $("#id_"+children.componentGlobalName).val()
+            };
+            $.shout(WacAppConfig.event.app_wac_events_show_data_print_form, params);
+        });
+
+        $('#btnDel_' + children.componentGlobalName).bind("click", function(){
+            $(document).wacPage().showConfirm(
+                                    $.i18n.prop('Delete confirm'),
+                                    function(){  // if yes
+                                        $.shout(children.moduleName + WacAppConfig.event.app_wac_events_data_deleted, {id: $("id_" + children.componentGlobalName).val()});
+                                    },
+                                    function(){}  // if no
+                                );
+        });
+        
     };
 
     this.emptyForm = function(children){
@@ -410,9 +441,13 @@ function WacPanelFormPrototype()
     this.initLayout = function(children){
         Wac.log("WacPanelFormPrototype initLayout", debug);
         
-        $("#btnInputMode_" + children.componentGlobalName).buttonset();
-        $('#btnSave_' + children.componentGlobalName).button();
+        $("#groupInputMode_" + children.componentGlobalName).buttonset();
         
+        $('#btnSave_' + children.componentGlobalName).button();
+        $('#btnDel_' + children.componentGlobalName).button();
+        $('#btnPrint_' + children.componentGlobalName).button({icons: {primary: "ui-icon-print"}});
+        $('#groupFunc_' + children.componentGlobalName).buttonset();
+
         $(children.componentGlobalId).panel({
             draggable:true,
             width:'100%'
@@ -453,11 +488,19 @@ function WacPanelFormPrototype()
     };
 
     this.switchInputMode = function(children, v){
-        Wac.log("WacPanelFormPrototype switchInputMode", debug);
+        Wac.log("WacPanelFormPrototype switchInputMode: "+v, debug);
         children.inputMode = v;
         $("input[name='input_mode_" + children.componentGlobalName + "'][value='" + v + "']").attr("checked", true);
-        $("#btnInputMode_" + children.componentGlobalName).buttonset("refresh");
-        Wac.log("input[name='input_mode_" + children.componentGlobalName + "'][value=['" + v + "']" + ":" + $("input[name='input_mode_" + children.componentGlobalName + "'][value='" + v + "']").length, debug);
+        $("#groupInputMode_" + children.componentGlobalName).buttonset("refresh");
+
+        if( v == WacEntity.formInputMode.add){
+            $('#btnDel_' + children.componentGlobalName).button("disable");
+            $('#btnPrint_' + children.componentGlobalName).button("disable");
+        }
+        else{
+            $('#btnDel_' + children.componentGlobalName).button("enable");
+            $('#btnPrint_' + children.componentGlobalName).button("enable");
+        }
     };
 
     this.validateMainForm = function(children){
@@ -468,6 +511,11 @@ function WacPanelFormPrototype()
         {
             validateFlag = false;
         }
+
+        if($("#id_"+children.componentGlobalName).val()==0 || $("#id_"+children.componentGlobalName).val()===undefined){
+             children.switchInputMode(WacEntity.formInputMode.add);
+        }
+
         return validateFlag;
     };
 
@@ -478,7 +526,7 @@ function WacPanelFormPrototype()
             return;
         }
 
-//        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
+        $(document).wacPage().showBlockUILoading(children.formId, $.i18n.prop('processing...'));
 
         var extraParams = "dataFormat=json";
         var submitUrl;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-06-03 17:21:30
+Date: 2011-06-10 18:14:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -206,13 +206,14 @@ CREATE TABLE `sf_guard_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-03 06:34:22', '2009-12-19 08:12:50', '2011-06-03 06:34:22');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-10 06:49:54', '2009-12-19 08:12:50', '2011-06-10 06:49:54');
 INSERT INTO `sf_guard_user` VALUES ('17', 'user1', 'sha1', 'e83ecdefb483cd2db998fd0daa0c5d87', 'bafb2f103d52d727ba3eb8c5d9532c871d04e455', '1', '0', '2011-03-31 04:01:35', '2011-03-31 02:40:56', '2011-03-31 04:01:35');
+INSERT INTO `sf_guard_user` VALUES ('18', 'user2', 'sha1', '1cf2166bd1239849b913ff34710b5a08', '789577ef91737d016a50c99bf037bcd97544a4a0', '1', '0', null, '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 
 -- ----------------------------
 -- Table structure for `sf_guard_user_group`
@@ -233,9 +234,11 @@ CREATE TABLE `sf_guard_user_group` (
 -- Records of sf_guard_user_group
 -- ----------------------------
 INSERT INTO `sf_guard_user_group` VALUES ('1', '1', '2009-12-19 08:12:50', '2009-12-19 08:12:50');
+INSERT INTO `sf_guard_user_group` VALUES ('17', '2', '2011-06-10 06:26:44', '2011-06-10 06:26:44');
+INSERT INTO `sf_guard_user_group` VALUES ('17', '4', '2011-06-10 06:26:44', '2011-06-10 06:26:44');
 INSERT INTO `sf_guard_user_group` VALUES ('17', '10', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
-INSERT INTO `sf_guard_user_group` VALUES ('17', '11', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
-INSERT INTO `sf_guard_user_group` VALUES ('17', '12', '2011-06-02 09:20:35', '2011-06-02 09:20:35');
+INSERT INTO `sf_guard_user_group` VALUES ('18', '4', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
+INSERT INTO `sf_guard_user_group` VALUES ('18', '9', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 
 -- ----------------------------
 -- Table structure for `sf_guard_user_permission`
@@ -291,21 +294,24 @@ CREATE TABLE `wac_category` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_category
 -- ----------------------------
-INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '16', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:15', '0000-00-00 00:00:00');
-INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '15', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:15', '2011-03-22 03:04:51');
-INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '14', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:15', '2011-03-30 10:46:06');
+INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '18', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '0000-00-00 00:00:00');
+INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '17', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-03-22 03:04:51');
+INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '16', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-03-30 10:46:06');
 INSERT INTO `wac_category` VALUES ('13', '0', '0', '1', '4', '0', 'root_17', null, '17', 'root_17', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:56', '2011-03-31 02:40:56');
 INSERT INTO `wac_category` VALUES ('14', '13', '0', '2', '3', '1', 'branch_17_1', null, '17', 'branch_17_1', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:57', '2011-03-31 02:40:57');
 INSERT INTO `wac_category` VALUES ('15', '19', '1', '11', '12', '4', null, null, '1', null, '999', 'leaf', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:16', '2011-04-22 07:58:40');
 INSERT INTO `wac_category` VALUES ('16', '7', '0', '4', '7', '3', null, null, '1', null, 'New node', 'branch', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:13', '2011-04-01 08:26:57');
 INSERT INTO `wac_category` VALUES ('17', '19', '0', '9', '10', '4', null, null, '1', null, '88', 'leaf', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:13', '2011-04-19 10:54:59');
-INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '14', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:15', '2011-04-18 11:07:17');
-INSERT INTO `wac_category` VALUES ('19', '18', '0', '8', '13', '3', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:15', '2011-04-18 11:07:23');
+INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '16', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-04-18 11:07:17');
+INSERT INTO `wac_category` VALUES ('19', '18', '0', '8', '15', '3', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-04-18 11:07:23');
+INSERT INTO `wac_category` VALUES ('20', '0', '0', '1', '4', '0', 'root_18_0', null, '18', 'root_18_0', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
+INSERT INTO `wac_category` VALUES ('21', '20', '0', '2', '3', '1', 'branch_18_0', null, '18', 'branch_18_0', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
+INSERT INTO `wac_category` VALUES ('22', '19', '2', '13', '14', '4', null, null, '1', null, '666', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:33', '2011-06-10 06:27:57');
 
 -- ----------------------------
 -- Table structure for `wac_country`
@@ -334,7 +340,7 @@ CREATE TABLE `wac_country` (
   KEY `Index_6` (`code`),
   KEY `Index_2` (`priority`),
   KEY `Index_3` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_country
@@ -342,7 +348,8 @@ CREATE TABLE `wac_country` (
 INSERT INTO `wac_country` VALUES ('1', null, null, 'CHN', '中国', null, '', '0', '0', null, null, '50', '1', '2010-01-24 05:30:00', '2010-01-24 05:30:00');
 INSERT INTO `wac_country` VALUES ('2', null, null, 'USA', '美国', null, '', '0', '0', null, null, '50', '1', '2011-03-01 07:42:50', '2011-03-01 07:43:14');
 INSERT INTO `wac_country` VALUES ('5', null, null, 'ENG', '英国', null, '', '0', '0', null, null, '50', '1', '2011-01-27 08:58:12', '2011-01-27 08:58:36');
-INSERT INTO `wac_country` VALUES ('6', null, null, 'tt9', 't19', null, 'tt91', '0', '0', null, null, '50', '0', '2011-04-07 06:28:34', '2011-04-07 06:28:58');
+INSERT INTO `wac_country` VALUES ('6', null, null, 'tt91', 't191', null, 'tt911', '0', '0', null, null, '50', '1', '2011-06-10 06:25:22', '2011-06-10 06:25:46');
+INSERT INTO `wac_country` VALUES ('7', null, null, 't2', 't2', null, 't2', '0', '0', null, null, '50', '1', '2011-06-10 06:26:05', '2011-06-10 06:26:05');
 
 -- ----------------------------
 -- Table structure for `wac_currency`
@@ -492,7 +499,7 @@ CREATE TABLE `wac_file` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_file
@@ -518,6 +525,8 @@ INSERT INTO `wac_file` VALUES ('75', '2', '0', '3', '4', '2', 'leaf', '1', null,
 INSERT INTO `wac_file` VALUES ('76', '53', '0', '20', '21', '3', 'leaf', '1', null, 'p15tk4po80co412802dh1hsk1shi4.zip', 'memcached-1.2.6-win32-bin.zip', '4/p/', 'application/zip', '9222', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-18 11:09:30');
 INSERT INTO `wac_file` VALUES ('77', '53', '1', '24', '25', '3', 'leaf', '1', null, 'p15tmmapvh1h11hgof6e127v44i3.zip', 'aports.zip', 'm/a/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-19 10:54:19');
 INSERT INTO `wac_file` VALUES ('78', '53', '2', '24', '29', '3', 'leaf', '1', null, 'p15tmmapvh1eth7kdsvn1k6n1hie4.zip', 'Bat_To_Exe_Converter.zip', 'm/a/', 'application/zip', '102081', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-19 10:54:26');
+INSERT INTO `wac_file` VALUES ('79', '0', '0', '1', '4', '0', 'root', '18', 'root_18_0', 'root_18_0', 'Root', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
+INSERT INTO `wac_file` VALUES ('80', '79', '0', '2', '3', '1', 'branch', '18', 'branch_18_0', 'branch_18_0', 'My Branch 1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:08', '2011-06-10 06:27:08');
 
 -- ----------------------------
 -- Table structure for `wac_language`
@@ -984,11 +993,39 @@ CREATE TABLE `wac_storehouse` (
   KEY `Index_2` (`updated_at`),
   KEY `Index_3` (`created_at`),
   KEY `Index_4` (`is_avail`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_storehouse
 -- ----------------------------
+INSERT INTO `wac_storehouse` VALUES ('29', 't5', 't5', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:48:09', '2011-06-09 10:48:09');
+INSERT INTO `wac_storehouse` VALUES ('30', 't6', 't6', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:50:30', '2011-06-09 10:50:30');
+INSERT INTO `wac_storehouse` VALUES ('23', 'd1', 'd1', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 08:48:25', '2011-06-09 08:48:25');
+INSERT INTO `wac_storehouse` VALUES ('26', 't12', 't12', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:39:08', '2011-06-09 10:39:08');
+INSERT INTO `wac_storehouse` VALUES ('24', 'd2', 'd2', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 08:49:09', '2011-06-09 08:49:09');
+INSERT INTO `wac_storehouse` VALUES ('28', 't4', 't4', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:44:17', '2011-06-09 10:44:17');
+INSERT INTO `wac_storehouse` VALUES ('15', '我的小仓1', 'k1', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-07 06:47:36', '2011-06-07 06:47:36');
+INSERT INTO `wac_storehouse` VALUES ('27', 't3', 't3', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:41:37', '2011-06-09 10:41:37');
+INSERT INTO `wac_storehouse` VALUES ('17', 'a6', 'a6', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 08:02:03', '2011-06-09 02:30:02');
+INSERT INTO `wac_storehouse` VALUES ('18', 'ca5a', 'ca5a', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 02:36:19', '2011-06-09 02:36:19');
+INSERT INTO `wac_storehouse` VALUES ('25', 't1', 't1', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 10:38:00', '2011-06-09 10:38:00');
+INSERT INTO `wac_storehouse` VALUES ('48', 't2', 't2', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:50:28', '2011-06-10 06:50:28');
+INSERT INTO `wac_storehouse` VALUES ('21', 'k31', 'k31', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 02:51:44', '2011-06-09 02:51:44');
+INSERT INTO `wac_storehouse` VALUES ('32', 't71', 't71', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 11:04:34', '2011-06-09 11:04:58');
+INSERT INTO `wac_storehouse` VALUES ('33', 't8', 't8', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 11:00:49', '2011-06-09 11:00:49');
+INSERT INTO `wac_storehouse` VALUES ('35', 'a1', 'a1', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 11:01:55', '2011-06-09 11:01:55');
+INSERT INTO `wac_storehouse` VALUES ('36', 'a21', 'a21', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:22:25', '2011-06-10 06:22:49');
+INSERT INTO `wac_storehouse` VALUES ('37', 't69', 't69', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-09 11:04:38', '2011-06-09 11:04:38');
+INSERT INTO `wac_storehouse` VALUES ('38', 'a7', 'a7', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 03:56:43', '2011-06-10 03:56:43');
+INSERT INTO `wac_storehouse` VALUES ('39', 'a8', 'a8', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 03:59:46', '2011-06-10 03:59:46');
+INSERT INTO `wac_storehouse` VALUES ('43', 'a4', 'a4', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:33:03', '2011-06-10 06:33:03');
+INSERT INTO `wac_storehouse` VALUES ('42', 'a3', 'a3', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:22:25', '2011-06-10 06:22:25');
+INSERT INTO `wac_storehouse` VALUES ('44', 'a41', 'a41', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:33:16', '2011-06-10 06:33:16');
+INSERT INTO `wac_storehouse` VALUES ('45', 'c1', 'c1', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:45:04', '2011-06-10 06:45:04');
+INSERT INTO `wac_storehouse` VALUES ('46', 'c2', 'c2', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:45:14', '2011-06-10 06:45:14');
+INSERT INTO `wac_storehouse` VALUES ('47', 'c12', 'c12', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:45:30', '2011-06-10 06:45:30');
+INSERT INTO `wac_storehouse` VALUES ('49', 't21', 't21', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:50:46', '2011-06-10 06:50:46');
+INSERT INTO `wac_storehouse` VALUES ('50', 't22', 't22', '0', null, '0', null, null, null, null, null, null, '0', '0', null, null, '50', '1', '2011-06-10 06:51:04', '2011-06-10 06:51:04');
 
 -- ----------------------------
 -- Table structure for `wac_storehouse_material_biz_item`
@@ -1232,7 +1269,7 @@ CREATE TABLE `wac_system_log` (
   KEY `Index_1` (`updated_at`),
   KEY `Index_2` (`created_at`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_system_log
@@ -1468,6 +1505,96 @@ INSERT INTO `wac_system_log` VALUES ('228', '1', '2', 'admin 编辑了 系统信
 INSERT INTO `wac_system_log` VALUES ('229', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:15', '2011-06-03 09:09:15');
 INSERT INTO `wac_system_log` VALUES ('230', '1', '2', 'admin 编辑了 系统信息, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:34', '2011-06-03 09:09:34');
 INSERT INTO `wac_system_log` VALUES ('231', '1', '2', 'admin 编辑了 系统信息, (id为 4)', '0', '0', null, null, '50', '1', '2011-06-03 09:09:46', '2011-06-03 09:09:46');
+INSERT INTO `wac_system_log` VALUES ('232', '1', '2', 'admin 添加了 , (id为 1)', '0', '0', null, null, '50', '1', '2011-06-03 09:39:23', '2011-06-03 09:39:23');
+INSERT INTO `wac_system_log` VALUES ('233', '1', '2', 'admin 添加了 , (id为 2)', '0', '0', null, null, '50', '1', '2011-06-07 02:38:14', '2011-06-07 02:38:14');
+INSERT INTO `wac_system_log` VALUES ('234', '1', '2', 'admin 添加了 , (id为 3)', '0', '0', null, null, '50', '1', '2011-06-07 02:39:45', '2011-06-07 02:39:45');
+INSERT INTO `wac_system_log` VALUES ('235', '1', '2', 'admin 添加了 wacStorehouse, (id为 4)', '0', '0', null, null, '50', '1', '2011-06-07 02:44:43', '2011-06-07 02:44:43');
+INSERT INTO `wac_system_log` VALUES ('236', '1', '2', 'admin 添加了 wacStorehouse, (id为 5)', '0', '0', null, null, '50', '1', '2011-06-07 02:59:48', '2011-06-07 02:59:48');
+INSERT INTO `wac_system_log` VALUES ('237', '1', '2', 'admin 添加了 wacStorehouse, (id为 6)', '0', '0', null, null, '50', '1', '2011-06-07 03:00:01', '2011-06-07 03:00:01');
+INSERT INTO `wac_system_log` VALUES ('238', '1', '2', 'admin 添加了 wacStorehouse, (id为 7)', '0', '0', null, null, '50', '1', '2011-06-07 03:00:47', '2011-06-07 03:00:47');
+INSERT INTO `wac_system_log` VALUES ('239', '1', '2', 'admin 添加了 wacStorehouse, (id为 8)', '0', '0', null, null, '50', '1', '2011-06-07 03:00:59', '2011-06-07 03:00:59');
+INSERT INTO `wac_system_log` VALUES ('240', '1', '2', 'admin 添加了 wacStorehouse, (id为 9)', '0', '0', null, null, '50', '1', '2011-06-07 03:01:31', '2011-06-07 03:01:31');
+INSERT INTO `wac_system_log` VALUES ('241', '1', '2', 'admin 添加了 wacStorehouse, (id为 10)', '0', '0', null, null, '50', '1', '2011-06-07 06:25:15', '2011-06-07 06:25:15');
+INSERT INTO `wac_system_log` VALUES ('242', '1', '2', 'admin 添加了 wacStorehouse, (id为 11)', '0', '0', null, null, '50', '1', '2011-06-07 06:37:14', '2011-06-07 06:37:14');
+INSERT INTO `wac_system_log` VALUES ('243', '1', '2', 'admin 添加了 wacStorehouse, (id为 12)', '0', '0', null, null, '50', '1', '2011-06-07 06:39:09', '2011-06-07 06:39:09');
+INSERT INTO `wac_system_log` VALUES ('244', '1', '2', 'admin 添加了 wacStorehouse, (id为 13)', '0', '0', null, null, '50', '1', '2011-06-07 06:39:19', '2011-06-07 06:39:19');
+INSERT INTO `wac_system_log` VALUES ('245', '1', '2', 'admin 添加了 wacStorehouse, (id为 14)', '0', '0', null, null, '50', '1', '2011-06-07 06:39:52', '2011-06-07 06:39:52');
+INSERT INTO `wac_system_log` VALUES ('246', '1', '2', 'admin 添加了 wacStorehouse, (id为 15)', '0', '0', null, null, '50', '1', '2011-06-07 06:47:36', '2011-06-07 06:47:36');
+INSERT INTO `wac_system_log` VALUES ('247', '1', '2', 'admin 添加了 wacStorehouse, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-09 02:22:46', '2011-06-09 02:22:46');
+INSERT INTO `wac_system_log` VALUES ('248', '1', '2', 'admin 添加了 wacStorehouse, (id为 17)', '0', '0', null, null, '50', '1', '2011-06-09 02:30:02', '2011-06-09 02:30:02');
+INSERT INTO `wac_system_log` VALUES ('249', '1', '2', 'admin 编辑了 wacStorehouse, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-09 02:31:30', '2011-06-09 02:31:30');
+INSERT INTO `wac_system_log` VALUES ('250', '1', '2', 'admin 编辑了 wacStorehouse, (id为 16)', '0', '0', null, null, '50', '1', '2011-06-09 02:33:00', '2011-06-09 02:33:00');
+INSERT INTO `wac_system_log` VALUES ('251', '1', '2', 'admin 添加了 wacStorehouse, (id为 18)', '0', '0', null, null, '50', '1', '2011-06-09 02:36:19', '2011-06-09 02:36:19');
+INSERT INTO `wac_system_log` VALUES ('252', '1', '2', 'admin 添加了 wacStorehouse, (id为 19)', '0', '0', null, null, '50', '1', '2011-06-09 02:50:11', '2011-06-09 02:50:11');
+INSERT INTO `wac_system_log` VALUES ('253', '1', '2', 'admin 编辑了 wacStorehouse, (id为 19)', '0', '0', null, null, '50', '1', '2011-06-09 02:50:35', '2011-06-09 02:50:35');
+INSERT INTO `wac_system_log` VALUES ('254', '1', '2', 'admin 编辑了 wacStorehouse, (id为 12)', '0', '0', null, null, '50', '1', '2011-06-09 02:50:57', '2011-06-09 02:50:57');
+INSERT INTO `wac_system_log` VALUES ('255', '1', '2', 'admin 编辑了 wacStorehouse, (id为 12)', '0', '0', null, null, '50', '1', '2011-06-09 02:51:04', '2011-06-09 02:51:04');
+INSERT INTO `wac_system_log` VALUES ('256', '1', '2', 'admin 添加了 wacStorehouse, (id为 20)', '0', '0', null, null, '50', '1', '2011-06-09 02:51:36', '2011-06-09 02:51:36');
+INSERT INTO `wac_system_log` VALUES ('257', '1', '2', 'admin 添加了 wacStorehouse, (id为 21)', '0', '0', null, null, '50', '1', '2011-06-09 02:51:44', '2011-06-09 02:51:44');
+INSERT INTO `wac_system_log` VALUES ('258', '1', '2', 'admin 添加了 wacStorehouse, (id为 22)', '0', '0', null, null, '50', '1', '2011-06-09 02:53:58', '2011-06-09 02:53:58');
+INSERT INTO `wac_system_log` VALUES ('259', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 03:52:16', '2011-06-09 03:52:16');
+INSERT INTO `wac_system_log` VALUES ('260', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 03:52:37', '2011-06-09 03:52:37');
+INSERT INTO `wac_system_log` VALUES ('261', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 03:54:03', '2011-06-09 03:54:03');
+INSERT INTO `wac_system_log` VALUES ('262', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 03:58:23', '2011-06-09 03:58:23');
+INSERT INTO `wac_system_log` VALUES ('263', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 08:32:07', '2011-06-09 08:32:07');
+INSERT INTO `wac_system_log` VALUES ('264', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 08:37:51', '2011-06-09 08:37:51');
+INSERT INTO `wac_system_log` VALUES ('265', '1', '2', 'admin 添加了 wacStorehouse, (id为 23)', '0', '0', null, null, '50', '1', '2011-06-09 08:48:25', '2011-06-09 08:48:25');
+INSERT INTO `wac_system_log` VALUES ('266', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 08:48:52', '2011-06-09 08:48:52');
+INSERT INTO `wac_system_log` VALUES ('267', '1', '2', 'admin 添加了 wacStorehouse, (id为 24)', '0', '0', null, null, '50', '1', '2011-06-09 08:49:09', '2011-06-09 08:49:09');
+INSERT INTO `wac_system_log` VALUES ('268', '1', '2', 'admin 编辑了 wacStorehouse, (id为 20)', '0', '0', null, null, '50', '1', '2011-06-09 08:50:17', '2011-06-09 08:50:17');
+INSERT INTO `wac_system_log` VALUES ('269', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:30:21', '2011-06-09 10:30:21');
+INSERT INTO `wac_system_log` VALUES ('270', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:35:17', '2011-06-09 10:35:17');
+INSERT INTO `wac_system_log` VALUES ('271', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:36:18', '2011-06-09 10:36:18');
+INSERT INTO `wac_system_log` VALUES ('272', '1', '2', 'admin 添加了 wacStorehouse, (id为 25)', '0', '0', null, null, '50', '1', '2011-06-09 10:38:00', '2011-06-09 10:38:00');
+INSERT INTO `wac_system_log` VALUES ('273', '1', '2', 'admin 添加了 wacStorehouse, (id为 26)', '0', '0', null, null, '50', '1', '2011-06-09 10:39:08', '2011-06-09 10:39:08');
+INSERT INTO `wac_system_log` VALUES ('274', '1', '2', 'admin 添加了 wacStorehouse, (id为 27)', '0', '0', null, null, '50', '1', '2011-06-09 10:41:37', '2011-06-09 10:41:37');
+INSERT INTO `wac_system_log` VALUES ('275', '1', '2', 'admin 添加了 wacStorehouse, (id为 28)', '0', '0', null, null, '50', '1', '2011-06-09 10:44:17', '2011-06-09 10:44:17');
+INSERT INTO `wac_system_log` VALUES ('276', '1', '2', 'admin 添加了 wacStorehouse, (id为 29)', '0', '0', null, null, '50', '1', '2011-06-09 10:48:09', '2011-06-09 10:48:09');
+INSERT INTO `wac_system_log` VALUES ('277', '1', '2', 'admin 添加了 wacStorehouse, (id为 30)', '0', '0', null, null, '50', '1', '2011-06-09 10:50:30', '2011-06-09 10:50:30');
+INSERT INTO `wac_system_log` VALUES ('278', '1', '2', 'admin 添加了 wacStorehouse, (id为 31)', '0', '0', null, null, '50', '1', '2011-06-09 10:51:47', '2011-06-09 10:51:47');
+INSERT INTO `wac_system_log` VALUES ('279', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:52:02', '2011-06-09 10:52:02');
+INSERT INTO `wac_system_log` VALUES ('280', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:56:26', '2011-06-09 10:56:26');
+INSERT INTO `wac_system_log` VALUES ('281', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 10:57:52', '2011-06-09 10:57:52');
+INSERT INTO `wac_system_log` VALUES ('282', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 11:00:05', '2011-06-09 11:00:05');
+INSERT INTO `wac_system_log` VALUES ('283', '1', '2', 'admin 添加了 wacStorehouse, (id为 32)', '0', '0', null, null, '50', '1', '2011-06-09 11:00:25', '2011-06-09 11:00:25');
+INSERT INTO `wac_system_log` VALUES ('284', '1', '2', 'admin 添加了 wacStorehouse, (id为 33)', '0', '0', null, null, '50', '1', '2011-06-09 11:00:49', '2011-06-09 11:00:49');
+INSERT INTO `wac_system_log` VALUES ('285', '1', '2', 'admin 添加了 wacStorehouse, (id为 34)', '0', '0', null, null, '50', '1', '2011-06-09 11:01:12', '2011-06-09 11:01:12');
+INSERT INTO `wac_system_log` VALUES ('286', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-09 11:01:36', '2011-06-09 11:01:36');
+INSERT INTO `wac_system_log` VALUES ('287', '1', '2', 'admin 添加了 wacStorehouse, (id为 35)', '0', '0', null, null, '50', '1', '2011-06-09 11:01:55', '2011-06-09 11:01:55');
+INSERT INTO `wac_system_log` VALUES ('288', '1', '2', 'admin 添加了 wacStorehouse, (id为 36)', '0', '0', null, null, '50', '1', '2011-06-09 11:02:20', '2011-06-09 11:02:20');
+INSERT INTO `wac_system_log` VALUES ('289', '1', '2', 'admin 添加了 wacStorehouse, (id为 37)', '0', '0', null, null, '50', '1', '2011-06-09 11:04:38', '2011-06-09 11:04:38');
+INSERT INTO `wac_system_log` VALUES ('290', '1', '2', 'admin 编辑了 wacStorehouse, (id为 32)', '0', '0', null, null, '50', '1', '2011-06-09 11:04:58', '2011-06-09 11:04:58');
+INSERT INTO `wac_system_log` VALUES ('291', '1', '2', 'admin 添加了 wacStorehouse, (id为 38)', '0', '0', null, null, '50', '1', '2011-06-10 03:56:43', '2011-06-10 03:56:43');
+INSERT INTO `wac_system_log` VALUES ('292', '1', '2', 'admin 添加了 wacStorehouse, (id为 39)', '0', '0', null, null, '50', '1', '2011-06-10 03:59:46', '2011-06-10 03:59:46');
+INSERT INTO `wac_system_log` VALUES ('293', '1', '2', 'admin 添加了 wacStorehouse, (id为 40)', '0', '0', null, null, '50', '1', '2011-06-10 04:02:36', '2011-06-10 04:02:36');
+INSERT INTO `wac_system_log` VALUES ('294', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 04:03:23', '2011-06-10 04:03:23');
+INSERT INTO `wac_system_log` VALUES ('295', '1', '2', 'admin 添加了 wacStorehouse, (id为 41)', '0', '0', null, null, '50', '1', '2011-06-10 04:58:44', '2011-06-10 04:58:44');
+INSERT INTO `wac_system_log` VALUES ('296', '1', '2', 'admin 添加了 wacStorehouse, (id为 42)', '0', '0', null, null, '50', '1', '2011-06-10 06:22:25', '2011-06-10 06:22:25');
+INSERT INTO `wac_system_log` VALUES ('297', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 06:22:32', '2011-06-10 06:22:32');
+INSERT INTO `wac_system_log` VALUES ('298', '1', '2', 'admin 编辑了 wacStorehouse, (id为 36)', '0', '0', null, null, '50', '1', '2011-06-10 06:22:49', '2011-06-10 06:22:49');
+INSERT INTO `wac_system_log` VALUES ('299', '1', '2', 'admin 编辑了 国家, (id为 6)', '0', '0', null, null, '50', '1', '2011-06-10 06:25:46', '2011-06-10 06:25:46');
+INSERT INTO `wac_system_log` VALUES ('300', '1', '2', 'admin 添加了 国家, (id为 7)', '0', '0', null, null, '50', '1', '2011-06-10 06:26:05', '2011-06-10 06:26:05');
+INSERT INTO `wac_system_log` VALUES ('301', '1', '2', 'admin 编辑了 用户管理, (id为 17)', '0', '0', null, null, '50', '1', '2011-06-10 06:26:44', '2011-06-10 06:26:44');
+INSERT INTO `wac_system_log` VALUES ('302', '1', '2', 'admin 添加了 用户管理, (id为 18)', '0', '0', null, null, '50', '1', '2011-06-10 06:27:08', '2011-06-10 06:27:08');
+INSERT INTO `wac_system_log` VALUES ('303', '1', '2', 'admin 编辑了 wacStorehouse, (id为 35)', '0', '0', null, null, '50', '1', '2011-06-10 06:32:15', '2011-06-10 06:32:15');
+INSERT INTO `wac_system_log` VALUES ('304', '1', '2', 'admin 编辑了 wacStorehouse, (id为 42)', '0', '0', null, null, '50', '1', '2011-06-10 06:32:40', '2011-06-10 06:32:40');
+INSERT INTO `wac_system_log` VALUES ('305', '1', '2', 'admin 添加了 wacStorehouse, (id为 43)', '0', '0', null, null, '50', '1', '2011-06-10 06:33:03', '2011-06-10 06:33:03');
+INSERT INTO `wac_system_log` VALUES ('306', '1', '2', 'admin 添加了 wacStorehouse, (id为 44)', '0', '0', null, null, '50', '1', '2011-06-10 06:33:16', '2011-06-10 06:33:16');
+INSERT INTO `wac_system_log` VALUES ('307', '1', '2', 'admin 添加了 wacStorehouse, (id为 45)', '0', '0', null, null, '50', '1', '2011-06-10 06:45:04', '2011-06-10 06:45:04');
+INSERT INTO `wac_system_log` VALUES ('308', '1', '2', 'admin 添加了 wacStorehouse, (id为 46)', '0', '0', null, null, '50', '1', '2011-06-10 06:45:14', '2011-06-10 06:45:14');
+INSERT INTO `wac_system_log` VALUES ('309', '1', '2', 'admin 添加了 wacStorehouse, (id为 47)', '0', '0', null, null, '50', '1', '2011-06-10 06:45:30', '2011-06-10 06:45:30');
+INSERT INTO `wac_system_log` VALUES ('310', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 06:46:18', '2011-06-10 06:46:18');
+INSERT INTO `wac_system_log` VALUES ('311', '1', '2', 'admin 添加了 wacStorehouse, (id为 48)', '0', '0', null, null, '50', '1', '2011-06-10 06:50:28', '2011-06-10 06:50:28');
+INSERT INTO `wac_system_log` VALUES ('312', '1', '2', 'admin 添加了 wacStorehouse, (id为 49)', '0', '0', null, null, '50', '1', '2011-06-10 06:50:46', '2011-06-10 06:50:46');
+INSERT INTO `wac_system_log` VALUES ('313', '1', '2', 'admin 添加了 wacStorehouse, (id为 50)', '0', '0', null, null, '50', '1', '2011-06-10 06:51:04', '2011-06-10 06:51:04');
+INSERT INTO `wac_system_log` VALUES ('314', '1', '2', 'admin 添加了 wacStorehouse, (id为 51)', '0', '0', null, null, '50', '1', '2011-06-10 06:51:37', '2011-06-10 06:51:37');
+INSERT INTO `wac_system_log` VALUES ('315', '1', '2', 'admin 编辑了 wacStorehouse, (id为 51)', '0', '0', null, null, '50', '1', '2011-06-10 06:56:06', '2011-06-10 06:56:06');
+INSERT INTO `wac_system_log` VALUES ('316', '1', '2', 'admin 添加了 wacStorehouse, (id为 52)', '0', '0', null, null, '50', '1', '2011-06-10 06:58:30', '2011-06-10 06:58:30');
+INSERT INTO `wac_system_log` VALUES ('317', '1', '2', 'admin 编辑了 wacStorehouse, (id为 52)', '0', '0', null, null, '50', '1', '2011-06-10 06:58:44', '2011-06-10 06:58:44');
+INSERT INTO `wac_system_log` VALUES ('318', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 06:58:59', '2011-06-10 06:58:59');
+INSERT INTO `wac_system_log` VALUES ('319', '1', '2', 'admin 添加了 wacStorehouse, (id为 53)', '0', '0', null, null, '50', '1', '2011-06-10 07:50:57', '2011-06-10 07:50:57');
+INSERT INTO `wac_system_log` VALUES ('320', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 08:01:51', '2011-06-10 08:01:51');
+INSERT INTO `wac_system_log` VALUES ('321', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 08:02:06', '2011-06-10 08:02:06');
 
 -- ----------------------------
 -- Table structure for `wac_system_parameter`
