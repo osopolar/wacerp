@@ -81,6 +81,10 @@
         <source>No options available</source>
         <target>无可用选项!</target>
       </trans-unit>
+      <trans-unit>
+        <source>Can not switch to edit mode since data not saved!</source>
+        <target>数据未保存,暂时不能切换到编辑模式!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -28,6 +28,7 @@ all:
     data_export: _data_export
     data_print: _data_print
     data_saved: _data_saved
+    data_deleted: _data_deleted
     data_changed: _data_changed
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form

@@ -11,7 +11,7 @@ class WacEntityStatus extends WacCommonData
     
     public static $active     = "active";
     public static $inactive   = "inactive";
-    public static $valid      = "valid";
+    public static $avail      = "avail";
     public static $invalid    = "invalid";
 
     public static $notsave    = "notsave";
@@ -24,7 +24,7 @@ class WacEntityStatus extends WacCommonData
     public $_params = array(
         'active'    => array('id'=>"0", 'value'=>1, 'group'=>'1', 'name'=>"active", 'caption'=>"Status Active"),
         'inactive' => array('id'=>"1", 'value'=>0, 'group'=>'1', 'name'=>"inactive", 'caption'=>"Status Inactive"),
-        'valid'     => array('id'=>"2", 'value'=>1, 'group'=>'2', 'name'=>"avail", 'caption'=>"Status Valid"),
+        'avail'     => array('id'=>"2", 'value'=>1, 'group'=>'2', 'name'=>"avail", 'caption'=>"Status Avail"),
         'invalid'  => array('id'=>"3", 'value'=>0, 'group'=>'2', 'name'=>"invalid", 'caption'=>"Status Invalid"),
 
         'notsave'        => array('id'=>"4", 'value'=>4, 'group'=>'3', 'name'=>"notsave", 'caption'=>"Status Not Save"),
@@ -53,6 +53,13 @@ class WacEntityStatus extends WacCommonData
     {
         $activeRow = $this->_params[self::$active];
         $inactiveRow = $this->_params[self::$inactive];
+        return ($v==$activeRow['value']) ? $activeRow['caption'] : $inactiveRow['caption'];
+    }
+
+    public function getAvailCaption($v)
+    {
+        $activeRow = $this->_params[self::$avail];
+        $inactiveRow = $this->_params[self::$invalid];
         return ($v==$activeRow['value']) ? $activeRow['caption'] : $inactiveRow['caption'];
     }
     

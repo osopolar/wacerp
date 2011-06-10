@@ -134,7 +134,8 @@ abstract class WacCommonActions extends sfActions {
         if (count($listObjs) > 0) {
             foreach ($listObjs as $listObj) {
                 $tmpArr = $listObj->toArray();
-//                $tmpArr['is_avail_label'] = ($listObj->getIsAvail() == 1) ? $this->i18n->__("Yes") : $this->i18n->__("No");
+                $tmpArr['is_avail_label'] = ($listObj->getIsAvail() == 1) ? $this->i18n->__("Yes") : $this->i18n->__("No");
+//                $tmpArr['is_avail_label'] = $this->i18n->__(WacEntityStatus::getInstance()->getAvailCaption($listObj->getIsAvail()));
 
                 $filterArr[] = $tmpArr;
             }
@@ -215,6 +216,27 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
+     * more flexible than view
+    * @return html
+    */
+    public function executePrintView(sfWebRequest $request)
+    {
+        $output = "";
+        $resultSet = $this->getList($request);
+        $defaultTpl = "htmlEntityViewA";
+        $partial = WacModule::getInstance()->getName("wacCommon")."/".$defaultTpl;
+        if($request->hasParameter("printTpl"))
+        {
+            if($this->partialExists($request->getParameter("moduleName")."/".$request->getParameter("printTpl"))){
+                $partial = $request->getParameter("moduleName")."/".$request->getParameter("printTpl");
+            }
+        }
+
+        $output = $this->getPartial($partial, array('resultSet' => $resultSet));       
+        return OutputHelper::getInstance()->output($output, $this, array("isCache"=>false));
+    }
+
+    /*
      * export data according to exportFormat
     */
     public function executeDataExport(sfWebRequest $request) {
@@ -272,16 +294,17 @@ abstract class WacCommonActions extends sfActions {
         $result    = JsCommonData::getSuccessDatum();
         $reqParams = $request->getParameterHolder()->getAll();
 
+        $id = 0;
+        if(isset($params["opType"]) && $params["opType"]==WacOperationType::$edit){
+            $id = ($reqParams['id']!=JqGridDataHelper::$KEY_EMPTY) ? $reqParams['id'] : 0;            
+        }
 
-        $id = ($reqParams['id']!=JqGridDataHelper::$KEY_EMPTY) ? $reqParams['id'] : 0;
         if($this->mainModuleTable->isExistedCode($reqParams['code'], $id)) {
-//            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['code']), WacErrorCode::$duplicatedName);
             $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
             return $result;
         }
 
         if($this->mainModuleTable->isExistedName($reqParams['name'], $id)) {
-//            $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['name']), WacErrorCode::$duplicatedName);
             $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_name", array($reqParams['name'])), WacErrorCode::$duplicatedName);
             return $result;
         }
@@ -308,12 +331,52 @@ abstract class WacCommonActions extends sfActions {
         return $reqParams;
     }
 
+    /**
+     * Checks if a partial exists
+     *
+     * @param string $templateName		the partial's name, with or without the module ('module/partial')
+     *
+     * @return bool
+     */
+    public function partialExists($templateName) {
+        $context = sfContext::getInstance();
+
+        // is the partial in another module?
+        if (false !== $sep = strpos($templateName, '/')) {
+            $moduleName = substr($templateName, 0, $sep);
+            $templateName = substr($templateName, $sep + 1);
+        } else {
+            $moduleName = $context->getActionStack()->getLastEntry()->getModuleName();
+        }
+
+        //We need to fetch the module's configuration to know which View class to use,
+        // then we'll have access to information such as the extension
+        $config = sfConfig::get('mod_' . strtolower($moduleName) . '_partial_view_class');
+        if (empty($config)) {
+            require($context->getConfigCache()->checkConfig('modules/' . $moduleName . '/config/module.yml', true));
+            $config = sfConfig::get('mod_' . strtolower($moduleName) . '_partial_view_class', 'sf');
+        }
+        $class = $config . 'PartialView';
+        $view = new $class($context, $moduleName, $templateName, '');
+
+        $templateName = '_' . $templateName . $view->getExtension();
+
+        //We now check if the file exists and is readable
+        $directory = $context->getConfiguration()->getTemplateDir($moduleName, $templateName);
+        if ($directory) {
+            return true;
+        }
+
+        return false;
+    }
+
     /*
    * @return list data array
     */
     public function executeAdd(sfWebRequest $request) {
-        $inspectResult = $this->inspectDataValidation($request);
+        $inspectResult = $this->inspectDataValidation($request, array("opType"=>WacOperationType::$add));
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
+        
         if($inspectResult['status'] == WacOperationStatus::$Error) {
             $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult; // for compatibility JqGrid tips
             $resultSet['info'] = $inspectResult;
@@ -353,7 +416,7 @@ abstract class WacCommonActions extends sfActions {
         // forward to 404 if no id
         $this->forward404Unless($request->hasParameter('id'));
 
-        $inspectResult = $this->inspectDataValidation($request);
+        $inspectResult = $this->inspectDataValidation($request, array("opType"=>WacOperationType::$edit));
         $resultSet = JqGridDataHelper::getInstance()->getCommonDatum();
         if($inspectResult['status'] == WacOperationStatus::$Error) {
             $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $inspectResult; // for compatibility JqGrid tips
