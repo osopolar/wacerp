@@ -11,5 +11,6 @@
 //                                'contextInfo' => $contextInfo,
 //                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo))
 //                        )));
+
     ?>
 </div>

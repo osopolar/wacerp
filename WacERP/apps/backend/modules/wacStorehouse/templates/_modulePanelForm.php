@@ -76,17 +76,15 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
     /***** init section, begin *****/
     $("<?php echo $componentGlobalId; ?>").ready(function(){
-        Wac.log("<?php echo $componentGlobalId; ?> ready");
-
+//        Wac.log("<?php echo $componentGlobalId; ?> ready");
         var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
-        
-        
     });
 
 
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self           = this;
         this.prototype      = new WacPanelFormPrototype();  // extends WacFormPrototype
+        this.prototype.constructor = this;
 
         this.moduleName        = <?php echo "'{$moduleName}'" ?>;
         this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;

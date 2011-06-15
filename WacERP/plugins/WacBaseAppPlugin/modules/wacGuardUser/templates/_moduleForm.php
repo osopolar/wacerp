@@ -95,6 +95,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self           = this;
         this.prototype      = new WacFormPrototype();  // extends WacFormPrototype
+        this.prototype.constructor = this;
 
         this.appControllerId   = "#wacAppSystemController";  // be used to listen tab-remove event of the controller
         this.moduleName        = <?php echo "'{$moduleName}'" ?>;
