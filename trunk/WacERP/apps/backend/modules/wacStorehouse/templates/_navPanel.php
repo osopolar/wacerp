@@ -12,15 +12,22 @@ $componentGlobalId    = "#".$componentGlobalName;
     <h3><?php echo __("Storehouse").__("List");?></h3>
     <div id="content_<?php echo $componentGlobalName;?>">
         <ol id="list_<?php echo $componentGlobalName; ?>" class="selectable">
-            <li class="ui-state-default">1</li>
-            <li class="ui-state-default">2</li>
-            <li class="ui-state-default">3</li>
         </ol>
         <div class="wacFormClear"></div>
-        <hr style="width:100%; float:inherit;" class="wacFormRuler">
-        <div align="right">
-            <button id="btnAdd_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnAdd")?></button>
-            <button id="btnDel_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnDel")?></button>
+        <div class="wacFormBottom">
+            <hr style="width:100%; float:inherit;" class="wacFormRuler">
+            <div class="wacFormClear"></div>
+            <span id="barPager_<?php echo $componentGlobalName ?>">
+                <button id="btnPrev_<?php echo $componentGlobalName; ?>"><?php echo __("Previous page")?></button>
+                <span id="currentPage_<?php echo $componentGlobalName; ?>">0</span>
+                /
+                <span id="totalPages_<?php echo $componentGlobalName; ?>">0</span>
+                <button id="btnNext_<?php echo $componentGlobalName; ?>"><?php echo __("Next page")?></button>
+            </span>
+            <span style="float:right">
+                <button id="btnAdd_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnAdd")?></button>
+                <button id="btnDel_<?php echo $componentGlobalName; ?>"><?php echo __("JqGridBtnDel")?></button>
+            </span>
         </div>
     </div>
 </div>
@@ -33,6 +40,7 @@ $componentGlobalId    = "#".$componentGlobalName;
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self           = this;
         this.prototype      = new WacNavPanelPrototype();  // extends WacPanelPrototype
+        this.prototype.constructor = this;
 
         this.moduleName        = <?php echo "'{$moduleName}'" ?>;
         this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
@@ -46,8 +54,6 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
-            $('#btnAdd_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-plusthick"}});
-            $('#btnDel_' + _self.componentGlobalName).button({text: false,icons: {primary: "ui-icon-minusthick"}});
             _self.prototype.initLayout(_self);
         };
 
@@ -61,36 +67,6 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initDataCallBack = function(jsonData){
-            if(jsonData.userdata.status == WacEntity.operationStatus.succss)
-            {
-                if(jsonData['items'].length>0){
-                    for(i=0;i<jsonData['items'].length;i++)
-                    {
-                        $('<li class="ui-state-default">' + jsonData['items'][i].name +'</li>').appendTo('#list_' + _self.componentGlobalName);
-                    }
-
-                    $("#list_" + _self.componentGlobalName).selectable({
-                        stop: function() {
-                            _self.selectedItems = [];
-                            $( ".ui-selected", this ).each(function() {
-                                var index = $("#list_"+_self.componentGlobalName+" li").index( this );
-                                _self.selectedItems.push(jsonData['items'][index]);
-                            });
-
-                            $("body").data(_self.moduleName + "/selectedItem", _self.selectedItems[0]);
-                            $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {moduleName: _self.moduleName, selectedItems: _self.selectedItems});
-                        }
-                    });
-                }
-                else{
-                    $('<li class="ui-state-default">' + $.i18n.prop('no options') +'</li>').appendTo('#list_' + _self.componentGlobalName);
-                }
-                
-            }
-            else
-            {
-                $(document).wacPage().showTips(jsonData.userdata.message);
-            }
             _self.prototype.initDataCallBack(_self, jsonData);
         };
 

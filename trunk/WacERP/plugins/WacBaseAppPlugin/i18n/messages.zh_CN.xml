@@ -266,6 +266,14 @@
         <target>保存</target>
       </trans-unit>
       <trans-unit>
+        <source>Previous page</source>
+        <target>前一页</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Next page</source>
+        <target>后一页</target>
+      </trans-unit>
+      <trans-unit>
         <source>Content</source>
         <target>内容</target>
       </trans-unit>
