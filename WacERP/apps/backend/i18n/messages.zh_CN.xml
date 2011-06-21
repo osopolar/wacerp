@@ -53,6 +53,22 @@
         <source>Mode Edit</source>
         <target>编辑</target>
       </trans-unit>
+      <trans-unit>
+        <source>Management</source>
+        <target>管理</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Material Purchase Order</source>
+        <target>物料采购单</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Material Delivery Order</source>
+        <target>物料转仓单</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Material Sales Order</source>
+        <target>物料销售单</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -25,7 +25,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStoreroom', 'wac_db_connectio
  * @property timestamp $updated_at
  * @property WacStorehouse $Storehouse
  * @property Doctrine_Collection $MaterialDeliveryOrder
- * @property Doctrine_Collection $MaterialSaleOrder
+ * @property Doctrine_Collection $MaterialSalesOrder
  * @property Doctrine_Collection $MaterialShippingOrder
  * @property Doctrine_Collection $MaterialQuantity
  * 
@@ -47,7 +47,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStoreroom', 'wac_db_connectio
  * @method timestamp           getUpdatedAt()             Returns the current record's "updated_at" value
  * @method WacStorehouse       getStorehouse()            Returns the current record's "Storehouse" value
  * @method Doctrine_Collection getMaterialDeliveryOrder() Returns the current record's "MaterialDeliveryOrder" collection
- * @method Doctrine_Collection getMaterialSaleOrder()     Returns the current record's "MaterialSaleOrder" collection
+ * @method Doctrine_Collection getMaterialSalesOrder()    Returns the current record's "MaterialSalesOrder" collection
  * @method Doctrine_Collection getMaterialShippingOrder() Returns the current record's "MaterialShippingOrder" collection
  * @method Doctrine_Collection getMaterialQuantity()      Returns the current record's "MaterialQuantity" collection
  * @method WacStoreroom        setId()                    Sets the current record's "id" value
@@ -68,7 +68,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacStoreroom', 'wac_db_connectio
  * @method WacStoreroom        setUpdatedAt()             Sets the current record's "updated_at" value
  * @method WacStoreroom        setStorehouse()            Sets the current record's "Storehouse" value
  * @method WacStoreroom        setMaterialDeliveryOrder() Sets the current record's "MaterialDeliveryOrder" collection
- * @method WacStoreroom        setMaterialSaleOrder()     Sets the current record's "MaterialSaleOrder" collection
+ * @method WacStoreroom        setMaterialSalesOrder()    Sets the current record's "MaterialSalesOrder" collection
  * @method WacStoreroom        setMaterialShippingOrder() Sets the current record's "MaterialShippingOrder" collection
  * @method WacStoreroom        setMaterialQuantity()      Sets the current record's "MaterialQuantity" collection
  * 
@@ -246,7 +246,7 @@ abstract class BaseWacStoreroom extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'src_storeroom_id'));
 
-        $this->hasMany('WacMaterialSaleOrder as MaterialSaleOrder', array(
+        $this->hasMany('WacMaterialSalesOrder as MaterialSalesOrder', array(
              'local' => 'id',
              'foreign' => 'src_storeroom_id'));
 

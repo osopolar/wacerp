@@ -10,7 +10,9 @@ $componentGlobalId    = "#".$componentGlobalName;
 <div id="<?php echo $componentGlobalName;?>" class="wacPanelContainer">
     <div id="lLeft_<?php echo $componentGlobalName;?>" class="wacPanelLeft">
         <?php
-            include_component("wacStorehouse", "navPanel");
+            include_component("wacStorehouse", "navPanel");  // navigation list panel
+
+            include_component("wacStorehouse", "managementPanel");  // management panel
         ?>
     </div>
 

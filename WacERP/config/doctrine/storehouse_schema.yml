@@ -1,3 +1,91 @@
+WacSupplier:
+  connection: wac_db_connection1
+  package: Storehouse.
+  actAs: [Timestampable]
+  tableName: wac_supplier
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    name:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pr_int1:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    pr_int2:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    pr_str1:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pr_str2:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    priority:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '50'
+      notnull: false
+      autoincrement: false
+    is_avail:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0000-00-00 00:00:00'
+      notnull: true
+      autoincrement: false
+
 WacCustomer:
   connection: wac_db_connection1
   package: Storehouse.
@@ -10,6 +98,13 @@ WacCustomer:
       unsigned: false
       primary: true
       autoincrement: true
+    code:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
     name:
       type: string(255)
       fixed: false
@@ -833,11 +928,11 @@ WacMaterialPurchaseOrderItem:
       local: material_id
       foreign: id
       type: one
-WacMaterialSaleOrder:
+WacMaterialSalesOrder:
   connection: wac_db_connection1
   package: Storehouse.
   actAs: [Timestampable]
-  tableName: wac_material_sale_order
+  tableName: wac_material_sales_order
   columns:
     id:
       type: integer(8)
@@ -983,19 +1078,19 @@ WacMaterialSaleOrder:
       foreign: id
       type: one
       foreignType: many
-      foreignAlias: MaterialSaleOrder
+      foreignAlias: MaterialSalesOrder
     SrcStoreroom:
       class: WacStoreroom
       local: src_storeroom_id
       foreign: id
       type: one
       foreignType: many
-      foreignAlias: MaterialSaleOrder
-WacMaterialSaleOrderItem:
+      foreignAlias: MaterialSalesOrder
+WacMaterialSalesOrderItem:
   connection: wac_db_connection1
   package: Storehouse.
   actAs: [Timestampable]
-  tableName: wac_material_sale_order_item
+  tableName: wac_material_sales_order_item
   columns:
     id:
       type: integer(8)
@@ -1104,7 +1199,7 @@ WacMaterialSaleOrderItem:
       autoincrement: false
   relations:
     Order:
-      class: WacMaterialSaleOrder
+      class: WacMaterialSalesOrder
       local: order_id
       foreign: id
       type: one
@@ -1552,7 +1647,7 @@ WacMaterialPurchaseOrderState:
     keyField: order_type
     keyValue: 2
 
-WacMaterialSaleOrderState:
+WacMaterialSalesOrderState:
   package: Storehouse.
   inheritance:
     extends: WacOrderState

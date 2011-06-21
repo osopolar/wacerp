@@ -23,7 +23,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterial', 'wac_db_connection
  * @property Doctrine_Collection $Categories
  * @property Doctrine_Collection $WacMaterialDeliveryOrderItem
  * @property Doctrine_Collection $WacMaterialPurchaseOrderItem
- * @property Doctrine_Collection $WacMaterialSaleOrderItem
+ * @property Doctrine_Collection $WacMaterialSalesOrderItem
  * @property Doctrine_Collection $WacMaterialShippingOrderItem
  * @property Doctrine_Collection $WacStorehouseMaterialBizItem
  * @property Doctrine_Collection $WacStorehouseMaterialQuantity
@@ -45,7 +45,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterial', 'wac_db_connection
  * @method Doctrine_Collection getCategories()                    Returns the current record's "Categories" collection
  * @method Doctrine_Collection getWacMaterialDeliveryOrderItem()  Returns the current record's "WacMaterialDeliveryOrderItem" collection
  * @method Doctrine_Collection getWacMaterialPurchaseOrderItem()  Returns the current record's "WacMaterialPurchaseOrderItem" collection
- * @method Doctrine_Collection getWacMaterialSaleOrderItem()      Returns the current record's "WacMaterialSaleOrderItem" collection
+ * @method Doctrine_Collection getWacMaterialSalesOrderItem()     Returns the current record's "WacMaterialSalesOrderItem" collection
  * @method Doctrine_Collection getWacMaterialShippingOrderItem()  Returns the current record's "WacMaterialShippingOrderItem" collection
  * @method Doctrine_Collection getWacStorehouseMaterialBizItem()  Returns the current record's "WacStorehouseMaterialBizItem" collection
  * @method Doctrine_Collection getWacStorehouseMaterialQuantity() Returns the current record's "WacStorehouseMaterialQuantity" collection
@@ -66,7 +66,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterial', 'wac_db_connection
  * @method WacMaterial         setCategories()                    Sets the current record's "Categories" collection
  * @method WacMaterial         setWacMaterialDeliveryOrderItem()  Sets the current record's "WacMaterialDeliveryOrderItem" collection
  * @method WacMaterial         setWacMaterialPurchaseOrderItem()  Sets the current record's "WacMaterialPurchaseOrderItem" collection
- * @method WacMaterial         setWacMaterialSaleOrderItem()      Sets the current record's "WacMaterialSaleOrderItem" collection
+ * @method WacMaterial         setWacMaterialSalesOrderItem()     Sets the current record's "WacMaterialSalesOrderItem" collection
  * @method WacMaterial         setWacMaterialShippingOrderItem()  Sets the current record's "WacMaterialShippingOrderItem" collection
  * @method WacMaterial         setWacStorehouseMaterialBizItem()  Sets the current record's "WacStorehouseMaterialBizItem" collection
  * @method WacMaterial         setWacStorehouseMaterialQuantity() Sets the current record's "WacStorehouseMaterialQuantity" collection
@@ -223,7 +223,7 @@ abstract class BaseWacMaterial extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'material_id'));
 
-        $this->hasMany('WacMaterialSaleOrderItem', array(
+        $this->hasMany('WacMaterialSalesOrderItem', array(
              'local' => 'id',
              'foreign' => 'material_id'));
 
