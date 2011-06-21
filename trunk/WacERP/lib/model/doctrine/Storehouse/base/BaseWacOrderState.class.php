@@ -196,7 +196,7 @@ abstract class BaseWacOrderState extends sfDoctrineRecord
              array(
               'order_type' => 2,
              ),
-             'WacMaterialSaleOrderState' => 
+             'WacMaterialSalesOrderState' => 
              array(
               'order_type' => 3,
              ),

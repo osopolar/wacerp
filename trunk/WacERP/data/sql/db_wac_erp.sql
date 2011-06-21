@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-06-10 18:14:11
+Date: 2011-06-21 18:07:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,7 +211,7 @@ CREATE TABLE `sf_guard_user` (
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-10 06:49:54', '2009-12-19 08:12:50', '2011-06-10 06:49:54');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-21 07:50:04', '2009-12-19 08:12:50', '2011-06-21 07:50:04');
 INSERT INTO `sf_guard_user` VALUES ('17', 'user1', 'sha1', 'e83ecdefb483cd2db998fd0daa0c5d87', 'bafb2f103d52d727ba3eb8c5d9532c871d04e455', '1', '0', '2011-03-31 04:01:35', '2011-03-31 02:40:56', '2011-03-31 04:01:35');
 INSERT INTO `sf_guard_user` VALUES ('18', 'user2', 'sha1', '1cf2166bd1239849b913ff34710b5a08', '789577ef91737d016a50c99bf037bcd97544a4a0', '1', '0', null, '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 
@@ -1181,6 +1181,33 @@ CREATE TABLE `wac_storeroom` (
 
 -- ----------------------------
 -- Records of wac_storeroom
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wac_supplier`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_supplier`;
+CREATE TABLE `wac_supplier` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`name`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_supplier
 -- ----------------------------
 
 -- ----------------------------
