@@ -81,15 +81,18 @@ $componentGlobalId    = "#".$componentGlobalName;
 
         this.bindEvents = function(){
 //            _self.prototype.bindEvents(_self);
+//                Wac.log(data, debug);
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
-                _self.loadPanelForm(WacAppConfig.event.app_wac_events_show_add_form, data);
+                _self.loadFormPanel(WacAppConfig.event.app_wac_events_show_add_form, data);
             });
 
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
-//                Wac.log(data, debug);
-                _self.loadPanelForm(WacAppConfig.event.app_wac_events_show_edit_form, data);
+                _self.loadFormPanel(WacAppConfig.event.app_wac_events_show_edit_form, data);
             });
 
+            $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_management_panel, function ($self, data) {  // listenerid, event name, callback
+                _self.loadManagementPanel(WacAppConfig.event.app_wac_events_show_management_panel, data);
+            });
         };
 
         this.initData = function(){
@@ -100,19 +103,27 @@ $componentGlobalId    = "#".$componentGlobalName;
 //            _self.prototype.initDataCallBack(_self, jsonData);
         };
 
-        this.loadPanelForm = function(evt, data){
+        this.loadFormPanel = function(evt, data){
+            self.loadPanel("formPanel", "getPanelForm", evt, data);
+        };
+
+        this.loadManagementPanel = function(evt, data){
+            self.loadPanel("managementPanel", "getManagementPanel", evt, data);
+        };
+        
+        this.loadPanel = function(uiPanelName, action, evt, data){
 //            Wac.log(data, debug);
 //            Wac.log('div[id*="formPanel_'+ data.moduleName +'"]'+ " : " + $('div[id*="formPanel_'+ data.moduleName +'"]').length, debug);
-            if($('div[id*="formPanel_'+ data.moduleName +'"]').length == 0){
+            if($('div[id*="'+ uiPanelName + '_'+ data.moduleName +'"]').length == 0){
                 $(_self.contentId).load(
-                      WacAppConfig.baseUrl + data.moduleName + "/getPanelForm",
+                      WacAppConfig.baseUrl + data.moduleName + "/" + action,
                       {dataFormat: "html"}
                 );
             }
             else{
                 $.shout(data.moduleName + evt, data);
             }
-        }
+        };
 
         this.init();  // init method
     }
