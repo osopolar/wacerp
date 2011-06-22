@@ -12,6 +12,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialPurchaseOrder', 'wac_
  * @property string $code
  * @property integer $user_id
  * @property timestamp $biz_date
+ * @property integer $current_state
  * @property decimal $total_price
  * @property integer $pr_int1
  * @property integer $pr_int2
@@ -24,38 +25,40 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialPurchaseOrder', 'wac_
  * @property WacGuardUser $User
  * @property Doctrine_Collection $Items
  * 
- * @method integer                  getId()          Returns the current record's "id" value
- * @method string                   getName()        Returns the current record's "name" value
- * @method string                   getCode()        Returns the current record's "code" value
- * @method integer                  getUserId()      Returns the current record's "user_id" value
- * @method timestamp                getBizDate()     Returns the current record's "biz_date" value
- * @method decimal                  getTotalPrice()  Returns the current record's "total_price" value
- * @method integer                  getPrInt1()      Returns the current record's "pr_int1" value
- * @method integer                  getPrInt2()      Returns the current record's "pr_int2" value
- * @method string                   getPrStr1()      Returns the current record's "pr_str1" value
- * @method string                   getPrStr2()      Returns the current record's "pr_str2" value
- * @method integer                  getPriority()    Returns the current record's "priority" value
- * @method integer                  getIsAvail()     Returns the current record's "is_avail" value
- * @method timestamp                getCreatedAt()   Returns the current record's "created_at" value
- * @method timestamp                getUpdatedAt()   Returns the current record's "updated_at" value
- * @method WacGuardUser             getUser()        Returns the current record's "User" value
- * @method Doctrine_Collection      getItems()       Returns the current record's "Items" collection
- * @method WacMaterialPurchaseOrder setId()          Sets the current record's "id" value
- * @method WacMaterialPurchaseOrder setName()        Sets the current record's "name" value
- * @method WacMaterialPurchaseOrder setCode()        Sets the current record's "code" value
- * @method WacMaterialPurchaseOrder setUserId()      Sets the current record's "user_id" value
- * @method WacMaterialPurchaseOrder setBizDate()     Sets the current record's "biz_date" value
- * @method WacMaterialPurchaseOrder setTotalPrice()  Sets the current record's "total_price" value
- * @method WacMaterialPurchaseOrder setPrInt1()      Sets the current record's "pr_int1" value
- * @method WacMaterialPurchaseOrder setPrInt2()      Sets the current record's "pr_int2" value
- * @method WacMaterialPurchaseOrder setPrStr1()      Sets the current record's "pr_str1" value
- * @method WacMaterialPurchaseOrder setPrStr2()      Sets the current record's "pr_str2" value
- * @method WacMaterialPurchaseOrder setPriority()    Sets the current record's "priority" value
- * @method WacMaterialPurchaseOrder setIsAvail()     Sets the current record's "is_avail" value
- * @method WacMaterialPurchaseOrder setCreatedAt()   Sets the current record's "created_at" value
- * @method WacMaterialPurchaseOrder setUpdatedAt()   Sets the current record's "updated_at" value
- * @method WacMaterialPurchaseOrder setUser()        Sets the current record's "User" value
- * @method WacMaterialPurchaseOrder setItems()       Sets the current record's "Items" collection
+ * @method integer                  getId()            Returns the current record's "id" value
+ * @method string                   getName()          Returns the current record's "name" value
+ * @method string                   getCode()          Returns the current record's "code" value
+ * @method integer                  getUserId()        Returns the current record's "user_id" value
+ * @method timestamp                getBizDate()       Returns the current record's "biz_date" value
+ * @method integer                  getCurrentState()  Returns the current record's "current_state" value
+ * @method decimal                  getTotalPrice()    Returns the current record's "total_price" value
+ * @method integer                  getPrInt1()        Returns the current record's "pr_int1" value
+ * @method integer                  getPrInt2()        Returns the current record's "pr_int2" value
+ * @method string                   getPrStr1()        Returns the current record's "pr_str1" value
+ * @method string                   getPrStr2()        Returns the current record's "pr_str2" value
+ * @method integer                  getPriority()      Returns the current record's "priority" value
+ * @method integer                  getIsAvail()       Returns the current record's "is_avail" value
+ * @method timestamp                getCreatedAt()     Returns the current record's "created_at" value
+ * @method timestamp                getUpdatedAt()     Returns the current record's "updated_at" value
+ * @method WacGuardUser             getUser()          Returns the current record's "User" value
+ * @method Doctrine_Collection      getItems()         Returns the current record's "Items" collection
+ * @method WacMaterialPurchaseOrder setId()            Sets the current record's "id" value
+ * @method WacMaterialPurchaseOrder setName()          Sets the current record's "name" value
+ * @method WacMaterialPurchaseOrder setCode()          Sets the current record's "code" value
+ * @method WacMaterialPurchaseOrder setUserId()        Sets the current record's "user_id" value
+ * @method WacMaterialPurchaseOrder setBizDate()       Sets the current record's "biz_date" value
+ * @method WacMaterialPurchaseOrder setCurrentState()  Sets the current record's "current_state" value
+ * @method WacMaterialPurchaseOrder setTotalPrice()    Sets the current record's "total_price" value
+ * @method WacMaterialPurchaseOrder setPrInt1()        Sets the current record's "pr_int1" value
+ * @method WacMaterialPurchaseOrder setPrInt2()        Sets the current record's "pr_int2" value
+ * @method WacMaterialPurchaseOrder setPrStr1()        Sets the current record's "pr_str1" value
+ * @method WacMaterialPurchaseOrder setPrStr2()        Sets the current record's "pr_str2" value
+ * @method WacMaterialPurchaseOrder setPriority()      Sets the current record's "priority" value
+ * @method WacMaterialPurchaseOrder setIsAvail()       Sets the current record's "is_avail" value
+ * @method WacMaterialPurchaseOrder setCreatedAt()     Sets the current record's "created_at" value
+ * @method WacMaterialPurchaseOrder setUpdatedAt()     Sets the current record's "updated_at" value
+ * @method WacMaterialPurchaseOrder setUser()          Sets the current record's "User" value
+ * @method WacMaterialPurchaseOrder setItems()         Sets the current record's "Items" collection
  * 
  * @package    WacERP
  * @subpackage model
@@ -111,6 +114,16 @@ abstract class BaseWacMaterialPurchaseOrder extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 25,
+             ));
+        $this->hasColumn('current_state', 'integer', 2, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'default' => '0',
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 2,
              ));
         $this->hasColumn('total_price', 'decimal', 10, array(
              'type' => 'decimal',

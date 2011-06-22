@@ -12,7 +12,7 @@
  * @property Doctrine_Collection $WacMaterialPurchaseOrder
  * @property Doctrine_Collection $WacMaterialSalesOrder
  * @property Doctrine_Collection $WacMaterialShippingOrder
- * @property Doctrine_Collection $WacOrderState
+ * @property Doctrine_Collection $WacOrderStateHistory
  * @property Doctrine_Collection $WacMaterialCategory
  * 
  * @method Doctrine_Collection getWacFile()                  Returns the current record's "WacFile" collection
@@ -22,7 +22,7 @@
  * @method Doctrine_Collection getWacMaterialPurchaseOrder() Returns the current record's "WacMaterialPurchaseOrder" collection
  * @method Doctrine_Collection getWacMaterialSalesOrder()    Returns the current record's "WacMaterialSalesOrder" collection
  * @method Doctrine_Collection getWacMaterialShippingOrder() Returns the current record's "WacMaterialShippingOrder" collection
- * @method Doctrine_Collection getWacOrderState()            Returns the current record's "WacOrderState" collection
+ * @method Doctrine_Collection getWacOrderStateHistory()     Returns the current record's "WacOrderStateHistory" collection
  * @method Doctrine_Collection getWacMaterialCategory()      Returns the current record's "WacMaterialCategory" collection
  * @method WacGuardUser        setWacFile()                  Sets the current record's "WacFile" collection
  * @method WacGuardUser        setWacCategory()              Sets the current record's "WacCategory" collection
@@ -31,7 +31,7 @@
  * @method WacGuardUser        setWacMaterialPurchaseOrder() Sets the current record's "WacMaterialPurchaseOrder" collection
  * @method WacGuardUser        setWacMaterialSalesOrder()    Sets the current record's "WacMaterialSalesOrder" collection
  * @method WacGuardUser        setWacMaterialShippingOrder() Sets the current record's "WacMaterialShippingOrder" collection
- * @method WacGuardUser        setWacOrderState()            Sets the current record's "WacOrderState" collection
+ * @method WacGuardUser        setWacOrderStateHistory()     Sets the current record's "WacOrderStateHistory" collection
  * @method WacGuardUser        setWacMaterialCategory()      Sets the current record's "WacMaterialCategory" collection
  * 
  * @package    WacERP
@@ -72,7 +72,7 @@ abstract class BaseWacGuardUser extends sfGuardUser
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('WacOrderState', array(
+        $this->hasMany('WacOrderStateHistory', array(
              'local' => 'id',
              'foreign' => 'changer_id'));
 

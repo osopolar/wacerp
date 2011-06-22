@@ -18,6 +18,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @property integer $shipping_method_id
  * @property decimal $total_price
  * @property timestamp $biz_date
+ * @property integer $current_state
  * @property integer $pr_int1
  * @property integer $pr_int2
  * @property string $pr_str1
@@ -44,6 +45,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @method integer                  getShippingMethodId()    Returns the current record's "shipping_method_id" value
  * @method decimal                  getTotalPrice()          Returns the current record's "total_price" value
  * @method timestamp                getBizDate()             Returns the current record's "biz_date" value
+ * @method integer                  getCurrentState()        Returns the current record's "current_state" value
  * @method integer                  getPrInt1()              Returns the current record's "pr_int1" value
  * @method integer                  getPrInt2()              Returns the current record's "pr_int2" value
  * @method string                   getPrStr1()              Returns the current record's "pr_str1" value
@@ -69,6 +71,7 @@ Doctrine_Manager::getInstance()->bindComponent('WacMaterialShippingOrder', 'wac_
  * @method WacMaterialShippingOrder setShippingMethodId()    Sets the current record's "shipping_method_id" value
  * @method WacMaterialShippingOrder setTotalPrice()          Sets the current record's "total_price" value
  * @method WacMaterialShippingOrder setBizDate()             Sets the current record's "biz_date" value
+ * @method WacMaterialShippingOrder setCurrentState()        Sets the current record's "current_state" value
  * @method WacMaterialShippingOrder setPrInt1()              Sets the current record's "pr_int1" value
  * @method WacMaterialShippingOrder setPrInt2()              Sets the current record's "pr_int2" value
  * @method WacMaterialShippingOrder setPrStr1()              Sets the current record's "pr_str1" value
@@ -197,6 +200,16 @@ abstract class BaseWacMaterialShippingOrder extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 25,
+             ));
+        $this->hasColumn('current_state', 'integer', 2, array(
+             'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'default' => '0',
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 2,
              ));
         $this->hasColumn('pr_int1', 'integer', 4, array(
              'type' => 'integer',

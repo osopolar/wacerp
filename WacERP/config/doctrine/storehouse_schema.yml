@@ -468,6 +468,14 @@ WacMaterialDeliveryOrder:
       primary: false
       notnull: false
       autoincrement: false
+    current_state:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
     pr_int1:
       type: integer(4)
       fixed: false
@@ -728,6 +736,14 @@ WacMaterialPurchaseOrder:
       fixed: false
       unsigned: false
       primary: false
+      notnull: false
+      autoincrement: false
+    current_state:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
       notnull: false
       autoincrement: false
     total_price:
@@ -998,6 +1014,14 @@ WacMaterialSalesOrder:
       fixed: false
       unsigned: false
       primary: false
+      notnull: false
+      autoincrement: false
+    current_state:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
       notnull: false
       autoincrement: false
     pr_int1:
@@ -1299,6 +1323,14 @@ WacMaterialShippingOrder:
       primary: false
       notnull: false
       autoincrement: false
+    current_state:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
     pr_int1:
       type: integer(4)
       fixed: false
@@ -1519,11 +1551,11 @@ WacMaterialShippingOrderItem:
       local: material_id
       foreign: id
       type: one
-WacOrderState:
+WacOrderStateHistory:
   connection: wac_db_connection1
   package: Storehouse.
   actAs: [Timestampable]
-  tableName: wac_order_state
+  tableName: wac_order_state_history
   columns:
     id:
       type: integer(8)
@@ -1631,34 +1663,34 @@ WacOrderState:
       foreign: id
       type: one
 
-WacMaterialDeliveryOrderState:
+WacMaterialDeliveryOrderStateHistory:
   package: Storehouse.
   inheritance:
-    extends: WacOrderState
+    extends: WacOrderStateHistory
     type: column_aggregation
     keyField: order_type
     keyValue: 1
 
-WacMaterialPurchaseOrderState:
+WacMaterialPurchaseOrderStateHistory:
   package: Storehouse.
   inheritance:
-    extends: WacOrderState
+    extends: WacOrderStateHistory
     type: column_aggregation
     keyField: order_type
     keyValue: 2
 
-WacMaterialSalesOrderState:
+WacMaterialSalesOrderStateHistory:
   package: Storehouse.
   inheritance:
-    extends: WacOrderState
+    extends: WacOrderStateHistory
     type: column_aggregation
     keyField: order_type
     keyValue: 3
 
-WacMaterialShippingOrderState:
+WacMaterialShippingOrderStateHistory:
   package: Storehouse.
   inheritance:
-    extends: WacOrderState
+    extends: WacOrderStateHistory
     type: column_aggregation
     keyField: order_type
     keyValue: 4
