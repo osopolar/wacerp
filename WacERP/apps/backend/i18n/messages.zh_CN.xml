@@ -58,16 +58,16 @@
         <target>管理</target>
       </trans-unit>
       <trans-unit>
-        <source>Material Purchase Order</source>
-        <target>物料采购单</target>
+        <source>Material Purchase</source>
+        <target>物料采购</target>
       </trans-unit>
       <trans-unit>
-        <source>Material Delivery Order</source>
-        <target>物料转仓单</target>
+        <source>Material Delivery</source>
+        <target>物料转仓</target>
       </trans-unit>
       <trans-unit>
-        <source>Material Sales Order</source>
-        <target>物料销售单</target>
+        <source>Material Sales</source>
+        <target>物料销售</target>
       </trans-unit>
     </body>
   </file>

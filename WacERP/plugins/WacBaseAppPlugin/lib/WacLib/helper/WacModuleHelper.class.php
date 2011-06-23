@@ -92,6 +92,14 @@ class WacModuleHelper
     }
 
     /*
+     * getManagementPanelId
+     */
+    public static function getManagementPanelId($module, $attachInfo=array())
+    {
+        return self::getElementId($module, $attachInfo, "mgPanel");
+    }
+
+    /*
      * getNavPanelId
      */
     public static function getNavPanelId($module, $attachInfo=array())
@@ -566,6 +574,41 @@ class WacModuleHelper
      */
     public static function getModuleTableFields($moduleName)
     {
-        return Doctrine::getTable(WacTable::$$moduleName)->getFieldNames();
+        if(isset(WacTable::$$moduleName)){
+            return Doctrine::getTable(WacTable::$$moduleName)->getFieldNames();
+        }
+        
+    }
+
+    /*
+     * @return module table key
+     */
+    public static function getModuleTableKey($moduleName){
+        return $moduleName."ModuleTable";
+    }
+
+    /*
+     * @return module table name
+     */
+    public static function getModuleTableName($moduleName, $tableName=""){
+        if(!empty($tableName)){
+            return $tableName;
+        }
+        else{
+            if(!isset(WacTable::$$moduleName)){
+                return ucfirst($moduleName);
+            }
+            else{
+                return WacTable::$$moduleName;
+            }
+        }
+    }
+
+    public static function getModuleTable($moduleName, $tableName=""){
+        $moduleTableKey = self::getModuleTableKey($moduleName);
+        if(!sfConfig::has($moduleTableKey)){
+            sfConfig::set($moduleTableKey, Doctrine::getTable(self::getModuleTableName($moduleName, $tableName)));
+        }
+        return sfConfig::get($moduleTableKey);
     }
 }

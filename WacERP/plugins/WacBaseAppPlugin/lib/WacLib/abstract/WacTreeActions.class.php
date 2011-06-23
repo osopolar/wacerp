@@ -13,6 +13,13 @@
 abstract class WacTreeActions extends WacCommonActions {
 
     /*
+     * a switch setting, if some module not allow, override this and return false;
+     */
+    public function allowSetupMainModuleTable(){
+        return true;
+    }
+
+    /*
      * _getChildren
      * @return array $filterResultSet
      */

@@ -2,7 +2,7 @@
 /**
  * manage the form
  */
-class managementPanelComponent extends WacComponent
+class moduleFormComponent extends WacComponent
 {
     public function execute($request)
     {

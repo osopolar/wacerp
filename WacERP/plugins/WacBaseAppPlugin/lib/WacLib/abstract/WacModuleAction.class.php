@@ -12,14 +12,26 @@
  */
 abstract class WacModuleAction extends WacCommonActions {
     /*
-     * setup main module table
+     * a switch setting, if some module not allow, override this and return false;
      */
-    public function setupMainModuleTable(){
-        $this->mainModuleTable = Doctrine::getTable(ucfirst($this->getModuleName()));
+    public function allowSetupMainModuleTable(){
+        return true;
     }
     
     public function executeGetPanelForm(sfWebRequest $request) {
         $str = $this->getComponent($this->contextInfo["moduleName"], WacComponentList::$modulePanelForm,
+                        array(
+                            'invokeParams' => array(
+                                'contextInfo' => $this->contextInfo,
+                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($this->contextInfo))
+                        ))
+                );
+
+        return OutputHelper::getInstance()->output($str, $this, array("isCache" => false));
+    }
+
+    public function executeGetManagementPanel(sfWebRequest $request) {
+        $str = $this->getComponent($this->contextInfo["moduleName"], WacComponentList::$moduleManagementPanel,
                         array(
                             'invokeParams' => array(
                                 'contextInfo' => $this->contextInfo,

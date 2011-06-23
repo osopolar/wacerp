@@ -104,16 +104,16 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.loadFormPanel = function(evt, data){
-            self.loadPanel("formPanel", "getPanelForm", evt, data);
+            _self.loadPanel("formPanel", "getPanelForm", evt, data);
         };
 
         this.loadManagementPanel = function(evt, data){
-            self.loadPanel("managementPanel", "getManagementPanel", evt, data);
+            _self.loadPanel("managementPanel", "getManagementPanel", evt, data);
         };
         
         this.loadPanel = function(uiPanelName, action, evt, data){
 //            Wac.log(data, debug);
-//            Wac.log('div[id*="formPanel_'+ data.moduleName +'"]'+ " : " + $('div[id*="formPanel_'+ data.moduleName +'"]').length, debug);
+            Wac.log(uiPanelName + " : " + $('div[id*="'+ uiPanelName+'_'+ data.moduleName +'"]').length, debug);
             if($('div[id*="'+ uiPanelName + '_'+ data.moduleName +'"]').length == 0){
                 $(_self.contentId).load(
                       WacAppConfig.baseUrl + data.moduleName + "/" + action,

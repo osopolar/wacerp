@@ -32,7 +32,9 @@ abstract class WacCommonActions extends sfActions {
         $this->innerContextInfo["wacActionJs"]  ='/WacBaseAppPlugin/js/modules/'.$this->innerContextInfo["moduleName"].'/'.$this->innerContextInfo["actionName"].'.js';
         $this->innerContextInfo["jsModulePath"] = "/js/".$this->contextInfo["modulePath"];
 
-        $this->setupMainModuleTable();
+        if($this->allowSetupMainModuleTable()){
+            $this->setupMainModuleTable();
+        }
 
         $this->contextInfo = $this->innerContextInfo;  //assign to tpl
 
@@ -48,10 +50,26 @@ abstract class WacCommonActions extends sfActions {
      * setup main module table
      */
     public function setupMainModuleTable(){
-        $moduleName = $this->getModuleName();
-        if(isset(WacTable::$$moduleName)) {
-            $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
-        }
+//        $moduleName = $this->getModuleName();
+//        if(isset(WacTable::$$moduleName)) {
+//            $this->mainModuleTable = Doctrine::getTable(WacTable::$$moduleName);
+//        }
+        $this->mainModuleTable = WacModuleHelper::getModuleTable($this->innerContextInfo["moduleName"], $this->getModuleTableName());
+    }
+
+    /*
+     * a switch setting, if some module not allow, override this and return false;
+     */
+    public function allowSetupMainModuleTable(){
+        return false;
+    }
+
+    /*
+     * map to other table name if the module not follow the module table name's rule
+     * a hook to let the children setup different table
+     */
+    public function getModuleTableName(){
+        return WacModuleHelper::getModuleTableName($this->innerContextInfo["moduleName"], "");
     }
 
     /*

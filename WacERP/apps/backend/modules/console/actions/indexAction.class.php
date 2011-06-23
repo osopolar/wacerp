@@ -5,7 +5,7 @@
  * @author     ben
  */
 class indexAction extends WacCommonActions
-{
+{    
     public function execute($request)
     {   
         //component js required, begin
