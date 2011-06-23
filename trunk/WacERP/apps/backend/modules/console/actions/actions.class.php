@@ -10,6 +10,7 @@
  */
 class consoleActions extends WacCommonActions
 {
+
  /**
   * Executes index action
   *

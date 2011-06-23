@@ -5,12 +5,20 @@
         ?>
     </div>
     <?php
-            include_component("appStockController", "desktop");
+//            include_component("appStockController", "desktop");
 //            include_component("wacStorehouse", "modulePanelForm", array(
 //                            'invokeParams' => array(
 //                                'contextInfo' => $contextInfo,
 //                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo))
 //                        )));
+
+            include_component("materialPurchase", "moduleManagementPanel", array(
+                            'invokeParams' => array(
+                                'contextInfo' => $contextInfo,
+                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo))
+                        )));
+
+            
 
     ?>
 </div>

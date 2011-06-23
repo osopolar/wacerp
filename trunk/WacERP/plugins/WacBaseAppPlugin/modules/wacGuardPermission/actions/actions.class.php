@@ -8,7 +8,7 @@
  * @author     JianBinBi
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class wacGuardPermissionActions extends WacCommonActions {
+class wacGuardPermissionActions extends WacModuleAction {
     /*
      * @return inspect result
      */
