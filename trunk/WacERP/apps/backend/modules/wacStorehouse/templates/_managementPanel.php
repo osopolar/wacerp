@@ -15,7 +15,6 @@ $componentGlobalId    = "#".$componentGlobalName;
             <li class="wacCursor" id="mp_<?php echo $componentGlobalName; ?>"><?php echo __("Material Purchase");?></li>
             <li></li>
             <li></li>
-            <li></li>
         </ul>
         <div class="wacFormClear"></div>
     </div>
@@ -55,7 +54,8 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.bindEvents = function(){
             $("#mp_" + _self.componentGlobalName).bind("click", function(){
                 $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
-            })
+            });
+
         };
 
         this.init();  // init method

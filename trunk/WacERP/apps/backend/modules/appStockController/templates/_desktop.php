@@ -36,11 +36,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         </div>
     </div>
     <div id="lCenter_<?php echo $componentGlobalName;?>" class="wacPanelCenter">
-        <div id="content_<?php echo $componentGlobalName;?>" class="wacPanelDesktop">
-            <p>
-                <b>Feel free to examine html of this page.</b>
-            </p>
-        </div>
+        <div id="content_<?php echo $componentGlobalName;?>" class="wacPanelDesktop"></div>
     </div>
 </div>
 
@@ -108,14 +104,19 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.loadManagementPanel = function(evt, data){
-            _self.loadPanel("managementPanel", "getManagementPanel", evt, data);
+            _self.loadPanel("mgPanel", "getManagementPanel", evt, data);
         };
         
         this.loadPanel = function(uiPanelName, action, evt, data){
 //            Wac.log(data, debug);
-            Wac.log(uiPanelName + " : " + $('div[id*="'+ uiPanelName+'_'+ data.moduleName +'"]').length, debug);
+//            Wac.log(uiPanelName + " : " + $('div[id*="'+ uiPanelName+'_'+ data.moduleName +'"]').length, debug);
             if($('div[id*="'+ uiPanelName + '_'+ data.moduleName +'"]').length == 0){
-                $(_self.contentId).load(
+                var panelContainer = uiPanelName + '_'+ data.moduleName + '_container';
+
+                Wac.log(panelContainer, debug);
+
+                $(_self.contentId).append("<div id='" + panelContainer + "'></div>");
+                $("#" + panelContainer).load(
                       WacAppConfig.baseUrl + data.moduleName + "/" + action,
                       {dataFormat: "html"}
                 );
