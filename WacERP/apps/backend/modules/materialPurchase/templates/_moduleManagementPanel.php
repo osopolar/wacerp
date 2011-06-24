@@ -7,7 +7,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
 <div id="<?php echo $componentGlobalName; ?>" title="<?php echo WacModule::getInstance()->getCaption($moduleName); ?>" class="ui-widget centralPanel" >
-    <h3><?php echo __("Module Name"); ?></h3>
+    <h3><?php echo __("Material Purchase"); ?></h3>
     <div>
        <?php
           include_component($contextInfo["moduleName"], WacComponentList::$moduleIndexListWidget);

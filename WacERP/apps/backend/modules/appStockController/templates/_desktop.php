@@ -109,21 +109,36 @@ $componentGlobalId    = "#".$componentGlobalName;
         
         this.loadPanel = function(uiPanelName, action, evt, data){
 //            Wac.log(data, debug);
-//            Wac.log(uiPanelName + " : " + $('div[id*="'+ uiPanelName+'_'+ data.moduleName +'"]').length, debug);
-            if($('div[id*="'+ uiPanelName + '_'+ data.moduleName +'"]').length == 0){
-                var panelContainer = uiPanelName + '_'+ data.moduleName + '_container';
+            var panelContainer = uiPanelName + '_'+ data.moduleName + '_container';
 
+            if($('#'+panelContainer).length == 0){
                 Wac.log(panelContainer, debug);
-
-                $(_self.contentId).append("<div id='" + panelContainer + "'></div>");
+                
+                $(_self.contentId).prepend("<div id='" + panelContainer + "'></div>");
                 $("#" + panelContainer).load(
                       WacAppConfig.baseUrl + data.moduleName + "/" + action,
-                      {dataFormat: "html"}
+                      {dataFormat: "html"},
+                      function(){
+                          _self.setPanelsPos("relative");
+//                          $(document).oneTime("2s", function() {
+//				_self.setPanelsPos("absolute");
+//			  });
+                      }
                 );
             }
             else{
                 $.shout(data.moduleName + evt, data);
             }
+        };
+
+        /*
+        *  let the new panels follow the previous panel automatically
+         */
+        this.setPanelsPos = function(pos){
+              $(_self.contentId + " .ui-helper-reset.ui-widget-content.ui-panel-content.ui-corner-bottom").each(function(idx){
+                  $(this).css("position", pos);
+//                Wac.log( idx + ":" + $(this).css("position"), debug);
+              });
         };
 
         this.init();  // init method

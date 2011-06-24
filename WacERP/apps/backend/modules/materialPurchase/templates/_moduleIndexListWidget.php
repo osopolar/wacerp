@@ -15,7 +15,7 @@
             'enableWidgets' => array(// enable sub widgets
                 WacComponentList::$tableToolbar,
                 WacComponentList::$moduleList,
-//                WacComponentList::$moduleForm
+                WacComponentList::$moduleForm
             )
         )
 );
