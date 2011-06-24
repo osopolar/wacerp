@@ -62,6 +62,10 @@
         <target>物料采购</target>
       </trans-unit>
       <trans-unit>
+        <source>materialPurchase</source>
+        <target>物料采购单</target>
+      </trans-unit>
+      <trans-unit>
         <source>Material Delivery</source>
         <target>物料转仓</target>
       </trans-unit>

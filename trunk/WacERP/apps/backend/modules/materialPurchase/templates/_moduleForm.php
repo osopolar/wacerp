@@ -88,7 +88,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
 
     /***** init section, begin *****/
     $("<?php echo $componentGlobalId; ?>").ready(function(){
-        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+//        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
     });
 
 

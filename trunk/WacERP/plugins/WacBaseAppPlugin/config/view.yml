@@ -79,6 +79,7 @@ default:
 
 #    - /WacBaseAppPlugin/js/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
     jquery.datalink: /WacBaseAppPlugin/js/jquery/plugins/jquery-datalink/jquery.datalink.js
+    jquery.timers: /WacBaseAppPlugin/js/jquery/plugins/jquery.timers/jquery.timers.js
     jquery.printElement: /WacBaseAppPlugin/js/jquery/plugins/printElement/jquery.printElement.min.js    # jquery.printElement
 
     wac.main: /WacBaseAppPlugin/js/wac/main.js  # wac_main
