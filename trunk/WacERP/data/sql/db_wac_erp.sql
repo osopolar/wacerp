@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-06-21 18:07:34
+Date: 2011-06-27 19:05:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,7 +211,7 @@ CREATE TABLE `sf_guard_user` (
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-21 07:50:04', '2009-12-19 08:12:50', '2011-06-21 07:50:04');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-27 06:22:13', '2009-12-19 08:12:50', '2011-06-27 06:22:13');
 INSERT INTO `sf_guard_user` VALUES ('17', 'user1', 'sha1', 'e83ecdefb483cd2db998fd0daa0c5d87', 'bafb2f103d52d727ba3eb8c5d9532c871d04e455', '1', '0', '2011-03-31 04:01:35', '2011-03-31 02:40:56', '2011-03-31 04:01:35');
 INSERT INTO `sf_guard_user` VALUES ('18', 'user2', 'sha1', '1cf2166bd1239849b913ff34710b5a08', '789577ef91737d016a50c99bf037bcd97544a4a0', '1', '0', null, '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 
@@ -294,24 +294,23 @@ CREATE TABLE `wac_category` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_category
 -- ----------------------------
-INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '18', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '0000-00-00 00:00:00');
-INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '17', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-03-22 03:04:51');
-INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '16', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-03-30 10:46:06');
+INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '16', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '0000-00-00 00:00:00');
+INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '15', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-03-22 03:04:51');
+INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '14', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-03-30 10:46:06');
 INSERT INTO `wac_category` VALUES ('13', '0', '0', '1', '4', '0', 'root_17', null, '17', 'root_17', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:56', '2011-03-31 02:40:56');
 INSERT INTO `wac_category` VALUES ('14', '13', '0', '2', '3', '1', 'branch_17_1', null, '17', 'branch_17_1', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:57', '2011-03-31 02:40:57');
-INSERT INTO `wac_category` VALUES ('15', '19', '1', '11', '12', '4', null, null, '1', null, '999', 'leaf', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:16', '2011-04-22 07:58:40');
-INSERT INTO `wac_category` VALUES ('16', '7', '0', '4', '7', '3', null, null, '1', null, 'New node', 'branch', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:13', '2011-04-01 08:26:57');
-INSERT INTO `wac_category` VALUES ('17', '19', '0', '9', '10', '4', null, null, '1', null, '88', 'leaf', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:13', '2011-04-19 10:54:59');
-INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '16', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-04-18 11:07:17');
-INSERT INTO `wac_category` VALUES ('19', '18', '0', '8', '15', '3', null, null, '1', null, 'B1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:24', '2011-04-18 11:07:23');
+INSERT INTO `wac_category` VALUES ('16', '7', '0', '4', '9', '3', null, null, '1', null, 'New node', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 08:08:00', '2011-04-01 08:26:57');
+INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '14', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-04-18 11:07:17');
 INSERT INTO `wac_category` VALUES ('20', '0', '0', '1', '4', '0', 'root_18_0', null, '18', 'root_18_0', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 INSERT INTO `wac_category` VALUES ('21', '20', '0', '2', '3', '1', 'branch_18_0', null, '18', 'branch_18_0', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
-INSERT INTO `wac_category` VALUES ('22', '19', '2', '13', '14', '4', null, null, '1', null, '666', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:33', '2011-06-10 06:27:57');
+INSERT INTO `wac_category` VALUES ('23', '16', '0', '7', '8', '4', null, null, '1', null, 'New node9', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 08:08:00', '2011-06-27 07:02:18');
+INSERT INTO `wac_category` VALUES ('26', '18', '0', '10', '11', '3', null, null, '1', null, '1', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-27 08:10:54', '2011-06-27 08:10:54');
+INSERT INTO `wac_category` VALUES ('28', '18', '1', '12', '13', '3', null, null, '1', null, '3', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-27 08:10:40', '2011-06-27 08:10:59');
 
 -- ----------------------------
 -- Table structure for `wac_country`
@@ -499,34 +498,35 @@ CREATE TABLE `wac_file` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_file
 -- ----------------------------
-INSERT INTO `wac_file` VALUES ('1', '0', '0', '1', '32', '0', 'root', '1', 'ROOT', 'ROOT', 'ROOT', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '0000-00-00 00:00:00');
-INSERT INTO `wac_file` VALUES ('2', '1', '0', '2', '17', '1', 'root', '1', null, null, 'A:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-03-04 08:02:04');
-INSERT INTO `wac_file` VALUES ('3', '1', '1', '18', '29', '1', 'root', '1', null, null, 'B:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-03-04 10:28:32');
-INSERT INTO `wac_file` VALUES ('4', '1', '2', '30', '31', '1', 'root', '1', null, null, 'C:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '0000-00-00 00:00:00');
-INSERT INTO `wac_file` VALUES ('50', '53', '3', '30', '31', '3', 'leaf', '1', null, 'p15ru0afqbh8f1mlh1sem1j241rch3.zip', 'aports.zip', '0/a/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-22 07:59:03');
-INSERT INTO `wac_file` VALUES ('53', '3', '0', '19', '28', '2', 'branch', '1', null, null, 'B1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-03-28 10:35:09');
+INSERT INTO `wac_file` VALUES ('1', '0', '0', '1', '34', '0', 'root', '1', 'ROOT', 'ROOT', 'ROOT', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '0000-00-00 00:00:00');
+INSERT INTO `wac_file` VALUES ('2', '1', '0', '2', '17', '1', 'root', '1', null, null, 'A:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-03-04 08:02:04');
+INSERT INTO `wac_file` VALUES ('3', '1', '1', '18', '31', '1', 'root', '1', null, null, 'B:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-03-04 10:28:32');
+INSERT INTO `wac_file` VALUES ('4', '1', '2', '32', '33', '1', 'root', '1', null, null, 'C:', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '0000-00-00 00:00:00');
+INSERT INTO `wac_file` VALUES ('50', '53', '3', '32', '33', '3', 'leaf', '1', null, 'p15ru0afqbh8f1mlh1sem1j241rch3.zip', 'aports.zip', '0/a/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-04-22 07:59:03');
+INSERT INTO `wac_file` VALUES ('53', '3', '0', '19', '30', '2', 'branch', '1', null, null, 'B1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-03-28 10:35:09');
 INSERT INTO `wac_file` VALUES ('56', '0', '0', '1', '10', '0', 'root', '17', 'root_17', 'root_17', 'Root', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-31 04:02:04', '2011-03-31 02:40:57');
 INSERT INTO `wac_file` VALUES ('57', '56', '0', '2', '9', '1', 'branch', '17', 'branch_17_1', 'branch_17_1', 'My Branch 1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-31 04:02:04', '2011-03-31 02:40:57');
 INSERT INTO `wac_file` VALUES ('58', '57', '0', '3', '8', '2', 'branch', '17', null, null, 'My Folder1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-03-31 04:02:04', '2011-03-31 04:02:06');
 INSERT INTO `wac_file` VALUES ('59', '58', '0', '4', '5', '3', 'leaf', '17', null, 'p15s516ttm6gpkdglo1b0nunj3.zip', 'aports.zip', '1/6/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-03-31 04:02:24', '2011-03-31 04:02:24');
 INSERT INTO `wac_file` VALUES ('60', '58', '1', '6', '7', '3', 'leaf', '17', null, 'p15s516ttmfmm1jip11um1ltamk34.zip', 'Bat_To_Exe_Converter.zip', '1/6/', 'application/zip', '102081', null, '0', '0', null, null, '50', '1', '2011-03-31 04:02:28', '2011-03-31 04:02:28');
-INSERT INTO `wac_file` VALUES ('69', '2', '1', '5', '16', '2', 'branch', '1', null, null, 'C1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
+INSERT INTO `wac_file` VALUES ('69', '2', '1', '5', '16', '2', 'branch', '1', null, null, 'C1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('70', '69', '0', '6', '7', '3', 'leaf', '1', null, 'p15t4jdpbecmjh0v12gcm3flt43.zip', 'BcompilerGUI win.zip', 'j/d/', 'application/zip', '89775', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('71', '69', '1', '8', '9', '3', 'leaf', '1', null, 'p15t4jee9n1v8715c61bel1r81orf4.zip', 'BullzipPDFPrinter_7_1_0_1195.zip', 'j/e/', 'application/zip', '1085199', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('72', '69', '2', '10', '11', '3', 'leaf', '1', null, 'p15t4jf0qcku41vr13qavk51k3m5.zip', 'magento99-1.4.2.0.zip', 'j/f/', 'application/zip', '105567', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('73', '69', '3', '12', '13', '3', 'leaf', '1', null, 'p15tcauuaeilu1c1cblf1ep91thi3.zip', 'memcached-1.2.6-win32-bin.zip', 'a/u/', 'application/zip', '9222', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('74', '69', '4', '14', '15', '3', 'leaf', '1', null, 'p15tcauuaejkr3s61cts1rc78054.zip', 'mongo-1.1.0.zip', 'a/u/', 'application/zip', '110292', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:32', '2011-04-18 11:09:56');
 INSERT INTO `wac_file` VALUES ('75', '2', '0', '3', '4', '2', 'leaf', '1', null, 'p15tk4po80vjg1b8ehu114fe1vs73.zip', 'magmi_0.7.8.zip', '4/p/', 'application/zip', '28180', null, '0', '0', null, null, '50', '1', '2011-04-18 11:09:27', '2011-04-18 11:09:51');
-INSERT INTO `wac_file` VALUES ('76', '53', '0', '20', '21', '3', 'leaf', '1', null, 'p15tk4po80co412802dh1hsk1shi4.zip', 'memcached-1.2.6-win32-bin.zip', '4/p/', 'application/zip', '9222', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-18 11:09:30');
-INSERT INTO `wac_file` VALUES ('77', '53', '1', '24', '25', '3', 'leaf', '1', null, 'p15tmmapvh1h11hgof6e127v44i3.zip', 'aports.zip', 'm/a/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-19 10:54:19');
-INSERT INTO `wac_file` VALUES ('78', '53', '2', '24', '29', '3', 'leaf', '1', null, 'p15tmmapvh1eth7kdsvn1k6n1hie4.zip', 'Bat_To_Exe_Converter.zip', 'm/a/', 'application/zip', '102081', null, '0', '0', null, null, '50', '1', '2011-04-22 07:58:39', '2011-04-19 10:54:26');
+INSERT INTO `wac_file` VALUES ('76', '53', '0', '20', '21', '3', 'leaf', '1', null, 'p15tk4po80co412802dh1hsk1shi4.zip', 'memcached-1.2.6-win32-bin.zip', '4/p/', 'application/zip', '9222', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-04-18 11:09:30');
+INSERT INTO `wac_file` VALUES ('77', '53', '1', '24', '25', '3', 'leaf', '1', null, 'p15tmmapvh1h11hgof6e127v44i3.zip', 'aports.zip', 'm/a/', 'application/zip', '118066', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-04-19 10:54:19');
+INSERT INTO `wac_file` VALUES ('78', '53', '2', '24', '31', '3', 'leaf', '1', null, 'p15tmmapvh1eth7kdsvn1k6n1hie4.zip', 'Bat_To_Exe_Converter.zip', 'm/a/', 'application/zip', '102081', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-04-19 10:54:26');
 INSERT INTO `wac_file` VALUES ('79', '0', '0', '1', '4', '0', 'root', '18', 'root_18_0', 'root_18_0', 'Root', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 INSERT INTO `wac_file` VALUES ('80', '79', '0', '2', '3', '1', 'branch', '18', 'branch_18_0', 'branch_18_0', 'My Branch 1', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:08', '2011-06-10 06:27:08');
+INSERT INTO `wac_file` VALUES ('81', '53', '4', '28', '29', '3', 'branch', '1', null, null, 'New node', null, null, '0', null, '0', '0', null, null, '50', '1', '2011-06-27 08:44:14', '2011-06-27 07:40:48');
 
 -- ----------------------------
 -- Table structure for `wac_language`
@@ -622,11 +622,14 @@ CREATE TABLE `wac_material_category` (
   KEY `Index_6` (`code`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_material_category
 -- ----------------------------
+INSERT INTO `wac_material_category` VALUES ('1', '0', '0', '1', '10', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 07:41:58', '0000-00-00 00:00:00');
+INSERT INTO `wac_material_category` VALUES ('2', '1', '0', '2', '9', '1', 'MATERIAL_CATEGORY', null, '1', null, '物料分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 07:41:58', '2011-03-22 03:04:51');
+INSERT INTO `wac_material_category` VALUES ('3', '2', '0', '3', '4', '2', '', null, '1', null, '原材料', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 07:39:22', '2011-06-27 07:39:22');
 
 -- ----------------------------
 -- Table structure for `wac_material_category_link`
@@ -670,6 +673,7 @@ CREATE TABLE `wac_material_delivery_order` (
   `dst_storeroom_id` bigint(20) DEFAULT '0',
   `total_price` decimal(10,0) DEFAULT NULL,
   `biz_date` datetime DEFAULT NULL,
+  `current_state` smallint(6) DEFAULT '0',
   `pr_int1` int(11) DEFAULT '0',
   `pr_int2` int(11) DEFAULT '0',
   `pr_str1` varchar(255) DEFAULT NULL,
@@ -730,6 +734,7 @@ CREATE TABLE `wac_material_purchase_order` (
   `user_id` bigint(20) DEFAULT '0',
   `biz_date` datetime DEFAULT NULL,
   `total_price` decimal(10,0) DEFAULT NULL,
+  `current_state` smallint(6) DEFAULT '0',
   `pr_int1` int(11) DEFAULT '0',
   `pr_int2` int(11) DEFAULT '0',
   `pr_str1` varchar(255) DEFAULT NULL,
@@ -780,39 +785,6 @@ CREATE TABLE `wac_material_purchase_order_item` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `wac_material_sale_order`
--- ----------------------------
-DROP TABLE IF EXISTS `wac_material_sale_order`;
-CREATE TABLE `wac_material_sale_order` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `user_id` bigint(20) DEFAULT '0',
-  `src_storehouse_id` bigint(20) DEFAULT '0',
-  `src_storeroom_id` bigint(20) DEFAULT '0',
-  `customer_id` bigint(20) DEFAULT '0',
-  `total_price` decimal(10,0) DEFAULT NULL,
-  `biz_date` datetime DEFAULT NULL,
-  `pr_int1` int(11) DEFAULT '0',
-  `pr_int2` int(11) DEFAULT '0',
-  `pr_str1` varchar(255) DEFAULT NULL,
-  `pr_str2` varchar(255) DEFAULT NULL,
-  `priority` int(11) DEFAULT '50',
-  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  KEY `Index_1` (`user_id`),
-  KEY `Index_2` (`code`),
-  KEY `Index_3` (`created_at`),
-  KEY `Index_4` (`is_avail`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of wac_material_sale_order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `wac_material_sale_order_item`
 -- ----------------------------
 DROP TABLE IF EXISTS `wac_material_sale_order_item`;
@@ -843,6 +815,40 @@ CREATE TABLE `wac_material_sale_order_item` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `wac_material_sales_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `wac_material_sales_order`;
+CREATE TABLE `wac_material_sales_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT '0',
+  `src_storehouse_id` bigint(20) DEFAULT '0',
+  `src_storeroom_id` bigint(20) DEFAULT '0',
+  `customer_id` bigint(20) DEFAULT '0',
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `biz_date` datetime DEFAULT NULL,
+  `current_state` smallint(6) DEFAULT '0',
+  `pr_int1` int(11) DEFAULT '0',
+  `pr_int2` int(11) DEFAULT '0',
+  `pr_str1` varchar(255) DEFAULT NULL,
+  `pr_str2` varchar(255) DEFAULT NULL,
+  `priority` int(11) DEFAULT '50',
+  `is_avail` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`user_id`),
+  KEY `Index_2` (`code`),
+  KEY `Index_3` (`created_at`),
+  KEY `Index_4` (`is_avail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wac_material_sales_order
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `wac_material_shipping_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `wac_material_shipping_order`;
@@ -858,6 +864,7 @@ CREATE TABLE `wac_material_shipping_order` (
   `shipping_method_id` bigint(20) DEFAULT '0',
   `total_price` decimal(10,0) DEFAULT NULL,
   `biz_date` datetime DEFAULT NULL,
+  `current_state` smallint(6) DEFAULT '0',
   `pr_int1` int(11) DEFAULT '0',
   `pr_int2` int(11) DEFAULT '0',
   `pr_str1` varchar(255) DEFAULT NULL,
@@ -908,10 +915,10 @@ CREATE TABLE `wac_material_shipping_order_item` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `wac_order_state`
+-- Table structure for `wac_order_state_history`
 -- ----------------------------
-DROP TABLE IF EXISTS `wac_order_state`;
-CREATE TABLE `wac_order_state` (
+DROP TABLE IF EXISTS `wac_order_state_history`;
+CREATE TABLE `wac_order_state_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) DEFAULT '0',
   `order_type` smallint(6) DEFAULT '0',
@@ -933,7 +940,7 @@ CREATE TABLE `wac_order_state` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of wac_order_state
+-- Records of wac_order_state_history
 -- ----------------------------
 
 -- ----------------------------

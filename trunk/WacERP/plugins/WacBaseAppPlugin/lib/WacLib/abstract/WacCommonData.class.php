@@ -72,7 +72,7 @@ abstract class WacCommonData
      */
     public function getCaption($key)
     {
-        return $this->getAttribute($key, 'caption');
+        return sfContext::getInstance()->getI18N()->__($this->getAttribute($key, 'caption'));
     }
 
     /*
@@ -88,7 +88,7 @@ abstract class WacCommonData
      */
     public function getCaptionById($id)
     {
-        return $this->getAttributeById($id, 'caption');
+        return sfContext::getInstance()->getI18N()->__($this->getAttributeById($id, 'caption'));
     }
 
     /*

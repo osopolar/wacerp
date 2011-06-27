@@ -58,6 +58,10 @@
         <target>管理</target>
       </trans-unit>
       <trans-unit>
+        <source>Cancel</source>
+        <target>取消</target>
+      </trans-unit>
+      <trans-unit>
         <source>Material Purchase</source>
         <target>物料采购</target>
       </trans-unit>

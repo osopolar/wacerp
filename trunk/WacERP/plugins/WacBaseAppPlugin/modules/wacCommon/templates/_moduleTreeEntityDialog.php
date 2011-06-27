@@ -10,17 +10,17 @@
 
 $moduleName              = $contextInfo['moduleName'];
 $moduleGlobalName        = $moduleName.$invokeParams['attachInfo']['uiid'];
-$componentGlobalName     = WacModuleHelper::getUploadFormId($moduleName, $invokeParams['attachInfo']);
+$componentGlobalName     = WacModuleHelper::getFormDialogId($moduleName, $invokeParams['attachInfo']);
 $componentGlobalId       = "#".$componentGlobalName;
 $componentCaption        = WacModule::getInstance()->getCaption($moduleName);
-$componentFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $invokeParams['attachInfo']);
-$componentFormName       = WacModuleHelper::getFormId($moduleName, $invokeParams['attachInfo']);
+$componentFormName       = WacModuleHelper::getFormId($componentGlobalName, $invokeParams['attachInfo']);
+$componentFormId         = "#".$componentFormName;
 $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invokeParams['config']['isHidden']) ? "display: none;" : "display: inline;";
 //print_r($contextInfo);
 ?>
 
-<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentFormName, true); ?>
-<div id="<?php echo $componentFormDialogName; ?>" style="<?php echo $cfgDialogDisplay; ?>" class="ui-widget" >
+<?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
+<div id="<?php echo $componentGlobalName; ?>" style="<?php echo $cfgDialogDisplay; ?>" class="ui-widget" >
     <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="" class="wacFormA">
         <div class="wacFormFirstCol">
             <div class="wacFormContentA">
@@ -58,62 +58,120 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
 <script type="text/javascript">
     //<![CDATA[
-    $("#<?php echo $componentFormDialogName; ?>").ready(function(){
-        var wacImagesPath       = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+    /*****  Component, by Ben Bi <prince.bi@gmail.com>  created at: 12/23/2009 4:10:45 PM  *****/
 
-        var moduleName          = <?php echo "'{$moduleName}'" ?>;
-        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
-        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
-        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
-        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
-        var componentFormDialogId  = '#' + <?php echo "'{$componentFormDialogName}'" ?>;
-        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
+    /***** init section, begin *****/
+    $("<?php echo $componentGlobalId; ?>").ready(function(){
+        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+    });
 
+    function <?php echo ucfirst($componentGlobalName); ?>(){
+        var _self           = this;
+        this.prototype      = new WacBasicFormPrototype();  // extends WacFormPrototype
+        this.prototype.constructor = this;
 
-        function init(){
-            initDialog();
-            bindEvents();
-        };  // init end
+        this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
+        this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
+        this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.uiPanelId         = WacEntity.module.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
 
-        function initDialog(){
+        // layout order, div > dialog > form
+        this.formDialogName = "<?php echo $componentGlobalName; ?>";
+        this.formDialogId   = "<?php echo $componentGlobalId; ?>";
+        this.formName       = "<?php echo $componentFormName; ?>";
+        this.formId         = "<?php echo $componentFormId; ?>";
+
+        this.modelEntity    = {};  // map to current data model entity
+        this.inputMode      = WacEntity.formInputMode.add;
+
+        this.init = function(){
+            _self.prototype.init(_self);
+        };
+
+        this.initLayout = function(){
+            _self.prototype.initLayout(_self);
+
             $(componentFormDialogId).dialog({
                 bgiframe: true,
                 modal: true,
-                width: 560,
-                height: 400,
+                width: 460,
+                height: 250,
                 autoOpen: false,
                 buttons: {},
                 zIndex: 100
             });
         };
 
-        function bindEvents()
-        {
+        this.initForm = function(){
+            _self.prototype.initForm(_self);
+        };
+
+        this.bindEvents = function(){
+            _self.prototype.bindEvents(_self);
+
             $(document).hear(componentFormDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
                 Wac.log("componentFormDialogId");
                 Wac.log(data);
                 $(componentFormDialogId).dialog('open');
             });
 
-            $( componentFormDialogId).bind( "dialogclose", function(event, ui) {
-                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
-            });
+//            $( componentFormDialogId).bind( "dialogclose", function(event, ui) {
+//                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
+//            });
+        };
 
-            // fix dialog div didnt remove bug, remove it by this way
-            var uiPanelId = WacEntity.module.getUiPanelId(moduleName);
-            $("#wacAppSystemController").unbind('tabsremove');
-            $("#wacAppSystemController").bind('tabsremove', function(event, ui) {
-//               Wac.log("ui.panel.id:" + ui.panel.id + " : " + uiPanelId);
-                if(ui.panel.id == uiPanelId)
+        this.initFormData = function(){
+            _self.prototype.initFormData(_self);
+        };
+
+        this.initFormDataCallBack = function(jsonData){
+            if(jsonData.info.status == WacEntity.operationStatus.Error)
+            {
+                Wac.log(jsonData.info.message);
+            }
+            else
+            {
+                $('#sf_guard_user_group_list_' + _self.componentGlobalName).empty();
+
+                for(i=0;i<jsonData['items']['group'].length;i++)
                 {
-                    $(componentFormDialogId).remove();  //remove dialog form
+                    $('<option value="' + jsonData['items']['group'][i].key +'">' + jsonData['items']['group'][i].value +'</option>').appendTo('#sf_guard_user_group_list_' + _self.componentGlobalName);
                 }
-            });
-        };  //bindEvnts end
 
-        init();
+                for(i=0;i<jsonData['items']['user_group'].length;i++)
+                {
+                    $('#sf_guard_user_group_list_' + _self.componentGlobalName + " option[value='"+jsonData['items']['user_group'][i]+"']").attr("selected", true);
+                }
+            }
 
-    })
+            _self.prototype.initFormDataCallBack(_self, jsonData);
+
+            //   Wac.log($(document).wacTool().dumpObj(jsonData));
+        };
+
+        this.setupDefaults = function(defaultValueObj){
+//            if(_self.inputMode == WacEntity.formInputMode.add)   // use default values
+//            {
+//                $("#id_" + _self.componentGlobalName).attr("value", 0);
+//            }
+//            else  // use edit obj values
+//            {
+//                $("#id_" + _self.componentGlobalName).attr("value", _self.modelEntity.id);
+//                $("#username_" + _self.componentGlobalName).attr("value", _self.modelEntity.username);
+//                $("#password_" + _self.componentGlobalName).attr("value", "000000");
+//                $("#password_confirm_" + _self.componentGlobalName).attr("value", "000000");
+//                $("#is_active_" + _self.componentGlobalName).attr("checked", (_self.modelEntity.is_active=='true'));
+//                //            Wac.log(_self.modelEntity);
+//            }
+//
+//            _self.prototype.setupDefaults(_self, defaultValueObj);
+        };
+
+        this.init();  // init method
+
+    }
     //]]>
 </script>
 

@@ -46,6 +46,12 @@ class WacComponentList
     //// module tree
     public static $moduleTree                 = "moduleTree";
 
+    //// module tree
+    public static $moduleDialogTree           = "moduleDialogTree";
+
+    //// module tree
+    public static $moduleTreeEntityDialog     = "moduleTreeEntityDialog";
+
     //// module upload form
     public static $moduleUploadForm           = "moduleUploadForm";
 

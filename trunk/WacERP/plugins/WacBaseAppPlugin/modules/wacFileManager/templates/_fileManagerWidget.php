@@ -24,7 +24,7 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTree, $enableWidgets)
 }
 
 if (WacWidgetHelper::enableWidget(WacComponentList::$moduleUploadForm, $enableWidgets)) {
-    include_component(WacModule::getInstance()->getName("wacFileManager"), WacComponentList::$moduleUploadForm,
+    include_component($contextInfo['moduleName'], WacComponentList::$moduleUploadForm,
             array(
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,

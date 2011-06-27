@@ -281,6 +281,22 @@
         <source>Culture</source>
         <target>区域语言</target>
       </trans-unit>
+      <trans-unit>
+        <source>Business Date</source>
+        <target>业务日期</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Business</source>
+        <target>业务</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Material</source>
+        <target>物料</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Category</source>
+        <target>分类</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
