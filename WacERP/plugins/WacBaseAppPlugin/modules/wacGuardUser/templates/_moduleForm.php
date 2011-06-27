@@ -7,79 +7,79 @@ $componentFormName    = WacModuleHelper::getFormId($componentGlobalName, $invoke
 $componentFormId      = "#".$componentFormName;
 $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $invokeParams['attachInfo']);
 ?>
-
+    
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
-<div id="<?php echo $componentGlobalName;?>" title="<?php echo WacModule::getInstance()->getCaption($moduleName);?>" class="ui-widget" style="display: none" >
-<form name="<?php echo $componentFormName;?>" id="<?php echo $componentFormName;?>" method="post" action="" class="wacFormA">
-    <div class="wacFormFirstCol">
-        <div class="wacFormContentA">
-            <div class="wacFormRow">
-                <div class="wacFormItemLeft "><?php echo __("User Name");?></div>
-                <div class="wacFormItemRight">
-                    <input name="username" id="username_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+<div id="<?php echo $componentGlobalName; ?>" title="<?php echo WacModule::getInstance()->getCaption($moduleName); ?>" class="ui-widget" style="display: none" >
+    <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="" class="wacFormA">
+        <div class="wacFormFirstCol">
+            <div class="wacFormContentA">
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft "><?php echo __("User Name"); ?></div>
+                    <div class="wacFormItemRight">
+                        <input name="username" id="username_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
                 </div>
-                <div class="wacFormClear"></div>
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft"><?php echo __("Password"); ?></div>
+                    <div class="wacFormItemRight">
+                        <input name="password" id="password_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft"><?php echo __("Password") . __("Confirm"); ?></div>
+                    <div class="wacFormItemRight">
+                        <input name="password_confirm" id="password_confirm_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft">
+                        <label for="is_active_<?php echo $componentGlobalName; ?>"><?php echo __("Status Active"); ?></label>
+                    </div>
+                    <div class="wacFormItemRight">
+                        <input name="is_active" id="is_active_<?php echo $componentGlobalName; ?>" checked="true" value="1" type="checkbox" class="ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
             </div>
-            <div class="wacFormRow">
-                <div class="wacFormItemLeft"><?php echo __("Password");?></div>
-                <div class="wacFormItemRight">
-                    <input name="password" id="password_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
-                </div>
-                <div class="wacFormClear"></div>
-            </div>
-            <div class="wacFormRow">
-                <div class="wacFormItemLeft"><?php echo __("Password").__("Confirm");?></div>
-                <div class="wacFormItemRight">
-                    <input name="password_confirm" id="password_confirm_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
-                </div>
-                <div class="wacFormClear"></div>
-            </div>
-            <div class="wacFormRow">
-                <div class="wacFormItemLeft">
-                    <label for="is_active_<?php echo $componentGlobalName; ?>"><?php echo __("Status Active");?></label>
-                </div>
-                <div class="wacFormItemRight">
-                    <input name="is_active" id="is_active_<?php echo $componentGlobalName; ?>" checked="true" value="1" type="checkbox" class="ui-widget-content ui-corner-all" />
-                </div>
-                <div class="wacFormClear"></div>
-            </div>
-        </div>
-        
-        
-    </div>
-    <div class="wacFormSecondCol">
-        <div class="wacFormContentA">
-            <div class="wacFormRow">
-                <div class="wacFormItemLeft">
-                    <label for="sf_guard_user_group_list_<?php echo $componentGlobalName ?>">
-                        <?php echo __("User Group");?>
-                    </label>
-                    <br/>(<?php echo __("Press Ctrl to mutiple select items");?>)
-                </div>
-                <div class="wacFormItemRight">
-                   <select name="user_group_list[]" multiple="multiple" id="sf_guard_user_group_list_<?php echo $componentGlobalName ?>" style="width: 195px; height: 300px" class="ui-widget-content ui-corner-all">
-                   </select>
-                </div>
-                <div class="wacFormClear"></div>
-            </div>
+
 
         </div>
-        
-    </div>
-    <div class="wacFormClear"></div>
-    <div class="wacFormBottom" align="center">
+        <div class="wacFormSecondCol">
+            <div class="wacFormContentA">
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft">
+                        <label for="sf_guard_user_group_list_<?php echo $componentGlobalName ?>">
+                            <?php echo __("User Group"); ?>
+                        </label>
+                        <br/>(<?php echo __("Press Ctrl to mutiple select items"); ?>)
+                    </div>
+                    <div class="wacFormItemRight">
+                        <select name="user_group_list[]" multiple="multiple" id="sf_guard_user_group_list_<?php echo $componentGlobalName ?>" style="width: 195px; height: 300px" class="ui-widget-content ui-corner-all">
+                        </select>
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
 
-        <hr class="wacFormRuler" style="width:700px; float:inherit;" />
+            </div>
 
-   <div class="wacFormClear"></div>
-   <br/>
-   <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save");?>"/>
-      &nbsp;&nbsp;
-      <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Close");?>"/>
-    </div>
+        </div>
+        <div class="wacFormClear"></div>
+        <div class="wacFormBottom" align="center">
 
-    <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0">
-</form>
+            <hr class="wacFormRuler" style="width:700px; float:inherit;" />
+
+            <div class="wacFormClear"></div>
+            <br/>
+            <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+            &nbsp;&nbsp;
+            <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Close"); ?>"/>
+        </div>
+
+        <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0"/>
+    </form>
 </div>
 
 <script type="text/javascript">

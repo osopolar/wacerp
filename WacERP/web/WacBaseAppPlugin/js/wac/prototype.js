@@ -55,7 +55,7 @@ function WacFormPrototype()
             $(children.formDialogId).dialog('close');
         });
 
-        // fix dialog div didnt remove bug, remove it by this way
+        // fix dialog div cannot be removed from tabs compoonent bug, remove it by this way
 //        $(children.appControllerId).unbind('tabsremove');
         $(children.appControllerId).bind('tabsremove', function(event, ui) {
 //            Wac.log("ui.panel.id:" + ui.panel.id + ":" + children.uiPanelId);
@@ -219,6 +219,52 @@ function WacFormPrototype()
         }
 
         $(document).wacPage().hideBlockUI(children.formDialogId);
+    };
+}
+
+/*
+ *  declare a panel-prototype model class
+ */
+function WacBasicFormPrototype()
+{
+    var _self = this;
+
+    var debug = true;
+//    var debug = false;
+
+    var pagerInfo = {currentPage: 1, totalPages:1, totalRecords:0};
+
+    this.init = function(children){
+        children.initLayout();
+        children.initData();
+        children.bindEvents();
+    };
+
+    this.bindEvents = function(children){
+        Wac.log("WacBasicFormPrototype bindEvents", debug);
+
+        // fix dialog div didnt remove bug, remove it by this way
+        var uiPanelId = WacEntity.module.getUiPanelId(children.moduleName);
+        $(children.appControllerId).unbind('tabsremove');
+        $(children.appControllerId).bind('tabsremove', function(event, ui) {
+            //               Wac.log("ui.panel.id:" + ui.panel.id + " : " + uiPanelId);
+            if(ui.panel.id == uiPanelId)
+            {
+                $(children.formDialogId).remove();  //remove dialog form
+            }
+        });
+    };
+
+    this.initLayout = function(children){
+        Wac.log("WacBasicFormPrototype initLayout", debug);
+    };
+
+    this.initData = function(children){
+        Wac.log("WacBasicFormPrototype initData", debug);
+    };
+
+    this.setupDefaults = function(children, defaultValueObj){
+        Wac.log("WacBasicFormPrototype setupDefaults", debug);
     };
 }
 

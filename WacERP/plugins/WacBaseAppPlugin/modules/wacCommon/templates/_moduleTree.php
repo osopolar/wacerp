@@ -33,11 +33,12 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
         var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
         var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
 
-
-        init();
-        bindEvents();
-
         function init(){
+            initTree();
+            bindEvents();
+        };  // init end
+
+        function initTree(){
             $(componentGlobalId)
             .jstree({ 
                 // the list of plugins to include
@@ -288,6 +289,8 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
         };  // init end
          
         function bindEvents(){};  //bindEvnts end
+
+        init();
 
     })
     //]]>

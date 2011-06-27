@@ -21,16 +21,16 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                 <div class="wacFormClear"></div>
             </div>
             <div class="wacFormRow">
-                <div class="wacFormItemLeft"><?php echo __("Password");?></div>
+                <div class="wacFormItemLeft"><?php echo __("Code");?></div>
                 <div class="wacFormItemRight">
-                    <input name="password" id="password_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    <input name="code" id="code_<?php echo $componentGlobalName; ?>" maxlength="20" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
                 </div>
                 <div class="wacFormClear"></div>
             </div>
             <div class="wacFormRow">
-                <div class="wacFormItemLeft"><?php echo __("Password").__("Confirm");?></div>
+                <div class="wacFormItemLeft"><?php echo __("Business Date");?></div>
                 <div class="wacFormItemRight">
-                    <input name="password_confirm" id="password_confirm_<?php echo $componentGlobalName; ?>" maxlength="20" type="password" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    <input name="biz_date" id="biz_date_<?php echo $componentGlobalName; ?>" maxlength="20" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
                 </div>
                 <div class="wacFormClear"></div>
             </div>
@@ -140,17 +140,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             }
             else
             {
-                $('#sf_guard_user_group_list_' + _self.componentGlobalName).empty();
-
-                for(i=0;i<jsonData['items']['group'].length;i++)
-                {
-                    $('<option value="' + jsonData['items']['group'][i].key +'">' + jsonData['items']['group'][i].value +'</option>').appendTo('#sf_guard_user_group_list_' + _self.componentGlobalName);
-                }
-
-                for(i=0;i<jsonData['items']['user_group'].length;i++)
-                {
-                    $('#sf_guard_user_group_list_' + _self.componentGlobalName + " option[value='"+jsonData['items']['user_group'][i]+"']").attr("selected", true);
-                }
+                
             }
 
             _self.prototype.initFormDataCallBack(_self, jsonData);

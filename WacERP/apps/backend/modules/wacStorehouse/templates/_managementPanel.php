@@ -9,14 +9,16 @@ $componentGlobalId    = "#".$componentGlobalName;
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
 
 <div id="<?php echo $componentGlobalName;?>" class="wacNavPanel">
-    <h3><?php echo __("Management");?></h3>
+    <h3><?php echo __("Business").__("Management");?></h3>
     <div id="content_<?php echo $componentGlobalName;?>">
         <ul id="list_<?php echo $componentGlobalName; ?>" class="wacTableField">
-            <li class="wacCursor" id="mp_<?php echo $componentGlobalName; ?>"><?php echo __("Material Purchase");?></li>
-            <li></li>
-            <li></li>
+            <li class="wacCursor" id="mc_<?php echo $componentGlobalName; ?>">
+            <?php echo __("Material").__("Category");?>
+            </li>
+            <li class="wacCursor" id="mp_<?php echo $componentGlobalName; ?>">
+            <?php echo __("Material Purchase");?>
+            </li>
         </ul>
-        <div class="wacFormClear"></div>
     </div>
 </div>
 
@@ -56,6 +58,9 @@ $componentGlobalId    = "#".$componentGlobalName;
                 $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
             });
 
+            $("#mc_" + _self.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
+            });
         };
 
         this.init();  // init method

@@ -10,14 +10,7 @@
  * @author     ben
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
-abstract class WacTreeActions extends WacCommonActions {
-
-    /*
-     * a switch setting, if some module not allow, override this and return false;
-     */
-    public function allowSetupMainModuleTable(){
-        return true;
-    }
+abstract class WacTreeActions extends WacModuleAction {
 
     /*
      * _getChildren

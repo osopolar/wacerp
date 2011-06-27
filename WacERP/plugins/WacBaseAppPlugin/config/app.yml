@@ -31,8 +31,10 @@ all:
     data_saved: _data_saved
     data_deleted: _data_deleted
     data_changed: _data_changed
+    action_canceled: _action_canceled
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form
     show_file_upload_form: _show_file_upload_form
+    show_tree_entity_dialog: _show_tree_entity_dialog
     file_upload_complete: _file_upload_complete_evt
 
