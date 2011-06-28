@@ -93,7 +93,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
         this.initLayout = function(){
             _self.prototype.initLayout(_self);
 
-            $(componentFormDialogId).dialog({
+            $(_self.formDialogId).dialog({
                 bgiframe: true,
                 modal: true,
                 width: 460,
@@ -111,13 +111,11 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
         this.bindEvents = function(){
             _self.prototype.bindEvents(_self);
 
-            $(document).hear(componentFormDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
-                Wac.log("componentFormDialogId");
-                Wac.log(data);
-                $(componentFormDialogId).dialog('open');
+            $(document).hear(_self.formDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+                $(_self.formDialogId).dialog('open');
             });
 
-//            $( componentFormDialogId).bind( "dialogclose", function(event, ui) {
+//            $( _self.formDialogId).bind( "dialogclose", function(event, ui) {
 //                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
 //            });
         };
@@ -133,17 +131,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
             }
             else
             {
-                $('#sf_guard_user_group_list_' + _self.componentGlobalName).empty();
-
-                for(i=0;i<jsonData['items']['group'].length;i++)
-                {
-                    $('<option value="' + jsonData['items']['group'][i].key +'">' + jsonData['items']['group'][i].value +'</option>').appendTo('#sf_guard_user_group_list_' + _self.componentGlobalName);
-                }
-
-                for(i=0;i<jsonData['items']['user_group'].length;i++)
-                {
-                    $('#sf_guard_user_group_list_' + _self.componentGlobalName + " option[value='"+jsonData['items']['user_group'][i]+"']").attr("selected", true);
-                }
+                ;
             }
 
             _self.prototype.initFormDataCallBack(_self, jsonData);
