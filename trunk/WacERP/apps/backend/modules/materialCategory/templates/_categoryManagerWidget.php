@@ -10,7 +10,7 @@ $widgetName = WacWidgetHelper::getInstance()->getWidgetName(__FILE__, $contextIn
 
 OutputHelper::getInstance()->writeNote("{$widgetName}, begin");
 echo "<div id=\"{$widgetName}\">\n\n";
-if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTree, $enableWidgets)) {
+if (WacWidgetHelper::enableWidget(WacComponentList::$moduleDialogTree, $enableWidgets)) {
     include_component($contextInfo["moduleName"], WacComponentList::$moduleDialogTree,
             array(
                 'invokeParams' => array(

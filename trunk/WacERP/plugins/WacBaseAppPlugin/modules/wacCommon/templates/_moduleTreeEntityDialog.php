@@ -111,12 +111,13 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
         this.bindEvents = function(){
             _self.prototype.bindEvents(_self);
 
-            $(document).hear(_self.formDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(_self.formDialogId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+                Wac.log("app_wac_events_show_tree_entity_dialog");
                 $(_self.formDialogId).dialog('open');
             });
 
 //            $( _self.formDialogId).bind( "dialogclose", function(event, ui) {
-//                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
+//                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
 //            });
         };
 

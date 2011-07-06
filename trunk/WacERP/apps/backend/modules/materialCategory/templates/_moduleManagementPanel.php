@@ -16,7 +16,8 @@ $componentGlobalId    = "#".$componentGlobalName;
                     array(
                         'method' => WacWidgetHelper::$methodComponent,
                         'enableWidgets' => array(// enable sub widgets
-                            WacComponentList::$moduleTree
+                            WacComponentList::$moduleDialogTree,
+                            WacComponentList::$moduleTreeEntityDialog
                         )
                     )
             );
