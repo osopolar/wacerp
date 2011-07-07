@@ -266,6 +266,23 @@ function WacBasicFormPrototype()
     this.setupDefaults = function(children, defaultValueObj){
         Wac.log("WacBasicFormPrototype setupDefaults", debug);
     };
+
+    this.initDataCallBack = function(children, jsonData){
+        Wac.log("WacBasicFormPrototype initDataCallBack", debug);
+        children.setupDefaults(jsonData['items']['default']);
+        $(document).wacPage().hideBlockUI(children.formDialogId);
+    };
+
+    this.validateMainForm = function(children){
+        Wac.log("WacFormPrototype validateMainForm", debug);
+
+        var validateFlag = true;
+        if (!$(children.componentGlobalId).validationEngine({returnIsValid:true}))
+        {
+            validateFlag = false;
+        }
+        return validateFlag;
+    };
 }
 
 /*

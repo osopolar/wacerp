@@ -77,6 +77,10 @@
         <source>Material Sales</source>
         <target>物料销售</target>
       </trans-unit>
+      <trans-unit>
+        <source>Material Category Definition</source>
+        <target>物料分类定义</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

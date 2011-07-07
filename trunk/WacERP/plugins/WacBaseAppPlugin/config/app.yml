@@ -29,8 +29,12 @@ all:
     data_export: _data_export
     data_print: _data_print
     data_saved: _data_saved
+    data_save: _data_save
+    data_delete: _data_delete
     data_deleted: _data_deleted
+    data_change: _data_change
     data_changed: _data_changed
+    action_cancel: _action_cancel
     action_canceled: _action_canceled
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form

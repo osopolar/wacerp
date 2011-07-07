@@ -148,14 +148,14 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             "icon" : wacImagesPath + "js_icons/branch.png",
                             "separator_before"  : false,
 			    "separator_after"   : true,
-                            "label"             : "<?php echo __("Create Folder");?>",
+                            "label"             : "<?php echo __("Create").__($invokeParams['config']["label_branch"]);?>",
                             "action"            : function (obj) {
                                                       this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeBranch; ?>" } });
                                                    }
                         },
                         "create" : {
                             "icon" : wacImagesPath + "js_icons/file.png",
-                            "label" : "<?php echo __("Create File");?>",
+                            "label" : "<?php echo __("Create").__($invokeParams['config']["label_node"]);?>",
                             "action" : function (obj) {
 //                                Wac.log($(obj).attr("rel"));
                                 $.vakata.context.hide();
@@ -167,9 +167,6 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                                     $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
                                 }
                             }
-//                            "action"            : function (obj) {
-//                                                      this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>" } });
-//                                                   }
                         },
                         "rename" : {
                             "icon" : wacImagesPath + "js_icons/edit.png",

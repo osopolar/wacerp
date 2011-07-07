@@ -15,7 +15,11 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleDialogTree, $enableWi
             array(
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
-                    'attachInfo' => $attachInfo
+                    'attachInfo' => $attachInfo,
+                    'config'      => array(
+                        "label_branch" => "Branch",
+                        "label_node"   => "Node"
+                    )
             ))
     );
 }
@@ -27,7 +31,8 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTreeEntityDialog, $en
                     'contextInfo' => $contextInfo,
                     'attachInfo'  => $attachInfo,
                     'config'      => array(
-                        "isHidden" => true
+                        "isHidden" => true,
+                        "title"   => "Material Category Definition"
                     )
                 )
     ));
