@@ -238,6 +238,10 @@
         <target>创建文件</target>
       </trans-unit>
       <trans-unit>
+        <source>Create</source>
+        <target>创建</target>
+      </trans-unit>
+      <trans-unit>
         <source>Rename</source>
         <target>重命名</target>
       </trans-unit>
@@ -296,6 +300,14 @@
       <trans-unit>
         <source>Category</source>
         <target>分类</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Branch</source>
+        <target>分支</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Node</source>
+        <target>节点</target>
       </trans-unit>
     </body>
   </file>
