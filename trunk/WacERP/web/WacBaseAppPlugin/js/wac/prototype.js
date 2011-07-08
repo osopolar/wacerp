@@ -228,7 +228,6 @@ function WacFormPrototype()
 function WacBasicFormPrototype()
 {
     var _self = this;
-
     var debug = true;
 //    var debug = false;
 
@@ -274,7 +273,7 @@ function WacBasicFormPrototype()
     };
 
     this.validateMainForm = function(children){
-        Wac.log("WacFormPrototype validateMainForm", debug);
+        Wac.log("WacBasicFormPrototype validateMainForm", debug);
 
         var validateFlag = true;
         if (!$(children.componentGlobalId).validationEngine({returnIsValid:true}))

@@ -28,8 +28,8 @@ all:
     search_in_list: _search_in_list_evt
     data_export: _data_export
     data_print: _data_print
-    data_saved: _data_saved
     data_save: _data_save
+    data_saved: _data_saved
     data_delete: _data_delete
     data_deleted: _data_deleted
     data_change: _data_change

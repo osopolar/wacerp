@@ -117,6 +117,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
             });
 
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+                _self.modelEntity = data;
                 $(_self.componentGlobalId).dialog('open');
             });
 
@@ -130,15 +131,16 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
         };
 
         this.saveForm = function(){
-            if(!_self.prototype.validateMainForm()){
+            if(!_self.prototype.validateMainForm(_self)){
                 return;
             }
             
             var params = {
-                "code":$("#code_" + _self.componentGlobalName).val(),
-                "name":$("#name_" + _self.componentGlobalName).val()
+                code:$("#code_" + _self.componentGlobalName).val(),
+                name:$("#name_" + _self.componentGlobalName).val()
             };
-            $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, params);
+            $.extend(_self.modelEntity, params);
+            $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, _self.modelEntity);
 //                       $.tree.focused().create(newNode, currentTree.selected);
 
         };
