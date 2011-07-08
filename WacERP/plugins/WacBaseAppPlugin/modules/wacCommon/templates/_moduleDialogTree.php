@@ -25,22 +25,30 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
 <script type="text/javascript">
     //<![CDATA[
     $("<?php echo $componentGlobalId; ?>").ready(function(){
-        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+    });
+    
+    function <?php echo ucfirst($componentGlobalName); ?>(){
+        var _self              = this;
+        
+        this.wacImagesPath     = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
-        var moduleName          = <?php echo "'{$moduleName}'" ?>;
-        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
-        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
-        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
-        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
-        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
+        this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
+        this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
+        this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.moduleUrl         = WacAppConfig.baseUrl + _self.moduleName + "/";
+        this.uiPanelId         = WacEntity.module.getUiPanelId(_self.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
+        this.componentCaption  = <?php echo "'{$componentCaption}'" ?>;
 
-        function init(){
-            initTree();
-            bindEvents();
+        this.init = function(){
+            _self.initTree();
+            _self.bindEvents();
         };
 
-        function initTree(){
-            $(componentGlobalId)
+        this.initTree = function(){
+            $(_self.componentGlobalId)
             .jstree({ 
                 // the list of plugins to include
                 "plugins" : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
@@ -52,7 +60,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                     // All the options are the same as jQuery's except for `data` which CAN (not should) be a function
                     "ajax" : {
                         // the URL to fetch the data
-                        "url" : moduleUrl + "getChildren",
+                        "url" : _self.moduleUrl + "getChildren",
                         // this function is executed in the instance's scope (this refers to the tree instance)
                         // the parameter is the node being loaded (may be -1, 0, or undefined when loading the root nodes)
                         "data" : function (n) { 
@@ -69,7 +77,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                     // As this has been a common question - async search
                     // Same as above - the `ajax` config option is actually jQuery's object (only `data` can be a function)
                     "ajax" : {
-                        "url" : moduleUrl + "search",
+                        "url" : _self.moduleUrl + "search",
                         // You get the search string as a parameter
                         "data" : function (str) {
                             return { 
@@ -97,7 +105,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             "valid_children" : "none",
                             // If we specify an icon for the leaf type it WILL OVERRIDE the theme icons
                             "icon" : {
-                                "image" : wacImagesPath + "js_icons/leaf.png"
+                                "image" : _self.wacImagesPath + "js_icons/leaf.png"
                             }
                         },
                         "leaf" : {
@@ -106,7 +114,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             "valid_children" : "none",
                             // If we specify an icon for the leaf type it WILL OVERRIDE the theme icons
                             "icon" : {
-                                "image" : wacImagesPath + "js_icons/leaf.png"
+                                "image" : _self.wacImagesPath + "js_icons/leaf.png"
                             }
                         },
                         // The `folder` type
@@ -114,7 +122,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             // can have files and other folders inside of it, but NOT `drive` nodes
                             "valid_children" : [ "default", "branch", "leaf" ],
                             "icon" : {
-                                "image" : wacImagesPath + "js_icons/branch.png"
+                                "image" : _self.wacImagesPath + "js_icons/branch.png"
                             }
                         },
                         // The `drive` nodes 
@@ -122,7 +130,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             // can have files and folders inside, but NOT other `drive` nodes
                             "valid_children" : [ "default","root", "branch", "leaf" ],
                             "icon" : {
-                                "image" : wacImagesPath + "js_icons/root.png"
+                                "image" : _self.wacImagesPath + "js_icons/root.png"
                             },
                             // those options prevent the functions with the same name to be used on the `drive` type nodes
                             // internally the `before` event is used
@@ -145,7 +153,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                 "contextmenu": {
                     items : { // Could be a function that should return an object like this one
                         "create_branch" : {
-                            "icon" : wacImagesPath + "js_icons/branch.png",
+                            "icon" : _self.wacImagesPath + "js_icons/branch.png",
                             "separator_before"  : false,
 			    "separator_after"   : true,
                             "label"             : "<?php echo __("Create").__($invokeParams['config']["label_branch"]);?>",
@@ -154,7 +162,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                                                    }
                         },
                         "create" : {
-                            "icon" : wacImagesPath + "js_icons/file.png",
+                            "icon" : _self.wacImagesPath + "js_icons/file.png",
                             "label" : "<?php echo __("Create").__($invokeParams['config']["label_node"]);?>",
                             "action" : function (obj) {
 //                                Wac.log($(obj).attr("rel"));
@@ -164,37 +172,37 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                                         "id" : obj.attr("id").replace("node_",""),
                                         "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
                                     }
-                                    $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
+                                    $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
                                 }
                             }
                         },
                         "rename" : {
-                            "icon" : wacImagesPath + "js_icons/edit.png",
+                            "icon" : _self.wacImagesPath + "js_icons/edit.png",
                             "label" : "<?php echo __("Rename");?>"
                         },
                         "remove" : {
-                            "icon" : wacImagesPath + "js_icons/delete.png",
+                            "icon" : _self.wacImagesPath + "js_icons/delete.png",
                             "label" : "<?php echo __("Delete");?>"
                         },
                         "ccp" : {
-                            "icon" : wacImagesPath + "js_icons/They-reply-technosorcery-icon.png",
+                            "icon" : _self.wacImagesPath + "js_icons/They-reply-technosorcery-icon.png",
                             "separator_after" : false,
                             "label" : "<?php echo __("Edit");?>",
                             "submenu" : {
                                 "cut" : {
-                                    "icon" : wacImagesPath + "js_icons/cut.png",
+                                    "icon" : _self.wacImagesPath + "js_icons/cut.png",
                                     "separator_before"	: false,
                                     "separator_after"	: false,
                                     "label"             : "<?php echo __("Cut");?>"
                                 },
                                 "copy" : {
-                                    "icon" : wacImagesPath + "js_icons/copy.png",
+                                    "icon" : _self.wacImagesPath + "js_icons/copy.png",
                                     "separator_before"	: false,
                                     "separator_after"	: false,
                                     "label"             : "<?php echo __("Copy");?>"
                                 },
                                 "paste" : {
-                                    "icon" : wacImagesPath + "js_icons/paste.png",
+                                    "icon" : _self.wacImagesPath + "js_icons/paste.png",
                                     "separator_before"	: false,
                                     "separator_after"	: false,
                                     "label"             : "<?php echo __("Paste");?>"
@@ -212,24 +220,38 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                 }
             })
             .bind("create.jstree", function (e, data) {
-                $.post(
-                moduleUrl + "createNode",
-                {
-                    "dataFormat" : "json",
-                    "id" : data.rslt.parent.attr("id").replace("node_",""),
-                    "position" : data.rslt.position,
-                    "caption" : data.rslt.name,
-                    "type" : data.rslt.obj.attr("rel")
-                },
-                function (r) {
-                    if(r.status) {
-                        $(data.rslt.obj).attr("id", "node_" + r.id);
-                    }
-                    else {
-                        $.jstree.rollback(data.rlbk);
-                    }
-                }
-            );
+                Wac.log("create.jstree");
+                Wac.log(data.rslt.obj.attr("entity"));
+//                var entity = data.rslt.obj.attr("entity");
+//                Wac.log(entity);
+
+//                Wac.log({
+//                        "dataFormat" : "json",
+//                        "id" : data.rslt.parent.attr("id").replace("node_",""),
+//                        "position" : data.rslt.position,
+//                        "caption" : data.rslt.name,
+//                        "type" : data.rslt.obj.attr("rel"),
+//                        "entity" : data.rslt.obj.attr("entity")
+//                    });
+
+//                $.post(
+//                    _self.moduleUrl + "createNode",
+//                    {
+//                        "dataFormat" : "json",
+//                        "id" : data.rslt.parent.attr("id").replace("node_",""),
+//                        "position" : data.rslt.position,
+//                        "caption" : data.rslt.name,
+//                        "type" : data.rslt.obj.attr("rel")
+//                    },
+//                    function (r) {
+//                        if(r.status) {
+//                            $(data.rslt.obj).attr("id", "node_" + r.id);
+//                        }
+//                        else {
+//                            $.jstree.rollback(data.rlbk);
+//                        }
+//                    }
+//                );
             })
             .bind("remove.jstree", function (e, data) {
                 if(data.rslt.parent == -1){
@@ -242,7 +264,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                         $.ajax({
                             async : false,
                             type: 'POST',
-                            url: moduleUrl + "removeNode",
+                            url: _self.moduleUrl + "removeNode",
                             data : {
                                 "dataFormat" : "json",
                                 "id" : this.id.replace("node_","")
@@ -258,7 +280,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
             })
             .bind("rename.jstree", function (e, data) {
                 $.post(
-                moduleUrl + "editNode",
+                _self.moduleUrl + "editNode",
                 {
                     "dataFormat" : "json",
                     "id" : data.rslt.obj.attr("id").replace("node_",""),
@@ -276,7 +298,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                     $.ajax({
                         async : false,
                         type: 'POST',
-                        url: moduleUrl + "moveNode",
+                        url: _self.moduleUrl + "moveNode",
                         data : {
                             "dataFormat" : "json",
                             "id" : $(this).attr("id").replace("node_",""),
@@ -302,19 +324,28 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
             });
         };  // init end
          
-        function bindEvents(){
-            $(document).hear(componentGlobalId, moduleGlobalName + WacAppConfig.event.app_wac_events_data_saved, function ($self, data) {  // listenerid, event name, callback
-                var node = $("li#"+data.id);
-                $(componentGlobalId).jstree("open_node", node);
-                $(componentGlobalId).jstree("refresh", node);
-                //                Wac.log("upload complete: ");
-                //                Wac.log(data);
+        this.bindEvents = function(){
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
+                Wac.log(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save);
+                Wac.log(data);
+//                $(_self.componentGlobalId).jstree("create", null, "last", { "attr" : { "rel" : data.type } });
+
+                $(_self.componentGlobalId).jstree("set_focus");
+                $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{"entity" : data}});
             });
+
+//            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_saved, function ($self, data) {  // listenerid, event name, callback
+//                var node = $("li#"+data.id);
+//                $(_self.componentGlobalId).jstree("open_node", node);
+//                $(_self.componentGlobalId).jstree("refresh", node);
+//                //                Wac.log("upload complete: ");
+//                //                Wac.log(data);
+//            });
         };  //bindEvnts end
 
-        init();
+        this.init();
 
-    })
+    }
     //]]>
 </script>
 
