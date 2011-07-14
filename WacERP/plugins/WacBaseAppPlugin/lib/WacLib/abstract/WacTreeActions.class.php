@@ -53,18 +53,31 @@ abstract class WacTreeActions extends WacModuleAction {
     protected function _createNode(sfWebRequest $request, $params=array()) {
         $this->forward404Unless($request->hasParameter('id'));
 
-        $jsTreeDataHelper = JsTreeDataHelper::getInstance();
-        $parent = $this->mainModuleTable->findOneById($request->getParameter("id"));
+        $inspectResult = $this->inspectDataValidation($request, array("opType"=>WacOperationType::$add));
+        $resultSet = JsCommonData::getInstance()->getCommonDatum();
 
-        if ($parent) {
-            $_params = $this->_mapData($request, $params);
-            $newNode = $jsTreeDataHelper->createNode($parent, $this->mainModuleTable, $_params);
-            return $jsTreeDataHelper->getSuccDatum($newNode->getId());
-        } else {
-            throw new sfException("Wac Error: require valid parent id in the tree!");
+        if($inspectResult['status'] == WacOperationStatus::$Error) {
+            $resultSet[JsCommonData::$KEY_INFO] = $inspectResult; // for compatibility JqGrid tips
+        }
+        else{
+            $jsTreeDataHelper = JsTreeDataHelper::getInstance();
+            $parent = $this->mainModuleTable->findOneById($request->getParameter("id"));
+
+            if ($parent) {
+                $_params = $this->_mapData($request, $params);
+                $newNode = $jsTreeDataHelper->createNode($parent, $this->mainModuleTable, $_params);
+
+                $succInfo = JsCommonData::getSuccessDatum(
+                   Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
+                );
+                $resultSet[JsCommonData::$KEY_INFO] = $succInfo;
+                $resultSet["id"] = $newNode->getId();
+            } else {
+                throw new sfException("Wac Error: require valid parent id in the tree!");
+            }
         }
 
-        return $jsTreeDataHelper->getErrDatum();
+        return $resultSet;
     }
 
     /*
@@ -98,6 +111,8 @@ abstract class WacTreeActions extends WacModuleAction {
         $this->forward404Unless($request->hasParameter('id'));
         $this->forward404Unless($request->hasParameter('target_parent_id'));
 
+        $resultSet = JsCommonData::getInstance()->getCommonDatum();
+
         $jsTreeDataHelper = JsTreeDataHelper::getInstance();
         $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
         $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
@@ -105,12 +120,19 @@ abstract class WacTreeActions extends WacModuleAction {
         if ($node) {
             $_params = $request->getParameterHolder()->getAll();
             $jsTreeDataHelper->moveNode($node, $targetParentNode, $this->mainModuleTable, $_params);
-            return $jsTreeDataHelper->getSuccDatum($node->getId());
+            
+//            return $jsTreeDataHelper->getSuccDatum($node->getId());
+            $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getSuccessDatum();
+            $resultSet["id"] = $node->getId();
         } else {
-            throw new sfException("Wac Error: require valid node id in the tree!");
+            $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getErrorDatum(
+               "Wac Error: require valid node id in the tree!"
+            );
+//            throw new sfException("Wac Error: require valid node id in the tree!");
         }
 
-        return $jsTreeDataHelper->getErrDatum();
+        return $resultSet;
+//        return $jsTreeDataHelper->getErrDatum();
     }
 
     /*
@@ -127,7 +149,8 @@ abstract class WacTreeActions extends WacModuleAction {
         $this->doBeforeNodeRemove($request);
         $succFlag = $jsTreeDataHelper->removeNode($node, $this->mainModuleTable);
         
-        return $succFlag ? $jsTreeDataHelper->getSuccDatum() : $jsTreeDataHelper->getErrDatum();
+//        return $succFlag ? $jsTreeDataHelper->getSuccDatum() : $jsTreeDataHelper->getErrDatum();
+        return $succFlag ? JsCommonData::getSuccessDatum() : JsCommonData::getErrorDatum();
     }
 
     /*

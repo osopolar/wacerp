@@ -49,7 +49,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
             <br/>
             <input name="btnSave" id="btnSave_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
             &nbsp;&nbsp;
-            <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Close"); ?>"/>
+            <input name="btnClose" id="btnClose_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Cancel"); ?>"/>
         </div>
 
         <input type="hidden" name="id" id="id_<?php echo $componentGlobalName ?>" value="0"/>
@@ -121,6 +121,11 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
                 $(_self.componentGlobalId).dialog('open');
             });
 
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_close_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+                _self.modelEntity = {};
+                 $(_self.componentGlobalId).dialog('close');
+            });
+
 //            $( _self.componentGlobalId).bind( "dialogclose", function(event, ui) {
 //                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
 //            });
@@ -141,8 +146,6 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
             };
             $.extend(_self.modelEntity, params);
             $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, _self.modelEntity);
-//                       $.tree.focused().create(newNode, currentTree.selected);
-
         };
         
 

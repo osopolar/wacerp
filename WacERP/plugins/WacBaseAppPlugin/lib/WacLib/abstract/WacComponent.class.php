@@ -22,10 +22,11 @@ abstract class WacComponent extends sfComponent {
     // define a info holder
     public function execute($request) {
         $this->innerContextInfo = array();
-        $this->innerContextInfo["componentName"]  = $this->getActionName();
-        $this->innerContextInfo["moduleName"]     = $this->getModuleName();
-        $this->innerContextInfo["componentJs"]    = $this->getComponentJs();
-        $this->innerContextInfo["wacComponentJs"] = $this->getWacComponentJs();
+        $this->innerContextInfo["componentName"]   = $this->getActionName();
+        $this->innerContextInfo["moduleName"]      = $this->getModuleName();
+        $this->innerContextInfo["moduleTableName"] = $this->getModuleTableName();
+        $this->innerContextInfo["componentJs"]     = $this->getComponentJs();
+        $this->innerContextInfo["wacComponentJs"]  = $this->getWacComponentJs();
 
         $this->contextInfo = $this->innerContextInfo;  //assign to tpl
     }
@@ -73,6 +74,13 @@ abstract class WacComponent extends sfComponent {
     */
     public function getInternalPath() {
         return $this->getContext()->getConfiguration()->getApplication()."/".$this->getModuleName()."/".$this->getActionName();
+    }
+
+    /*
+     * canbe override when init a component needs a main table
+     */
+    public function getModuleTableName(){
+        return "";
     }
 
 }

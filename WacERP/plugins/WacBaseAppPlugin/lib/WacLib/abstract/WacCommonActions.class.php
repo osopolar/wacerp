@@ -306,7 +306,7 @@ abstract class WacCommonActions extends sfActions {
     }
 
     /*
-   * @return
+    * @return
     */
     public function inspectDataValidation(sfWebRequest $request, $params=array()) {
         $result    = JsCommonData::getSuccessDatum();
@@ -405,7 +405,7 @@ abstract class WacCommonActions extends sfActions {
             $targetItem   = $this->mainModuleTable->create();
 
             $succInfo = JsCommonData::getSuccessDatum(
-                            Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
+                 Doctrine::getTable(WacTable::$wacSysmsg)->getContentByCode("sys_add_succ")
             );
             $resultSet[JqGridDataHelper::$KEY_USER_DATA] = $succInfo;
             $resultSet['info'] = $succInfo;
