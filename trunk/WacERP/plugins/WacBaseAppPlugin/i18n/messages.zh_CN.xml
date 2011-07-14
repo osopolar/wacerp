@@ -22,6 +22,10 @@
         <target>列表</target>
       </trans-unit>
       <trans-unit>
+        <source>Caption</source>
+        <target>标题</target>
+      </trans-unit>
+      <trans-unit>
         <source>Name</source>
         <target>名称</target>
       </trans-unit>

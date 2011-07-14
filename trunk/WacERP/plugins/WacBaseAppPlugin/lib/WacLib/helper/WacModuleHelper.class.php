@@ -606,9 +606,13 @@ class WacModuleHelper
 
     public static function getModuleTable($moduleName, $tableName=""){
         $moduleTableKey = self::getModuleTableKey($moduleName);
+        self::setModuleTable($moduleTableKey, $moduleName, $tableName);
+        return sfConfig::get($moduleTableKey);
+    }
+
+    public static function setModuleTable($moduleTableKey, $moduleName, $tableName=""){        
         if(!sfConfig::has($moduleTableKey)){
             sfConfig::set($moduleTableKey, Doctrine::getTable(self::getModuleTableName($moduleName, $tableName)));
         }
-        return sfConfig::get($moduleTableKey);
     }
 }

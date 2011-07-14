@@ -9,7 +9,7 @@
 class OutputHelper
 {
     public static $_instance=null;
-    public $isDebug = true;
+    protected $_debug = true;
 
     protected $_request = null;
     protected $_response = null;
@@ -255,10 +255,10 @@ class OutputHelper
             $this->_response->setContentType('application/text; charset=utf-8');
         }
         else {
-            if($this->isDebug){
+            if($this->_debug){
                 $resultSet = array();
                 $resultSet["output"] = $output;
-                $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
+                $resultSet[JsCommonData::$KEY_INFO]["req_params"] = $this->_request->getParameterHolder()->getAll();
             }
             return $action->renderText($action->getPartial(WacModule::getInstance()->getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
         }
@@ -281,15 +281,16 @@ class OutputHelper
             }
             $this->_response->setContentType('application/json; charset=utf-8');
             $output = json_encode($resultSet);
+            return $action->renderText($output);
         }
         else {
-            if($this->isDebug){
-                $resultSet["info"]["req_params"] = $this->_request->getParameterHolder()->getAll();
+            if($this->_debug){
+                if(is_array($resultSet)){
+                    $resultSet[JsCommonData::$KEY_INFO]["req_params"] = $this->_request->getParameterHolder()->getAll();
+                }
             }
-
             return $action->renderText($action->getPartial(WacModule::getInstance()->getName("wacCommon").'/debugBlank', array('output' => $resultSet)));
-        }
-        return $action->renderText($output);
+        }        
     }
 
     /*

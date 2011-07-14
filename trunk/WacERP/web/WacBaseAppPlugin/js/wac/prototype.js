@@ -125,8 +125,8 @@ function WacFormPrototype()
             success: function(jsonData){
                 children.initFormDataCallBack(jsonData);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            error: function(jqXHR, textStatus, errorThrown){
+                $(document).wacTool().dumpObj(this); // the options for this ajax request
             }
         });
     };
@@ -198,8 +198,8 @@ function WacFormPrototype()
             success: function(jsonData){
                 children.submitMainFormCallBack(jsonData);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            error: function(jqXHR, textStatus, errorThrown){
+                $(document).wacTool().dumpObj(this); // the options for this ajax request
             }
         });
     };
@@ -385,8 +385,8 @@ function WacNavPanelPrototype()
             success: function(jsonData){
                 _self.getListCallBack(children, jsonData);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            error: function(jqXHR, textStatus, errorThrown){
+                $(document).wacTool().dumpObj(this); // the options for this ajax request
             }
         });
     }
@@ -467,8 +467,8 @@ function WacNavPanelPrototype()
             success: function(jsonData){
                 children.deleteDataCallBack(jsonData);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            error: function(jqXHR, textStatus, errorThrown){
+                $(document).wacTool().dumpObj(this); // the options for this ajax request
             }
         });
     };
@@ -693,8 +693,8 @@ function WacPanelFormPrototype()
             success: function(jsonData){
                 children.saveFormCallBack(jsonData);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                Wac.log("getFormData Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
+            error: function(jqXHR, textStatus, errorThrown){
+                $(document).wacTool().dumpObj(this); // the options for this ajax request
             }
         });
     };

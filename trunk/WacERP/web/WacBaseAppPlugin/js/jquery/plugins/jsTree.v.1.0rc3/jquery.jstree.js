@@ -1029,7 +1029,7 @@
 				.bind("set_rollback.jstree", $.proxy(function () { 
 						this.reselect();
 					}, this))
-				.bind("close_node.jstree", $.proxy(function (event, data) { 
+				.bind("close_node.jstree", $.proxy(function (event, data) {
 						var s = this._get_settings().ui,
 							obj = this._get_node(data.rslt.obj),
 							clk = (obj && obj.length) ? obj.children("ul").find("a.jstree-clicked") : $(),
@@ -3702,6 +3702,12 @@
 			select_node : false, // requires UI plugin
 			show_at_node : true,
 			items : { // Could be a function that should return an object like this one
+                                "create_branch" : {
+					"separator_before"	: false,
+					"separator_after"	: true,
+					"label"				: "Create Branch",
+					"action"			: function (obj) { this.create(obj); }
+				},
 				"create" : {
 					"separator_before"	: false,
 					"separator_after"	: true,

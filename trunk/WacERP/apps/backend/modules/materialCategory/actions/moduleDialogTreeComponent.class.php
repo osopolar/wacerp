@@ -9,4 +9,8 @@ class moduleDialogTreeComponent extends WacComponent
         parent::execute($request);
     }
 
+    public function getModuleTableName(){
+        return "WacMaterialCategory";
+    }
+
 }

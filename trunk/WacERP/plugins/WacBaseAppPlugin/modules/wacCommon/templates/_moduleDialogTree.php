@@ -9,13 +9,14 @@
  */
 
 $moduleName          = $invokeParams['contextInfo']['moduleName'];
+$moduleTableName     = $contextInfo['moduleTableName'];
 $moduleGlobalName    = $moduleName.$invokeParams['attachInfo']['uiid'];
 $componentGlobalName = WacModuleHelper::getTreeId($moduleName, $invokeParams['attachInfo']);
 $componentGlobalId   = "#".$componentGlobalName;
 $componentCaption    = WacModule::getInstance()->getCaption($moduleName);
 
 //$rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
-$rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUserRootNode();
+$rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleTableName)->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
 
@@ -27,10 +28,10 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
     $("<?php echo $componentGlobalId; ?>").ready(function(){
         var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
     });
-    
+
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self              = this;
-        
+
         this.wacImagesPath     = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
         this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
@@ -41,6 +42,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
         this.moduleUrl         = WacAppConfig.baseUrl + _self.moduleName + "/";
         this.uiPanelId         = WacEntity.module.getUiPanelId(_self.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
         this.componentCaption  = <?php echo "'{$componentCaption}'" ?>;
+        this.modelEntity     = {};
 
         this.init = function(){
             _self.initTree();
@@ -49,13 +51,13 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
 
         this.initTree = function(){
             $(_self.componentGlobalId)
-            .jstree({ 
+            .jstree({
                 // the list of plugins to include
                 "plugins" : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
                 // Plugin configuration
 
                 // I usually configure the plugin that handles the data first - in this case JSON as it is most common
-                "json_data" : { 
+                "json_data" : {
                     // I chose an ajax enabled tree - again - as this is most common, and maybe a bit more complex
                     // All the options are the same as jQuery's except for `data` which CAN (not should) be a function
                     "ajax" : {
@@ -63,12 +65,12 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                         "url" : _self.moduleUrl + "getChildren",
                         // this function is executed in the instance's scope (this refers to the tree instance)
                         // the parameter is the node being loaded (may be -1, 0, or undefined when loading the root nodes)
-                        "data" : function (n) { 
+                        "data" : function (n) {
                             // the result is fed to the AJAX request `data` option
                             return {
                                 "dataFormat" : "json",
                                 "id" : n.attr ? n.attr("id").replace("node_","") : <?php echo $rootNode->getId();?>
-                            }; 
+                            };
                         }
                     }
                 },
@@ -80,10 +82,10 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                         "url" : _self.moduleUrl + "search",
                         // You get the search string as a parameter
                         "data" : function (str) {
-                            return { 
+                            return {
                                 "dataFormat" : "json",
-                                "search_str" : str 
-                            }; 
+                                "search_str" : str
+                            };
                         }
                     }
                 },
@@ -94,7 +96,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                     // Those two checks may slow jstree a lot, so use only when needed
                     "max_depth" : -2,
                     "max_children" : -2,
-                    // I want only `drive` nodes to be root nodes 
+                    // I want only `drive` nodes to be root nodes
                     // This will prevent moving or creating any other type as a root node
                     "valid_children" : [ "drive" ],
                     "types" : {
@@ -125,7 +127,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                                 "image" : _self.wacImagesPath + "js_icons/branch.png"
                             }
                         },
-                        // The `drive` nodes 
+                        // The `drive` nodes
                         "root" : {
                             // can have files and folders inside, but NOT other `drive` nodes
                             "valid_children" : [ "default","root", "branch", "leaf" ],
@@ -158,14 +160,20 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
 			    "separator_after"   : true,
                             "label"             : "<?php echo __("Create").__($invokeParams['config']["label_branch"]);?>",
                             "action"            : function (obj) {
-                                                      this.create( null, "last", { "attr" : { "rel" : "<?php echo JsTreeDataHelper::$typeBranch; ?>" } });
+                                                    $.vakata.context.hide();
+                                                    if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
+                                                        var params = {
+                                                            "id" : obj.attr("id").replace("node_",""),
+                                                            "type" : "<?php echo JsTreeDataHelper::$typeBranch; ?>"
+                                                        }
+                                                        $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
+                                                    }
                                                    }
                         },
                         "create" : {
                             "icon" : _self.wacImagesPath + "js_icons/file.png",
                             "label" : "<?php echo __("Create").__($invokeParams['config']["label_node"]);?>",
                             "action" : function (obj) {
-//                                Wac.log($(obj).attr("rel"));
                                 $.vakata.context.hide();
                                 if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
                                     var params = {
@@ -213,45 +221,44 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                 },
 
                 // the core plugin - not many options here
-                "core" : { 
+                "core" : {
                     // just open those two nodes up
                     // as this is an AJAX enabled tree, both will be downloaded from the server
-                    "initially_open" : [] 
+                    "initially_open" : []
                 }
             })
             .bind("create.jstree", function (e, data) {
-                Wac.log("create.jstree");
-                Wac.log(data.rslt.obj.attr("entity"));
-//                var entity = data.rslt.obj.attr("entity");
-//                Wac.log(entity);
+                var params = {
+                        "dataFormat" : "json",
+                        "id" : data.rslt.parent.attr("id").replace("node_",""),
+                        "position" : data.rslt.position,
+                        "caption" : data.rslt.name,
+                        "type" : data.rslt.obj.attr("rel")
+                    };
 
-//                Wac.log({
-//                        "dataFormat" : "json",
-//                        "id" : data.rslt.parent.attr("id").replace("node_",""),
-//                        "position" : data.rslt.position,
-//                        "caption" : data.rslt.name,
-//                        "type" : data.rslt.obj.attr("rel"),
-//                        "entity" : data.rslt.obj.attr("entity")
-//                    });
-
-//                $.post(
-//                    _self.moduleUrl + "createNode",
-//                    {
-//                        "dataFormat" : "json",
-//                        "id" : data.rslt.parent.attr("id").replace("node_",""),
-//                        "position" : data.rslt.position,
-//                        "caption" : data.rslt.name,
-//                        "type" : data.rslt.obj.attr("rel")
-//                    },
-//                    function (r) {
-//                        if(r.status) {
-//                            $(data.rslt.obj).attr("id", "node_" + r.id);
-//                        }
-//                        else {
-//                            $.jstree.rollback(data.rlbk);
-//                        }
-//                    }
-//                );
+                $.extend(params, _self.modelEntity);
+                
+                $.ajax({
+                    url: _self.moduleUrl + "createNode",
+                    //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+                    global: true,
+                    type: "GET",
+                    data: params,
+                    dataType: "json",
+                    success: function(jsonData){
+                        if(jsonData.info.status == WacEntity.operationStatus.succss){
+                            $(data.rslt.obj).attr("id", "node_" + jsonData.id);
+                        }
+                        else{
+                            $.jstree.rollback(data.rlbk);
+                            $(document).wacPage().showTips(jsonData.info.message);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        Wac.log(errorThrown);
+                        $(document).wacTool().dumpObj(this); // the options for this ajax request
+                    }
+                });
             })
             .bind("remove.jstree", function (e, data) {
                 if(data.rslt.parent == -1){
@@ -269,10 +276,17 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                                 "dataFormat" : "json",
                                 "id" : this.id.replace("node_","")
                             },
-                            success : function (r) {
-                                if(!r.status) {
+                            success : function (jsonData) {
+                                if(jsonData.info.status == WacEntity.operationStatus.succss){
                                     data.inst.refresh();
                                 }
+                                else{
+                                    $(document).wacPage().showTips(jsonData.info.message);
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                Wac.log(errorThrown);
+                                $(document).wacTool().dumpObj(this); // the options for this ajax request
                             }
                         });
                     });
@@ -307,40 +321,38 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName)->getUser
                             "caption" : data.rslt.name,
                             "copy" : data.rslt.cy ? 1 : 0
                         },
-                        success : function (r) {
-                            if(!r.status) {
-                                $.jstree.rollback(data.rlbk);
-                            }
-                            else {
-                                $(data.rslt.oc).attr("id", "node_" + r.id);
+                        success : function (jsonData) {
+                            if(jsonData.info.status == WacEntity.operationStatus.succss){
+                                $(data.rslt.oc).attr("id", "node_" + jsonData.id);
                                 if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
                                     data.inst.refresh(data.inst._get_parent(data.rslt.oc));
                                 }
                             }
-                            $("#analyze").click();
+                            else{
+                                $.jstree.rollback(data.rlbk);
+                                $(document).wacPage().showTips(jsonData.info.message);
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            Wac.log(errorThrown);
+                            $(document).wacTool().dumpObj(this); // the options for this ajax request
                         }
                     });
                 });
             });
         };  // init end
-         
+
         this.bindEvents = function(){
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
                 Wac.log(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save);
                 Wac.log(data);
-//                $(_self.componentGlobalId).jstree("create", null, "last", { "attr" : { "rel" : data.type } });
 
+                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_close_tree_entity_dialog, {})
+                _self.modelEntity = data;
                 $(_self.componentGlobalId).jstree("set_focus");
-                $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{"entity" : data}});
+                $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
             });
 
-//            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_saved, function ($self, data) {  // listenerid, event name, callback
-//                var node = $("li#"+data.id);
-//                $(_self.componentGlobalId).jstree("open_node", node);
-//                $(_self.componentGlobalId).jstree("refresh", node);
-//                //                Wac.log("upload complete: ");
-//                //                Wac.log(data);
-//            });
         };  //bindEvnts end
 
         this.init();

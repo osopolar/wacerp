@@ -10,6 +10,9 @@ class JsCommonData {
     protected static $_instance=null;
     public static $_nodeCount=0;
 
+    public static $KEY_ITEMS = "items";
+    public static $KEY_INFO  = "info";
+
 
     public static function getInstance() {
         $class = __CLASS__;
@@ -56,6 +59,7 @@ class JsCommonData {
         "error_code" => $code,
         "message"    => $msg,
         "attributes"=>$attrsInfo,
+        "req_params" => array()
         );
     }
 
@@ -71,6 +75,7 @@ class JsCommonData {
         "error_code" => $code,
         "message"    => $msg,
         "attributes"=>$attrsInfo,
+        "req_params" =>  array()
         );
     }
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50141
 File Encoding         : 65001
 
-Date: 2011-06-27 19:05:02
+Date: 2011-07-14 18:30:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,7 +211,7 @@ CREATE TABLE `sf_guard_user` (
 -- ----------------------------
 -- Records of sf_guard_user
 -- ----------------------------
-INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-06-27 06:22:13', '2009-12-19 08:12:50', '2011-06-27 06:22:13');
+INSERT INTO `sf_guard_user` VALUES ('1', 'admin', 'sha1', '59f12273dd2e1c99581bfc24ca702c8e', 'e8efdc7df4a04fcf3afd22d82f8ee4ca60f9b4c3', '1', '1', '2011-07-14 06:42:03', '2009-12-19 08:12:50', '2011-07-14 06:42:03');
 INSERT INTO `sf_guard_user` VALUES ('17', 'user1', 'sha1', 'e83ecdefb483cd2db998fd0daa0c5d87', 'bafb2f103d52d727ba3eb8c5d9532c871d04e455', '1', '0', '2011-03-31 04:01:35', '2011-03-31 02:40:56', '2011-03-31 04:01:35');
 INSERT INTO `sf_guard_user` VALUES ('18', 'user2', 'sha1', '1cf2166bd1239849b913ff34710b5a08', '789577ef91737d016a50c99bf037bcd97544a4a0', '1', '0', null, '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 
@@ -294,23 +294,26 @@ CREATE TABLE `wac_category` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_category
 -- ----------------------------
-INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '16', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '0000-00-00 00:00:00');
-INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '15', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-03-22 03:04:51');
-INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '14', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-03-30 10:46:06');
+INSERT INTO `wac_category` VALUES ('1', '0', '0', '1', '22', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-07-07 10:11:39', '0000-00-00 00:00:00');
+INSERT INTO `wac_category` VALUES ('2', '1', '0', '2', '21', '1', null, null, '1', null, '我的分类', 'root', null, '0', '0', null, null, '50', '1', '2011-07-07 10:11:39', '2011-03-22 03:04:51');
+INSERT INTO `wac_category` VALUES ('7', '2', '0', '3', '18', '2', null, null, '1', null, 'A1', 'branch', null, '0', '0', null, null, '50', '1', '2011-07-06 09:44:21', '2011-03-30 10:46:06');
 INSERT INTO `wac_category` VALUES ('13', '0', '0', '1', '4', '0', 'root_17', null, '17', 'root_17', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:56', '2011-03-31 02:40:56');
 INSERT INTO `wac_category` VALUES ('14', '13', '0', '2', '3', '1', 'branch_17_1', null, '17', 'branch_17_1', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-03-31 02:40:57', '2011-03-31 02:40:57');
 INSERT INTO `wac_category` VALUES ('16', '7', '0', '4', '9', '3', null, null, '1', null, 'New node', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 08:08:00', '2011-04-01 08:26:57');
-INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '14', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 10:05:56', '2011-04-18 11:07:17');
+INSERT INTO `wac_category` VALUES ('18', '2', '1', '7', '18', '2', null, null, '1', null, 'a', 'branch', null, '0', '0', null, null, '50', '1', '2011-07-06 09:44:21', '2011-04-18 11:07:17');
 INSERT INTO `wac_category` VALUES ('20', '0', '0', '1', '4', '0', 'root_18_0', null, '18', 'root_18_0', 'Root', 'root', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 INSERT INTO `wac_category` VALUES ('21', '20', '0', '2', '3', '1', 'branch_18_0', null, '18', 'branch_18_0', 'My Branch 1', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-10 06:27:07', '2011-06-10 06:27:07');
 INSERT INTO `wac_category` VALUES ('23', '16', '0', '7', '8', '4', null, null, '1', null, 'New node9', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 08:08:00', '2011-06-27 07:02:18');
 INSERT INTO `wac_category` VALUES ('26', '18', '0', '10', '11', '3', null, null, '1', null, '1', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-27 08:10:54', '2011-06-27 08:10:54');
-INSERT INTO `wac_category` VALUES ('28', '18', '1', '12', '13', '3', null, null, '1', null, '3', 'leaf', null, '0', '0', null, null, '50', '1', '2011-06-27 08:10:40', '2011-06-27 08:10:59');
+INSERT INTO `wac_category` VALUES ('28', '18', '1', '14', '17', '3', null, null, '1', null, '3', 'leaf', null, '0', '0', null, null, '50', '1', '2011-07-06 09:44:21', '2011-06-27 08:10:59');
+INSERT INTO `wac_category` VALUES ('29', '7', '1', '14', '17', '3', null, null, '1', null, 'a1', 'branch', null, '0', '0', null, null, '50', '1', '2011-07-06 09:44:21', '2011-07-06 09:44:35');
+INSERT INTO `wac_category` VALUES ('30', '29', '0', '15', '16', '4', null, null, '1', null, 'a11', 'leaf', null, '0', '0', null, null, '50', '1', '2011-07-06 09:44:45', '2011-07-06 09:44:45');
+INSERT INTO `wac_category` VALUES ('31', '2', '2', '19', '20', '2', null, null, '1', null, 'New node', 'leaf', null, '0', '0', null, null, '50', '1', '2011-07-07 10:12:03', '2011-07-07 10:12:03');
 
 -- ----------------------------
 -- Table structure for `wac_country`
@@ -498,7 +501,7 @@ CREATE TABLE `wac_file` (
   KEY `Index_6` (`created_at`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_file
@@ -622,14 +625,15 @@ CREATE TABLE `wac_material_category` (
   KEY `Index_6` (`code`),
   KEY `Index_7` (`user_id`),
   KEY `Index_8` (`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_material_category
 -- ----------------------------
-INSERT INTO `wac_material_category` VALUES ('1', '0', '0', '1', '10', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 07:41:58', '0000-00-00 00:00:00');
-INSERT INTO `wac_material_category` VALUES ('2', '1', '0', '2', '9', '1', 'MATERIAL_CATEGORY', null, '1', null, '物料分类', 'root', null, '0', '0', null, null, '50', '1', '2011-06-27 07:41:58', '2011-03-22 03:04:51');
-INSERT INTO `wac_material_category` VALUES ('3', '2', '0', '3', '4', '2', '', null, '1', null, '原材料', 'branch', null, '0', '0', null, null, '50', '1', '2011-06-27 07:39:22', '2011-06-27 07:39:22');
+INSERT INTO `wac_material_category` VALUES ('1', '0', '0', '1', '10', '0', 'ROOT', null, '1', 'ROOT', 'ROOT', 'root', null, '0', '0', null, null, '50', '1', '2011-07-14 10:09:38', '0000-00-00 00:00:00');
+INSERT INTO `wac_material_category` VALUES ('2', '1', '0', '2', '9', '1', 'MATERIAL_CATEGORY', null, '1', null, '物料分类', 'root', null, '0', '0', null, null, '50', '1', '2011-07-14 10:09:38', '2011-03-22 03:04:51');
+INSERT INTO `wac_material_category` VALUES ('33', '35', '0', '6', '7', '3', 'c1', null, '1', 'a1', 'a1', 'leaf', null, '0', '0', null, null, '50', '1', '2011-07-14 10:09:38', '2011-07-14 10:05:47');
+INSERT INTO `wac_material_category` VALUES ('35', '2', '0', '5', '8', '2', 's1', null, '1', 'd1', 'd1', 'branch', null, '0', '0', null, null, '50', '1', '2011-07-14 10:09:38', '2011-07-14 09:57:57');
 
 -- ----------------------------
 -- Table structure for `wac_material_category_link`
@@ -1249,7 +1253,7 @@ INSERT INTO `wac_sysmsg` VALUES ('2', 'sys_edit_succ', 'zh_CN', '', '修改成�
 INSERT INTO `wac_sysmsg` VALUES ('3', 'sys_del_succ', 'zh_CN', '', '删除成功!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-05 01:30:57');
 INSERT INTO `wac_sysmsg` VALUES ('4', 'sys_err_duplicated_code', 'zh_CN', '', '错误, 已存在相同的编码(%s)!', '0', '0', null, null, '50', '1', '2011-06-03 09:09:22', '2011-06-03 09:09:46');
 INSERT INTO `wac_sysmsg` VALUES ('5', 'sys_err_duplicated_name', 'zh_CN', '', '错误, 已存在相同的名称(%s)!', '0', '0', null, null, '50', '1', '2011-06-03 09:09:10', '2011-06-03 09:09:34');
-INSERT INTO `wac_sysmsg` VALUES ('6', 'sys_err_invalid_factory', 'zh_CN', '', '错误, 请输入有效工厂!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-08 19:22:19');
+INSERT INTO `wac_sysmsg` VALUES ('6', 'sys_operation_succ', 'zh_CN', '', '操作成功!', '0', '0', null, null, '50', '1', '2011-07-14 10:28:41', '2011-07-14 10:29:05');
 INSERT INTO `wac_sysmsg` VALUES ('7', 'sys_err_invalid_cotton_order', 'zh_CN', '', '错误, 请输入有效棉纱单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:21:55');
 INSERT INTO `wac_sysmsg` VALUES ('8', 'sys_err_invalid_dye_order', 'zh_CN', '', '错误, 请输入有效浆染单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:22:19');
 INSERT INTO `wac_sysmsg` VALUES ('9', 'sys_err_invalid_weave_order', 'zh_CN', '', '错误, 请输入有效织造单!', '0', '0', null, null, '50', '1', '2011-06-03 06:23:10', '2010-02-16 23:22:40');
@@ -1303,7 +1307,7 @@ CREATE TABLE `wac_system_log` (
   KEY `Index_1` (`updated_at`),
   KEY `Index_2` (`created_at`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wac_system_log
@@ -1629,6 +1633,7 @@ INSERT INTO `wac_system_log` VALUES ('318', '1', '2', 'admin 删除了 wacStoreh
 INSERT INTO `wac_system_log` VALUES ('319', '1', '2', 'admin 添加了 wacStorehouse, (id为 53)', '0', '0', null, null, '50', '1', '2011-06-10 07:50:57', '2011-06-10 07:50:57');
 INSERT INTO `wac_system_log` VALUES ('320', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 08:01:51', '2011-06-10 08:01:51');
 INSERT INTO `wac_system_log` VALUES ('321', '1', '2', 'admin 删除了 wacStorehouse, (id为 Array)', '0', '0', null, null, '50', '1', '2011-06-10 08:02:06', '2011-06-10 08:02:06');
+INSERT INTO `wac_system_log` VALUES ('322', '1', '2', 'admin 编辑了 系统信息, (id为 6)', '0', '0', null, null, '50', '1', '2011-07-14 10:29:05', '2011-07-14 10:29:05');
 
 -- ----------------------------
 -- Table structure for `wac_system_parameter`
