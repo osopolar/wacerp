@@ -24,6 +24,7 @@ all:
 #    op_confirm_no: _confirm_no_evt
     show_add_form: _show_add_form_evt
     show_edit_form: _show_edit_form_evt
+    cancel_form: _cancel__form_evt
     show_management_panel: _show_management_panel_evt
     search_in_list: _search_in_list_evt
     data_export: _data_export
@@ -39,7 +40,7 @@ all:
     show_data_export_form: _show_data_export_form
     show_data_print_form: _show_data_print_form
     show_file_upload_form: _show_file_upload_form
-    show_tree_entity_dialog: _show_tree_entity_dialog
-    close_tree_entity_dialog: _close_tree_entity_dialog
+#    show_tree_entity_dialog: _show_tree_entity_dialog
+#    close_tree_entity_dialog: _close_tree_entity_dialog
     file_upload_complete: _file_upload_complete_evt
 

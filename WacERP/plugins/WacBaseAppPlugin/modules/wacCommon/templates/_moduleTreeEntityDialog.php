@@ -116,19 +116,22 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
                 $(_self.componentGlobalId).dialog('close');
             });
 
-            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
                 _self.modelEntity = data;
                 $(_self.componentGlobalId).dialog('open');
             });
 
-            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_close_tree_entity_dialog, function ($self, data) {  // listenerid, event name, callback
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
+                _self.modelEntity = data;
+                Wac.log(data);
+                $(_self.componentGlobalId).dialog('open');
+            });
+
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, function ($self, data) {  // listenerid, event name, callback
                 _self.modelEntity = {};
                  $(_self.componentGlobalId).dialog('close');
             });
 
-//            $( _self.componentGlobalId).bind( "dialogclose", function(event, ui) {
-//                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_action_canceled, {});
-//            });
         };
 
         this.initData = function(){
