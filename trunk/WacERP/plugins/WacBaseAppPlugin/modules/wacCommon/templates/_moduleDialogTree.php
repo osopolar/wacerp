@@ -166,7 +166,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                                             "id" : obj.attr("id").replace("node_",""),
                                                             "type" : "<?php echo JsTreeDataHelper::$typeBranch; ?>"
                                                         }
-                                                        $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
+                                                        $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
                                                     }
                                                    }
                         },
@@ -180,13 +180,19 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                         "id" : obj.attr("id").replace("node_",""),
                                         "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
                                     }
-                                    $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_tree_entity_dialog, params);
+                                    $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
                                 }
                             }
                         },
                         "rename" : {
                             "icon" : _self.wacImagesPath + "js_icons/edit.png",
-                            "label" : "<?php echo __("Rename");?>"
+                            "label" : "<?php echo __("Edit");?>",
+                            "action" : function (obj) {
+                                $.vakata.context.hide();
+                                obj = this._get_node(obj);
+                                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, obj);
+//                                Wac.log(obj);
+                            }
                         },
                         "remove" : {
                             "icon" : _self.wacImagesPath + "js_icons/delete.png",
@@ -195,7 +201,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         "ccp" : {
                             "icon" : _self.wacImagesPath + "js_icons/They-reply-technosorcery-icon.png",
                             "separator_after" : false,
-                            "label" : "<?php echo __("Edit");?>",
+                            "label" : "<?php echo __("Other Actions");?>",
                             "submenu" : {
                                 "cut" : {
                                     "icon" : _self.wacImagesPath + "js_icons/cut.png",
@@ -344,10 +350,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
 
         this.bindEvents = function(){
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
-                Wac.log(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save);
-                Wac.log(data);
-
-                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_close_tree_entity_dialog, {})
+                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, {})
                 _self.modelEntity = data;
                 $(_self.componentGlobalId).jstree("set_focus");
                 $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);

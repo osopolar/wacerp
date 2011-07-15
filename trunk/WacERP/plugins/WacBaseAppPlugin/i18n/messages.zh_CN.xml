@@ -258,6 +258,10 @@
         <target>编辑</target>
       </trans-unit>
       <trans-unit>
+        <source>Other Actions</source>
+        <target>其它操作</target>
+      </trans-unit>
+      <trans-unit>
         <source>Cut</source>
         <target>剪切</target>
       </trans-unit>
