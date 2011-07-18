@@ -3,7 +3,7 @@
 /**
  * WacCommonActions actions.
  *
- * Descriptions: provides common methods for wac action
+ * Descriptions: it serve business module action, it can determine setup MainModuleTable, some module usual methods
  *
  * @package    Wac
  * @subpackage lib
@@ -17,7 +17,32 @@ abstract class WacModuleAction extends WacCommonActions {
     public function allowSetupMainModuleTable(){
         return true;
     }
-    
+
+    /*
+     * can be override
+     */
+    protected function _getFormData(sfWebRequest $request){
+        $resultSet = JsCommonData::getCommonDatum();
+        $resultSet['info'] = JsCommonData::getSuccessDatum();
+
+        if ($request->hasParameter('id')) {
+            $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
+            if($targetItem){
+                $resultSet['items']['modelEntity'] = $targetItem->toArray();
+            }
+            else{
+                $resultSet['info'] = JsCommonData::getErrorDatum($this->getSysMsg('sys_err_entity_not_found'));
+                $resultSet['items']['modelEntity'] = array();
+            }
+        }
+
+        return $resultSet;
+    }
+
+    public function executeGetFormData(sfWebRequest $request) {
+        return OutputHelper::getInstance()->output($this->_getFormData($request), $this);
+    }
+
     public function executeGetPanelForm(sfWebRequest $request) {
         $str = $this->getComponent($this->contextInfo["moduleName"], WacComponentList::$modulePanelForm,
                         array(

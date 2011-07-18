@@ -43,8 +43,7 @@ class wacGuardUserActions extends WacModuleAction
       $id = isset($reqParams['id']) ? $reqParams['id'] : 0;
       if($this->mainModuleTable->isExistedName($reqParams['username'], $id))
       {
-//         $result = JsCommonData::getErrorDatum(WacErrorCode::getInstance()->getInfo(WacErrorCode::$duplicatedName, $reqParams['username']), WacErrorCode::$duplicatedName);
-         $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_name", array($reqParams['username'])), WacErrorCode::$duplicatedName);
+         $result = JsCommonData::getErrorDatum($this->getSysMsg("sys_err_duplicated_name", array($reqParams['username'])), WacErrorCode::$duplicatedName);
          return $result;
       }
       

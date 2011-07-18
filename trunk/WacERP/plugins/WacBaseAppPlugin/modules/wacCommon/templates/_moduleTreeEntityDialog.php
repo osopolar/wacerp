@@ -67,7 +67,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self           = this;
-        this.prototype      = new WacBasicFormPrototype();  // extends WacFormPrototype
+        this.prototype      = new WacStdFormPrototype();  // extends WacFormPrototype
         this.prototype.constructor = this;
 
         this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
@@ -82,6 +82,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
         this.modelEntity    = {};  // map to current data model entity
         this.inputMode      = WacEntity.formInputMode.add;
+        this.ajaxInitData   = true;    // determine the data is inited by ajax or js model
 
         this.init = function(){
             _self.prototype.init(_self);
@@ -123,7 +124,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
                 _self.modelEntity = data;
-                Wac.log(data);
+                Wac.log($(data).attr("id"));
                 $(_self.componentGlobalId).dialog('open');
             });
 
