@@ -18,6 +18,10 @@ class PluginWacSysmsgTable extends WacCommonTable
     }
 
     public function getErrContent($code, $params=array()){
+        return $this->getSysMsg($code, $params);
+    }
+
+    public function getSysMsg($code, $params=array()){
         $content = $this->getContentByCode($code);
         return vsprintf($content, $params);
     }

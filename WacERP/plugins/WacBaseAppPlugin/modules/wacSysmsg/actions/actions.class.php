@@ -23,7 +23,7 @@ class wacSysmsgActions extends WacModuleAction
         }
 
         if($this->mainModuleTable->isExistedCode($reqParams['code'], $id)) {
-            $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum($this->getSysMsg("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
             return $result;
         }
 

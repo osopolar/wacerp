@@ -318,12 +318,12 @@ abstract class WacCommonActions extends sfActions {
         }
 
         if($this->mainModuleTable->isExistedCode($reqParams['code'], $id)) {
-            $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum($this->getSysMsg("sys_err_duplicated_code", array($reqParams['code'])), WacErrorCode::$duplicatedName);
             return $result;
         }
 
         if($this->mainModuleTable->isExistedName($reqParams['name'], $id)) {
-            $result = JsCommonData::getErrorDatum(Doctrine::getTable(WacTable::$wacSysmsg)->getErrContent("sys_err_duplicated_name", array($reqParams['name'])), WacErrorCode::$duplicatedName);
+            $result = JsCommonData::getErrorDatum($this->getSysMsg("sys_err_duplicated_name", array($reqParams['name'])), WacErrorCode::$duplicatedName);
             return $result;
         }
         return $result;
@@ -548,6 +548,10 @@ abstract class WacCommonActions extends sfActions {
     public function executeGetIdCodeHashHTML(sfWebRequest $request) {
         $resultSet = $this->getHashList("id", "code", 1, sfConfig::get("maxHashItems"));
         return OutputHelper::getInstance()->outputHtmlSelectElements($resultSet, $this);
+    }
+
+    public function getSysMsg($code, $params=array()){
+        return Doctrine::getTable(WacTable::$wacSysmsg)->getSysMsg($code, $params);
     }
 
     /*

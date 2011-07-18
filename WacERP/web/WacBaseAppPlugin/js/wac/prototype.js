@@ -225,7 +225,7 @@ function WacFormPrototype()
 /*
  *  declare a panel-prototype model class
  */
-function WacBasicFormPrototype()
+function WacStdFormPrototype()
 {
     var _self = this;
     var debug = true;
@@ -240,7 +240,7 @@ function WacBasicFormPrototype()
     };
 
     this.bindEvents = function(children){
-        Wac.log("WacBasicFormPrototype bindEvents", debug);
+        Wac.log("WacStdFormPrototype bindEvents", debug);
 
         // fix dialog div didnt remove bug, remove it by this way
         var uiPanelId = WacEntity.module.getUiPanelId(children.moduleName);
@@ -255,25 +255,55 @@ function WacBasicFormPrototype()
     };
 
     this.initLayout = function(children){
-        Wac.log("WacBasicFormPrototype initLayout", debug);
+        Wac.log("WacStdFormPrototype initLayout", debug);
     };
 
     this.initData = function(children){
-        Wac.log("WacBasicFormPrototype initData", debug);
+        Wac.log("WacStdFormPrototype initData", debug);
+        $(document).wacPage().showBlockUILoading(children.formId);
+        
+        $("input[type=text][id*='" + children.moduleName + "']").attr("value", "");
+        $("textarea[id*='" + children.moduleName + "']").attr("value", "");
+
+        if(children.ajaxInitData){
+            var params ={dataFormat :'json'};
+            if(children.inputMode == WacEntity.formInputMode.edit){
+                params.id = children.modelEntity.id;
+            }
+
+            $.ajax({
+                url: WacAppConfig.baseUrl + children.moduleName + "/getFormData",
+                global: true,
+                type: "GET",
+                data: params,
+                dataType: "json",
+                success: function(jsonData){
+                    children.initDataCallBack(jsonData);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    $(document).wacTool().dumpObj(this); // the options for this ajax request
+                }
+            });
+        }
+        else{
+            children.initDataCallBack(null);
+        }
     };
 
     this.setupDefaults = function(children, defaultValueObj){
-        Wac.log("WacBasicFormPrototype setupDefaults", debug);
+        Wac.log("WacStdFormPrototype setupDefaults", debug);
     };
 
     this.initDataCallBack = function(children, jsonData){
-        Wac.log("WacBasicFormPrototype initDataCallBack", debug);
-        children.setupDefaults(jsonData['items']['default']);
-        $(document).wacPage().hideBlockUI(children.formDialogId);
+        Wac.log("WacStdFormPrototype initDataCallBack", debug);
+        if(jsonData!=null){
+            children.setupDefaults(jsonData['items']['modelEntity']);
+        }
+        $(document).wacPage().hideBlockUI(children.componentGlobalId);
     };
 
     this.validateMainForm = function(children){
-        Wac.log("WacBasicFormPrototype validateMainForm", debug);
+        Wac.log("WacStdFormPrototype validateMainForm", debug);
 
         var validateFlag = true;
         if (!$(children.componentGlobalId).validationEngine({returnIsValid:true}))
