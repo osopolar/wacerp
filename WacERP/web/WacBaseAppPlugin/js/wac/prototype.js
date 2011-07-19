@@ -246,8 +246,12 @@ function WacStdFormPrototype()
         $(children.componentGlobalId).unbind();
 
         $(children.componentGlobalId).bind('dialogopen', function(event, ui){
+            Wac.log('dialogopen: ' + children.inputMode, debug);
             if(children.inputMode == WacEntity.formInputMode.edit){
                 children.getModelEntity();
+            }
+            else{
+                children.setupDefaults(children.modelEntity);
             }
         });
 
@@ -265,17 +269,20 @@ function WacStdFormPrototype()
 
         $(document).hear(children.componentGlobalId, children.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
             children.modelEntity = data;
-            Wac.log(children.modelEntity, debug);
             children.inputMode = WacEntity.formInputMode.add;
+
             $(children.componentGlobalId).dialog('open');
         });
 
         $(document).hear(children.componentGlobalId, children.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
-            Wac.log(children.modelEntity, debug);
-            children.inputMode = WacEntity.formInputMode.edit;
-            if(!children.ajaxModelEntity){
+            if(children.ajaxModelEntity){
+                children.modelEntity = {id: $(data).attr("id")};
+            }
+            else{
                 children.modelEntity = data;
             }
+            children.inputMode = WacEntity.formInputMode.edit;
+
             $(children.componentGlobalId).dialog('open');
         });
 
@@ -339,15 +346,26 @@ function WacStdFormPrototype()
 
     this.initDataCallback = function(children, jsonData){
         Wac.log("WacStdFormPrototype initDataCallback", debug);
-
-        if(jsonData){
-            children.setupDefaults(jsonData['items']['default']);
-        }
     };
 
     this.setupDefaults = function(children, defaultValueObj){
         Wac.log("WacStdFormPrototype setupDefaults", debug);
+        children.emptyForm();
+        children.modelEntity = defaultValueObj;
 
+        if(children.modelEntity){
+            $.each(children.modelEntity, function(key, value){
+                if($("#" + key + "_" + children.componentGlobalName).length>0){
+                    $("#" + key + "_" + children.componentGlobalName).attr("value", value);
+//                    Wac.log("#" + key + "_" + children.componentGlobalName + " : " + value, debug);
+                }
+            })
+        }
+    };
+
+    this.emptyForm = function(children){
+        Wac.log("WacStdFormPrototype emptyForm", debug);
+        $("#id_" + children.componentGlobalName).attr("value", 0);
         $("input[type=text][id*='" + children.moduleName + "']").attr("value", "");
         $("textarea[id*='" + children.moduleName + "']").attr("value", "");
     };
@@ -357,7 +375,7 @@ function WacStdFormPrototype()
         $(document).wacPage().showBlockUILoading(children.formId);
 
         if(children.ajaxModelEntity){
-            var params ={dataFormat :'json'};
+            var params ={dataFormat :'json', id: 0};
             if(children.inputMode == WacEntity.formInputMode.edit){
                 params.id = children.modelEntity.id;
             }
