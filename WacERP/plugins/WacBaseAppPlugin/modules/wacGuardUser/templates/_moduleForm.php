@@ -133,7 +133,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             _self.prototype.initFormData(_self);
         };
 
-        this.initFormDataCallBack = function(jsonData){
+        this.initFormDataCallback = function(jsonData){
             if(jsonData.info.status == WacEntity.operationStatus.Error)
             {
                 Wac.log(jsonData.info.message);
@@ -153,7 +153,7 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
                 }
             }
 
-            _self.prototype.initFormDataCallBack(_self, jsonData);
+            _self.prototype.initFormDataCallback(_self, jsonData);
 
             //   Wac.log($(document).wacTool().dumpObj(jsonData));
         };
@@ -207,8 +207,8 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             _self.prototype.submitMainForm(_self);
         };
 
-        this.submitMainFormCallBack = function(jsonData){
-            _self.prototype.submitMainFormCallBack(_self, jsonData);
+        this.submitMainFormCallback = function(jsonData){
+            _self.prototype.submitMainFormCallback(_self, jsonData);
             //   Wac.log($(document).wacTool().dumpObjObj(jsonData));
         };
 

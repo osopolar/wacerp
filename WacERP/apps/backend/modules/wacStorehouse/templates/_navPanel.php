@@ -66,16 +66,16 @@ $componentGlobalId    = "#".$componentGlobalName;
             _self.prototype.initData(_self);
         };
 
-        this.initDataCallBack = function(jsonData){
-            _self.prototype.initDataCallBack(_self, jsonData);
+        this.initDataCallback = function(jsonData){
+            _self.prototype.initDataCallback(_self, jsonData);
         };
 
         this.deleteData = function(){
             _self.prototype.deleteData(_self);
         };
 
-        this.deleteDataCallBack = function(){
-            _self.prototype.deleteDataCallBack(_self);
+        this.deleteDataCallback = function(){
+            _self.prototype.deleteDataCallback(_self);
         };
 
         this.init();  // init method

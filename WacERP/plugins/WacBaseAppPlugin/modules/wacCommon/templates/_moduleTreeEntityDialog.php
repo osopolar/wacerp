@@ -82,7 +82,10 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
         this.modelEntity    = {};  // map to current data model entity
         this.inputMode      = WacEntity.formInputMode.add;
-        this.ajaxInitData   = true;    // determine the data is inited by ajax or js model
+        this.ajaxInitData   = true;    // determine the data is inited by ajax 
+        this.ajaxModelEntity = true;    // determine the model entity is got by ajax
+
+        this.dialogProperties = {width: 460,height: 250}
 
         this.init = function(){
             _self.prototype.init(_self);
@@ -90,57 +93,34 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
         this.initLayout = function(){
             _self.prototype.initLayout(_self);
-
-            $('#btnSave_' + _self.componentGlobalName).button();
-            $('#btnClose_' + _self.componentGlobalName).button();
-
-            $(_self.componentGlobalId).dialog({
-                bgiframe: true,
-                modal: true,
-                width: 460,
-                height: 250,
-                autoOpen: false,
-                buttons: {},
-                zIndex: 100
-            });
         };
 
         this.bindEvents = function(){
             _self.prototype.bindEvents(_self);
-
-            $('#btnSave_' + _self.componentGlobalName).bind("click", function(){
-                _self.saveForm();
-            });
-
-            $("#btnClose_" + _self.componentGlobalName).bind('click', function (e)
-            {
-                $(_self.componentGlobalId).dialog('close');
-            });
-
-            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, function ($self, data) {  // listenerid, event name, callback
-                _self.modelEntity = data;
-                $(_self.componentGlobalId).dialog('open');
-            });
-
-            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, function ($self, data) {  // listenerid, event name, callback
-                _self.modelEntity = data;
-                Wac.log($(data).attr("id"));
-                $(_self.componentGlobalId).dialog('open');
-            });
-
-            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, function ($self, data) {  // listenerid, event name, callback
-                _self.modelEntity = {};
-                 $(_self.componentGlobalId).dialog('close');
-            });
-
         };
 
         this.initData = function(){
             _self.prototype.initData(_self);
         };
 
+        this.initDataCallback = function(jsonData){
+            _self.prototype.initDataCallback(_self, jsonData);
+        };
+
+        this.getModelEntity = function(){
+            _self.prototype.getModelEntity(_self);
+        };
+
+        this.getModelEntityCallback = function(jsonData){
+            _self.prototype.getModelEntityCallback(_self, jsonData);
+        };
+
+        this.setupDefaults = function(defaultValueObj){
+            _self.prototype.setupDefaults(_self, defaultValueObj);
+        };
+
         this.saveForm = function(){
-            if(!_self.prototype.validateMainForm(_self)){
+            if(!_self.prototype.validateForm(_self)){
                 return;
             }
             
