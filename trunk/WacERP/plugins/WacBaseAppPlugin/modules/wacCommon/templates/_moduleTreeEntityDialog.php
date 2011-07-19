@@ -83,7 +83,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
         this.modelEntity    = {};  // map to current data model entity
         this.inputMode      = WacEntity.formInputMode.add;
         this.ajaxInitData   = true;    // determine the data is inited by ajax 
-        this.ajaxModelEntity = true;    // determine the model entity is got by ajax
+        this.ajaxModelEntity = true;    // determine the model entity is got by ajax when edit
 
         this.dialogProperties = {width: 460,height: 250}
 
@@ -117,18 +117,30 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
         this.setupDefaults = function(defaultValueObj){
             _self.prototype.setupDefaults(_self, defaultValueObj);
+            
+
+//            $("#id_" + _self.componentGlobalName).attr("value", _self.modelEntity.id);
+//            $("#name_" + _self.componentGlobalName).attr("value", _self.modelEntity.name);
+//            $("#code_" + _self.componentGlobalName).attr("value", _self.modelEntity.code);
         };
+
+        this.emptyForm = function(){
+            _self.prototype.emptyForm(_self);
+        };
+
 
         this.saveForm = function(){
             if(!_self.prototype.validateForm(_self)){
                 return;
             }
-            
+
             var params = {
+                id: $("#id_" + _self.componentGlobalName).val(),
                 code:$("#code_" + _self.componentGlobalName).val(),
                 name:$("#name_" + _self.componentGlobalName).val()
             };
             $.extend(_self.modelEntity, params);
+            
             $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, _self.modelEntity);
         };
         

@@ -163,7 +163,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                                     $.vakata.context.hide();
                                                     if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
                                                         var params = {
-                                                            "id" : obj.attr("id").replace("node_",""),
+                                                            "parent_id" : obj.attr("id").replace("node_",""),
                                                             "type" : "<?php echo JsTreeDataHelper::$typeBranch; ?>"
                                                         }
                                                         $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
@@ -177,7 +177,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                 $.vakata.context.hide();
                                 if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
                                     var params = {
-                                        "id" : obj.attr("id").replace("node_",""),
+                                        "parent_id" : obj.attr("id").replace("node_",""),
                                         "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
                                     }
                                     $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
@@ -248,7 +248,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                     url: _self.moduleUrl + "createNode",
                     //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
                     global: true,
-                    type: "GET",
+                    type: "POST",
                     data: params,
                     dataType: "json",
                     success: function(jsonData){
@@ -265,6 +265,45 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         $(document).wacTool().dumpObj(this); // the options for this ajax request
                     }
                 });
+            })
+            .bind("rename.jstree", function (e, data) {
+                var params = {
+                        "dataFormat" : "json",
+                        "id" : data.rslt.obj.attr("id").replace("node_",""),
+                        "caption" : data.rslt.new_name
+                };
+                
+                $.ajax({
+                    url: _self.moduleUrl + "editNode",
+                    //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+                    global: true,
+                    type: "POST",
+                    data: params,
+                    dataType: "json",
+                    success: function(jsonData){
+                        if(jsonData.info.status != WacEntity.operationStatus.succss){
+                            $.jstree.rollback(data.rlbk);
+                            $(document).wacPage().showTips(jsonData.info.message);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        Wac.log(errorThrown);
+                        $(document).wacTool().dumpObj(this); // the options for this ajax request
+                    }
+                });
+//                $.post(
+//                    _self.moduleUrl + "editNode",
+//                    {
+//                        "dataFormat" : "json",
+//                        "id" : data.rslt.obj.attr("id").replace("node_",""),
+//                        "caption" : data.rslt.new_name
+//                    },
+//                    function (r) {
+//                        if(!r.status) {
+//                            $.jstree.rollback(data.rlbk);
+//                        }
+//                    }
+//                );
             })
             .bind("remove.jstree", function (e, data) {
                 if(data.rslt.parent == -1){
@@ -297,22 +336,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         });
                     });
                 }
-            })
-            .bind("rename.jstree", function (e, data) {
-                $.post(
-                _self.moduleUrl + "editNode",
-                {
-                    "dataFormat" : "json",
-                    "id" : data.rslt.obj.attr("id").replace("node_",""),
-                    "caption" : data.rslt.new_name
-                },
-                function (r) {
-                    if(!r.status) {
-                        $.jstree.rollback(data.rlbk);
-                    }
-                }
-            );
-            })
+            })            
             .bind("move_node.jstree", function (e, data) {
                 data.rslt.o.each(function (i) {
                     $.ajax({
@@ -352,11 +376,48 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
                 $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, {})
                 _self.modelEntity = data;
+//                Wac.log("tree hear save:" );
+//                Wac.log(_self.modelEntity );
+                
                 $(_self.componentGlobalId).jstree("set_focus");
-                $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
+                if(_self.modelEntity.id == "0"){  // new node
+                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
+                }
+                else{  // edit node
+                    _self.editNode();
+                }
             });
 
         };  //bindEvnts end
+
+        this.editNode = function(){
+            var params = {"dataFormat" : "json"};
+            $.extend(params, _self.modelEntity, {"caption":_self.modelEntity.name});
+
+            $.ajax({
+                url: _self.moduleUrl + "editNode",
+                //        url: WacAppConfig.baseUrl + "test/ajaxTest" ,
+                global: true,
+                type: "POST",
+                data: params,
+                dataType: "json",
+                success: function(jsonData){
+                    if(jsonData.info.status == WacEntity.operationStatus.succss){
+                        var node = $("li#"+data.id);
+                        $(_self.componentGlobalId).jstree("open_node", node);
+                        $(_self.componentGlobalId).jstree("refresh", node);
+                    }
+                    else{
+                        $.jstree.rollback(data.rlbk);
+                        $(document).wacPage().showTips(jsonData.info.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    Wac.log(errorThrown);
+                    $(document).wacTool().dumpObj(this); // the options for this ajax request
+                }
+            });
+        }
 
         this.init();
 
