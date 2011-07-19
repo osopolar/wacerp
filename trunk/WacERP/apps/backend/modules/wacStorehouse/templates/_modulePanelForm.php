@@ -113,8 +113,8 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             _self.prototype.initData(_self);
         };
 
-        this.initDataCallBack = function(jsonData){
-            _self.prototype.initDataCallBack(_self, jsonData);
+        this.initDataCallback = function(jsonData){
+            _self.prototype.initDataCallback(_self, jsonData);
         };
 
         this.switchInputMode = function(mode){
@@ -138,8 +138,8 @@ $componentListingTableId = "#".WacModuleHelper::getListingTableId($moduleName, $
             _self.prototype.saveForm(_self);
         };
 
-        this.saveFormCallBack = function(jsonData){
-            _self.prototype.saveFormCallBack(_self, jsonData);
+        this.saveFormCallback = function(jsonData){
+            _self.prototype.saveFormCallback(_self, jsonData);
             //   Wac.log($(document).wacTool().dumpObjObj(jsonData));
         };
 

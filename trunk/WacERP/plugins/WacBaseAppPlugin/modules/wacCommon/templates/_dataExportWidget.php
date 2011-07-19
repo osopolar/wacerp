@@ -96,7 +96,7 @@ echo "</div>\n";
 //                data: submitParams,
 //                dataType: "json",
 //                success: function(jsonData){
-//                    dataExportCallBack(jsonData);
+//                    dataExportCallback(jsonData);
 //                },
 //                error: function(XMLHttpRequest, textStatus, errorThrown){
 //                    Wac.log("dataExport Error: " + $(document).wacTool().dumpObj(this)); // the options for this ajax request
@@ -104,7 +104,7 @@ echo "</div>\n";
 //            });
         }
 
-        function dataExportCallBack(jsonData){
+        function dataExportCallback(jsonData){
         
         }
 

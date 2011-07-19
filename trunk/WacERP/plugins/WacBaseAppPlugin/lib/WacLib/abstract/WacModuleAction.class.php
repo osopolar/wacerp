@@ -21,26 +21,38 @@ abstract class WacModuleAction extends WacCommonActions {
     /*
      * can be override
      */
-    protected function _getFormData(sfWebRequest $request){
+    protected function _getModelEntity(sfWebRequest $request){
         $resultSet = JsCommonData::getCommonDatum();
-        $resultSet['info'] = JsCommonData::getSuccessDatum();
+
+        $resultSet['info'] = JsCommonData::getErrorDatum($this->getSysMsg('sys_err_entity_not_found'));
+        $resultSet['items']['modelEntity'] = array();
 
         if ($request->hasParameter('id')) {
             $targetItem = $this->mainModuleTable->findOneById($request->getParameter('id'));
             if($targetItem){
+                $resultSet['info'] = JsCommonData::getSuccessDatum();
                 $resultSet['items']['modelEntity'] = $targetItem->toArray();
-            }
-            else{
-                $resultSet['info'] = JsCommonData::getErrorDatum($this->getSysMsg('sys_err_entity_not_found'));
-                $resultSet['items']['modelEntity'] = array();
             }
         }
 
         return $resultSet;
     }
 
-    public function executeGetFormData(sfWebRequest $request) {
-        return OutputHelper::getInstance()->output($this->_getFormData($request), $this);
+    /*
+     * can be override
+     */
+    protected function _getInitData(sfWebRequest $request){
+        $resultSet = JsCommonData::getCommonDatum();
+        $resultSet['info'] = JsCommonData::getSuccessDatum();
+        return $resultSet;
+    }
+
+    public function executeGetInitData(sfWebRequest $request) {
+        return OutputHelper::getInstance()->output($this->_getInitData($request), $this);
+    }
+
+    public function executeGetModelEntity(sfWebRequest $request) {
+        return OutputHelper::getInstance()->output($this->_getModelEntity($request), $this);
     }
 
     public function executeGetPanelForm(sfWebRequest $request) {

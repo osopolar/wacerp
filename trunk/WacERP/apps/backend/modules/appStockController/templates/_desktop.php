@@ -95,8 +95,8 @@ $componentGlobalId    = "#".$componentGlobalName;
 //            _self.prototype.initData(_self);
         };
 
-        this.initDataCallBack = function(jsonData){
-//            _self.prototype.initDataCallBack(_self, jsonData);
+        this.initDataCallback = function(jsonData){
+//            _self.prototype.initDataCallback(_self, jsonData);
         };
 
         this.loadFormPanel = function(evt, data){
