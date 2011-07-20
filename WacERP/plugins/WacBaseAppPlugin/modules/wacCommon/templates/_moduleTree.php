@@ -9,12 +9,14 @@
  */
 
 $moduleName          = $invokeParams['contextInfo']['moduleName'];
+$moduleTableName     = $contextInfo['moduleTableName'];
 $moduleGlobalName    = $moduleName.$invokeParams['attachInfo']['uiid'];
 $componentGlobalName = WacModuleHelper::getTreeId($moduleName, $invokeParams['attachInfo']);
 $componentGlobalId   = "#".$componentGlobalName;
 $componentCaption    = WacModule::getInstance()->getCaption($moduleName);
 
-$rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
+$rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleTableName)->getUserRootNode();
+//$rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
 
@@ -24,21 +26,36 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
 <script type="text/javascript">
     //<![CDATA[
     $("<?php echo $componentGlobalId; ?>").ready(function(){
-        var wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+    });
 
-        var moduleName          = <?php echo "'{$moduleName}'" ?>;
-        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
-        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
-        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
-        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
-        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
+    function <?php echo ucfirst($componentGlobalName); ?>(){
+        var _self              = this;
+        this.wacImagesPath    = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
-        function init(){
-            initTree();
-            bindEvents();
-        };  // init end
+//        var moduleName          = <?php echo "'{$moduleName}'" ?>;
+//        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
+//        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
+//        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
+//        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
+//        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
 
-        function initTree(){
+        this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
+        this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
+        this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.moduleUrl         = WacAppConfig.baseUrl + _self.moduleName + "/";
+        this.uiPanelId         = WacEntity.module.getUiPanelId(_self.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
+        this.componentCaption  = <?php echo "'{$componentCaption}'" ?>;
+        this.modelEntity     = {};
+
+        this.init = function(){
+            _self.initTree();
+            _self.bindEvents();
+        };
+
+        this.initTree = function(){
             $(componentGlobalId)
             .jstree({ 
                 // the list of plugins to include
@@ -58,7 +75,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                             // the result is fed to the AJAX request `data` option
                             return {
                                 "dataFormat" : "json",
-                                "id" : n.attr ? n.attr("id").replace("node_","") : <?php echo $rootNode->getId();?>
+                                "id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : <?php echo $rootNode->getId();?>
                             }; 
                         }
                     }
@@ -207,7 +224,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                 moduleUrl + "createNode",
                 {
                     "dataFormat" : "json",
-                    "id" : data.rslt.parent.attr("id").replace("node_",""),
+                    "id" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""),
                     "position" : data.rslt.position,
                     "caption" : data.rslt.name,
                     "type" : data.rslt.obj.attr("rel")
@@ -247,7 +264,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                 moduleUrl + "editNode",
                 {
                     "dataFormat" : "json",
-                    "id" : data.rslt.obj.attr("id").replace("node_",""),
+                    "id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
                     "caption" : data.rslt.new_name
                 },
                 function (r) {
@@ -265,8 +282,8 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                         url: moduleUrl + "moveNode",
                         data : {
                             "dataFormat" : "json",
-                            "id" : $(this).attr("id").replace("node_",""),
-                            "target_parent_id" : data.rslt.np.attr("id").replace("node_",""),
+                            "id" : $(this).attr("id").replace("node_","").replace("copy_",""),
+                            "target_parent_id" : data.rslt.np.attr("id").replace("node_","").replace("copy_",""),
                             "position" : data.rslt.cp + i,
                             "caption" : data.rslt.name,
                             "copy" : data.rslt.cy ? 1 : 0
@@ -292,7 +309,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
 
         init();
 
-    })
+    }
     //]]>
 </script>
 

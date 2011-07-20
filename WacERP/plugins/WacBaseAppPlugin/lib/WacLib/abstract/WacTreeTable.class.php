@@ -324,16 +324,34 @@ abstract class WacTreeTable extends WacCommonTable
             if ($nodes->count(0) > 0) {
                 $i = 0;
                 $parentId = $targetParentNode->getId();
+                $mapIds = array();
+                // first loop, duplicate note's info, and lod down old/new id map
                 foreach ($nodes as $node) {
                     $newNode = $node->copy(false);
                     $newNode->setParentId($parentId);
+                    $newNode->setCode($node->getCode()."_cp");
+                    $newNode->setName($node->getName()."_cp");
                     $newNode->setIsAvail(0);
                     if ($i == 0) {
                         $copyNodeRoot = $newNode;
                         $newNode->setPosition($position);
                     }
                     $newNode->save();
-                    $parentId = $newNode->getId();
+                    $mapIds["o".$node->getId()] = $newNode->getId();
+                    $i++;
+                }
+
+                $i = 0;
+                // second loop, update parent id
+                foreach($nodes as $node){
+                    if($i>0){
+                        $newNode = $this->findOneBy("id", $mapIds["o".$node->getId()]);
+                        if($newNode){
+                            $oParentId = $node->getParent()->getId();
+                            $newNode->setParentId($mapIds["o".$oParentId]);
+                            $newNode->save();
+                        }
+                    }
                     $i++;
                 }
             }

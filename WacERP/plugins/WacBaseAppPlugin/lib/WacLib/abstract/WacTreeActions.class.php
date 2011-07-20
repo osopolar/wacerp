@@ -71,7 +71,7 @@ abstract class WacTreeActions extends WacModuleAction {
                         $this->getSysMsg('sys_add_succ')
                 );
                 $resultSet[JsCommonData::$KEY_INFO] = $succInfo;
-                $resultSet["id"] = $newNode->getId();
+                $resultSet["modelEntity"] = $newNode->toArray();
             } else {
                 throw new sfException("Wac Error: require valid parent id in the tree!");
             }
@@ -87,22 +87,29 @@ abstract class WacTreeActions extends WacModuleAction {
 
     protected function _editNode(sfWebRequest $request) {
         $this->forward404Unless($request->hasParameter('id'));
+
+        $inspectResult = $this->inspectDataValidation($request, array("opType"=>WacOperationType::$edit));
         $resultSet = JsCommonData::getInstance()->getCommonDatum();
 
-        $jsTreeDataHelper = JsTreeDataHelper::getInstance();
-        $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
+        if($inspectResult['status'] == WacOperationStatus::$Error) {
+            $resultSet[JsCommonData::$KEY_INFO] = $inspectResult; // for compatibility JqGrid tips
+        }
+        else{
+            $jsTreeDataHelper = JsTreeDataHelper::getInstance();
+            $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
 
-        if ($node) {
-            $_params = $this->_mapData($request);
-            $jsTreeDataHelper->editNode($node, $this->mainModuleTable, $_params);
+            if ($node) {
+                $_params = $this->_mapData($request);
+                $jsTreeDataHelper->editNode($node, $this->mainModuleTable, $_params);
 
-            $succInfo = JsCommonData::getSuccessDatum(
-                    $this->getSysMsg('sys_edit_succ')
-            );
-            $resultSet[JsCommonData::$KEY_INFO] = $succInfo;
-            $resultSet["id"] = $node->getId();
-        } else {
-            throw new sfException("Wac Error: require valid node id in the tree!");
+                $succInfo = JsCommonData::getSuccessDatum(
+                        $this->getSysMsg('sys_edit_succ')
+                );
+                $resultSet[JsCommonData::$KEY_INFO] = $succInfo;
+                $resultSet["modelEntity"] = $node->toArray();
+            } else {
+                throw new sfException("Wac Error: require valid node id in the tree!");
+            }
         }
 
         return $resultSet;
@@ -129,16 +136,15 @@ abstract class WacTreeActions extends WacModuleAction {
             
 //            return $jsTreeDataHelper->getSuccDatum($node->getId());
             $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getSuccessDatum();
-            $resultSet["id"] = $node->getId();
-        } else {
+            $resultSet["modelEntity"] = $node->toArray();
+        }
+        else {
             $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getErrorDatum(
                "Wac Error: require valid node id in the tree!"
             );
-//            throw new sfException("Wac Error: require valid node id in the tree!");
         }
 
         return $resultSet;
-//        return $jsTreeDataHelper->getErrDatum();
     }
 
     /*
@@ -173,6 +179,8 @@ abstract class WacTreeActions extends WacModuleAction {
         $this->forward404Unless($request->hasParameter('id'));
         $this->forward404Unless($request->hasParameter('target_parent_id'));
 
+        $resultSet = JsCommonData::getInstance()->getCommonDatum();
+
         $jsTreeDataHelper = JsTreeDataHelper::getInstance();
         $node = $this->mainModuleTable->findOneById($request->getParameter("id"));
         $targetParentNode = $this->mainModuleTable->findOneById($request->getParameter("target_parent_id"));
@@ -180,12 +188,15 @@ abstract class WacTreeActions extends WacModuleAction {
         if ($node) {
             $_params = $request->getParameterHolder()->getAll();
             $jsTreeDataHelper->copyNode($node, $targetParentNode, $this->mainModuleTable, $_params);
-            return $jsTreeDataHelper->getSuccDatum($node->getId());
+            $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getSuccessDatum();
+            $resultSet["modelEntity"] = $node->toArray();
         } else {
-            throw new sfException("Wac Error: require valid node id in the tree!");
+             $resultSet[JsCommonData::$KEY_INFO] = JsCommonData::getErrorDatum(
+               "Wac Error: require valid node id in the tree!"
+            );
         }
 
-        return $jsTreeDataHelper->getErrDatum();
+        return $resultSet;
     }
 
     /*
