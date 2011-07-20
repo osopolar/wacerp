@@ -15,7 +15,6 @@ $componentGlobalName = WacModuleHelper::getTreeId($moduleName, $invokeParams['at
 $componentGlobalId   = "#".$componentGlobalName;
 $componentCaption    = WacModule::getInstance()->getCaption($moduleName);
 
-//$rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUserRootNode();
 $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleTableName)->getUserRootNode();
 //print_r($invokeParams['contextInfo']);
 ?>
@@ -31,7 +30,6 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
 
     function <?php echo ucfirst($componentGlobalName); ?>(){
         var _self              = this;
-
         this.wacImagesPath     = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
 
         this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
@@ -69,7 +67,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                             // the result is fed to the AJAX request `data` option
                             return {
                                 "dataFormat" : "json",
-                                "id" : n.attr ? n.attr("id").replace("node_","") : <?php echo $rootNode->getId();?>
+                                "id" : n.attr ? n.attr("id").replace("node_","").replace("copy_","") : <?php echo $rootNode->getId();?>
                             };
                         }
                     }
@@ -163,7 +161,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                                     $.vakata.context.hide();
                                                     if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
                                                         var params = {
-                                                            "parent_id" : obj.attr("id").replace("node_",""),
+                                                            "parent_id" : obj.attr("id").replace("node_","").replace("copy_",""),
                                                             "type" : "<?php echo JsTreeDataHelper::$typeBranch; ?>"
                                                         }
                                                         $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
@@ -177,7 +175,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                                 $.vakata.context.hide();
                                 if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
                                     var params = {
-                                        "parent_id" : obj.attr("id").replace("node_",""),
+                                        "parent_id" : obj.attr("id").replace("node_","").replace("copy_",""),
                                         "type" : "<?php echo JsTreeDataHelper::$typeLeaf; ?>"
                                     }
                                     $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_add_form, params);
@@ -190,7 +188,10 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                             "action" : function (obj) {
                                 $.vakata.context.hide();
                                 obj = this._get_node(obj);
-                                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, obj);
+                                var params = {
+                                    "id" : obj.attr("id").replace("node_","").replace("copy_","")
+                                }
+                                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_edit_form, params);
 //                                Wac.log(obj);
                             }
                         },
@@ -236,7 +237,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
             .bind("create.jstree", function (e, data) {
                 var params = {
                         "dataFormat" : "json",
-                        "id" : data.rslt.parent.attr("id").replace("node_",""),
+                        "id" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""),
                         "position" : data.rslt.position,
                         "caption" : data.rslt.name,
                         "type" : data.rslt.obj.attr("rel")
@@ -253,7 +254,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                     dataType: "json",
                     success: function(jsonData){
                         if(jsonData.info.status == WacEntity.operationStatus.succss){
-                            $(data.rslt.obj).attr("id", "node_" + jsonData.id);
+                            $(data.rslt.obj).attr("id", "node_" + jsonData.modelEntity.id);
                         }
                         else{
                             $.jstree.rollback(data.rlbk);
@@ -269,7 +270,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
             .bind("rename.jstree", function (e, data) {
                 var params = {
                         "dataFormat" : "json",
-                        "id" : data.rslt.obj.attr("id").replace("node_",""),
+                        "id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
                         "caption" : data.rslt.new_name
                 };
                 
@@ -291,23 +292,10 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         $(document).wacTool().dumpObj(this); // the options for this ajax request
                     }
                 });
-//                $.post(
-//                    _self.moduleUrl + "editNode",
-//                    {
-//                        "dataFormat" : "json",
-//                        "id" : data.rslt.obj.attr("id").replace("node_",""),
-//                        "caption" : data.rslt.new_name
-//                    },
-//                    function (r) {
-//                        if(!r.status) {
-//                            $.jstree.rollback(data.rlbk);
-//                        }
-//                    }
-//                );
             })
             .bind("remove.jstree", function (e, data) {
                 if(data.rslt.parent == -1){
-                    $(document).wacPage().showTips($.i18n.prop("cannot remove root node!"));
+                    $(document).wacPage().showTips($.i18n.prop("Cannot remove root node!"));
                     return;
                 }
 
@@ -319,7 +307,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                             url: _self.moduleUrl + "removeNode",
                             data : {
                                 "dataFormat" : "json",
-                                "id" : this.id.replace("node_","")
+                                "id" : this.id.replace("node_","").replace("copy_","")
                             },
                             success : function (jsonData) {
                                 if(jsonData.info.status == WacEntity.operationStatus.succss){
@@ -345,16 +333,17 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         url: _self.moduleUrl + "moveNode",
                         data : {
                             "dataFormat" : "json",
-                            "id" : $(this).attr("id").replace("node_",""),
-                            "target_parent_id" : data.rslt.np.attr("id").replace("node_",""),
+                            "id" : $(this).attr("id").replace("node_","").replace("copy_",""),
+                            "target_parent_id" : data.rslt.np.attr("id").replace("node_","").replace("copy_",""),
                             "position" : data.rslt.cp + i,
                             "caption" : data.rslt.name,
                             "copy" : data.rslt.cy ? 1 : 0
                         },
                         success : function (jsonData) {
                             if(jsonData.info.status == WacEntity.operationStatus.succss){
-                                $(data.rslt.oc).attr("id", "node_" + jsonData.id);
-                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+                                $(data.rslt.oc).attr("id", "node_" + jsonData.modelEntity.id);
+                                if(data.rslt.cy) {
+                                    Wac.log("move_node.jstree refresh: " + $(data.rslt.oc).children("UL").length);
                                     data.inst.refresh(data.inst._get_parent(data.rslt.oc));
                                 }
                             }
@@ -370,14 +359,18 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                     });
                 });
             });
+//            .bind("copy.jstree", function (e, data) {
+////                Wac.log("copy.jstree");
+//            })
+//            .bind("paste.jstree", function (e, data) {
+//                Wac.log("paste.jstree");
+//            });
         };  // init end
 
         this.bindEvents = function(){
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
                 $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, {})
                 _self.modelEntity = data;
-//                Wac.log("tree hear save:" );
-//                Wac.log(_self.modelEntity );
                 
                 $(_self.componentGlobalId).jstree("set_focus");
                 if(_self.modelEntity.id == "0"){  // new node
@@ -403,12 +396,11 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                 dataType: "json",
                 success: function(jsonData){
                     if(jsonData.info.status == WacEntity.operationStatus.succss){
-                        var node = $("li#"+data.id);
+                        var node = $("li#"+jsonData.modelEntity.parent_id);
                         $(_self.componentGlobalId).jstree("open_node", node);
                         $(_self.componentGlobalId).jstree("refresh", node);
                     }
                     else{
-                        $.jstree.rollback(data.rlbk);
                         $(document).wacPage().showTips(jsonData.info.message);
                     }
                 },

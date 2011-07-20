@@ -85,6 +85,10 @@
         <source>Can not switch to edit mode since data not saved!</source>
         <target>数据未保存,暂时不能切换到编辑模式!</target>
       </trans-unit>
+      <trans-unit>
+        <source>Cannot remove root node!</source>
+        <target>分类根不能被删除!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
