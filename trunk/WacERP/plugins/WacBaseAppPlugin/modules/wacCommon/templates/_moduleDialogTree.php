@@ -156,7 +156,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                             "icon" : _self.wacImagesPath + "js_icons/branch.png",
                             "separator_before"  : false,
 			    "separator_after"   : true,
-                            "label"             : "<?php echo __("Create").__($invokeParams['config']["label_branch"]);?>",
+                            "label"             : "<?php echo __("Create").__($invokeParams['config']["labelBranch"]);?>",
                             "action"            : function (obj) {
                                                     $.vakata.context.hide();
                                                     if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
@@ -170,7 +170,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                         },
                         "create" : {
                             "icon" : _self.wacImagesPath + "js_icons/file.png",
-                            "label" : "<?php echo __("Create").__($invokeParams['config']["label_node"]);?>",
+                            "label" : "<?php echo __("Create").__($invokeParams['config']["labelNode"]);?>",
                             "action" : function (obj) {
                                 $.vakata.context.hide();
                                 if($(obj).attr("rel") !== "<?php echo JsTreeDataHelper::$typeLeaf; ?>"){
@@ -237,7 +237,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
             .bind("create.jstree", function (e, data) {
                 var params = {
                         "dataFormat" : "json",
-                        "id" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""),
+//                        "id" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""),
                         "position" : data.rslt.position,
                         "caption" : data.rslt.name,
                         "type" : data.rslt.obj.attr("rel")
@@ -343,7 +343,6 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
                             if(jsonData.info.status == WacEntity.operationStatus.succss){
                                 $(data.rslt.oc).attr("id", "node_" + jsonData.modelEntity.id);
                                 if(data.rslt.cy) {
-                                    Wac.log("move_node.jstree refresh: " + $(data.rslt.oc).children("UL").length);
                                     data.inst.refresh(data.inst._get_parent(data.rslt.oc));
                                 }
                             }

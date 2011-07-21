@@ -18,7 +18,11 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTree, $enableWidgets)
                 'widgetName'   => WacComponentList::$moduleTree,
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
-                    'attachInfo' => $attachInfo
+                    'attachInfo' => $attachInfo,
+                    'config'      => array(
+                        "labelBranch" => "Folder",
+                        "labelNode"   => "File"
+                    )
                 )
     ));
 }

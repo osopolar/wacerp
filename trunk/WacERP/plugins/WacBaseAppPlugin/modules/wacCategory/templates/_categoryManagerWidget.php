@@ -15,7 +15,11 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleTree, $enableWidgets)
             array(
                 'invokeParams' => array(
                     'contextInfo' => $contextInfo,
-                    'attachInfo' => $attachInfo
+                    'attachInfo' => $attachInfo,
+                    'config'      => array(
+                        "labelBranch" => "Category Directory",
+                        "labelNode"   => "Category"
+                    )
             ))
     );
 }
