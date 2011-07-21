@@ -20,8 +20,8 @@ default:
   stylesheets:
 #    main:            main.css
 
-#    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.8.custom/smoothness/jquery-ui-1.8.8.custom.css
-    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.9.custom/smoothness/jquery-ui-1.8.9.custom.css
+#    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.9.custom/smoothness/jquery-ui-1.8.9.custom.css
+    jquery.ui: /WacBaseAppPlugin/css/jquery/plugins/jquery-ui-1.8.14.custom/smoothness/jquery-ui-1.8.14.custom.css
 
     ui.panel: /WacBaseAppPlugin/css/jquery/plugins/ist-ui-panel/ui.panel.css
 
@@ -39,18 +39,22 @@ default:
 #    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.cookie.js     # jquery.cookie
 #    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.4.2/jquery.hotkeys.js     # jquery.hotkeys
 
-    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.2.min.js     # jquery
-    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
-    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
+#    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery-1.5.2.min.js     # jquery
+#    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.cookie.js     # jquery.cookie
+#    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.5/jquery.hotkeys.js     # jquery.hotkeys
+
+    jquery: /WacBaseAppPlugin/js/jquery/jquery-1.6/jquery-1.6.2.min.js     # jquery
+    jquery.cookie: /WacBaseAppPlugin/js/jquery/jquery-1.6/jquery.cookie.js     # jquery.cookie
+    jquery.hotkeys: /WacBaseAppPlugin/js/jquery/jquery-1.6/jquery.hotkeys.js     # jquery.hotkeys
 
 #    google.gear: /WacBaseAppPlugin/js/google/gears_init.js
 
     wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars, from wacConfiguration module
 
-#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-1.8.8.custom.min.js     # jquery-ui
-#    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.8.custom/jquery-ui-i18n.js     # jquery-ui-i18n
-    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.min.js     # jquery-ui
-    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.min.js     # jquery-ui
+#    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.14.custom/jquery-ui-1.8.14.custom.min.js     # jquery-ui
+    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.14.custom/jquery-ui-i18n.js     # jquery-ui-i18n
 
     jquery.shout: /WacBaseAppPlugin/js/jquery/plugins/jquery-shout/jquery.shout.js     # jquery-shout
     jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties.js  #jquery.i18n.properties

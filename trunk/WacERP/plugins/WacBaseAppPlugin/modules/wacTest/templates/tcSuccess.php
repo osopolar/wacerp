@@ -5,18 +5,18 @@
         ?>
     </div>
     <?php
-//            include_component("appStockController", "desktop");
+            include_component("appStockController", "desktop");
 
-              echo WacWidgetHelper::getInstance()->getWidget(
-                    "wacCategory", // be invoked module name
-                    WacComponentList::$categoryManagerWidget, // be invoked widget name
-                    array(
-                        'method'        => WacWidgetHelper::$methodComponent,
-                        'enableWidgets' => array(// enable sub widgets
-                            WacComponentList::$moduleTree
-                        )
-                    )
-              );
+//              echo WacWidgetHelper::getInstance()->getWidget(
+//                    "wacCategory", // be invoked module name
+//                    WacComponentList::$categoryManagerWidget, // be invoked widget name
+//                    array(
+//                        'method'        => WacWidgetHelper::$methodComponent,
+//                        'enableWidgets' => array(// enable sub widgets
+//                            WacComponentList::$moduleTree
+//                        )
+//                    )
+//              );
         
               // a bug will be pending, duplicated init action implements when open
 //              include_component("materialCategory", "moduleManagementPanel", array(
