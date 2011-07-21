@@ -370,10 +370,11 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_data_save, function ($self, data) {  // listenerid, event name, callback
                 $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_cancel_form, {})
                 _self.modelEntity = data;
-                
+
                 $(_self.componentGlobalId).jstree("set_focus");
                 if(_self.modelEntity.id == "0"){  // new node
-                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
+//                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
+                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name});
                 }
                 else{  // edit node
                     _self.editNode();
