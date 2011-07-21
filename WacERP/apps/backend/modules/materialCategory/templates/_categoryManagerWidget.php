@@ -17,8 +17,8 @@ if (WacWidgetHelper::enableWidget(WacComponentList::$moduleDialogTree, $enableWi
                     'contextInfo' => $contextInfo,
                     'attachInfo' => $attachInfo,
                     'config'      => array(
-                        "label_branch" => "Branch",
-                        "label_node"   => "Node"
+                        "labelBranch" => "Branch",
+                        "labelNode"   => "Node"
                     )
             ))
     );

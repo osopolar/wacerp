@@ -234,12 +234,12 @@
         <target>逻辑类型(1 true/0 false)</target>
       </trans-unit>
       <trans-unit>
-        <source>Create Folder</source>
-        <target>创建文件夹</target>
+        <source>Folder</source>
+        <target>文件夹</target>
       </trans-unit>
       <trans-unit>
-        <source>Create File</source>
-        <target>创建文件</target>
+        <source>File</source>
+        <target>文件</target>
       </trans-unit>
       <trans-unit>
         <source>Create</source>
@@ -316,6 +316,10 @@
       <trans-unit>
         <source>Node</source>
         <target>节点</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Category Directory</source>
+        <target>分类目录</target>
       </trans-unit>
     </body>
   </file>
