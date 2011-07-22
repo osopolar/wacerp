@@ -58,7 +58,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
 <script type="text/javascript">
     //<![CDATA[
-    /*****  Component, by Ben Bi <prince.bi@gmail.com>  created at: 12/23/2009 4:10:45 PM  *****/
+    /*****  Component, by Ben Bi <prince.bi@gmail.com>  created at: 7/22/2011 4:10:45 PM  *****/
 
     /***** init section, begin *****/
     $("<?php echo $componentGlobalId; ?>").ready(function(){

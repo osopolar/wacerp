@@ -71,12 +71,11 @@ default:
     jquery.validationEngine: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine.js     # jquery.formValidator
     jquery.validationEngine.i18n: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh
 
-#    jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc2/jquery.jstree.js    # jquery.jstree
     jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc3/jquery.jstree.js    # jquery.jstree
 
-    jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload_1.4.3.2/plupload.full.js    # jquery.plupload
-    jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload_1.4.3.2/jquery.ui.plupload.js    # jquery.ui.plupload
-    jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload_1.4.3.2/i18n/cn.js    # jquery.plupload.i18n
+    jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.js    # jquery.plupload, remember also change the path in tpl _moduleUploadForm.php
+    jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.js    # jquery.ui.plupload
+    jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload/i18n/cn.js    # jquery.plupload.i18n
 #    jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.min.js    # jquery.plupload
 #    jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.min.js    # jquery.ui.plupload
 #    jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload/i18n/cn.js    # jquery.plupload.i18n

@@ -168,7 +168,7 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                         },
                         "create" : {
                             "icon" : _self.wacImagesPath + "js_icons/file.png",
-                            "label" : "<?php echo __("Create").__($invokeParams['config']["labelNode"]);?>",
+                            "label" : "<?php echo __("Upload").__($invokeParams['config']["labelNode"]);?>",
                             "action" : function (obj) {
 //                                Wac.log($(obj).attr("rel"));
                                 $.vakata.context.hide();
@@ -265,24 +265,6 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                             $(document).wacTool().dumpObj(this); // the options for this ajax request
                         }
                     });
-//                $.post(
-//                    _self.moduleUrl + "createNode",
-//                    {
-//                        "dataFormat" : "json",
-//                        "id" : data.rslt.parent.attr("id").replace("node_","").replace("copy_",""),
-//                        "position" : data.rslt.position,
-//                        "caption" : data.rslt.name,
-//                        "type" : data.rslt.obj.attr("rel")
-//                    },
-//                    function (r) {
-//                        if(r.status) {
-//                            $(data.rslt.obj).attr("id", "node_" + r.id);
-//                        }
-//                        else {
-//                            $.jstree.rollback(data.rlbk);
-//                        }
-//                    }
-//                );
             })
             .bind("remove.jstree", function (e, data) {
                 if(data.rslt.parent == -1){
@@ -315,24 +297,6 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                         });
                     });
                 }
-//                if(data !== undefined){
-//                    data.rslt.obj.each(function () {
-//                        $.ajax({
-//                            async : false,
-//                            type: 'POST',
-//                            url: _self.moduleUrl + "removeNode",
-//                            data : {
-//                                "dataFormat" : "json",
-//                                "id" : this.id.replace("node_","").replace("copy_","")
-//                            },
-//                            success : function (r) {
-//                                if(!r.status) {
-//                                    data.inst.refresh();
-//                                }
-//                            }
-//                        });
-//                    });
-//                }
             })
             .bind("rename.jstree", function (e, data) {
                 var params = {
@@ -359,19 +323,6 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                         $(document).wacTool().dumpObj(this); // the options for this ajax request
                     }
                 });
-//                $.post(
-//                    _self.moduleUrl + "editNode",
-//                    {
-//                        "dataFormat" : "json",
-//                        "id" : data.rslt.obj.attr("id").replace("node_","").replace("copy_",""),
-//                        "caption" : data.rslt.new_name
-//                    },
-//                    function (r) {
-//                        if(!r.status) {
-//                            $.jstree.rollback(data.rlbk);
-//                        }
-//                    }
-//                );
             })
             .bind("move_node.jstree", function (e, data) {
                 data.rslt.o.each(function (i) {
@@ -405,39 +356,12 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
                         }
                     });
                 });
-
-//                data.rslt.o.each(function (i) {
-//                    $.ajax({
-//                        async : false,
-//                        type: 'POST',
-//                        url: _self.moduleUrl + "moveNode",
-//                        data : {
-//                            "dataFormat" : "json",
-//                            "id" : $(this).attr("id").replace("node_","").replace("copy_",""),
-//                            "target_parent_id" : data.rslt.np.attr("id").replace("node_","").replace("copy_",""),
-//                            "position" : data.rslt.cp + i,
-//                            "caption" : data.rslt.name,
-//                            "copy" : data.rslt.cy ? 1 : 0
-//                        },
-//                        success : function (r) {
-//                            if(!r.status) {
-//                                $.jstree.rollback(data.rlbk);
-//                            }
-//                            else {
-//                                $(data.rslt.oc).attr("id", "node_" + r.id);
-//                                if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-//                                    data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-//                                }
-//                            }
-//                        }
-//                    });
-//                });
             });
         };  // init end
 
         this.bindEvents = function(){
             $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_file_upload_complete, function ($self, data) {  // listenerid, event name, callback
-                var node = $("li#"+data.id);
+                var node = $("li#"+data.parent_id);
                 $(_self.componentGlobalId).jstree("open_node", node);
                 $(_self.componentGlobalId).jstree("refresh", node);
 //                Wac.log("upload complete: ");
