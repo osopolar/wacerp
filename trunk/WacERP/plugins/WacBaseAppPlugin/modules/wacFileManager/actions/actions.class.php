@@ -23,8 +23,6 @@ class wacFileManagerActions extends WacTreeActions {
         $jsonRpcUploadHelper = JsonRpcUploadHelper::getInstance();
         $jsonRpcData = JsonRpcData::getInstance();
 
-//        $resultSet = $jsonRpcData->getErrMsg("101");
-
         $resultSet = $jsonRpcData->getSuccMsg();
         try{
             // register a listener when upload finish
@@ -36,7 +34,8 @@ class wacFileManagerActions extends WacTreeActions {
             $resultSet = $jsonRpcData->getErrMsg($e->getCode());
         }
         catch(sfException $e){
-            throw new sfException("Wac Error: sth wrong when upload '!");
+            throw new sfException("Wac Error: ".$e->getMessage());
+
         }
         
         return OutputHelper::getInstance()->output($resultSet, $this);

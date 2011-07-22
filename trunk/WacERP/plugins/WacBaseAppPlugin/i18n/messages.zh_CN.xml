@@ -321,6 +321,10 @@
         <source>Category Directory</source>
         <target>分类目录</target>
       </trans-unit>
+      <trans-unit>
+        <source>Upload</source>
+        <target>上传</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

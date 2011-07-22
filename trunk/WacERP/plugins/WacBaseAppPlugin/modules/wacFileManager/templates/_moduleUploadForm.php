@@ -13,8 +13,9 @@ $moduleGlobalName        = $moduleName.$invokeParams['attachInfo']['uiid'];
 $componentGlobalName     = WacModuleHelper::getUploadFormId($moduleName, $invokeParams['attachInfo']);
 $componentGlobalId       = "#".$componentGlobalName;
 $componentCaption        = WacModule::getInstance()->getCaption($moduleName);
-$componentFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $invokeParams['attachInfo']);
+//$componentFormDialogName = WacModuleHelper::getFormDialogId($moduleName, $invokeParams['attachInfo']);
 $componentFormName       = WacModuleHelper::getFormId($moduleName, $invokeParams['attachInfo']);
+$componentFormId         = "#".$componentFormName;
 $componentUploaderName   = WacModuleHelper::getElementId($moduleName, $invokeParams['attachInfo'], 'uploader');
 $componentUploaderId     = "#".$componentUploaderName;
 $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invokeParams['config']['isHidden']) ? "display: none;" : "display: inline;";
@@ -22,7 +23,7 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 ?>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentFormName, true); ?>
-<div id="<?php echo $componentFormDialogName; ?>" style="<?php echo $cfgDialogDisplay;?>">
+<div id="<?php echo $componentGlobalName; ?>" style="<?php echo $cfgDialogDisplay;?>">
     <form name="<?php echo $componentFormName; ?>" id="<?php echo $componentFormName; ?>" method="post" action="">
         <div id="<?php echo $componentUploaderName; ?>">
             <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
@@ -32,37 +33,47 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
 
 <script type="text/javascript">
     //<![CDATA[
-    $("#<?php echo $componentFormDialogName; ?>").ready(function(){
-        var wacImagesPath       = <?php echo "'" . sfConfig::get("app_wac_setting_images_path") . "'" ?>;
+    /*****  Component, by Ben Bi <prince.bi@gmail.com>  created at: 7/22/2011 4:10:45 PM  *****/
 
-        var moduleName          = <?php echo "'{$moduleName}'" ?>;
-        var moduleUrl           = WacAppConfig.baseUrl + moduleName + "/";
-        var moduleGlobalName    = <?php echo "'{$moduleGlobalName}'" ?>;
-        var componentGlobalName = <?php echo "'{$componentGlobalName}'" ?>;
-        var componentGlobalId   = <?php echo "'{$componentGlobalId}'" ?>;
-        var componentFormDialogId  = '#' + <?php echo "'{$componentFormDialogName}'" ?>;
-        var componentUploaderId = <?php echo "'{$componentUploaderId}'" ?>;
-        var componentCaption    = <?php echo "'{$componentCaption}'" ?>;
+    /***** init section, begin *****/
+    $("<?php echo $componentGlobalId; ?>").ready(function(){
+        var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
+    });
+    
+    function <?php echo ucfirst($componentGlobalName); ?>(){
+        var _self           = this;
 
-        var componentUploader;   // uploader obj, created when initUploadForm
+        this.appControllerId   = "wacAppController";  // be used to listen tab-remove event of the controller
+        this.moduleName        = <?php echo "'{$moduleName}'" ?>;
+        this.moduleUrl         = WacAppConfig.baseUrl + this.moduleName + "/";
+        this.moduleGlobalName  = <?php echo "'{$moduleGlobalName}'" ?>;
+        this.componentGlobalName = "<?php echo $componentGlobalName; ?>";
+        this.componentGlobalId = "<?php echo $componentGlobalId; ?>";
+        this.uiPanelId         = WacEntity.module.getUiPanelId(this.moduleName);  // to fix the bug that cannot remove dialog in tab panel when close tab, so need to point out the panel ui id here
 
-        function init(){
-            initUploadForm();
-            initDialog();
-            bindEvents();
+        this.formName       = "<?php echo $componentFormName; ?>";
+        this.formId         = "<?php echo $componentFormId; ?>";
+
+        this.componentUploader = null;   // uploader obj, created when initUploadForm
+        this.componentUploaderId = <?php echo "'{$componentUploaderId}'" ?>;
+        this.componentCaption    = <?php echo "'{$componentCaption}'" ?>;
+
+        this.init = function(){
+            _self.initUploadForm();
+            _self.initDialog();
+            _self.bindEvents();
         };  // init end
 
-        function initUploadForm(){
+        this.initUploadForm = function(){
 //                $(function() {
             // Convert divs to queue widgets when the DOM is ready
-               $(componentUploaderId).plupload({
+               $(_self.componentUploaderId).plupload({
                     // General settings
-//                    runtimes : 'flash',
                     runtimes : 'flash,html4,html5,browserplus,silverlight,gears',
-                    url : moduleUrl + 'upload',
+                    url : _self.moduleUrl + 'upload',
                     max_file_size : '1000mb',
                     max_file_count: 20, // user can add no more then 20 files at a time
-                    chunk_size : '2mb',
+                    chunk_size : '1mb',
                     unique_names : true,
                     multiple_queues : true,
                     multipart_params: {dataFormat: '<?php echo WacDataFormatType::$jsonRPC; ?>', type: '<?php echo JsTreeDataHelper::$typeLeaf; ?>'},
@@ -83,18 +94,18 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
                     ],
 
                     // Flash settings
-                    flash_swf_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.flash.swf',
+                    flash_swf_url : WacAppConfig.app_wac_setting_js_path + 'jquery/plugins/plupload/plupload.flash.swf',
 
                     // Silverlight settings
-                    silverlight_xap_url : WacAppConfig.app_wac_setting_js_path + '/jquery/plugins/plupload/plupload.silverlight.xap'
+                    silverlight_xap_url : WacAppConfig.app_wac_setting_js_path + 'jquery/plugins/plupload/plupload.silverlight.xap'
                 });
 
-                componentUploader = $(componentUploaderId).plupload('getUploader');
+                _self.componentUploader = $(_self.componentUploaderId).plupload('getUploader');
 
         };  // initUploadForm end
 
-        function initDialog(){
-            $(componentFormDialogId).dialog({
+        this.initDialog = function(){
+            $(_self.componentGlobalId).dialog({
                 bgiframe: true,
                 modal: true,
                 width: 860,
@@ -105,51 +116,42 @@ $cfgDialogDisplay        = (isset($invokeParams['config']['isHidden']) && $invok
             });
         };
 
-        function bindEvents()
-        {
-//            componentUploader.bind('UploadFile', function(up, file) {
+        this.bindEvents = function(){
+//            _self.componentUploader.bind('UploadFile', function(up, file) {
 //                Wac.log("UploadFile");
-//                Wac.log("length: " + $(componentUploader.files).length);
+//                Wac.log("length: " + $(_self.componentUploader.files).length);
 //                Wac.log(up.settings.multipart_params);
 //            });
 
-//            componentUploader.bind('UploadComplete', function(/up, files) {
+//            _self.componentUploader.bind('UploadComplete', function(/up, files) {
 //                Wac.log("UploadComplete");
 //                Wac.log(up.settings.multipart_params);
-////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, componentUploader.settings.multipart_params);
+////                $.shout(modulePrefixId + WacAppConfig.event.app_wac_events_file_upload_complete, _self.componentUploader.settings.multipart_params);
 //            });
 
-            $(document).hear(componentFormDialogId, moduleGlobalName + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
-                $.extend(componentUploader.settings.multipart_params, { id : data.id });
-//                Wac.log($(componentUploader.files).length);
-//                if($(componentUploader.files).length > 0){
-//                    $(componentUploader.files).each(function(i, file){
-//                        componentUploader.removeFile(file);
-//                    })
-//                }
-                $(componentFormDialogId).dialog('open');
+            $(document).hear(_self.componentGlobalId, _self.moduleGlobalName + WacAppConfig.event.app_wac_events_show_file_upload_form, function ($self, data) {  // listenerid, event name, callback
+                $.extend(_self.componentUploader.settings.multipart_params, { parent_id : data.id });
+                $(_self.componentGlobalId).dialog('open');
             });
 
-            $( componentFormDialogId).bind( "dialogclose", function(event, ui) {
-                $.shout(moduleGlobalName + WacAppConfig.event.app_wac_events_file_upload_complete, componentUploader.settings.multipart_params);
+            $( _self.componentGlobalId).bind( "dialogclose", function(event, ui) {
+                $.shout(_self.moduleGlobalName + WacAppConfig.event.app_wac_events_file_upload_complete, _self.componentUploader.settings.multipart_params);
             });
 
             // fix dialog div didnt remove bug, remove it by this way
-            var uiPanelId = WacEntity.module.getUiPanelId(moduleName);
             $("#wacAppSystemController").unbind('tabsremove');
             $("#wacAppSystemController").bind('tabsremove', function(event, ui) {
-//               Wac.log("ui.panel.id:" + ui.panel.id + " : " + uiPanelId);
-                if(ui.panel.id == uiPanelId)
+                if(ui.panel.id == _self.uiPanelId)
                 {
-                    $(componentFormDialogId).remove();  //remove dialog form
+                    $(_self.componentGlobalId).remove();  //remove dialog form
                 }
             });
         };  //bindEvnts end
 
-        init();
+        this.init();
 
-    })
-    //]]>
+    }
+//]]>
 </script>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentFormName, false); ?>
