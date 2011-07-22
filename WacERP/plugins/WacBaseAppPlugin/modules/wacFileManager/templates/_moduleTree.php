@@ -48,9 +48,9 @@ $rootNode = Doctrine::getTable(WacTable::getTableByModule($moduleName))->getUser
         this.modelEntity     = {};
 
         this.init = function(){
-            initTree();
-            bindEvents();
-        };  // init end
+            _self.initTree();
+            _self.bindEvents();
+        };
 
         this.initTree = function(){
             $(_self.componentGlobalId)
