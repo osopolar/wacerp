@@ -5,8 +5,21 @@
         ?>
     </div>
     <?php
-            include_component("appStockController", "desktop");
+    /* stock desktop */
+//            include_component("appStockController", "desktop");
 
+    include_component(
+        "wacFileManager",
+        WacComponentList::$fileManagerWidget,
+        array(
+            'method'        => WacWidgetHelper::$methodComponent,
+            'enableWidgets' => array(// enable sub widgets
+                WacComponentList::$moduleTree,
+                WacComponentList::$moduleUploadForm
+            )
+        ));
+
+    /* category */
 //              echo WacWidgetHelper::getInstance()->getWidget(
 //                    "wacCategory", // be invoked module name
 //                    WacComponentList::$categoryManagerWidget, // be invoked widget name
@@ -26,7 +39,7 @@
 //                        )));
 
 
-
+    /* */
 //            include_component("wacStorehouse", "modulePanelForm", array(
 //                            'invokeParams' => array(
 //                                'contextInfo' => $contextInfo,

@@ -373,8 +373,7 @@ $rootNode = WacModuleHelper::getInstance()->getModuleTable($moduleName, $moduleT
 
                 $(_self.componentGlobalId).jstree("set_focus");
                 if(_self.modelEntity.id == "0"){  // new node
-//                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
-                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name});
+                    $(_self.componentGlobalId).jstree("create", null, "last", {"attr":{ "rel":data.type}, "data":data.name}, null, true);
                 }
                 else{  // edit node
                     _self.editNode();
