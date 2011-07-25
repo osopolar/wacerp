@@ -25,8 +25,8 @@ default:
 
     ui.panel: /WacBaseAppPlugin/css/jquery/plugins/ist-ui-panel/ui.panel.css
 
-#    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.1/ui.jqgrid.css
-    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
+#    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
+    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-4.1.2/ui.jqgrid.css
 
     jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload_1.4.3.2/css/jquery.ui.plupload.css
 
@@ -51,10 +51,10 @@ default:
 
     wac.configuration: /wacConfiguration/getFrontendEnvSetting/dataFormat/pureText  # Load WAC Ria frontend environment vars, from wacConfiguration module
 
-#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.min.js     # jquery-ui
 #    jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-i18n.js     # jquery-ui-i18n
-    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.14.custom/jquery-ui-1.8.14.custom.min.js     # jquery-ui
+#    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.9.custom/jquery-ui-1.8.9.custom.min.js     # jquery-ui
     jquery.ui.i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.14.custom/jquery-ui-i18n.js     # jquery-ui-i18n
+    jquery.ui: /WacBaseAppPlugin/js/jquery/plugins/jquery-ui-1.8.14.custom/jquery-ui-1.8.14.custom.min.js     # jquery-ui
 
     jquery.shout: /WacBaseAppPlugin/js/jquery/plugins/jquery-shout/jquery.shout.js     # jquery-shout
     jquery.prop-i18n: /WacBaseAppPlugin/js/jquery/plugins/jquery.prop-i18n/jquery.i18n.properties.js  #jquery.i18n.properties
@@ -65,8 +65,10 @@ default:
     jquery.blockUI: /WacBaseAppPlugin/js/jquery/plugins/blockUI/jquery.blockUI.js     # jquery.blockUI
     jquery.ui.panel: /WacBaseAppPlugin/js/jquery/plugins/ist-ui-panel/ui.panel.min.js     # jquery.ui.panel
 
-    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
-    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/jquery.jqGrid.min.js     # jquery.jqGrid
+#    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
+#    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-3.8.2/jquery.jqGrid.min.js     # jquery.jqGrid
+    jquery.grid.locale: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-4.1.2/i18n/grid.locale-cn.js     # jqgrid.jqGrid.locale
+    jquery.jqGrid: /WacBaseAppPlugin/js/jquery/plugins/jquery.jqGrid-4.1.2/jquery.jqGrid.min.js     # jquery.jqGrid
 
     jquery.validationEngine: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine.js     # jquery.formValidator
     jquery.validationEngine.i18n: /WacBaseAppPlugin/js/jquery/plugins/formValidator/jquery.validationEngine-zh-cn.js     # jquery.validationEngine-zh

@@ -17,24 +17,11 @@ $componentGlobalId    = "#".$componentGlobalName;
     </div>
 
     <div id="lRight_<?php echo $componentGlobalName;?>" class="wacPanelRight">
-        <div id="infoNotificationPanel" class="wacNavPanel">
-            <h3>Right panel #1</h3>
-            <div>
-		Panel's initial options:
-                <ul>
-                    <li>collapseType = slide-right</li>
-                    <li>collapsed = true</li>
-                    <li>trueVerticalText = true</li>
-                    <li>vHeight = 237px</li>
-                    <li>width = 200px</li>
-                </ul>
-                <b>Notes:</b>
-                <ul>
-                    <li>'collapsed' option set to 'true' tells panel to be initially rendered in collapsed state.</li>
-                </ul>
-            </div>
-        </div>
+        <?php
+            include_component("appStockController", "toolbarPanel");  // toolbar panel
+        ?>
     </div>
+    
     <div id="lCenter_<?php echo $componentGlobalName;?>" class="wacPanelCenter">
         <div id="content_<?php echo $componentGlobalName;?>" class="wacPanelDesktop"></div>
     </div>
@@ -43,14 +30,6 @@ $componentGlobalId    = "#".$componentGlobalName;
 <script type="text/javascript">
     $(document).ready(function(){
         var <?php echo $componentGlobalName; ?> = new <?php echo ucfirst($componentGlobalName); ?>();
-        
-        $('#infoNotificationPanel').panel({
-            collapseType:'slide-right',
-            collapsed:true,
-            trueVerticalText:true,
-            vHeight:'160px',
-            width:'200px'
-        });
     });
 
     function <?php echo ucfirst($componentGlobalName); ?>(){

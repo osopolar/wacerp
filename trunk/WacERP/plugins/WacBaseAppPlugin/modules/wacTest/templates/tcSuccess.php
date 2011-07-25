@@ -6,18 +6,20 @@
     </div>
     <?php
     /* stock desktop */
-//            include_component("appStockController", "desktop");
+            include_component("appStockController", "desktop");
 
-    include_component(
-        "wacFileManager",
-        WacComponentList::$fileManagerWidget,
-        array(
-            'method'        => WacWidgetHelper::$methodComponent,
-            'enableWidgets' => array(// enable sub widgets
-                WacComponentList::$moduleTree,
-                WacComponentList::$moduleUploadForm
-            )
-        ));
+//    include_component("wacGuardUser", WacComponentList::$moduleIndexListWidget);
+
+//    include_component(
+//        "wacFileManager",
+//        WacComponentList::$fileManagerWidget,
+//        array(
+//            'method'        => WacWidgetHelper::$methodComponent,
+//            'enableWidgets' => array(// enable sub widgets
+//                WacComponentList::$moduleTree,
+//                WacComponentList::$moduleUploadForm
+//            )
+//        ));
 
     /* category */
 //              echo WacWidgetHelper::getInstance()->getWidget(

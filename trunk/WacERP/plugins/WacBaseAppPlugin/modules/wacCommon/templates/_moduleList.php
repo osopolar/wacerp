@@ -66,6 +66,7 @@ $componentCaption        = WacModule::getInstance()->getCaption($moduleName) . _
                         ],
                         jsonReader : WacEntity.jsonReader,
                         rowNum:10,
+                        rownumbers: true,
                         rowList:[5,10,20,30,40,50],
                         sortname: 'id',
                         sortorder: "desc",

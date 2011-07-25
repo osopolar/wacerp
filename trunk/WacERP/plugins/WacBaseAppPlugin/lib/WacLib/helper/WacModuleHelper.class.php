@@ -615,4 +615,19 @@ class WacModuleHelper
             sfConfig::set($moduleTableKey, Doctrine::getTable(self::getModuleTableName($moduleName, $tableName)));
         }
     }
+
+
+    /*
+     * getComponentGlobalName
+     */
+    public static function getComponentGlobalName($contextInfo){
+        return $contextInfo["componentName"]."_".$contextInfo["moduleName"]."_".uniqid();
+    }
+
+    /*
+     * getModuleGlobalName
+     */
+    public static function getComponentGlobalName($contextInfo){
+        return $contextInfo["moduleName"]."_".uniqid();
+    }
 }
