@@ -2,7 +2,6 @@
 *    STYLES FOR: complex.html
 *
 *    Created with ThemeRoller...
-*    http://ui.jquery.com/themeroller/?bgColorDefault=e0e0e0&bgTextureDefault=02_glass.png&bgImgOpacityDefault=80&borderColorDefault=cccccc&fcDefault=444444&iconColorDefault=888888&bgColorHover=d8d8d8&bgTextureHover=02_glass.png&bgImgOpacityHover=90&borderColorHover=888888&fcHover=111111&iconColorHover=222222&bgColorActive=8ab9ff&bgTextureActive=02_glass.png&bgImgOpacityActive=50&borderColorActive=2694e8&fcActive=000000&iconColorActive=ffffff&bgColorContent=f3f3f3&fcContent=362b36&ffDefault=Lucida%20Grande,%20Lucida%20Sans,%20Arial,%20sans-serif&fwDefault=normal&fsDefault=1.2&fsDefaultUnit=em#bgColorDefault=d6d6d6&bgTextureDefault=02_glass.png&bgImgOpacityDefault=80&borderColorDefault=bbbbbb&fcDefault=000000&iconColorDefault=444444&bgColorHover=eeeeee&bgTextureHover=02_glass.png&bgImgOpacityHover=90&borderColorHover=cccccc&fcHover=000066&iconColorHover=000066&bgColorActive=80ade5&bgTextureActive=04_highlight_hard.png&bgImgOpacityActive=100&borderColorActive=266cc0&fcActive=000000&iconColorActive=ffffff&bgColorContent=D1E6FC&bgTextureContent=10_dots_medium.png&bgImgOpacityContent=90&borderColorContent=bbbbbb&fcContent=000000&iconColorContent=222222&ffDefault=Lucida+Grande%2C+Lucida+Sans%2C+Arial%2C+sans-serif&fwDefault=normal&fsDefault=1&fsDefaultUnit=em
 */
 
 
@@ -341,3 +340,10 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
 .selectable .ui-selected { background: #F39814; color: white; }
 .selectable { list-style-type: none; margin: 0; padding: 0; }
 .selectable li { cursor: pointer; margin: 3px; padding: 1px; float: left; width: 20px; height: 20px; font-size: 11px; text-align: center; }
+
+.toolboxList .ui-selecting { background: #FECA40; }
+.toolboxList .ui-selected { background: #F39814; color: white; }
+.toolboxList { list-style-type: none; margin: 0; padding: 0; }
+.toolboxList li { cursor: pointer; margin: 3px; padding: 1px; float: left; min-width: 50px; height: 25px; font-size: 11px; font-weight: bold; text-align: center; }
+/*.wac-button-calendar { background: url(images/js_icons/calendar_view_month.png) no-repeat center; }
+.ui-button-icon-primary .ui-icon .ui-icon-wac-calendar { background-image: url(images/js_icons/calendar_view_month.png); }*/

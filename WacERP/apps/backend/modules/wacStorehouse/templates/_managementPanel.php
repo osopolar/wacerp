@@ -2,7 +2,7 @@
 $attachInfo = array("uiid" => WacWidgetHelper::getInstance()->getUiid($contextInfo));
 $moduleName           = $contextInfo['moduleName'];
 $moduleGlobalName     = $moduleName.$attachInfo['uiid'];
-$componentGlobalName  = WacModuleHelper::getNavPanelId($moduleName, $attachInfo);
+$componentGlobalName  = WacModuleHelper::getManagementPanelId($moduleName, $attachInfo);
 $componentGlobalId    = "#".$componentGlobalName;
 ?>
 

@@ -18,7 +18,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 
     <div id="lRight_<?php echo $componentGlobalName;?>" class="wacPanelRight">
         <?php
-            include_component("appStockController", "toolbarPanel");  // toolbar panel
+            include_component("appStockController", "toolboxPanel");  // toolbar panel
         ?>
     </div>
     
