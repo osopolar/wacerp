@@ -325,6 +325,10 @@
         <source>Upload</source>
         <target>上传</target>
       </trans-unit>
+      <trans-unit>
+        <source>Toolbox</source>
+        <target>工具箱</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

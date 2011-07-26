@@ -149,7 +149,7 @@ class WacModuleHelper
      */
     public static function getElementId($module, $attachInfo=array(), $element="")
     {
-        return isset($attachInfo["uiid"]) ? $element."_".$module.$attachInfo["uiid"] : $element."_".$module;
+        return isset($attachInfo["uiid"]) ? $element."_".$module."_".$attachInfo["uiid"] : $element."_".$module;
     }
 
     /*
@@ -616,18 +616,11 @@ class WacModuleHelper
         }
     }
 
-
     /*
      * getComponentGlobalName
      */
-    public static function getComponentGlobalName($contextInfo){
-        return $contextInfo["componentName"]."_".$contextInfo["moduleName"]."_".uniqid();
+    public static function getComponentGlobalName($contextInfo, $attachInfo){
+        return $contextInfo["componentName"]."_".$contextInfo["moduleName"]."_".$attachInfo['uiid'];
     }
 
-    /*
-     * getModuleGlobalName
-     */
-    public static function getComponentGlobalName($contextInfo){
-        return $contextInfo["moduleName"]."_".uniqid();
-    }
 }
