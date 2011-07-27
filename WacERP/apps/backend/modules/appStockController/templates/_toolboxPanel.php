@@ -21,7 +21,7 @@ $componentGlobalId    = "#".$componentGlobalName;
                 <span class="ui-button-text"><?php echo __("Calculator");?></span>
             </li>
             <li class="ui-button ui-corner-all ui-state-default ui-button-text-icon-primary" title="<?php echo __("Calendar");?>">
-                <span class="ui-button-icon-primary ui-icon ui-icon-wac-calendar"></span>
+                <span class="ui-button-icon-primary ui-icon-wac-calendar"></span>
                 <span class="ui-button-text"><?php echo __("Calendar");?></span>
             </li>
         </ol>
@@ -70,6 +70,8 @@ $componentGlobalId    = "#".$componentGlobalName;
                 trueVerticalText:true,
                 vHeight:'160px',
                 width:'200px'
+//                width:'200px',
+//                titleTextClass:"wacToolbox"
             });
         };
 
