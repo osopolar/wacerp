@@ -14,4 +14,5 @@
 .ui-panel-clps-pnl {float:left;padding:0.1em 0.25em 0.3em;position:relative;top:-0.1em;}
 .ui-panel-vtitle {overflow:hidden;position:relative;white-space:nowrap;}
 .ui-panel-vtext {display:block;}
-.ui-panel-vtext-ie {bottom:1.5em;filter:flipv() fliph();left:0.2em;position:absolute;writing-mode:tb-rl;}
+/*.ui-panel-vtext-ie {bottom:1.5em;filter:flipv() fliph();left:0.2em;position:absolute;writing-mode:tb-rl;}*/
+.ui-panel-vtext-ie {bottom:1.5em;filter:flipv() fliph() fliph() flipv();left:0;position:absolute;writing-mode:tb-rl;}

@@ -345,5 +345,5 @@ span.button-close-east:hover    { background: url(images/ui_layout/go-rt-on.gif)
 .toolboxList .ui-selected { background: #F39814; color: white; }
 .toolboxList { list-style-type: none; margin: 0; padding: 0; }
 .toolboxList li { cursor: pointer; margin: 3px; padding: 1px; float: left; min-width: 50px; height: 25px; font-size: 11px; font-weight: bold; text-align: center; }
-/*.wac-button-calendar { background: url(images/js_icons/calendar_view_month.png) no-repeat center; }
-.ui-button-icon-primary .ui-icon .ui-icon-wac-calendar { background-image: url(images/js_icons/calendar_view_month.png); }*/
+/*.wac-button-calendar { background: url(images/js_icons/calendar_view_month.png) no-repeat center; }*/
+.ui-icon-wac-calendar { background-image: url('images/js_icons/calendar_view_month.png') }

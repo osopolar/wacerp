@@ -173,3 +173,5 @@
 .wacTable{padding:5px;border:solid 1px #000;}
 .wacTableTitle{padding: 2px; min-width: 25px; border-bottom: 1px solid rgb(0, 0, 0); background-color: rgb(139, 164, 209); color: rgb(255, 255, 255);}
 .wacTableField{font-size: 11pt; border-bottom: 1px solid rgb(0, 0, 0); background-color: rgb(255, 255, 255);}
+
+/*.wacToolbox {cursor:pointer; margin-left:0.3em; font-size: 11pt; padding-left:18px; background: url('images/js_icons/setting_tools.png')  0 1px no-repeat;}*/
