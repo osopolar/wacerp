@@ -43,4 +43,5 @@ all:
 #    show_tree_entity_dialog: _show_tree_entity_dialog
 #    close_tree_entity_dialog: _close_tree_entity_dialog
     file_upload_complete: _file_upload_complete_evt
+    toolbox_click: _toolbox_click_evt
 
