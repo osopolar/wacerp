@@ -3,7 +3,7 @@ $moduleName           = $invokeParams['contextInfo']['moduleName'];
 $moduleGlobalName     = $moduleName.$invokeParams['attachInfo']['uiid'];
 $componentGlobalName  = WacModuleHelper::getElementId($moduleName, $invokeParams['attachInfo'], "calendar");
 $componentGlobalId    = "#".$componentGlobalName;
-$triggerEvent         = $invokeParams['attachInfo']["button"]->clickEvent;
+$triggerEvent         = $invokeParams['attachInfo']["button"]->triggerEvent;
 ?>
 
 <script type="text/javascript">
@@ -42,9 +42,9 @@ $triggerEvent         = $invokeParams['attachInfo']["button"]->clickEvent;
         this.initData = function(){};
 
         this.bindEvents = function(){
-            $(document).hear(_self.componentGlobalId, "<?php echo $triggerEvent ?>", function ($self, data) {  // listenerid, event name, callback
-                Wac.log("sth happen");
-            });
+//            $(document).hear(_self.componentGlobalId, "<?php echo $triggerEvent ?>", function ($self, data) {  // listenerid, event name, callback
+//                Wac.log("sth happen");
+//            });
         };
 
         this.init();  // init method

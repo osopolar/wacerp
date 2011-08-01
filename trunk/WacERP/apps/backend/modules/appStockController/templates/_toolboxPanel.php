@@ -15,13 +15,13 @@ $componentGlobalId    = "#".$componentGlobalName;
         <ol id="toolbox_<?php echo $componentGlobalName;?>" class="toolboxList">
             <?php
                 $liPattern =
-                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\">
+                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\" evt=\"%s\">
                     <span class=\"ui-button-icon-primary ui-icon ui-icon-search\"></span>
                     <span class=\"ui-button-text\">%s</span>
                 </li>";
                 if(count($toolboxBtns)>0){
                     foreach($toolboxBtns as $toolboxBtn){
-                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->label);
+                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->triggerEvent, $toolboxBtn->label);
                     }
                 }
             ?>
@@ -66,7 +66,23 @@ if(count($toolboxBtns)>0){
         };
 
         this.initLayout = function(){
-            $("#toolbox_" + _self.componentGlobalName).selectable();
+            $("#toolbox_" + _self.componentGlobalName).selectable({
+                selected: function(event, ui) {
+                    var index = $("#toolbox_" + _self.componentGlobalName + " li").index( this );
+                    Wac.log($(index).attr("evt"));
+//                        children.selectedItems = [];
+//                        $( ".ui-selected", this ).each(function() {
+//                            var index = $("#list_"+children.componentGlobalName+" li").index( this );
+//                            children.selectedItems.push(jsonData['items'][index]);
+//                        });
+//
+//                        $("body").data(children.moduleName + "/selectedItem", children.selectedItems[0]);
+//                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {
+//                            moduleName: children.moduleName,
+//                            selectedItems: children.selectedItems
+//                            });
+                    }
+            });
 
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-right',
@@ -82,12 +98,10 @@ if(count($toolboxBtns)>0){
         this.initData = function(){};
 
         this.bindEvents = function(){
-//            $("#mp_" + _self.componentGlobalName).bind("click", function(){
-//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
-//            });
-//
-//            $("#mc_" + _self.componentGlobalName).bind("click", function(){
-//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
+//            $("#toolbox_" + _self.componentGlobalName + " li").bind("click", function(event){
+//                Wac.log("#toolbox_" + _self.componentGlobalName + " li");
+//                Wac.log($(this).attr(event));
+////                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
 //            });
         };
 

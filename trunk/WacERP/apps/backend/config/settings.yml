@@ -49,6 +49,7 @@ all:
       - wacSystemParameter
       - wacFileManager
       - wacCategory
+      - wacToolbox
 
     
     # Form security secret (CSRF protection)
