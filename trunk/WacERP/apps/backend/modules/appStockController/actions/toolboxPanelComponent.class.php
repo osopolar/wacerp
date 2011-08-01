@@ -23,8 +23,8 @@ class toolboxPanelComponent extends WacComponent
         $btnOptions->invokeComponentName  = "options";
         $btnOptions->icon             = "Gear-icon.png";
         $btnOptions->label            = $this->i18n->__("Options");
-        $btnOptions->clickEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
-        $btnOptions->clickEventParams = array();
+        $btnOptions->triggerEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
+        $btnOptions->triggerEventParams = array();
         $this->toolboxBtns->attach($btnOptions);
 
         $btnCalculator = new StdClass;
@@ -32,8 +32,8 @@ class toolboxPanelComponent extends WacComponent
         $btnCalculator->invokeComponentName  = "calculator";
         $btnCalculator->icon             = "Gear-icon.png";
         $btnCalculator->label            = $this->i18n->__("Calculator");
-        $btnCalculator->clickEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
-        $btnCalculator->clickEventParams = array();
+        $btnCalculator->triggerEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
+        $btnCalculator->triggerEventParams = array();
         $this->toolboxBtns->attach($btnCalculator);
 
         $btnCalendar = new StdClass;
@@ -41,8 +41,8 @@ class toolboxPanelComponent extends WacComponent
         $btnCalendar->invokeComponentName  = "calendar";
         $btnCalendar->icon             = "Gear-icon.png";
         $btnCalendar->label            = $this->i18n->__("Calendar");
-        $btnCalendar->clickEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
-        $btnCalendar->clickEventParams = array();
+        $btnCalendar->triggerEvent       = $this->innerContextInfo["moduleName"].sfConfig::get("app_wac_events_toolbox_click");
+        $btnCalendar->triggerEventParams = array();
         $this->toolboxBtns->attach($btnCalendar);
 
 
