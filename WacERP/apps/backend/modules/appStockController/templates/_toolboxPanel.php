@@ -4,6 +4,7 @@ $moduleName           = $contextInfo['moduleName'];
 $moduleGlobalName     = WacModuleHelper::getModuleGlobalName($moduleName, $attachInfo);
 $componentGlobalName  = WacModuleHelper::getComponentGlobalName($contextInfo, $attachInfo);
 $componentGlobalId    = "#".$componentGlobalName;
+
 ?>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
@@ -12,21 +13,38 @@ $componentGlobalId    = "#".$componentGlobalName;
     <h3><?php echo __("Toolbox");?></h3>
     <div>
         <ol id="toolbox_<?php echo $componentGlobalName;?>" class="toolboxList">
-            <li class="ui-button ui-corner-all ui-state-default ui-button-text-icon-primary" title="<?php echo __("Options");?>">
-                <span class="ui-button-icon-primary ui-icon ui-icon-search"></span>
-                <span class="ui-button-text"><?php echo __("Options");?></span>
-            </li>
-            <li class="ui-button ui-corner-all ui-state-default ui-button-text-icon-primary" title="<?php echo __("Calculator");?>">
-                <span class="ui-button-icon-primary ui-icon ui-icon-search"></span>
-                <span class="ui-button-text"><?php echo __("Calculator");?></span>
-            </li>
-            <li class="ui-button ui-corner-all ui-state-default ui-button-text-icon-primary" title="<?php echo __("Calendar");?>">
-                <span class="ui-button-icon-primary ui-icon-wac-calendar"></span>
-                <span class="ui-button-text"><?php echo __("Calendar");?></span>
-            </li>
+            <?php
+                $liPattern =
+                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\">
+                    <span class=\"ui-button-icon-primary ui-icon ui-icon-search\"></span>
+                    <span class=\"ui-button-text\">%s</span>
+                </li>";
+                if(count($toolboxBtns)>0){
+                    foreach($toolboxBtns as $toolboxBtn){
+                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->label);
+                    }
+                }
+            ?>
         </ol>
     </div>
 </div>
+
+<?php
+if(count($toolboxBtns)>0){
+    foreach($toolboxBtns as $toolboxBtn){
+        include_component($toolboxBtn->invokeModuleName, $toolboxBtn->invokeComponentName,
+                array(
+                    'invokeParams' => array(
+                        'contextInfo' => $contextInfo,
+                        'attachInfo' => array(
+                            "button" => $toolboxBtn,   // StdClass, defined in its component
+                            "uiid"   => $attachInfo["uiid"]
+                        )
+                    )
+        ));
+    }
+}
+?>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -48,21 +66,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
-            $("#toolbox_" + _self.componentGlobalName).selectable({
-//                    stop: function() {
-//                        _self.selectedItems = [];
-//                        $( ".ui-selected", this ).each(function() {
-//                            var index = $("#list_"+_self.componentGlobalName+" li").index( this );
-//                            _self.selectedItems.push(jsonData['items'][index]);
-//                        });
-//
-//                        $("body").data(_self.moduleName + "/selectedItem", _self.selectedItems[0]);
-//                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {
-//                            moduleName: _self.moduleName,
-//                            selectedItems: _self.selectedItems
-//                            });
-//                    }
-                });
+            $("#toolbox_" + _self.componentGlobalName).selectable();
 
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-right',
