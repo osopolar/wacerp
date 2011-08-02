@@ -26,26 +26,39 @@ $triggerEvent         = $invokeParams['attachInfo']["button"]->triggerEvent;
         };
 
         this.initLayout = function(){
-            $("#toolbox_" + _self.componentGlobalName).selectable();
-
-            $(_self.componentGlobalId).panel({
-                collapseType:'slide-right',
-//                collapsed:true,
-                trueVerticalText:true,
-                vHeight:'160px',
-                width:'200px'
-//                width:'200px',
-//                titleTextClass:"wacToolbox"
-            });
         };
 
         this.initData = function(){};
 
         this.bindEvents = function(){
-//            $(document).hear(_self.componentGlobalId, "<?php echo $triggerEvent ?>", function ($self, data) {  // listenerid, event name, callback
-//                Wac.log("sth happen");
-//            });
+            $(document).hear(_self.componentGlobalId, "<?php echo $triggerEvent ?>", function ($self, data) {  // listenerid, event name, callback
+                _self.showUI();
+            });
         };
+
+        this.showUI = function(){
+            $("body").append("<div id='" + _self.componentGlobalName + "' align='center' title='"+ $.i18n.prop('Calendar') +"'><div id='calendar_" + _self.componentGlobalName + "'></div></div>");
+
+            $(_self.componentGlobalId).dialog({
+                    bgiframe: true,
+                    modal: false,
+                    width: 285,
+                    height: 280,
+                    zIndex: 100,
+                    open: function(event, ui) {
+                        $( "#calendar_" + _self.componentGlobalName ).datepicker({
+//                            changeMonth: true,
+//                            changeYear: true
+                        });
+                    }
+//                    buttons: {
+//                        Ok: function() {
+//                            $(this).dialog('close');
+//                        }
+//                    }
+                });
+
+        }
 
         this.init();  // init method
     }

@@ -479,8 +479,8 @@ function WacNavPanelPrototype()
 {
     var _self = this;
 
-    var debug = true;
-//    var debug = false;
+//    var debug = true;
+    var debug = false;
 
     var pagerInfo = {currentPage: 1, totalPages:1, totalRecords:0};
 
@@ -540,6 +540,7 @@ function WacNavPanelPrototype()
 
         $(children.componentGlobalId).panel({
             collapseType:'slide-left',
+            collapsed:true,
             trueVerticalText:true,
             vHeight:'150px',
             width:'280px'

@@ -87,7 +87,19 @@
       </trans-unit>
       <trans-unit>
         <source>Cannot remove root node!</source>
-        <target>分类根不能被删除!</target>
+        <target>根分类不能被删除!</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Options</source>
+        <target>首选项</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Calendar</source>
+        <target>日历</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Calculator</source>
+        <target>计算器</target>
       </trans-unit>
     </body>
   </file>

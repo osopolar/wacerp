@@ -45,6 +45,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.initLayout = function(){
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-left',
+                collapsed:true,
                 trueVerticalText:true,
                 vHeight:'150px',
                 width:'280px'
