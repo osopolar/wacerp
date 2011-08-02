@@ -15,7 +15,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         <ol id="toolbox_<?php echo $componentGlobalName;?>" class="toolboxList">
             <?php
                 $liPattern =
-                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\" evt=\"%s\">
+                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\" triggerEvent=\"%s\">
                     <span class=\"ui-button-icon-primary ui-icon ui-icon-search\"></span>
                     <span class=\"ui-button-text\">%s</span>
                 </li>";
@@ -67,14 +67,17 @@ if(count($toolboxBtns)>0){
 
         this.initLayout = function(){
             $("#toolbox_" + _self.componentGlobalName).selectable({
-                selected: function(event, ui) {
-                    var index = $("#toolbox_" + _self.componentGlobalName + " li").index( this );
-                    Wac.log($(index).attr("evt"));
-//                        children.selectedItems = [];
-//                        $( ".ui-selected", this ).each(function() {
-//                            var index = $("#list_"+children.componentGlobalName+" li").index( this );
-//                            children.selectedItems.push(jsonData['items'][index]);
-//                        });
+                stop: function(event, ui) {
+                        var index;
+                        $( ".ui-selected", this ).each(function() {
+//                            index = $("#toolbox_"+_self.componentGlobalName+" li").index( this );
+//                            Wac.log("#toolbox_" + _self.componentGlobalName + " li" + ":" + index);
+                            $.shout($(this).attr("triggerEvent"), {
+                                                        moduleName: _self.moduleName,
+                                                        selectedItems: _self.selectedItems
+                                                        });
+                            Wac.log($(this).attr("triggerEvent"));
+                        });                        
 //
 //                        $("body").data(children.moduleName + "/selectedItem", children.selectedItems[0]);
 //                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {
