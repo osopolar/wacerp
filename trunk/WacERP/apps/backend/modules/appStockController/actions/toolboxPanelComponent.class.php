@@ -20,32 +20,35 @@ class toolboxPanelComponent extends WacComponent
 
         $toolboxBtn = new StdClass;
         $toolboxBtn->srcModuleName       = $this->innerContextInfo["moduleName"];
-        $toolboxBtn->invokeModuleName    = "wacToolbox";
-        $toolboxBtn->invokeComponentName = "options";
-        $toolboxBtn->icon                = "Gear-icon.png";
+        $toolboxBtn->invokeModuleName    = "appStockController";
+        $toolboxBtn->invokeComponentName = "";
+        $toolboxBtn->invokeAction        = "getManagementPanel";
+        $toolboxBtn->iconCss             = "wac-bi-options";
         $toolboxBtn->label               = $this->i18n->__("Options");
-        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click");
-        $toolboxBtn->triggerEventParams  = array();
+        $toolboxBtn->triggerEvent        = sfConfig::get("app_wac_events_show_management_panel");  // listened by the desktop
+        $toolboxBtn->loadComponent       = false;
         $this->toolboxBtns->attach($toolboxBtn);
 
         $toolboxBtn = new StdClass;
         $toolboxBtn->srcModuleName       = $this->innerContextInfo["moduleName"];
         $toolboxBtn->invokeModuleName    = "wacToolbox";
         $toolboxBtn->invokeComponentName = "calculator";
-        $toolboxBtn->icon                = "Gear-icon.png";
+        $toolboxBtn->invokeAction        = "";
+        $toolboxBtn->iconCss             = "wac-bi-calculator";
         $toolboxBtn->label               = $this->i18n->__("Calculator");
-        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click");
-        $toolboxBtn->triggerEventParams  = array();
+        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click"); // listened by the corresponding component
+        $toolboxBtn->loadComponent       = true;
         $this->toolboxBtns->attach($toolboxBtn);
 
         $toolboxBtn = new StdClass;
         $toolboxBtn->srcModuleName       = $this->innerContextInfo["moduleName"];
         $toolboxBtn->invokeModuleName    = "wacToolbox";
         $toolboxBtn->invokeComponentName = "calendar";
-        $toolboxBtn->icon                = "Gear-icon.png";
+        $toolboxBtn->invokeAction        = "";
+        $toolboxBtn->iconCss             = "wac-bi-calendar";
         $toolboxBtn->label               = $this->i18n->__("Calendar");
-        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click");
-        $toolboxBtn->triggerEventParams  = array();
+        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click"); // listened by the corresponding component
+        $toolboxBtn->loadComponent       = true;
         $this->toolboxBtns->attach($toolboxBtn);
 
 

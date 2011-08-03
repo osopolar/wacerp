@@ -329,6 +329,14 @@
         <source>Toolbox</source>
         <target>工具箱</target>
       </trans-unit>
+      <trans-unit>
+        <source>Options</source>
+        <target>首选项</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Panel</source>
+        <target>面板</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
