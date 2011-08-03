@@ -91,8 +91,7 @@ $componentGlobalId    = "#".$componentGlobalName;
             var panelContainer = uiPanelName + '_'+ data.moduleName + '_container';
 
             if($('#'+panelContainer).length == 0){
-                Wac.log(panelContainer, debug);
-                
+                $(document).wacPage().showBlockUILoader({id:_self.componentGlobalId});
                 $(_self.contentId).prepend("<div id='" + panelContainer + "'></div>");
                 $("#" + panelContainer).load(
                       WacAppConfig.baseUrl + data.moduleName + "/" + action,
@@ -102,6 +101,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 //                          $(document).oneTime("2s", function() {
 //				_self.setPanelsPos("absolute");
 //			  });
+                          $(document).wacPage().hideBlockUI(_self.componentGlobalId);
                       }
                 );
             }

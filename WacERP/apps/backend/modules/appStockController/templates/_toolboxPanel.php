@@ -15,13 +15,13 @@ $componentGlobalId    = "#".$componentGlobalName;
         <ol id="toolbox_<?php echo $componentGlobalName;?>" class="toolboxList">
             <?php
                 $liPattern =
-                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\" triggerEvent=\"%s\">
-                    <span class=\"ui-button-icon-primary ui-icon ui-icon-search\"></span>
+                "<li class=\"ui-button ui-corner-all ui-state-default ui-button-text-icon-primary\" title=\"%s\" triggerEvent=\"%s\" invokeModuleName=\"%s\" invokeAction=\"%s\">
+                    <span class=\"ui-button-icon-primary ui-icon %s\"></span>
                     <span class=\"ui-button-text\">%s</span>
                 </li>";
                 if(count($toolboxBtns)>0){
                     foreach($toolboxBtns as $toolboxBtn){
-                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->triggerEvent, $toolboxBtn->label);
+                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->triggerEvent, $toolboxBtn->invokeModuleName, $toolboxBtn->invokeAction, $toolboxBtn->iconCss, $toolboxBtn->label);
                     }
                 }
             ?>
@@ -32,16 +32,18 @@ $componentGlobalId    = "#".$componentGlobalName;
 <?php
 if(count($toolboxBtns)>0){
     foreach($toolboxBtns as $toolboxBtn){
-        include_component($toolboxBtn->invokeModuleName, $toolboxBtn->invokeComponentName,
-                array(
-                    'invokeParams' => array(
-                        'contextInfo' => $contextInfo,
-                        'attachInfo' => array(
-                            "button" => $toolboxBtn,   // StdClass, defined in its component
-                            "uiid"   => $attachInfo["uiid"]
+        if($toolboxBtn->loadComponent){
+            include_component($toolboxBtn->invokeModuleName, $toolboxBtn->invokeComponentName,
+                    array(
+                        'invokeParams' => array(
+                            'contextInfo' => $contextInfo,
+                            'attachInfo' => array(
+                                "button" => $toolboxBtn,   // StdClass, defined in its component
+                                "uiid"   => $attachInfo["uiid"]
+                            )
                         )
-                    )
-        ));
+            ));
+        }
     }
 }
 ?>
@@ -70,20 +72,11 @@ if(count($toolboxBtns)>0){
                 stop: function(event, ui) {
                         var index;
                         $( ".ui-selected", this ).each(function() {
-//                            index = $("#toolbox_"+_self.componentGlobalName+" li").index( this );
-//                            Wac.log("#toolbox_" + _self.componentGlobalName + " li" + ":" + index);
                             $.shout($(this).attr("triggerEvent"), {
-                                                        moduleName: _self.moduleName,
-                                                        selectedItems: _self.selectedItems
-                                                        });
-                            Wac.log($(this).attr("triggerEvent"));
-                        });                        
-//
-//                        $("body").data(children.moduleName + "/selectedItem", children.selectedItems[0]);
-//                        $.shout(WacAppConfig.event.app_wac_events_show_edit_form, {
-//                            moduleName: children.moduleName,
-//                            selectedItems: children.selectedItems
-//                            });
+                                moduleName: $(this).attr("invokeModuleName"),
+                                action: $(this).attr("invokeAction")
+                            });
+                        }); 
                     }
             });
 
@@ -100,13 +93,7 @@ if(count($toolboxBtns)>0){
 
         this.initData = function(){};
 
-        this.bindEvents = function(){
-//            $("#toolbox_" + _self.componentGlobalName + " li").bind("click", function(event){
-//                Wac.log("#toolbox_" + _self.componentGlobalName + " li");
-//                Wac.log($(this).attr(event));
-////                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
-//            });
-        };
+        this.bindEvents = function(){};
 
         this.init();  // init method
     }
