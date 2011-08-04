@@ -29,6 +29,8 @@ default:
 #    ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-3.8.2/ui.jqgrid.css
     ui.jqgrid: /WacBaseAppPlugin/css/jquery/plugins/jquery.jqGrid-4.1.2/ui.jqgrid.css
 
+    jquery.treeview: /WacBaseAppPlugin/css/jquery/plugins/jquery.treeview/jquery.treeview.css
+
     jquery.ui.plupload: /WacBaseAppPlugin/css/jquery/plugins/plupload_1.4.3.2/css/jquery.ui.plupload.css
 
     validationEngine: /WacBaseAppPlugin/css/jquery/plugins/formValidator/validationEngine.jquery.css
@@ -76,6 +78,8 @@ default:
 
     jquery.jstree: /WacBaseAppPlugin/js/jquery/plugins/jsTree.v.1.0rc3/jquery.jstree.js    # jquery.jstree
 
+    jquery.treeview: /WacBaseAppPlugin/js/jquery/plugins/jquery.treeview/jquery.treeview.js    # jquery.treeview, for simple tree display
+
     jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.js    # jquery.plupload, remember also change the path in tpl _moduleUploadForm.php
     jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.js    # jquery.ui.plupload
     jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload/i18n/cn.js    # jquery.plupload.i18n
@@ -87,6 +91,7 @@ default:
     jquery.datalink: /WacBaseAppPlugin/js/jquery/plugins/jquery-datalink/jquery.datalink.js
     jquery.timers: /WacBaseAppPlugin/js/jquery/plugins/jquery.timers/jquery.timers.js
     jquery.calculator: /WacBaseAppPlugin/js/jquery/plugins/jquery-calculator/calculator.js
+#    jquery.gmap: /WacBaseAppPlugin/js/jquery/plugins/jquery.gmap/jquery.gmap-1.1.0-min.js
     jquery.printElement: /WacBaseAppPlugin/js/jquery/plugins/printElement/jquery.printElement.min.js    # jquery.printElement
 
     wac.main: /WacBaseAppPlugin/js/wac/main.js  # wac_main

@@ -40,7 +40,9 @@ $triggerEvent         = $invokeParams['attachInfo']["button"]->triggerEvent;
         };
 
         this.showUI = function(){
-            $("body").append("<div id='" + _self.componentGlobalName + "' align='center' title='"+ $.i18n.prop('Calculator') +"'><div id='calc_" + _self.componentGlobalName + "'></div></div>");
+            if($(_self.componentGlobalId).length==0){
+                $("body").append("<div id='" + _self.componentGlobalName + "' align='center' title='"+ $.i18n.prop('Calculator') +"'><div id='calc_" + _self.componentGlobalName + "'></div></div>");
+            }
 
 //            $('#calc_' + _self.componentGlobalName).calculator({movable:true,resizable:true, width:160,defaultOpen:false});
 
