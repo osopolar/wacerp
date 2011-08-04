@@ -21,7 +21,9 @@ $componentGlobalId    = "#".$componentGlobalName;
                 </li>";
                 if(count($toolboxBtns)>0){
                     foreach($toolboxBtns as $toolboxBtn){
-                        printf($liPattern, $toolboxBtn->label, $toolboxBtn->triggerEvent, $toolboxBtn->invokeModuleName, $toolboxBtn->invokeAction, $toolboxBtn->iconCss, $toolboxBtn->label);
+                        if($toolboxBtn->enable){
+                            printf($liPattern, $toolboxBtn->label, $toolboxBtn->triggerEvent, $toolboxBtn->invokeModuleName, $toolboxBtn->invokeAction, $toolboxBtn->iconCss, $toolboxBtn->label);
+                        }
                     }
                 }
             ?>
@@ -32,7 +34,7 @@ $componentGlobalId    = "#".$componentGlobalName;
 <?php
 if(count($toolboxBtns)>0){
     foreach($toolboxBtns as $toolboxBtn){
-        if($toolboxBtn->loadComponent){
+        if($toolboxBtn->loadComponent && $toolboxBtn->enable){
             include_component($toolboxBtn->invokeModuleName, $toolboxBtn->invokeComponentName,
                     array(
                         'invokeParams' => array(
@@ -82,7 +84,7 @@ if(count($toolboxBtns)>0){
 
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-right',
-//                collapsed:true,
+                collapsed:true,
                 trueVerticalText:true,
                 vHeight:'160px',
                 width:'200px'

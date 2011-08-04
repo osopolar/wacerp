@@ -101,6 +101,14 @@
         <source>Calculator</source>
         <target>计算器</target>
       </trans-unit>
+      <trans-unit>
+        <source>Google</source>
+        <target>谷歌</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Map</source>
+        <target>地图</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -19,5 +19,10 @@ class wacToolboxComponents extends WacComponent
     {
          parent::execute($request);
     }
+
+    public function executeGoogleMap($request)
+    {
+         parent::execute($request);
+    }
    
 }

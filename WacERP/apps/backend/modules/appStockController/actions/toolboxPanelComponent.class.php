@@ -27,6 +27,7 @@ class toolboxPanelComponent extends WacComponent
         $toolboxBtn->label               = $this->i18n->__("Options");
         $toolboxBtn->triggerEvent        = sfConfig::get("app_wac_events_show_management_panel");  // listened by the desktop
         $toolboxBtn->loadComponent       = false;
+        $toolboxBtn->enable              = true;
         $this->toolboxBtns->attach($toolboxBtn);
 
         $toolboxBtn = new StdClass;
@@ -38,6 +39,7 @@ class toolboxPanelComponent extends WacComponent
         $toolboxBtn->label               = $this->i18n->__("Calculator");
         $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click"); // listened by the corresponding component
         $toolboxBtn->loadComponent       = true;
+        $toolboxBtn->enable              = true;
         $this->toolboxBtns->attach($toolboxBtn);
 
         $toolboxBtn = new StdClass;
@@ -49,6 +51,19 @@ class toolboxPanelComponent extends WacComponent
         $toolboxBtn->label               = $this->i18n->__("Calendar");
         $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click"); // listened by the corresponding component
         $toolboxBtn->loadComponent       = true;
+        $toolboxBtn->enable              = true;
+        $this->toolboxBtns->attach($toolboxBtn);
+
+        $toolboxBtn = new StdClass;
+        $toolboxBtn->srcModuleName       = $this->innerContextInfo["moduleName"];
+        $toolboxBtn->invokeModuleName    = "wacToolbox";
+        $toolboxBtn->invokeComponentName = "googleMap";
+        $toolboxBtn->invokeAction        = "";
+        $toolboxBtn->iconCss             = "wac-bi-map";
+        $toolboxBtn->label               = $this->i18n->__("Google").$this->i18n->__("Map");
+        $toolboxBtn->triggerEvent        = "{$toolboxBtn->invokeComponentName}_{$toolboxBtn->srcModuleName}".sfConfig::get("app_wac_events_toolbox_click"); // listened by the corresponding component
+        $toolboxBtn->loadComponent       = true;
+        $toolboxBtn->enable              = true;
         $this->toolboxBtns->attach($toolboxBtn);
 
 

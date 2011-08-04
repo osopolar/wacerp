@@ -11,12 +11,27 @@ $componentGlobalId    = "#".$componentGlobalName;
 <div id="<?php echo $componentGlobalName;?>" class="wacNavPanel">
     <h3><?php echo __("Business").__("Management");?></h3>
     <div id="content_<?php echo $componentGlobalName;?>">
-        <ul id="list_<?php echo $componentGlobalName; ?>" class="wacTableField">
-            <li class="wacCursor" id="mc_<?php echo $componentGlobalName; ?>">
-            <?php echo __("Material").__("Category");?>
-            </li>
-            <li class="wacCursor" id="mp_<?php echo $componentGlobalName; ?>">
-            <?php echo __("Material Purchase");?>
+        <ul id="bizmenu_<?php echo $componentGlobalName;?>" class="treeview-black">
+            <li>Item 1</li>
+            <li>
+                <span>Item 2</span>
+                <ul>
+                    <li>
+                        <span>Item 2.1</span>
+                        <ul>
+                            <li>Item 2.1.1</li>
+                            <li>Item 2.1.2</li>
+                        </ul>
+                    </li>
+                    <li>Item 2.2</li>
+                    <li class="closed">
+                        <span>Item 2.3 (closed at start)</span>
+                        <ul>
+                            <li>Item 2.3.1</li>
+                            <li>Item 2.3.2</li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -43,6 +58,12 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
+            $("#bizmenu_" + _self.componentGlobalName).treeview({
+                collapsed: false,
+                persist: "cookie",
+                cookieId: "treeview-bizmenu"
+            });
+
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-left',
 //                collapsed:true,
@@ -55,13 +76,13 @@ $componentGlobalId    = "#".$componentGlobalName;
         this.initData = function(){};
         
         this.bindEvents = function(){
-            $("#mp_" + _self.componentGlobalName).bind("click", function(){
-                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
-            });
-
-            $("#mc_" + _self.componentGlobalName).bind("click", function(){
-                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
-            });
+//            $("#mp_" + _self.componentGlobalName).bind("click", function(){
+//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
+//            });
+//
+//            $("#mc_" + _self.componentGlobalName).bind("click", function(){
+//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
+//            });
         };
 
         this.init();  // init method
