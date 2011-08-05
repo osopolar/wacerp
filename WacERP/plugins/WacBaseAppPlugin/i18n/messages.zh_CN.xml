@@ -345,6 +345,22 @@
         <source>Map</source>
         <target>地图</target>
       </trans-unit>
+      <trans-unit>
+        <source>Options</source>
+        <target>首选项</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Calculator</source>
+        <target>计算器</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Calendar</source>
+        <target>日历</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Management</source>
+        <target>管理</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

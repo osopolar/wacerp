@@ -12,7 +12,7 @@ $componentGlobalId    = "#".$componentGlobalName;
         <?php
             include_component("wacStorehouse", "navPanel");  // navigation list panel
 
-            include_component("appStockController", "businessPanel");  // management panel
+            include_component("appStockController", "businessPanel");  // business panel
         ?>
     </div>
 

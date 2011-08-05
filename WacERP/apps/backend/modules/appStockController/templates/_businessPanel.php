@@ -12,25 +12,28 @@ $componentGlobalId    = "#".$componentGlobalName;
     <h3><?php echo __("Business").__("Management");?></h3>
     <div id="content_<?php echo $componentGlobalName;?>">
         <ul id="bizmenu_<?php echo $componentGlobalName;?>" class="treeview-black">
-            <li>Item 1</li>
             <li>
-                <span>Item 2</span>
+                <span><?php echo __("Purchase").__("Management");?></span>
                 <ul>
-                    <li>
-                        <span>Item 2.1</span>
-                        <ul>
-                            <li>Item 2.1.1</li>
-                            <li>Item 2.1.2</li>
-                        </ul>
-                    </li>
-                    <li>Item 2.2</li>
-                    <li class="closed">
-                        <span>Item 2.3 (closed at start)</span>
-                        <ul>
-                            <li>Item 2.3.1</li>
-                            <li>Item 2.3.2</li>
-                        </ul>
-                    </li>
+                    <li class="wacCursor" id="mp_<?php echo $componentGlobalName; ?>"><span><?php echo __("Material Purchase");?></span></li>
+                </ul>
+            </li>
+            <li>
+                <span><?php echo __("Stock").__("Management");?></span>
+                <ul>
+                    <li class="wacCursor"><span>Item 2.1</span></li>
+                </ul>
+            </li>
+            <li>
+                <span><?php echo __("Sale").__("Management");?></span>
+                <ul>
+                    <li class="wacCursor"><span>Item 3.1</span></li>
+                </ul>
+            </li>
+            <li>
+                <span><?php echo __("Goods").__("Management");?></span>
+                <ul>
+                    <li class="wacCursor" id="mc_<?php echo $componentGlobalName; ?>"><span><?php echo __("Material").__("Category");?></span></li>
                 </ul>
             </li>
         </ul>
@@ -58,12 +61,6 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
-            $("#bizmenu_" + _self.componentGlobalName).treeview({
-                collapsed: false,
-                persist: "cookie",
-                cookieId: "treeview-bizmenu"
-            });
-
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-left',
 //                collapsed:true,
@@ -71,18 +68,25 @@ $componentGlobalId    = "#".$componentGlobalName;
                 vHeight:'150px',
                 width:'280px'
             });
+
+            $("#bizmenu_" + _self.componentGlobalName).treeview({
+                collapsed: false,
+                persist: "cookie",
+                cookieId: "treeview-black"
+            });
+
         };
 
         this.initData = function(){};
         
         this.bindEvents = function(){
-//            $("#mp_" + _self.componentGlobalName).bind("click", function(){
-//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
-//            });
-//
-//            $("#mc_" + _self.componentGlobalName).bind("click", function(){
-//                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
-//            });
+            $("#mp_" + _self.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialPurchase"});
+            });
+
+            $("#mc_" + _self.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
+            });
         };
 
         this.init();  // init method

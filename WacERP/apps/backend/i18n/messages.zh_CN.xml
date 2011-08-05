@@ -54,10 +54,6 @@
         <target>编辑</target>
       </trans-unit>
       <trans-unit>
-        <source>Management</source>
-        <target>管理</target>
-      </trans-unit>
-      <trans-unit>
         <source>Cancel</source>
         <target>取消</target>
       </trans-unit>
@@ -82,17 +78,22 @@
         <target>物料分类定义</target>
       </trans-unit>
       <trans-unit>
-        <source>Options</source>
-        <target>首选项</target>
+        <source>Purchase</source>
+        <target>采购</target>
       </trans-unit>
       <trans-unit>
-        <source>Calculator</source>
-        <target>计算器</target>
+        <source>Stock</source>
+        <target>库存</target>
       </trans-unit>
       <trans-unit>
-        <source>Calendar</source>
-        <target>日历</target>
+        <source>Sale</source>
+        <target>销售</target>
       </trans-unit>
+      <trans-unit>
+        <source>Goods</source>
+        <target>货品</target>
+      </trans-unit>
+      
 
     </body>
   </file>

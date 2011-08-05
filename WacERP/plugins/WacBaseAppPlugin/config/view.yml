@@ -83,9 +83,6 @@ default:
     jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.js    # jquery.plupload, remember also change the path in tpl _moduleUploadForm.php
     jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.js    # jquery.ui.plupload
     jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload/i18n/cn.js    # jquery.plupload.i18n
-#    jquery.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/plupload.full.min.js    # jquery.plupload
-#    jquery.ui.plupload: /WacBaseAppPlugin/js/jquery/plugins/plupload/jquery.ui.plupload.min.js    # jquery.ui.plupload
-#    jquery.plupload.i18n: /WacBaseAppPlugin/js/jquery/plugins/plupload/i18n/cn.js    # jquery.plupload.i18n
 
 #    - /WacBaseAppPlugin/js/jquery/plugins/jqueryStorage/jquery.Storage.js     # jquery.Storage
     jquery.datalink: /WacBaseAppPlugin/js/jquery/plugins/jquery-datalink/jquery.datalink.js
