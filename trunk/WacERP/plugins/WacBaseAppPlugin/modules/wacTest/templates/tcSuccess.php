@@ -6,7 +6,9 @@
     </div>
     <?php
     /* stock desktop */
-            include_component("appStockController", "desktop");
+        include_component("appStockController", "desktop");
+
+//        include_component("appStockController", "businessPanel");  // business panel
 
 //    include_component("wacGuardUser", WacComponentList::$moduleIndexListWidget);
 
