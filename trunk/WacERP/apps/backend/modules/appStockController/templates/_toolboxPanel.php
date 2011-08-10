@@ -84,7 +84,8 @@ if(count($toolboxBtns)>0){
 
             $(_self.componentGlobalId).panel({
                 collapseType:'slide-right',
-                collapsed:true,
+//                collapsed:true,
+                collapsed:false,
                 trueVerticalText:true,
                 vHeight:'160px',
                 width:'200px'

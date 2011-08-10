@@ -121,6 +121,10 @@ body {
    visibility: visible; display: block; top: auto; bottom: 0px; 
 }
 
+.wacPanelBottom{
+   visibility: visible; display: block; top: auto; bottom: 5px; position: absolute; right:5px;
+}
+
 .wacPanelFormRow{
     background-color:none;
     display:block;
