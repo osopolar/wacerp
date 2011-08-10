@@ -361,6 +361,19 @@
         <source>Management</source>
         <target>管理</target>
       </trans-unit>
+      <trans-unit>
+        <source>Setting</source>
+        <target>设置</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Display</source>
+        <target>显示</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Items Per Page on List</source>
+        <target>每页显示行数</target>
+      </trans-unit>
+
     </body>
   </file>
 </xliff>
