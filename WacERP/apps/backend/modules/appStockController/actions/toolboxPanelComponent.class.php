@@ -25,7 +25,7 @@ class toolboxPanelComponent extends WacComponent
         $toolboxBtn->invokeAction        = "getManagementPanel";
         $toolboxBtn->iconCss             = "wac-bi-options";
         $toolboxBtn->label               = $this->i18n->__("Options");
-        $toolboxBtn->triggerEvent        = sfConfig::get("app_wac_events_show_management_panel");  // listened by the desktop
+        $toolboxBtn->triggerEvent        = sfConfig::get("app_wac_events_show_options_panel");  // listened by the desktop
         $toolboxBtn->loadComponent       = false;
         $toolboxBtn->enable              = true;
         $this->toolboxBtns->attach($toolboxBtn);

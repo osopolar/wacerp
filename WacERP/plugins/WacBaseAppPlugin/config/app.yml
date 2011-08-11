@@ -26,6 +26,7 @@ all:
     show_edit_form: _show_edit_form_evt
     cancel_form: _cancel__form_evt
     show_management_panel: _show_management_panel_evt
+    show_options_panel: _show_options_panel_evt
     search_in_list: _search_in_list_evt
     data_export: _data_export
     data_print: _data_print

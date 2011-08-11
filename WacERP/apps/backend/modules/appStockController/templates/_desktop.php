@@ -68,6 +68,10 @@ $componentGlobalId    = "#".$componentGlobalName;
             $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_management_panel, function ($self, data) {  // listenerid, event name, callback
                 _self.loadManagementPanel(WacAppConfig.event.app_wac_events_show_management_panel, data);
             });
+
+            $(_self.componentGlobalId).hear(_self.componentGlobalId, WacAppConfig.event.app_wac_events_show_options_panel, function ($self, data) {  // listenerid, event name, callback
+                _self.loadOptionsPanel(WacAppConfig.event.app_wac_events_show_options_panel, data);
+            });
         };
 
         this.initData = function(){
@@ -84,6 +88,10 @@ $componentGlobalId    = "#".$componentGlobalName;
 
         this.loadManagementPanel = function(evt, data){
             _self.loadPanel("mgPanel", "getManagementPanel", evt, data);
+        };
+
+        this.loadOptionsPanel = function(evt, data){
+            _self.loadPanel("mgPanel", "getOptionsPanel", evt, data);
         };
         
         this.loadPanel = function(uiPanelName, action, evt, data){

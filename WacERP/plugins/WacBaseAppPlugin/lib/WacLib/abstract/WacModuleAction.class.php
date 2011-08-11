@@ -78,4 +78,16 @@ abstract class WacModuleAction extends WacCommonActions {
 
         return OutputHelper::getInstance()->output($str, $this, array("isCache" => false));
     }
+
+    public function executeGetOptionsPanel(sfWebRequest $request) {
+        $str = $this->getComponent($this->contextInfo["moduleName"], WacComponentList::$optionsPanel,
+                        array(
+                            'invokeParams' => array(
+                                'contextInfo' => $this->contextInfo,
+                                'attachInfo' => array("uiid" => WacWidgetHelper::getInstance()->getUiid($this->contextInfo))
+                        ))
+                );
+
+        return OutputHelper::getInstance()->output($str, $this, array("isCache" => false));
+    }
 }
