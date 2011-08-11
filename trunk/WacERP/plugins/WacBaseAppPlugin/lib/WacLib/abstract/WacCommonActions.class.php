@@ -280,6 +280,10 @@ abstract class WacCommonActions extends sfActions {
         return OutputHelper::getInstance()->output($resultSet, $this);
     }
 
+    public function executeAjaxTest(sfWebRequest $request) {
+        $this->forward($this->innerContextInfo["moduleName"], "Test");
+    }
+
     /*
    *  do operation according to the oper parameter
     */

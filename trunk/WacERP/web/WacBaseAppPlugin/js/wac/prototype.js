@@ -228,10 +228,8 @@ function WacFormPrototype()
 function WacStdFormPrototype()
 {
     var _self = this;
-    var debug = true;
-//    var debug = false;
-
-    var pagerInfo = {currentPage: 1, totalPages:1, totalRecords:0};
+//    var debug = true;
+    var debug = false;
 
     this.init = function(children){
         children.initLayout();

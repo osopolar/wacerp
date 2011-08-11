@@ -43,6 +43,9 @@ class WacComponentList
     //// module panel 
     public static $moduleManagementPanel      = "moduleManagementPanel";
 
+    //// module panel
+    public static $optionsPanel               = "optionsPanel";
+
     //// module tree
     public static $moduleTree                 = "moduleTree";
 
