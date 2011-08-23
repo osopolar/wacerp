@@ -14,7 +14,7 @@ $componentGlobalId    = "#".$componentGlobalName;
                 <div class="wacFormRow">
                     <div class="wacFormItemLeft "><?php echo __("Items Per Page on List"); ?></div>
                     <div class="wacFormItemRight">
-                        <input name="setting[display][rowNum]" id="display_rowNum_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[noSpecialCaracters]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                        <input name="setting[display][rowNum]" id="display_rowNum_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[onlyNumber]] wacFormText DataTD ui-widget-content ui-corner-all" />
                     </div>
                     <div class="wacFormClear"></div>
                 </div>
@@ -28,22 +28,47 @@ $componentGlobalId    = "#".$componentGlobalName;
             </span>
         </form>
     </div>
-    <h3><a href="#">Section 2</a></h3>
+    <h3><a href="#"><?php echo __("System") . __("Setting"); ?></a></h3>
     <div>
-        <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+        <form name="system_<?php echo $componentGlobalName; ?>" id="system_<?php echo $componentGlobalName; ?>" method="post" action="" class="wacFormA">
+            <div class="wacFormFirstCol">
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft "><?php echo __("Currency"); ?></div>
+                    <div class="wacFormItemRight">
+                        <input name="setting[system][currency]" id="system_currency_<?php echo $componentGlobalName; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
+            </div>
+            <div class="wacFormSecondCol">
+            </div>
+
+            <span class="wacPanelBottom" id="groupFunc_<?php echo $componentGlobalName ?>">
+                <input name="btnSave" id="btnSave_system_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+                <input name="btnReset" id="btnReset_system_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Reset"); ?>"/>
+            </span>
+        </form>
     </div>
-    <h3><a href="#">Section 3</a></h3>
+    <h3><a href="#"><?php echo __("Print") . __("Setting"); ?></a></h3>
     <div>
-        <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
-        <ul>
-            <li>List item one</li>
-            <li>List item two</li>
-            <li>List item three</li>
-        </ul>
-    </div>
-    <h3><a href="#">Section 4</a></h3>
-    <div>
-        <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+        <form name="print_<?php echo $componentGlobalName; ?>" id="print_<?php echo $componentGlobalName; ?>" method="post" action="" class="wacFormA">
+            <div class="wacFormFirstCol">
+                <div class="wacFormRow">
+                    <div class="wacFormItemLeft "><?php echo __("Items Per Page on List"); ?></div>
+                    <div class="wacFormItemRight">
+                        <input name="setting[print][companyName]" id="print_companyName_<?php echo $componentGlobalName; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
+                    </div>
+                    <div class="wacFormClear"></div>
+                </div>
+            </div>
+            <div class="wacFormSecondCol">
+            </div>
+
+            <span class="wacPanelBottom" id="groupFunc_<?php echo $componentGlobalName ?>">
+                <input name="btnSave" id="btnSave_print_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
+                <input name="btnReset" id="btnReset_print_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Reset"); ?>"/>
+            </span>
+        </form>
     </div>
 </div>
 

@@ -377,7 +377,14 @@
         <source>Items Per Page on List</source>
         <target>每页显示行数</target>
       </trans-unit>
-
+      <trans-unit>
+        <source>System</source>
+        <target>系统</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Currency</source>
+        <target>货币</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
