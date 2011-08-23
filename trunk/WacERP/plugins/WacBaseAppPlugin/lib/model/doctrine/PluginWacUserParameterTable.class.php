@@ -16,4 +16,16 @@ class PluginWacUserParameterTable extends WacCommonTable
     {
         return Doctrine_Core::getTable('PluginWacUserParameter');
     }
+
+    /*
+     * return value
+     */
+    public function getOneByCode($code, $isArr=true)
+    {
+        $conditions = array();
+        $conditions['andWhere'][] = "user_id='".sfContext::getInstance()->getUser()->getGuardUser()->getId()."'";
+        $conditions['andWhere'][] = "code='{$code}'";
+
+        return $this->getOneByParams($conditions, $isArr);
+    }
 }

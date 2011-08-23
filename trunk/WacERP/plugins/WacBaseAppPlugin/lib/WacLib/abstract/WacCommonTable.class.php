@@ -62,6 +62,28 @@ abstract class WacCommonTable extends Doctrine_Table
     }
 
     /*
+     * return value
+     */
+    public function getOneByParams($arrParams, $isArr=true)
+    {
+        $objQuery = $this->createQuery('t1')
+            ->select("t1.*");
+
+        QueryHelper::processOption($objQuery, $arrParams);
+
+        $dataResult = null;
+        
+        if($isArr){
+            $dataResult = $objQuery->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+        }
+        else{
+            $dataResult = $objQuery->fetchOne(array(), Doctrine::HYDRATE_RECORD);
+        }
+        $objQuery->free();
+        return $dataResult;
+    }
+
+    /*
      * return a common list
      *  eg. $arrParams = ['andWhere'][] = "code='{$code}'";
      */
