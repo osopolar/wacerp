@@ -28,4 +28,10 @@ class PluginWacUserParameterTable extends WacCommonTable
 
         return $this->getOneByParams($conditions, $isArr);
     }
+
+    public function getCodeValueHashByUserId($userId, $page=1, $rows=500, $params=array()){
+        $condParams = array();
+        $condParams['andWhere'][] = "user_id={$userId}";
+        return $this->getCodeValueHash($page, $rows, $params, $condParams);
+    }
 }

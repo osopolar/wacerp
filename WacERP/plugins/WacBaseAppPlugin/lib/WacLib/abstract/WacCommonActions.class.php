@@ -43,7 +43,37 @@ abstract class WacCommonActions extends sfActions {
         if($this->getUser()->isAuthenticated()){
             $this->wacGuardUser = $this->getWacGuardUser();
         }
+
+        $this->setupUserParameters();
 //        sfContext::getInstance()->getConfiguration()->loadHelpers("Date");
+    }
+
+    /*
+     * setup user's params according to user and system parameters .
+     */
+    public function setupUserParameters(){
+//        $this->getUser()->setAttribute("setting/display/rowNum", 15, "wac/user");
+        $userParams = array();
+        $sysParams = array();
+        $params = array();
+        $params["format"]="SF_SELECT_OPTIONS";
+        if(!is_null($this->wacGuardUser)){
+            $userParams = Doctrine::getTable(WacTable::$wacUserParameter)->getCodeValueHashByUserId($this->wacGuardUser->getId(), 1, 500, $params);
+        }
+        
+        $sysParams  = Doctrine::getTable(WacTable::$wacSystemParameter)->getCodeValueHash(1, 500, $params);
+        $userParams = array_merge($sysParams, $userParams);
+        
+        $user = $this->getUser();
+        $oriUserParams = $user->getAttributeHolder()->getAll(WacAssetHelper::NS_USER);
+        if(count($userParams)>0){
+            foreach($userParams as $k=>$v){
+                if(!isset($oriUserParams[$k]) || $v != $oriUserParams[$k]){
+                    $user->setAttribute($k, $v, WacAssetHelper::NS_USER);
+                }
+            }
+        }
+
     }
 
     /*

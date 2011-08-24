@@ -3,6 +3,7 @@ $moduleName           = $contextInfo['moduleName'];
 $moduleGlobalName     = $moduleName.$invokeParams['attachInfo']['uiid'];
 $componentGlobalName  = WacModuleHelper::getManagementPanelId($moduleName, $invokeParams['attachInfo']);
 $componentGlobalId    = "#".$componentGlobalName;
+
 ?>
 
 <?php OutputHelper::getInstance()->noteComponent($contextInfo, $componentGlobalName, true); ?>
@@ -14,7 +15,7 @@ $componentGlobalId    = "#".$componentGlobalName;
                 <div class="wacFormRow">
                     <div class="wacFormItemLeft "><?php echo __("Items Per Page on List"); ?></div>
                     <div class="wacFormItemRight">
-                        <input name="setting[display][rowNum]" id="display_rowNum_<?php echo $componentGlobalName; ?>" type="text" class="validate[required,custom[onlyNumber]] wacFormText DataTD ui-widget-content ui-corner-all" />
+                        <input name="setting[display][rowNum]" id="rowNum_display_<?php echo $componentGlobalName; ?>" value="<?php echo $settingParams["setting/display/rowNum"]; ?>" type="text" class="validate[required,custom[onlyNumber]] wacFormText DataTD ui-widget-content ui-corner-all" />
                     </div>
                     <div class="wacFormClear"></div>
                 </div>
@@ -22,7 +23,7 @@ $componentGlobalId    = "#".$componentGlobalName;
             <div class="wacFormSecondCol">
             </div>
 
-            <span class="wacPanelBottom" id="groupFunc_<?php echo $componentGlobalName ?>">
+            <span class="wacPanelBottom" id="groupFunc_display_<?php echo $componentGlobalName ?>">
                 <input name="btnSave" id="btnSave_display_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
                 <input name="btnReset" id="btnReset_display_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Reset"); ?>"/>
             </span>
@@ -35,7 +36,7 @@ $componentGlobalId    = "#".$componentGlobalName;
                 <div class="wacFormRow">
                     <div class="wacFormItemLeft "><?php echo __("Currency"); ?></div>
                     <div class="wacFormItemRight">
-                        <input name="setting[system][currency]" id="system_currency_<?php echo $componentGlobalName; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
+                        <input name="setting[system][currency]" id="currency_system_<?php echo $componentGlobalName; ?>" value="<?php echo $settingParams["setting/system/currency"]; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
                     </div>
                     <div class="wacFormClear"></div>
                 </div>
@@ -43,7 +44,7 @@ $componentGlobalId    = "#".$componentGlobalName;
             <div class="wacFormSecondCol">
             </div>
 
-            <span class="wacPanelBottom" id="groupFunc_<?php echo $componentGlobalName ?>">
+            <span class="wacPanelBottom" id="groupFunc_system_<?php echo $componentGlobalName ?>">
                 <input name="btnSave" id="btnSave_system_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
                 <input name="btnReset" id="btnReset_system_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Reset"); ?>"/>
             </span>
@@ -54,9 +55,9 @@ $componentGlobalId    = "#".$componentGlobalName;
         <form name="print_<?php echo $componentGlobalName; ?>" id="print_<?php echo $componentGlobalName; ?>" method="post" action="" class="wacFormA">
             <div class="wacFormFirstCol">
                 <div class="wacFormRow">
-                    <div class="wacFormItemLeft "><?php echo __("Items Per Page on List"); ?></div>
+                    <div class="wacFormItemLeft "><?php echo __("Company").__("Name"); ?></div>
                     <div class="wacFormItemRight">
-                        <input name="setting[print][companyName]" id="print_companyName_<?php echo $componentGlobalName; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
+                        <input name="setting[print][companyName]" id="companyName_print_<?php echo $componentGlobalName; ?>" value="<?php echo $settingParams["setting/print/companyName"]; ?>" type="text" class="validate[required] wacFormText DataTD ui-widget-content ui-corner-all" />
                     </div>
                     <div class="wacFormClear"></div>
                 </div>
@@ -64,7 +65,7 @@ $componentGlobalId    = "#".$componentGlobalName;
             <div class="wacFormSecondCol">
             </div>
 
-            <span class="wacPanelBottom" id="groupFunc_<?php echo $componentGlobalName ?>">
+            <span class="wacPanelBottom" id="groupFunc_print_<?php echo $componentGlobalName ?>">
                 <input name="btnSave" id="btnSave_print_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Save"); ?>"/>
                 <input name="btnReset" id="btnReset_print_<?php echo $componentGlobalName ?>" type="button" value="<?php echo __("Reset"); ?>"/>
             </span>
@@ -100,7 +101,8 @@ $componentGlobalId    = "#".$componentGlobalName;
         };
 
         this.initLayout = function(){
-            $('#groupFunc_' + _self.componentGlobalName).buttonset();
+//            $('#groupFunc_' + _self.componentGlobalName).buttonset();
+            $('span[id*=groupFunc]').buttonset();
 
             $( "#accordion_" + _self.componentGlobalName ).accordion({
 		  icons: {header: "ui-icon-circle-arrow-e",headerSelected: "ui-icon-circle-arrow-s"}
@@ -115,7 +117,23 @@ $componentGlobalId    = "#".$componentGlobalName;
             });
 
             $("#btnReset_display_" + _self.componentGlobalName).bind("click", function(){
-                Wac.log("reset", debug);
+                $("#display_" + _self.componentGlobalName)[0].reset();
+            });
+
+            $("#btnSave_system_" + _self.componentGlobalName).bind("click", function(){
+                _self.saveForm("system");
+            });
+
+            $("#btnReset_system_" + _self.componentGlobalName).bind("click", function(){
+                $("#system_" + _self.componentGlobalName)[0].reset();
+            });
+
+            $("#btnSave_print_" + _self.componentGlobalName).bind("click", function(){
+                _self.saveForm("print");
+            });
+
+            $("#btnReset_print_" + _self.componentGlobalName).bind("click", function(){
+                $("#print_" + _self.componentGlobalName)[0].reset();
             });
         };
 

@@ -385,6 +385,10 @@
         <source>Currency</source>
         <target>货币</target>
       </trans-unit>
+      <trans-unit>
+        <source>Company</source>
+        <target>公司</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
