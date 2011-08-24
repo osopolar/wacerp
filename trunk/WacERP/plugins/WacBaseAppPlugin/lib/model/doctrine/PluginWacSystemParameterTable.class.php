@@ -16,4 +16,15 @@ class PluginWacSystemParameterTable extends WacCommonTable
     {
         return Doctrine_Core::getTable('PluginWacSystemParameter');
     }
+
+    /*
+     * return value
+     */
+    public function getOneByCode($code, $isArr=true)
+    {
+        $conditions = array();
+        $conditions['andWhere'][] = "code='{$code}'";
+
+        return $this->getOneByParams($conditions, $isArr);
+    }
 }

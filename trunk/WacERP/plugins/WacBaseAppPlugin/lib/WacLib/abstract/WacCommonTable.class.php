@@ -113,15 +113,22 @@ abstract class WacCommonTable extends Doctrine_Table
   /*
    *  return id=>name hash
     */
-    public function getIdNameHash($page=1, $rows=50, $params=array()) {
-        return $this->getHashList("id", "name", array(), $page, $rows, $params);
+    public function getIdNameHash($page=1, $rows=50, $params=array(), $condParams=array()) {
+        return $this->getHashList("id", "name", $condParams, $page, $rows, $params);
     }
 
     /*
    *  return code=>name hash
     */
-    public function getCodeNameHash($page=1, $rows=50, $params=array()) {
-        return $this->getHashList("code", "name", array(), $page, $rows, $params);
+    public function getCodeNameHash($page=1, $rows=50, $params=array(), $condParams=array()) {
+        return $this->getHashList("code", "name", $condParams, $page, $rows, $params);
+    }
+
+    /*
+   *  return code=>value hash
+    */
+    public function getCodeValueHash($page=1, $rows=500, $params=array(), $condParams=array()) {
+        return $this->getHashList("code", "value", $condParams, $page, $rows, $params);
     }
 
     /*

@@ -75,6 +75,7 @@ class WacTable {
     public static $wacGuardUser       = "WacGuardUser";
     public static $wacGuardGroup      = "WacGuardGroup";
     public static $wacGuardPermission = "WacGuardPermission";
+    public static $wacUserParameter   = "WacUserParameter";
 
 //    public static $wacGoods = "WacGoods";
 //    public static $wacDispatchOrder = "WacDispatchOrder";

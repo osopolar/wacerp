@@ -1,12 +1,14 @@
 <?php
 /**
- * Description of SfDataHelper
+ * Description of WacAssetHelper
  *
- * convert to symfony data format
+ * provides assets of WAC
  *
  * @author ben
  */
 class WacAssetHelper {
+    const NS_USER = "wac/user";
+    
     public static $_instance=null;
 
     protected $_i18nImageDir = "";

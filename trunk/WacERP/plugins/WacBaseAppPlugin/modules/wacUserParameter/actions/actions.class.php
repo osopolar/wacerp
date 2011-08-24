@@ -36,24 +36,13 @@ class wacUserParameterActions extends WacModuleAction
     */
     public function executeEdit(sfWebRequest $request) {
 //        $this->forward("wacUserParameter", "test");
+//$userParams = $this->getUser()->getAttributeHolder()->getAll("wac/user");
+//print_r($userParams);
         $reqParams = $this->getRequest()->getParameterHolder()->getAll();
-$userParams = $this->getUser()->getAttributeHolder()->getAll();
-print_r($userParams);
+        
         if(isset($reqParams["setting"])){
-            foreach ($reqParams["setting"]["display"] as $k => $v) {
-                $code = "setting/display/{$k}";
-                $objParamater = $this->mainModuleTable->getOneByCode($code, false);
-                if (empty($objParamater)) {
-                    $objParamater = $this->mainModuleTable->create();
-                }
-
-                if($objParamater->getValue() != $v){
-                    $objParamater->setCode($code);
-                    $objParamater->setValue($v);
-                    $objParamater->setUserId($this->wacGuardUser->getId());
-                    $objParamater->setType(0);
-                    $objParamater->save();
-                }
+            foreach($reqParams["setting"] as $k=>$setting){
+                $this->handleSetting($reqParams["setting"], $k);
             }
         }
 
@@ -66,6 +55,39 @@ print_r($userParams);
 
         $this->afterEdit($request);
         return OutputHelper::getInstance()->output($resultSet, $this);
+    }
+
+    public function handleSetting($sectionParams, $sectionName){
+        if(in_array($sectionName, array("system", "print"))){
+            foreach ($sectionParams[$sectionName] as $k => $v) {
+                $code = "setting/{$sectionName}/{$k}";
+                $objParamater = Doctrine::getTable(WacTable::$wacSystemParameter)->getOneByCode($code, false);
+
+                if (!empty($objParamater) && $objParamater->getValue() != $v) {
+                    $objParamater->setValue($v);
+                    $objParamater->save();
+                }
+                unset($objParamater);
+            }
+        }
+        else{
+            foreach ($sectionParams[$sectionName] as $k => $v) {
+                $code = "setting/{$sectionName}/{$k}";
+                $objParamater = $this->mainModuleTable->getOneByCode($code, false);
+                if (empty($objParamater)) {
+                    $objParamater = $this->mainModuleTable->create();
+                }
+
+                if ($objParamater->getValue() != $v) {
+                    $objParamater->setCode($code);
+                    $objParamater->setValue($v);
+                    $objParamater->setUserId($this->wacGuardUser->getId());
+                    $objParamater->setType(0);
+                    $objParamater->save();
+                }
+                unset($objParamater);
+            }
+        }
     }
 
 }
