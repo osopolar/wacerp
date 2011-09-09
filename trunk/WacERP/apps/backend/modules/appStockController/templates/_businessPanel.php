@@ -34,6 +34,9 @@ $componentGlobalId    = "#".$componentGlobalName;
                 <span><?php echo __("Goods").__("Management");?></span>
                 <ul>
                     <li class="wacCursor" id="mc_<?php echo $componentGlobalName; ?>"><span><?php echo __("Material").__("Category");?></span></li>
+                    <li class="wacCursor" id="mm_<?php echo $componentGlobalName; ?>"><span><?php echo __("Material").__("Management");?></span></li>
+                    <li class="wacCursor" id="pc_<?php echo $componentGlobalName; ?>"><span><?php echo __("Product").__("Category");?></span></li>
+                    <li class="wacCursor" id="pm_<?php echo $componentGlobalName; ?>"><span><?php echo __("Product").__("Management");?></span></li>
                 </ul>
             </li>
         </ul>
@@ -86,6 +89,10 @@ $componentGlobalId    = "#".$componentGlobalName;
 
             $("#mc_" + _self.componentGlobalName).bind("click", function(){
                 $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "materialCategory"});
+            });
+
+            $("#pm_" + _self.componentGlobalName).bind("click", function(){
+                $.shout(WacAppConfig.event.app_wac_events_show_management_panel, {moduleName: "wacProduct"});
             });
         };
 
